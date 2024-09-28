@@ -1,0 +1,100 @@
+.banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+    background-color: #3b3b3b;
+}
+
+.flexcard {
+    display: flex;
+    width: 90%;
+    height: 500px;
+    gap: 10px;
+    overflow: hidden;
+}
+
+.flexcard a {
+    flex: 1;
+    text-decoration: none;
+    transition: flex 0.5s ease;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 457.5px; 
+    object-fit: cover; 
+    transition: none; 
+}
+
+.card h5 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.flexcard a:hover {
+    flex: 1;
+}
+
+.flexcard a:not(:hover) {
+    flex: 0.7;
+    transition: flex 0.5s ease;
+}
+
+/* Responsive styles for screens smaller than 768px */
+@media (max-width: 843px) {
+    .flexcard {
+      flex-direction: row;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      gap: 0;
+    }
+  
+    .flexcard a {
+      flex: none;
+      min-width: 100%;
+      transition: none;
+    }
+  
+    .card img {
+      height: 500px;
+    }
+  
+    .slideshow-controls {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+    }
+  
+    .slideshow-controls button {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
+  
+    .slideshow-controls button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+}

@@ -1,0 +1,7 @@
+footer {
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    background: #333;
+    grid-template-columns: repeat(auto-fit,minmax(250px, 1fr));
+}

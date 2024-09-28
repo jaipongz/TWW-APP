@@ -1,0 +1,16 @@
+<div class="banner">
+    <div class="flexcard" #flexcard>
+      <a href="#" *ngFor="let slide of slides">
+        <div class="card">
+          <img [src]="slide.image" [alt]="slide.title">
+          <h5>{{slide.title}}</h5>
+        </div>
+        
+      </a>
+    </div>
+    <div class="slideshow-controls" *ngIf="isMobileView">
+      <button id="prevSlide" (click)="prevSlide()" [disabled]="currentIndex === 0">Prev</button>
+      <button id="nextSlide" (click)="nextSlide()" [disabled]="currentIndex === slides.length - 1">Next</button>
+    </div>
+  </div>
+  
