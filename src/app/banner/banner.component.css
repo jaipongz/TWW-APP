@@ -1,5 +1,6 @@
 .banner {
     display: flex;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     height: 600px;
@@ -9,7 +10,7 @@
 .flexcard {
     display: flex;
     width: 90%;
-    height: 500px;
+    height: 90%;
     gap: 10px;
     overflow: hidden;
 }
@@ -57,12 +58,17 @@
     transition: flex 0.5s ease;
 }
 
+
 /* Responsive styles for screens smaller than 768px */
 @media (max-width: 843px) {
+  .banner {
+    height: 200px;
+
+    }
     .flexcard {
       flex-direction: row;
-      overflow-x: scroll;
-      scroll-behavior: smooth;
+      height: 90%;
+      width: 90%;
       gap: 0;
     }
   
@@ -73,9 +79,8 @@
     }
   
     .card img {
-      height: 500px;
+      height: 100%;
     }
-  
     .slideshow-controls {
       display: flex;
       justify-content: space-between;
@@ -96,5 +101,29 @@
     .slideshow-controls button:disabled {
       opacity: 0.5;
       cursor: not-allowed;
+    }
+    .dots-container {
+      display: flex;
+      justify-content: center;
+      margin-top:-20px;
+    }
+    
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: white;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+      cursor: pointer;
+    }
+    
+    .dot.active {
+      background-color: #333;
+    }
+    
+    .flexcard a:not(.active) {
+      flex: 0.7;
     }
 }

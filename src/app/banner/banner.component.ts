@@ -1,11 +1,11 @@
-import { Component, HostListener, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.css'
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnDestroy {
   @ViewChild('flexcard', { static: true }) flexcard!: ElementRef;
   currentIndex: number = 0;
   slides = [
@@ -36,18 +36,16 @@ export class BannerComponent implements OnInit {
   }
 
   checkViewport(): void {
-    this.isMobileView = window.innerWidth <= 768;
+    this.isMobileView = window.innerWidth <= 843;
+  }
+  
+  goToSlide(index: number): void {
+    this.currentIndex = index;
+    this.scrollToSlide();
+    this.stopAutoSlide();
+    this.startAutoSlide();  // Restart auto-slide after manual navigation
   }
 
-  prevSlide(): void {
-    this.currentIndex = this.currentIndex > 0 ? this.currentIndex - 1 : this.slides.length - 1;
-    this.scrollToSlide();
-  }
-
-  nextSlide(): void {
-    this.currentIndex = (this.currentIndex + 1) % this.slides.length;  // Loop to the first slide when reaching the end
-    this.scrollToSlide();
-  }
 
   scrollToSlide(): void {
     const slideWidth = this.flexcard.nativeElement.clientWidth;
@@ -59,13 +57,12 @@ export class BannerComponent implements OnInit {
 
   startAutoSlide(): void {
     this.slideInterval = setInterval(() => {
-      this.nextSlide();
-    }, 5000);  // Slide every 3 seconds
+      this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+      this.scrollToSlide();
+    }, 3000);
   }
 
   stopAutoSlide(): void {
-    if (this.slideInterval) {
-      clearInterval(this.slideInterval);
-    }
+    clearInterval(this.slideInterval);
   }
 }
