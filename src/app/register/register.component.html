@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-sub">
+            <div class="" style="display: flex; flex-direction: column;align-items: center;">
+                <div class="image-container">
+                    <img src="image\g.png" alt="imagelogin">
+                </div>
+                <p style="color: #88583D;font-size: 96px;">Thanwiwa</p>
+            </div>
+            <div class="login-container">
+                <h2>สมัครสมาชิก</h2>
+                <form id="registerForm" class="login-form" action="/submit-login" method="POST">
+                    <div class="input-group">
+                        <img src="image\account_circle.png" alt="user-icon" style="width: 27px; height: 27px;">
+                        <input type="text" id="username" placeholder="username" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
+                        <input type="password" id="password" placeholder="password" name="password" required>
+                    </div>
+                    <div class="input-group">
+                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
+                        <input type="password" id="password-confirm" placeholder="password confirm"
+                            name="password-confirm" required>
+                    </div>
+                    <div class="input-group">
+                        <img src="image\mail.png" alt="[mail-icon]" style="width: 27px; height: 27px;">
+                        <input type="mail" id="mail" placeholder="mail" name="mail" required>
+                    </div>
+                    <div class="input-group2">
+                        <button (click)="return()" class="input-group2-sub">Login</button>
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

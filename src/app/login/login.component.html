@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-sub">
+            <div class="image-container">
+                <img src="image\g.png" alt="imagelogin">
+            </div>
+            <div class="login-container">
+                <h2>Thanwiwa</h2>
+                <form id="loginForm" class="login-form" action="/submit-login" method="POST">
+                    <div class="input-group">
+                        <img src="image\account_circle.png" alt="user-icon" style="width: 27px; height: 27px;">
+                        <input type="text" id="username" placeholder="username" name="username" required>
+                    </div>
+                    <div class="input-group">
+                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
+                        <input type="password" id="password" placeholder="password" name="password" required>
+                    </div>
+                    <div class="input-group1">
+                        <a href="#">สมัครสมาชิก</a>
+                        <a href="#">ลืมรหัสผ่าน?</a>
+                    </div>
+                    <div class="input-group2">
+                        <button type="submit" (click)="register()">Login</button>
+                    </div>
+                    <div class="input-group3">
+                        <label for="">หรือเข้าสู่ระบบโดย</label>
+                        <div class="social">
+                            <a href="#"><img src="image\facebook.png" alt="facebook-icon"
+                                    style="width: 42px; height: 42px;"></a>
+                            <a href="#"><img src="image\line.png" alt="line-icon"
+                                    style="width: 42px; height: 42px;"></a>
+                            <a href="#"><img src="image\google.png" alt="google-icon"
+                                    style="width: 42px; height: 42px;"></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
