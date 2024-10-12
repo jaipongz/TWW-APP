@@ -18,27 +18,26 @@
             </div>
             <div class="login-container">
                 <h2>สมัครสมาชิก</h2>
-                <form id="registerForm" class="login-form" action="/submit-login" method="POST">
+                <form (ngSubmit)="register()" #registerForm="ngForm">
                     <div class="input-group">
-                        <img src="image\account_circle.png" alt="user-icon" style="width: 27px; height: 27px;">
-                        <input type="text" id="username" placeholder="username" name="username" required>
+                        <img src="image/account_circle.png" alt="user-icon" style="width: 27px; height: 27px;">
+                        <input type="text" id="username" placeholder="username" name="username" [(ngModel)]="username" required>
                     </div>
                     <div class="input-group">
-                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
-                        <input type="password" id="password" placeholder="password" name="password" required>
+                        <img src="image/Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
+                        <input type="password" id="password" placeholder="password" name="password" [(ngModel)]="password" required>
                     </div>
                     <div class="input-group">
-                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
-                        <input type="password" id="password-confirm" placeholder="password confirm"
-                            name="password-confirm" required>
+                        <img src="image/Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
+                        <input type="password" id="password-confirm" placeholder="password confirm" name="password-confirm" required>
                     </div>
                     <div class="input-group">
-                        <img src="image\mail.png" alt="[mail-icon]" style="width: 27px; height: 27px;">
-                        <input type="mail" id="mail" placeholder="mail" name="mail" required>
+                        <img src="image/mail.png" alt="[mail-icon]" style="width: 27px; height: 27px;">
+                        <input type="email" id="mail" placeholder="mail" name="mail" [(ngModel)]="email" required>
                     </div>
                     <div class="input-group2">
-                        <button (click)="return()" class="input-group2-sub">Login</button>
-                        <button type="submit">Register</button>
+                        <!-- <button type="button" (click)="return()" class="input-group2-sub">Login</button> -->
+                        <button type="submit" (click)="register()">Register</button>
                     </div>
                 </form>
             </div>

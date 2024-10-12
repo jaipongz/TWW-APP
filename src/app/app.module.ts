@@ -1,6 +1,5 @@
 import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -12,9 +11,9 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ForgotPasswordSubComponent } from './forgot-password-sub/forgot-password-sub.component';
-
+import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes = [
-  {path: '' , component: ForgotPasswordSubComponent },
+  {path: '' , component: RegisterComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
 
@@ -35,6 +34,7 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [],
