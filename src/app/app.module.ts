@@ -13,7 +13,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ForgotPasswordSubComponent } from './forgot-password-sub/forgot-password-sub.component';
 import { HttpClientModule } from '@angular/common/http';
 const appRoutes: Routes = [
-  {path: '' , component: RegisterComponent },
+  {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
 

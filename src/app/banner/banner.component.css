@@ -1,61 +1,70 @@
+.container-page {
+  display: flex;
+  flex-direction: column;
+  padding: 0 3rem 0 3rem;
+  background-color: #ffe3e3;
+  
+}
+
 .banner {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    height: 600px;
-    background-color: #3b3b3b;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  box-shadow: 0 2px rgba(0, 0, 0, 1);
+
 }
 
 .flexcard {
-    display: flex;
-    width: 90%;
-    height: 90%;
-    gap: 10px;
-    overflow: hidden;
+  display: flex;
+  width: 90%;
+  height: 90%;
+  gap: 10px;
+  overflow: hidden;
 }
 
 .flexcard a {
-    flex: 1;
-    text-decoration: none;
-    transition: flex 0.5s ease;
+  flex: 1;
+  text-decoration: none;
+  transition: flex 0.5s ease;
 }
 
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.5s ease;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+  overflow: hidden;
 }
 
 .card img {
-    width: 100%;
-    height: 457.5px; 
-    object-fit: cover; 
-    transition: none; 
+  width: 100%;
+  height: 90%;
+  object-fit: cover;
+  transition: none;
 }
 
 .card h5 {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #333;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #333;
 }
 
 .flexcard a:hover {
-    flex: 1;
+  flex: 1;
 }
 
 .flexcard a:not(:hover) {
-    flex: 0.7;
-    transition: flex 0.5s ease;
+  flex: 0.7;
+  transition: flex 0.5s ease;
 }
 
 
@@ -64,66 +73,348 @@
   .banner {
     height: 200px;
 
-    }
-    .flexcard {
-      flex-direction: row;
-      height: 90%;
-      width: 90%;
-      gap: 0;
-    }
-  
-    .flexcard a {
-      flex: none;
-      min-width: 100%;
-      transition: none;
-    }
-  
-    .card img {
-      height: 100%;
-    }
-    .slideshow-controls {
-      display: flex;
-      justify-content: space-between;
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      transform: translateY(-50%);
-    }
-  
-    .slideshow-controls button {
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-    }
-  
-    .slideshow-controls button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-    .dots-container {
-      display: flex;
-      justify-content: center;
-      margin-top:-20px;
-    }
-    
-    .dot {
-      height: 12px;
-      width: 12px;
-      margin: 0 5px;
-      background-color: white;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-      cursor: pointer;
-    }
-    
-    .dot.active {
-      background-color: #333;
-    }
-    
-    .flexcard a:not(.active) {
-      flex: 0.7;
-    }
+  }
+
+  .flexcard {
+    flex-direction: row;
+    height: 90%;
+    width: 90%;
+    gap: 0;
+  }
+
+  .flexcard a {
+    flex: none;
+    min-width: 100%;
+    transition: none;
+  }
+
+  .card img {
+    height: 100%;
+  }
+
+  .slideshow-controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+
+  .slideshow-controls button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .slideshow-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+  }
+
+  .dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    background-color: #333;
+  }
+
+  .flexcard a:not(.active) {
+    flex: 0.7;
+  }
 }
+
+
+
+.category  {
+  display: flex;
+  padding-top: 10px;
+  height: 300px;
+  box-shadow: 0 2px rgba(0, 0, 0, 1);
+  justify-content: space-around;
+  overflow: hidden;
+}
+.category-sub {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5rem;
+  align-items: center;
+  
+  
+}
+
+h2 {
+  display: inline;
+}
+
+
+.tag {
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 600px;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+
+.tag-list button {
+  max-width: 150px;
+  width: 100%;
+  max-height: 60px;
+  height: 100%;
+  padding: 10px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  background: #A99488;
+  border-radius: 10px;
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+
+  /* เพิ่มเงาให้ปุ่ม */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  /* ทำให้ปุ่มดูนูนขึ้น */
+  transform: translateY(0);
+}
+
+.tag-list button:hover {
+  background-color: #8c7a6e; /* เปลี่ยนสีปุ่มเมื่อ hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
+  transform: translateY(-2px); /* ยกปุ่มขึ้นเล็กน้อยเมื่อ hover */
+}
+
+.tag-list button:active {
+  transform: translateY(1px); /* ขยับปุ่มลงเมื่อกด */
+}
+
+.popular, .recommend {
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  justify-items: center;
+  align-items: center;
+  position: relative;
+  padding: 40px;
+  overflow: hidden;
+  box-shadow: 0 2px rgba(0, 0, 0, 1);
+}
+
+.popular h2 {
+  
+  position: absolute;
+  top: 10px;
+}
+
+.popular-card {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  height: 90%;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.popular-card a {
+  flex: 1;
+  text-decoration: none;
+  transition: flex 0.5s ease;
+}
+
+.card-1 {
+  width: 200px;
+  text-align: center;
+  align-items: center,start;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.card-1 h5 {
+  
+  margin: 2px;
+  font-size: 1rem;
+  color: #ff0000;
+}
+
+.card-1 h6 {
+  
+  margin: 2px;
+  color: #ff0000;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 75%;
+}
+
+.card-1 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  object-fit: cover;
+}
+
+.number {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(255, 255, 255, 0.7); /* สีพื้นหลังขาวใส */
+  padding: 5px 10px;
+  border-radius: 50%;
+  color: #ff0000; /* สีของตัวเลข */
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+
+.recommend {
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+.recommend-re { 
+  display: flex;
+  box-shadow: none;
+
+  filter: drop-shadow(2px 2px 2px #ff0000);
+  gap: 1rem;
+}
+
+.recommend-card , .novel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  flex-wrap: nowrap;
+  width: 200px;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  transition: all 0.5s ease;
+  gap: 1rem;
+
+}
+
+.recommend-card img , .novel-card img {
+  width: 100%;
+  height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  object-fit: cover;
+  
+}
+
+.recommend-card h5 ,.novel-card h5{
+  margin: 3px;
+  font-size: 1rem;
+  color: #ff0000;
+}
+
+.recommend-card h6 ,.novel-card h6 {
+  
+  margin: 2px;
+  color: #555;
+  text-align: center;
+}
+.novel-now {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: space-around;
+  padding: 40px;
+  overflow: hidden;
+  box-shadow: 0 2px rgba(0, 0, 0, 1);
+}
+
+.header-update {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.novel-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 200px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgb(255, 0, 0);
+  transition: all 0.5s ease;
+  gap: 0.5rem;
+}
+
+.novel-card img {
+  width: 100%;
+  height: 200px; /* ปรับขนาดของรูปภาพ */
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+}
+
+.novel-card h5 {
+  margin: 2px;
+  font-size: 1rem;
+  color: #ff0000;
+  text-align: center;
+}
+
+.novel-card h6 {
+  margin: 2px;
+  color: #555;
+  text-align: center;
+}
+
+.novel-card h6 i {
+  margin-right: 5px;
+}
+
+/* จัดการคำยาวเกิน */
+.novel-card h5, .novel-card h6 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Media queries สำหรับการตอบสนองต่อหน้าจอขนาดเล็ก */
+@media (max-width: 768px) {
+  .header-update {
+    justify-content: center;
+  }
+  
+  .novel-card {
+    width: 100%;
+  }
+}
+
