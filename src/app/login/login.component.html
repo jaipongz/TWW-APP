@@ -15,35 +15,41 @@
             </div>
             <div class="login-container">
                 <h2>Thanwiwa</h2>
-                <form id="loginForm" class="login-form" action="/submit-login" method="POST">
+                <form id="loginForm" (ngSubmit)="login()" class="login-form" #loginForm="ngForm" novalidate>
                     <div class="input-group">
-                        <img src="image\account_circle.png" alt="user-icon" style="width: 27px; height: 27px;">
-                        <input type="text" id="username" placeholder="username" name="username" required>
+                        <input type="text" id="username" placeholder="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
                     </div>
                     <div class="input-group">
-                        <img src="image\Lock.png" alt="[pass-icon]" style="width: 27px; height: 27px;">
-                        <input type="password" id="password" placeholder="password" name="password" required>
+                        <input  [type]="showPassword ? 'text' : 'password'" id="password" placeholder="password" name="password" [(ngModel)]="password" minlength="8" #passwordInput="ngModel" required>
+                        <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn"> <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></button>
                     </div>
                     <div class="input-group1">
-                        <a href="#">สมัครสมาชิก</a>
-                        <a href="#">ลืมรหัสผ่าน?</a>
+                        <a [routerLink]="['/register']" >สมัครสมาชิก</a>
+                        <a [routerLink]="['/forgot-password']" >ลืมรหัสผ่าน?</a>
                     </div>
                     <div class="input-group2">
-                        <button type="submit" (click)="register()">Login</button>
+                        <button type="submit" (click)="login()">Login</button>
                     </div>
                     <div class="input-group3">
                         <label for="">หรือเข้าสู่ระบบโดย</label>
                         <div class="social">
-                            <a href="#"><img src="image\facebook.png" alt="facebook-icon"
+                            <a ><img src="image\facebook.png" alt="facebook-icon"
                                     style="width: 42px; height: 42px;"></a>
-                            <a href="#"><img src="image\line.png" alt="line-icon"
-                                    style="width: 42px; height: 42px;"></a>
+                            <!-- <a ><img src="image\line.png" alt="line-icon"
+                                    style="width: 42px; height: 42px;"></a> -->
                             <a href="http://localhost:3090/auth/google">
                                 <img src="image/google.png" alt="google-icon" style="width: 42px; height: 42px;">
                             </a>
                         </div>
                     </div>
                 </form>
+                    <!-- Popup -->
+                    <div *ngIf="showPopup" class="popup">
+                        <div class="popup-content">
+                          <h3>{{ popupMessage }}</h3>
+                          <button (click)="closePopup()">OK</button>
+                        </div>
+                      </div>
             </div>
         </div>
     </div>

@@ -11,14 +11,17 @@
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  max-height: 500px;
+  height: max-content;
+  
   box-shadow: 0 2px rgba(0, 0, 0, 1);
 
 }
 
 .flexcard {
   display: flex;
-  width: 90%;
+  flex-direction: row;
+  width: 120%;
   height: 90%;
   gap: 10px;
   overflow: hidden;
@@ -27,7 +30,7 @@
 .flexcard a {
   flex: 1;
   text-decoration: none;
-  transition: flex 0.5s ease;
+  /* transition: flex 0.5s ease; */
 }
 
 .card {
@@ -41,30 +44,78 @@
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s ease;
-  overflow: hidden;
+  /* transition: all 0.5s ease; */
+
 }
 
 .card img {
   width: 100%;
-  height: 90%;
+  height: 100%;
   object-fit: cover;
   transition: none;
 }
 
-.card h5 {
+/* .card h5 {
   margin: 10px 0;
   font-size: 1.2rem;
   color: #333;
-}
+} */
 
-.flexcard a:hover {
+/* .flexcard a:hover {
   flex: 1;
 }
 
 .flexcard a:not(:hover) {
   flex: 0.7;
   transition: flex 0.5s ease;
+} */
+
+
+.slideshow-controls {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.slideshow-controls button {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.slideshow-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  margin-top: -20px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+.flexcard a:not(.active) {
+  flex: 0.7;
 }
 
 
@@ -75,12 +126,12 @@
 
   }
 
-  .flexcard {
+  /* .flexcard {
     flex-direction: row;
     height: 90%;
     width: 90%;
     gap: 0;
-  }
+  } */
 
   .flexcard a {
     flex: none;
@@ -92,7 +143,7 @@
     height: 100%;
   }
 
-  .slideshow-controls {
+  /* .slideshow-controls {
     display: flex;
     justify-content: space-between;
     position: absolute;
@@ -137,7 +188,7 @@
 
   .flexcard a:not(.active) {
     flex: 0.7;
-  }
+  } */
 }
 
 
@@ -146,7 +197,9 @@
   display: flex;
   padding-top: 10px;
   height: 300px;
-  box-shadow: 0 2px rgba(0, 0, 0, 1);
+  border-radius: 20px;
+  background-color: #F6EEE0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
   justify-content: space-around;
   overflow: hidden;
 }

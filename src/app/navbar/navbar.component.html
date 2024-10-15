@@ -1,17 +1,21 @@
-<nav>
-    <div class="logo">
-        <h2>Thanwiwa</h2>
+<nav class="navbar">
+    <div class="navbar-container">
+      <!-- Logo -->
+      <a href="#" class="logo">My App</a>
+  
+      <!-- Links for authenticated and unauthenticated users -->
+      <div *ngIf="isLoggedIn; else loggedOut" class="navbar-links">
+        <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/profile">Profile</a>
+        <button (click)="logout()" class="logout-button">Logout</button>
+      </div>
+  
+      <ng-template #loggedOut>
+        <div class="navbar-links">
+          <a routerLink="/login">Login</a>
+          <a routerLink="/register">Register</a>
+        </div>
+      </ng-template>
     </div>
-    <ul class="menu">
-        <li><a href="#" >หน้าแรก</a></li>
-        <li><a href="#" >นิยาย</a></li>
-        <li><a href="#" >ค้นหา</a></li>
-
-    </ul>
-    <!-- <div class="container" onclick="myFunction(this)">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </div> -->
-</nav>
-
+  </nav>
+  

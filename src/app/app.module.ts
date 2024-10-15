@@ -16,6 +16,9 @@ const appRoutes: Routes = [
   {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
+  {path: 'banner' , component: BannerComponent },
+  {path: 'forgot-password' , component: ForgotPasswordComponent },
+  {path: 'forgot-password-sub' , component: ForgotPasswordSubComponent },
 
 ]
 

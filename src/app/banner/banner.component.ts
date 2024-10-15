@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-banner',
@@ -6,6 +8,9 @@ import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy} from
   styleUrl: './banner.component.css'
 })
 export class BannerComponent implements OnInit, OnDestroy {
+  constructor(private router :Router, private http : HttpClient) {}
+
+
   @ViewChild('flexcard', { static: true }) flexcard!: ElementRef;
   currentIndex: number = 0;
   slides = [
@@ -16,28 +21,37 @@ export class BannerComponent implements OnInit, OnDestroy {
     { image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', title: 'Title 5' },
     // Add more slides as needed
   ];
-  isMobileView: boolean = false;
+  // isMobileView: boolean = false;
   slideInterval!: any;  // Store the interval ID
 
-  constructor() {}
+  
 
   ngOnInit(): void {
-    this.checkViewport();
+    // this.checkViewport();
     this.startAutoSlide();  // Start auto-sliding when component initializes
+    
+    const token = localStorage.getItem('token');
+    if (token) {
+      console.log('Token found:', token);
+      // Proceed with banner page logic
+    } else {
+      console.log('No token found, redirecting to login');
+      // this.router.navigate(['login']); // Redirect to login if no token
+    }
   }
 
   ngOnDestroy(): void {
     this.stopAutoSlide();  // Clear the interval when the component is destroyed
   }
 
-  @HostListener('window:resize', [])
-  onResize() {
-    this.checkViewport();
-  }
+  // @HostListener('window:resize', [])
+  // onResize() {
+  //   this.checkViewport();
+  // }
 
-  checkViewport(): void {
-    this.isMobileView = window.innerWidth <= 843;
-  }
+  // checkViewport(): void {
+  //   this.isMobileView = window.innerWidth <= 843;
+  // }
   
   goToSlide(index: number): void {
     this.currentIndex = index;

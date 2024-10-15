@@ -72,10 +72,11 @@
 }
 
 h2 {
+
     display: inline;
     text-align: center;
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.6); /* สีพื้นหลังโปร่งใส */
+    
     
 
 }
@@ -84,11 +85,9 @@ h2 {
     display: flex;
     margin-bottom: 15px;
     align-items: center;
-    
-    padding: 3px;
     width: 100%; /* ปรับเป็น 100% เพื่อรองรับ responsive */
     height: 40px;
-    border: 1px solid #000000;
+   
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.6); /* สีพื้นหลังโปร่งใส */
@@ -96,12 +95,13 @@ h2 {
 }
 
 .input-group input {
+    text-align: start;
     width: 100%;
     height: 100%;
     border: none;
     float: none;
-    border-radius: 0 50px 50px 0;
-    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 50px 50px 50px 50px;
 }
 .input-group1 {
     display: flex;
@@ -168,5 +168,61 @@ h2 {
     }
 }
 
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .popup-content h3 {
+    margin-bottom: 15px;
+  }
+  
+  .popup-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .popup-content button:hover {
+    background-color: #0056b3;
+  }
+  .input-group {
+    position: relative;
+    width: 100%;
+  }
+
+  .toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+  
+  .toggle-btn i {
+    color: #333;
+  }
 /****************************************************************************************************************************************************************************/
 

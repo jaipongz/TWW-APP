@@ -1,11 +1,11 @@
-<!-- <app-navbar></app-navbar> -->
-<div class="container-page" style="background-image: url(image\backg.png);">
+<app-navbar></app-navbar>
+<div class="container-page">
   <div class="banner">
     <div class="flexcard" #flexcard>
       <a *ngFor="let card of slides; let i = index" [ngClass]="{'active': i === currentIndex}"
         (mouseover)="stopAutoSlide()" (mouseleave)="startAutoSlide()" class="card">
         <img [src]="card.image" [alt]="card.title">
-        <h5>{{ card.title }}</h5>
+        <!-- <h5>{{ card.title }}</h5> -->
       </a>
     </div>
     <!-- Dot Navigation -->
