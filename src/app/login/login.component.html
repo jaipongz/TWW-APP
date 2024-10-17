@@ -43,13 +43,13 @@
                         </div>
                     </div>
                 </form>
-                    <!-- Popup -->
-                    <div *ngIf="showPopup" class="popup">
-                        <div class="popup-content">
-                          <h3>{{ popupMessage }}</h3>
-                          <button (click)="closePopup()">OK</button>
-                        </div>
-                      </div>
+                <!-- Popup -->
+                <div *ngIf="showPopup" class="popup">
+                    <div class="popup-content">
+                        <h3>{{ popupMessage }}</h3>
+                        <button (click)="closePopup()">OK</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

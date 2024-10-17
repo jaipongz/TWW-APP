@@ -58,8 +58,8 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    
-
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 .login-form {
     display: flex;
@@ -83,7 +83,7 @@ h2 {
 
 .input-group {
     display: flex;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     align-items: center;
     width: 100%; /* ปรับเป็น 100% เพื่อรองรับ responsive */
     height: 40px;
@@ -120,6 +120,8 @@ h2 {
 .input-group2 {
     display: flex;
     gap: 30px;
+    margin-bottom: 8px;
+    margin-top: 8px;
 }
 
 .input-group2 button {
@@ -148,6 +150,25 @@ h2 {
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+.text-login {
+    font-size: 12px;
+}
+
+.orlogin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.orlogin-by {
+    justify-content: space-between;
+    align-items: center;
+    background-color: #88583D;
+    width: 25%;
+    height: 1px;
 }
 
 
@@ -223,6 +244,75 @@ h2 {
   
   .toggle-btn i {
     color: #333;
+  }
+
+  /* ปรับสไตล์ของ popup */
+.login-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .login-popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  /* จัดปุ่มปิด X ให้ไปอยู่มุมขวาสุด */
+  .popup-header {
+    display: flex;
+    justify-content: flex-end; /* ทำให้ปุ่มไปอยู่ฝั่งขวาสุด */
+    padding-bottom: 10px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    cursor: pointer;
+    color: gray;
+    padding: 5px 9px;
+    /* transition: transform 0.2s ease; */
+  }
+  
+  .close-btn:hover {
+    color: white;
+    /* background-color: #F0F0F0; */
+    background-color: #88583D;
+    border-radius: 80%;
+    /* transform: scale(1.1); */
+  }
+  
+  .login-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  
+  .image-container, .login-container {
+    flex: 1;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
   }
 /****************************************************************************************************************************************************************************/
 

@@ -9,13 +9,73 @@
         <a routerLink="/profile">Profile</a>
         <button (click)="logout()" class="logout-button">Logout</button>
       </div>
-  
+      
       <ng-template #loggedOut>
         <div class="navbar-links">
-          <a routerLink="/login">Login</a>
+          <!-- <a routerLink="/login">Login</a> -->
+          <a (click)="openLoginPopup()">Login</a>
           <a routerLink="/register">Register</a>
         </div>
       </ng-template>
     </div>
   </nav>
+
+  <!-- Popup login -->
+<div *ngIf="showLoginPopup" class="login-popup-overlay" (click)="closeLoginPopup()">
+  <div class="login-popup" (click)="$event.stopPropagation()">
+    
+    <!-- style="background-color: red;" -->
+
+    <!-- ปุ่มปิด X อยู่เหนือ div ของ login-content -->
+    <div class="popup-header" >
+      <button class="close-btn" (click)="closeLoginPopup()">X</button>
+    </div>
+
+    <div class="login-content">
+      <!-- Image Section -->
+      <div class="image-container">
+        <img src="image/g.png" alt="imagelogin">
+      </div>
+
+      <div class="login-container">
+        <h2>Thanwiwa</h2>
+        <form id="loginForm" (ngSubmit)="login()" class="login-form" #loginForm="ngForm" novalidate>
+          <div class="input-group">
+            <input type="text" id="username" placeholder="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
+          </div>
+          <div class="input-group">
+            <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="password" name="password" [(ngModel)]="password" minlength="8" #passwordInput="ngModel" required>
+            <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn">
+              <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+            </button>
+          </div>
+          <div class="input-group1">
+            <a [routerLink]="['/register']" class="text-login">
+                สมัครสมาชิก
+            </a>
+            <a [routerLink]="['/forgot-password']" class="text-login">
+                ลืมรหัสผ่าน?
+            </a>
+          </div>
+          <div class="input-group2">
+            <button type="submit">Login</button>
+          </div>
+          <div class="orlogin">
+            <div class="orlogin-by"></div>
+            <label for="" style="font-size: 14px; color:#88583D;">หรือเข้าสู่ระบบโดย</label>
+            <div class="orlogin-by"></div>
+          </div>
+          <div class="input-group3">
+ 
+            
+            <div class="social">
+              <a><img src="image/facebook.png" alt="facebook-icon" style="width: 42px; height: 42px;"></a>
+              <a href="http://localhost:3090/auth/google"><img src="image/google.png" alt="google-icon" style="width: 42px; height: 42px;"></a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
   
