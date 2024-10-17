@@ -15,7 +15,7 @@
     </div>
   </div>
 
-
+  <div class="container-page-sub">
   <div class="category">
     <div class="category-sub">
       <h2>หมวดหมู่</h2>
@@ -41,17 +41,17 @@
         <h5>{{ popcard.name }}</h5>
         <h5>{{ popcard.tag }}</h5>
         <h6>{{ popcard.penname }}</h6>
-
-        <h6><i class="fas fa-book">
-          </i> {{ popcard.ep }} ตอน</h6>
+        <h6><i class="fas fa-book"></i> {{ popcard.ep }} ตอน</h6>
       </a>
     </div>
   </div>
+  
 
   <div class="recommend">
     <h2>รายการแนะนำ</h2>
-    <div class="recommend recommend-re">
-      <div class="recommend-card" *ngFor="let rect of recmmend">
+    <div class="recommend-re">
+      <button (click)="prevCard()" class="nav-button">←</button>
+      <div class="recommend-card" *ngFor="let rect of visibleCards">
         <img [src]="rect.image" [alt]="rect.name">
         <div class="card-img-sub">
           <h5>{{ rect.name }}</h5>
@@ -61,6 +61,7 @@
         </div>
       </div>
     </div>
+    <button (click)="nextCard()" class="nav-button">→</button>
   </div>
 
   <div class="novel-now">

@@ -120,15 +120,56 @@ export class BannerComponent implements OnInit, OnDestroy {
     {image: 'https://wallpapers.com/images/featured/male-anime-characters-e5qgslpvg4gaf0rc.jpg', name: 'title4', penname: 'penname4', ep: 'ep4'},
     {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
+    {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
+    {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
+    {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
+    {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
   ]
+
+  
+  currentRecomment = 0;
+
+  get visibleCards() {
+    return this.recmmend.slice(this.currentRecomment, this.currentRecomment + 5); // แสดงการ์ด 3 อันจากดัชนีปัจจุบัน
+  }
+
+  nextCard() {
+    if (this.currentRecomment < this.recmmend.length - 5) {
+      this.currentRecomment += 1; // เลื่อนดูการ์ดถัดไป
+    }
+  }
+
+  prevCard() {
+    if (this.currentRecomment > 0) {
+      this.currentRecomment -= 1; // เลื่อนดูการ์ดก่อนหน้า
+    }
+  }
 
 
 
   novelupdate = [
     {image: 'https://f.ptcdn.info/648/068/000/q7mr6ak8fdRxVA9ZBhY-o.jpg', name: 'title1', penname: 'penname1', ep: 'ep1'},
+    {image: 'https://f.ptcdn.info/648/068/000/q7mr6ak8fdRxVA9ZBhY-o.jpg', name: 'title1', penname: 'penname1', ep: 'ep1'},
+    {image: 'https://f.ptcdn.info/648/068/000/q7mr6ak8fdRxVA9ZBhY-o.jpg', name: 'title1', penname: 'penname1', ep: 'ep1'},
+    {image: 'https://f.ptcdn.info/648/068/000/q7mr6ak8fdRxVA9ZBhY-o.jpg', name: 'title1', penname: 'penname1', ep: 'ep1'},
+    {image: 'https://f.ptcdn.info/080/004/000/1365740188-toriko4044-o.jpg', name: 'title2', penname: 'penname2', ep: 'ep2'},
+    {image: 'https://f.ptcdn.info/080/004/000/1365740188-toriko4044-o.jpg', name: 'title2', penname: 'penname2', ep: 'ep2'},
+    {image: 'https://f.ptcdn.info/080/004/000/1365740188-toriko4044-o.jpg', name: 'title2', penname: 'penname2', ep: 'ep2'},
+    {image: 'https://f.ptcdn.info/080/004/000/1365740188-toriko4044-o.jpg', name: 'title2', penname: 'penname2', ep: 'ep2'},
     {image: 'https://f.ptcdn.info/080/004/000/1365740188-toriko4044-o.jpg', name: 'title2', penname: 'penname2', ep: 'ep2'},
     {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
+    {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
+    {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
+    {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
+    {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
+    {image: 'https://www.anime-sugoi.com/upload/9638355b86398bccc2f5145330592542.jpg', name: 'title3', penname: 'penname3', ep: 'ep3'},
     {image: 'https://wallpapers.com/images/featured/male-anime-characters-e5qgslpvg4gaf0rc.jpg', name: 'title4', penname: 'penname4', ep: 'ep4'},
+    {image: 'https://wallpapers.com/images/featured/male-anime-characters-e5qgslpvg4gaf0rc.jpg', name: 'title4', penname: 'penname4', ep: 'ep4'},
+    {image: 'https://wallpapers.com/images/featured/male-anime-characters-e5qgslpvg4gaf0rc.jpg', name: 'title4', penname: 'penname4', ep: 'ep4'},
+    {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
+    {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
+    {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
+    {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
     {image: 'https://t3.ftcdn.net/jpg/08/15/62/26/360_F_815622609_toLonURjFLS0I1vtK0NeTocROaHsFGlL.jpg', name: 'title5', penname: 'penname5', ep: 'ep5'},
   ]
 

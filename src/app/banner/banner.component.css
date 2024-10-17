@@ -1,96 +1,66 @@
 .container-page {
   display: flex;
   flex-direction: column;
-  padding: 0 3rem 0 3rem;
   background-color: #ffe3e3;
+  justify-content: center;
+  background: url('/image/backg.png');
   
+  
+}
+
+.container-page-sub {
+  padding: 0 1rem 0;
+
 }
 
 .banner {
   display: flex;
-  flex-flow: column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: 500px;
-  height: max-content;
-  
-  box-shadow: 0 2px rgba(0, 0, 0, 1);
-
+  height: 500px;
+  background-color: #F6EEE0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .flexcard {
   display: flex;
   flex-direction: row;
-  width: 120%;
-  height: 90%;
+  width: 100%;
+  height: 95%;
   gap: 10px;
-  overflow: hidden;
+  justify-content: center;
 }
 
 .flexcard a {
-  flex: 1;
-  text-decoration: none;
-  /* transition: flex 0.5s ease; */
+  flex: 0.7;
+  transition: flex 0.5s ease;
+}
+
+.flexcard a.active {
+  flex: 1.5; /* Expands the active card */
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  display: none;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
   background-color: #fff;
+  margin: 0 10px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* transition: all 0.5s ease; */
-
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: none;
 }
 
-/* .card h5 {
-  margin: 10px 0;
-  font-size: 1.2rem;
-  color: #333;
-} */
-
-/* .flexcard a:hover {
-  flex: 1;
-}
-
-.flexcard a:not(:hover) {
-  flex: 0.7;
-  transition: flex 0.5s ease;
-} */
-
-
-.slideshow-controls {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  transform: translateY(-50%);
-}
-
-.slideshow-controls button {
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.slideshow-controls button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.active {
+  display: block;
 }
 
 .dots-container {
@@ -118,107 +88,77 @@
   flex: 0.7;
 }
 
+/* Media Queries for responsiveness */
 
-/* Responsive styles for screens smaller than 768px */
-@media (max-width: 843px) {
+/* For screens smaller than 768px (tablets and smaller devices) */
+@media (max-width: 768px) {
   .banner {
-    height: 200px;
-
+    height: 350px; /* Reduce banner height */
   }
 
-  /* .flexcard {
-    flex-direction: row;
-    height: 90%;
-    width: 90%;
-    gap: 0;
-  } */
+  .flexcard {
+    flex-direction: column; /* Stack the cards vertically */
+  }
 
   .flexcard a {
-    flex: none;
-    min-width: 100%;
-    transition: none;
+    flex: 1; /* Make all cards have the same size */
   }
 
-  .card img {
-    height: 100%;
+  .flexcard a.active {
+    flex: 1.2; /* Slightly larger active card for tablets */
+  }
+}
+
+/* For screens smaller than 480px (mobile phones) */
+@media (max-width: 480px) {
+  .banner {
+    height: 250px; /* Reduce banner height further */
   }
 
-  /* .slideshow-controls {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
+  .flexcard {
+    flex-direction: column; /* Stack cards vertically */
+    gap: 5px; /* Reduce gap between cards */
   }
 
-  .slideshow-controls button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+  .flexcard a {
+    flex: 1; /* Equal size cards */
   }
 
-  .slideshow-controls button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+  .flexcard a.active {
+    flex: 1.1; /* Slightly expand the active card */
   }
 
-  .dots-container {
-    display: flex;
-    justify-content: center;
-    margin-top: -20px;
-  }
-
-  .dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: white;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-    cursor: pointer;
-  }
-
-  .dot.active {
-    background-color: #333;
-  }
-
-  .flexcard a:not(.active) {
-    flex: 0.7;
-  } */
 }
 
 
 
-.category  {
+
+
+.category {
   display: flex;
   padding-top: 10px;
   height: 300px;
   border-radius: 20px;
-  background-color: #F6EEE0;
+  background-color: #f6eee0dc ;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 1);
   justify-content: space-around;
   overflow: hidden;
 }
+
 .category-sub {
   display: flex;
   flex-direction: column;
   margin-left: 5rem;
   align-items: center;
-  
-  
 }
 
 h2 {
   display: inline;
+  color: #000000;
+  text-shadow: 2px 2px 10px #000000;
 }
 
-
 .tag {
-  display: -ms-flexbox;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -227,9 +167,7 @@ h2 {
   gap: 10px;
   align-items: center;
   justify-content: center;
-  
 }
-
 
 .tag-list button {
   max-width: 150px;
@@ -244,23 +182,61 @@ h2 {
   background: #A99488;
   border-radius: 10px;
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
-
-  /* เพิ่มเงาให้ปุ่ม */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  /* ทำให้ปุ่มดูนูนขึ้น */
   transform: translateY(0);
 }
 
 .tag-list button:hover {
-  background-color: #8c7a6e; /* เปลี่ยนสีปุ่มเมื่อ hover */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* เพิ่มเงาเมื่อ hover */
-  transform: translateY(-2px); /* ยกปุ่มขึ้นเล็กน้อยเมื่อ hover */
+  background-color: #8c7a6e;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .tag-list button:active {
-  transform: translateY(1px); /* ขยับปุ่มลงเมื่อกด */
+  transform: translateY(1px);
 }
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+  .category {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  .category-sub {
+    margin-left: 0;
+    align-items: center;
+  }
+
+  .tag {
+    max-width: 100%;
+  }
+
+  .tag-list button {
+    max-width: 120px; /* Reduce button width */
+    max-height: 50px; /* Reduce button height */
+  }
+}
+
+/* For screens smaller than 480px (mobile phones) */
+@media (max-width: 480px) {
+  .category {
+    padding: 5px;
+  }
+
+  .category-sub h2 {
+    font-size: 1.2rem; /* Adjust heading size */
+  }
+
+  .tag-list button {
+    max-width: 100px; /* Further reduce button width */
+    max-height: 40px; /* Further reduce button height */
+  }
+}
+
 
 .popular, .recommend {
   display: flex;
@@ -269,135 +245,281 @@ h2 {
   justify-items: center;
   align-items: center;
   position: relative;
-  padding: 40px;
+  border-radius: 10px;
+  padding: 20px;
   overflow: hidden;
-  box-shadow: 0 2px rgba(0, 0, 0, 1);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.popular {
+  padding: 20px;
 }
 
 .popular h2 {
-  
-  position: absolute;
-  top: 10px;
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px #000000;
 }
 
 .popular-card {
   display: flex;
-  justify-content: center;
+  flex-wrap: nowrap;
+  min-width: 100%;
   gap: 20px;
-  height: 90%;
-  padding: 10px;
-  overflow: hidden;
-}
-
-.popular-card a {
-  flex: 1;
-  text-decoration: none;
-  transition: flex 0.5s ease;
+  justify-content: center;
 }
 
 .card-1 {
-  width: 200px;
-  text-align: center;
-  align-items: center,start;
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
-  transition: all 0.5s ease;
-  overflow: hidden;
+  opacity: 10px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 250px;
 }
 
-.card-1 h5 {
-  
-  margin: 2px;
-  font-size: 1rem;
-  color: #ff0000;
+.card-1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-.card-1 h6 {
-  
-  margin: 2px;
-  color: #ff0000;
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 768px (tablets and phones) */
+@media (max-width: 768px) {
+  .popular{
+    height: auto;
+    padding: 15px;
+  }
+
+  .popular-card {
+    flex-wrap: wrap; /* Allows the cards to stack or wrap on smaller screens */
+  }
+
+  .card-1 {
+    width: 200px; /* Reduce the width of cards */
+  }
+
+  .popular h2 {
+    font-size: 1.5rem; /* Reduce the font size of heading */
+  }
 }
+
+/* For screens smaller than 480px (mobile phones) */
+@media (max-width: 480px) {
+  .popular{
+    padding: 10px;
+  }
+
+  .card-1 {
+    width: 150px; /* Further reduce the width of cards for small screens */
+  }
+
+  .popular h2 {
+    font-size: 1.2rem; /* Further reduce the font size */
+  }
+}
+
+
+
 
 .image-container {
   position: relative;
-  width: 100%;
-  height: 75%;
 }
 
-.card-1 img {
+.image-container img {
   width: 100%;
-  height: 100%;
+  height: 200px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
   object-fit: cover;
 }
 
 .number {
   position: absolute;
   top: 10px;
-  right: 10px;
-  background-color: rgba(255, 255, 255, 0.7); /* สีพื้นหลังขาวใส */
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
   padding: 5px 10px;
   border-radius: 50%;
-  color: #ff0000; /* สีของตัวเลข */
   font-size: 1.2rem;
   font-weight: bold;
 }
 
+.card-1 h5 {
+  font-size: 1rem;
+  margin: 10px;
+  color: #ff0000;
+  text-shadow: 2px 2px 10px #000000;
+}
+
+.card-1 h6 {
+  font-size: 0.9rem;
+  margin: 5px 10px;
+  color: #ffffff;
+  text-shadow: 2px 2px 10px #000000;
+}
+
+.card-1 .fas {
+  margin-right: 5px;
+  color: #ffffff;
+  text-shadow: 2px 2px 10px #000000;
+}
+
+
+
+
 
 .recommend {
   flex-direction: row;
-  justify-content: space-around;
-
+  justify-content: space-between;
 }
-.recommend-re { 
+.recommend h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin-left: 6rem;
+  text-shadow: 2px 2px 10px #000000;
+}
+
+.recommend-re {
   display: flex;
-  box-shadow: none;
-
+  height: 100%;
+  justify-items: center;
+  align-items: center;
+  border-radius: 10px;
+  overflow: auto;
+  
+  position: relative;
+  gap: 10px;
   filter: drop-shadow(2px 2px 2px #ff0000);
-  gap: 1rem;
+  margin-left: 3rem;
+
+  /* ซ่อน scrollbar สำหรับเบราว์เซอร์ที่รองรับ Webkit (Chrome, Safari) */
+  scrollbar-width: none; /* สำหรับ Firefox */
+
 }
 
-.recommend-card , .novel-card {
+.nav-button {
+  background-color: #ff0000;
+  text-align: center;
+  align-items: center;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.nav-button:hover {
+  background-color: #d40000;
+}
+
+.recommend-card, .novel-card {
   display: flex;
   flex-direction: column;
-  align-items: start;
   flex-wrap: nowrap;
-  width: 200px;
-  height: 100%;
+  height: 90%;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
   transition: all 0.5s ease;
-  gap: 1rem;
-
+  transition: transform 0.5s ease;
 }
 
-.recommend-card img , .novel-card img {
-  width: 100%;
+.recommend-card img, .novel-card img {
+  width: 200px;
   height: 90%;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
   object-fit: cover;
-  
 }
 
-.recommend-card h5 ,.novel-card h5{
+.recommend-card h5, .novel-card h5 {
   margin: 3px;
   font-size: 1rem;
   color: #ff0000;
+  text-shadow: 2px 2px 10px #000000;
 }
 
-.recommend-card h6 ,.novel-card h6 {
-  
+.recommend-card h6, .novel-card h6 {
   margin: 2px;
   color: #555;
-  text-align: center;
+  text-shadow: 2px 2px 10px #000000;
 }
+
+/* Media Queries for scaling down on smaller screens */
+
+@media (max-width: 768px) {
+  .recommend {
+    height: 350px;
+
+  }
+  .recommend h2 {
+    font-size: 1.5rem; /* ลดขนาดฟอนต์ */
+    margin-left: 3rem; /* ลดระยะห่าง */
+  }
+
+  .recommend-re {
+    margin-left: 2rem;
+    gap: 5px; /* ลดระยะห่าง */
+  }
+
+  .nav-button {
+    display: none;
+  }
+
+  .recommend-card img, .novel-card img {
+    width: 150px; /* ลดขนาดรูปภาพ */
+    height: 80%;
+  }
+
+  .recommend-card h5, .novel-card h5 {
+    font-size: 0.9rem; /* ลดขนาดฟอนต์ */
+  }
+
+  .recommend-card h6, .novel-card h6 {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recommend {
+    height: 250px;
+  }
+  .recommend h2 {
+    font-size: 1.2rem; /* ลดขนาดฟอนต์ลงสำหรับจอเล็ก */
+    margin-left: 1rem; /* ลดระยะห่าง */
+  }
+
+  .recommend-re {
+    margin-left: 1rem;
+    gap: 3px;
+  }
+
+  .nav-button {
+    font-size: 1rem; /* ลดขนาดปุ่มลงอีก */
+    padding: 6px;
+  }
+
+  .recommend-card img, .novel-card img {
+    width: 120px; /* ลดขนาดรูปภาพ */
+    height: 70%;
+  }
+
+  .recommend-card h5, .novel-card h5 {
+    font-size: 0.8rem; /* ลดขนาดฟอนต์ */
+  }
+
+  .recommend-card h6, .novel-card h6 {
+    font-size: 0.7rem;
+  }
+}
+
 .novel-now {
   display: flex;
   flex-direction: column;
@@ -405,7 +527,8 @@ h2 {
   align-content: space-around;
   padding: 40px;
   overflow: hidden;
-  box-shadow: 0 2px rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .header-update {
@@ -435,22 +558,33 @@ h2 {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
 }
+.novel-now h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 10px #000000;
+}
+
 
 .novel-card h5 {
   margin: 2px;
   font-size: 1rem;
   color: #ff0000;
-  text-align: center;
+
+  text-shadow: 2px 2px 10px #000000;
 }
 
 .novel-card h6 {
   margin: 2px;
   color: #555;
-  text-align: center;
+
+  text-shadow: 2px 2px 10px #000000;
 }
 
 .novel-card h6 i {
   margin-right: 5px;
+  text-shadow: 2px 2px 10px #000000;
 }
 
 /* จัดการคำยาวเกิน */
