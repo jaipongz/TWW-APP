@@ -13,27 +13,28 @@
       <ng-template #loggedOut>
         <div class="navbar-links">
           <!-- <a routerLink="/login">Login</a> -->
-          <a (click)="openLoginPopup()">Login</a>
-          <a routerLink="/register">Register</a>
+          <button mat-button (click)="openLoginDialog()">Login</button>
+          <button mat-button (click)="openRegisterDialog()">Register</button>
         </div>
       </ng-template>
     </div>
   </nav>
 
+
   <!-- Popup login -->
-<div *ngIf="showLoginPopup" class="login-popup-overlay" (click)="closeLoginPopup()">
-  <div class="login-popup" (click)="$event.stopPropagation()">
+<!-- <div *ngIf="showLoginPopup" class="login-popup-overlay" (click)="closeLoginPopup()">
+  <div class="login-popup" (click)="$event.stopPropagation()"> -->
     
     <!-- style="background-color: red;" -->
 
     <!-- ปุ่มปิด X อยู่เหนือ div ของ login-content -->
-    <div class="popup-header" >
+    <!-- <div class="popup-header" >
       <button class="close-btn" (click)="closeLoginPopup()">X</button>
     </div>
 
-    <div class="login-content">
+    <div class="login-content"> -->
       <!-- Image Section -->
-      <div class="image-container">
+      <!-- <div class="image-container">
         <img src="image/g.png" alt="imagelogin">
       </div>
 
@@ -77,5 +78,5 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
   

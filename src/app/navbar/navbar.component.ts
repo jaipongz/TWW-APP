@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-navbar',
@@ -12,9 +15,9 @@ export class NavbarComponent implements OnInit {
   username: string = '';
   password: string = '';
   showPassword: boolean = false;
-  showLoginPopup: boolean = false;
+  // showLoginPopup: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     // Check if token exists in localStorage
@@ -25,7 +28,7 @@ export class NavbarComponent implements OnInit {
   logout(): void {
     localStorage.removeItem('token'); // Remove token on logout
     this.isLoggedIn = false;
-    this.router.navigate(['#']); // Redirect to login page
+    this.router.navigate(['banner']); // Redirect to login page
   }
   // showLoginPopup = false; // ตัวแปรนี้จะใช้สำหรับควบคุมการแสดง popup
 
@@ -34,18 +37,37 @@ export class NavbarComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  // ฟังก์ชันสำหรับแสดง popup
-  openLoginPopup() {
-    this.showLoginPopup = true;
+  openLoginDialog(): void {
+    const dialogRef = this.dialog.open(LoginComponent, {
+    //
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
+
+  openRegisterDialog(): void {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      //
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  // ฟังก์ชันสำหรับแสดง popup
+  // openLoginPopup() {
+  //   this.showLoginPopup = true;
+  // }
 
   // ฟังก์ชันสำหรับปิด popup
-  closeLoginPopup() {
-    this.showLoginPopup = false;
-  }
+  // closeLoginPopup() {
+  //   this.showLoginPopup = false;
+  // }
 
-  login() {
-    // เพิ่มโค้ดการล็อกอินของคุณที่นี่
-    this.closeLoginPopup(); // ปิด popup เมื่อเข้าสู่ระบบสำเร็จ
-  }
+  // login() {
+  //   // เพิ่มโค้ดการล็อกอินของคุณที่นี่
+  //   this.closeLoginPopup(); // ปิด popup เมื่อเข้าสู่ระบบสำเร็จ
+  // }
 }

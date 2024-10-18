@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http'; // Import HttpClient
 import { Observable } from 'rxjs'; // Optional for handling responses
+import { MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-register',
@@ -20,8 +22,13 @@ export class RegisterComponent {
   showConfirmPassword: boolean = false;
 
  
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<RegisterComponent>) { }
 
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -71,7 +78,6 @@ export class RegisterComponent {
     }
     }
     
-   
   closePopup() {
     this.showPopup = false;
   }

@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+
 /* You can add global styles to this file, and also import other style files */
 * {
     margin: 0rem;
     padding: 0rem;
     box-sizing: border-box;
     /* font-family: ; */
-    font-family: Arial, sans-serif;
+    font-family: cursive;
 }
 
 /* cssของlogin&register */
@@ -316,3 +319,6 @@ h2 {
   }
 /****************************************************************************************************************************************************************************/
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

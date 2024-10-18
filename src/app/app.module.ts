@@ -12,6 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ForgotPasswordSubComponent } from './forgot-password-sub/forgot-password-sub.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
 const appRoutes: Routes = [
   {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
@@ -38,9 +43,13 @@ const appRoutes: Routes = [
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
     RouterModule.forRoot(appRoutes),
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
