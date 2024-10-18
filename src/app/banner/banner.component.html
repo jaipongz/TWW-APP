@@ -15,19 +15,29 @@
     </div>
   </div>
 
-  <div class="container-page-sub">
-  <div class="category">
-    <div class="category-sub">
-      <h2>หมวดหมู่</h2>
-      <img src="image\g.png" alt="girl" style="height: 200px; width: 200px;">
+
+  <!-- Category Section -->
+  <section class="category-section">
+    <div class="category-header">
+        <div class="category-title">
+            <img src="girlreading.png" alt="Character">
+            <h2>หมวดหมู่</h2>
+        </div>
+        <div class="category-tabs">
+            <button class="active">ยอดนิยม</button>
+            <button>คะแนน</button>
+            <button>นิยาย (ฟรี)</button>
+            <button>นิยาย (VIP)</button>
+        </div>
     </div>
-    <div class="tag">
+
+    <!-- Category Buttons -->
+    <div class="category-buttons">
       <a *ngFor="let tag of category; let i = index" class="tag-list">
         <button (click)="goTotag()">{{tag.tag}}</button>
-
       </a>
     </div>
-  </div>
+</section>
 
 
   <div class="popular">
@@ -41,17 +51,17 @@
         <h5>{{ popcard.name }}</h5>
         <h5>{{ popcard.tag }}</h5>
         <h6>{{ popcard.penname }}</h6>
-        <h6><i class="fas fa-book"></i> {{ popcard.ep }} ตอน</h6>
+
+        <h6><i class="fas fa-book">
+          </i> {{ popcard.ep }} ตอน</h6>
       </a>
     </div>
   </div>
-  
 
   <div class="recommend">
     <h2>รายการแนะนำ</h2>
-    <div class="recommend-re">
-      <button (click)="prevCard()" class="nav-button">←</button>
-      <div class="recommend-card" *ngFor="let rect of visibleCards">
+    <div class="recommend recommend-re">
+      <div class="recommend-card" *ngFor="let rect of recmmend">
         <img [src]="rect.image" [alt]="rect.name">
         <div class="card-img-sub">
           <h5>{{ rect.name }}</h5>
@@ -61,7 +71,6 @@
         </div>
       </div>
     </div>
-    <button (click)="nextCard()" class="nav-button">→</button>
   </div>
 
   <div class="novel-now">
