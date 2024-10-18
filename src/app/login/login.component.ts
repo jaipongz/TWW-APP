@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
+import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 
 @Component({
   selector: 'app-login',
@@ -36,9 +37,9 @@ export class LoginComponent {
   // closeLoginPopup() {
   //   this.showLoginPopup = false;
   // }
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
 
   login() {
     if (!this.username || !this.password) {
@@ -79,12 +80,27 @@ export class LoginComponent {
   }
 
   openRegisterDialog(): void {
+    this.dialogRef.close(); 
     const dialogRef = this.dialog.open(RegisterComponent, {
       //
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });}
+
+    openForgotpass(){ 
+      
+      const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+        
+        
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
+    
+
+    
 
   closePopup() {
     this.showPopup = false;
