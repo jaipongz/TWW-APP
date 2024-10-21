@@ -1,9 +1,10 @@
 .container-page {
   display: flex;
   flex-direction: column;
-  background-color: #ffe3e3;
+  background-color: #ffffff;
+  gap: 10px;
   justify-content: center;
-  background: url("/image/1329400.jpeg");
+  /* background: url("/image/1329400.jpeg"); */
 }
 
 .container-page-sub {
@@ -16,8 +17,7 @@
   justify-content: center;
   align-items: center;
   height: 500px;
-  background-color: #000000;
-
+  /* background-color: #000000; */
   overflow: hidden;
 }
 
@@ -36,7 +36,8 @@
 }
 
 .flexcard a.active {
-  flex: 1.5; /* Expands the active card */
+  flex: 1.5;
+  /* Expands the active card */
 }
 
 .card {
@@ -90,81 +91,86 @@
 /* For screens smaller than 768px (tablets and smaller devices) */
 @media (max-width: 768px) {
   .banner {
-    height: 350px; /* Reduce banner height */
+    height: 350px;
+    /* Reduce banner height */
   }
 
   .flexcard {
-    flex-direction: column; /* Stack the cards vertically */
+    flex-direction: column;
+    /* Stack the cards vertically */
   }
 
   .flexcard a {
-    flex: 1; /* Make all cards have the same size */
+    flex: 1;
+    /* Make all cards have the same size */
   }
 
   .flexcard a.active {
-    flex: 1.2; /* Slightly larger active card for tablets */
+    flex: 1.2;
+    /* Slightly larger active card for tablets */
   }
 }
 
 /* For screens smaller than 480px (mobile phones) */
 @media (max-width: 480px) {
   .banner {
-    height: 250px; /* Reduce banner height further */
+    height: 250px;
+    /* Reduce banner height further */
   }
 
   .flexcard {
-    flex-direction: column; /* Stack cards vertically */
-    gap: 5px; /* Reduce gap between cards */
+    flex-direction: column;
+    /* Stack cards vertically */
+    gap: 5px;
+    /* Reduce gap between cards */
   }
 
   .flexcard a {
-    flex: 1; /* Equal size cards */
+    flex: 1;
+    /* Equal size cards */
   }
 
   .flexcard a.active {
-    flex: 1.1; /* Slightly expand the active card */
+    flex: 1.1;
+    /* Slightly expand the active card */
   }
 }
 
-.category {
-  display: flex;
-  padding-top: 10px;
-  height: 300px;
-  background-color: #ffababc4;
-  justify-content: space-around;
-  overflow: hidden;
-}
 
-.category-sub {
-  display: flex;
-  flex-direction: column;
-  margin-left: 5rem;
-  align-items: center;
-}
-
-/* General Styles */
-body {
-  font-family: "Kanit", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f5f5f5;
-}
 
 .category-section {
-  /* background-image: url('image.png'); Add your background image */
-  background-size: cover;
-  padding: 30px;
+  position: relative;
+  max-width: 1100px;
+  padding: 10px 50px;
   border-radius: 10px;
-  max-width: 1200px;
-  margin: 50px auto;
+  margin: 0 auto;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  /* ให้อยู่เหนือ pseudo-element */
+}
+
+.category-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/image/image.png');
+  background-size: cover;
+  /* ทำให้ภาพเต็มพื้นที่ */
+  opacity: 0.5;
+  /* กำหนดความโปร่งใส 50% */
+  z-index: -1;
+  /* วางไว้ข้างหลังเนื้อหา */
+  border-radius: 10px;
+  /* ตรงกับคอนเทนเนอร์หลัก */
 }
 
 .category-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
 
 .category-title {
@@ -173,7 +179,8 @@ body {
 }
 
 .category-title img {
-  width: 100px; /* Adjust the size of the image */
+  width: 100px;
+  /* Adjust the size of the image */
   margin-right: 20px;
 }
 
@@ -183,19 +190,19 @@ body {
   color: #8b4513;
 }
 
-.category-tabs {
-  display: flex;
-  gap: 10px;
-}
-
 .category-tabs button {
+  display: inline-flex;
+  /* ให้ปุ่มมีขนาดตามข้อความ */
   padding: 10px 20px;
+  /* ปรับ padding ให้เหมาะสม */
   border: none;
   border-radius: 25px;
-  background-color: #b79492;
-  color: white;
-  cursor: pointer;
+  background-color: #8b4513;
   font-size: 1rem;
+  color: #7c4d3d;
+  cursor: pointer;
+  white-space: nowrap;
+  /* ป้องกันข้อความยาวเกินทำให้ตัดบรรทัด */
 }
 
 .category-tabs button.active {
@@ -203,527 +210,389 @@ body {
 }
 
 .category-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns layout */
+  display: flex;
+  flex-wrap: wrap;
+  /* ปุ่มจะย้ายไปแถวถัดไปเมื่อพื้นที่ไม่พอ */
   gap: 15px;
   margin-top: 20px;
 }
 
 .category-buttons button {
-  padding: 15px;
+  display: inline-flex;
+  /* ให้ปุ่มมีขนาดตามข้อความ */
+  padding: 10px 20px;
+  /* ปรับ padding ให้เหมาะสม */
   border: none;
-  border-radius: 15px;
-  background-color: #fdf0e5;
+  border-radius: 25px;
   font-size: 1rem;
   color: #7c4d3d;
   cursor: pointer;
+  white-space: nowrap;
+  /* ป้องกันข้อความยาวเกินทำให้ตัดบรรทัด */
+  border: none;
+  color: white;
+  /* กำหนดสีตัวหนังสือเบื้องต้น */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .category-buttons button:hover {
-  background-color: #f4e0d2;
+  opacity: 0.9;
 }
 
-h2 {
-  display: inline;
-  font-size: 2rem;
-  color: #000000;
-  /* text-shadow: 2px 2px 10px #000000; */
+/* Media Queries เพื่อย่อขนาดเมื่อหน้าจอเล็กลง */
+@media (max-width: 1200px) {
+  .category-title img {
+    width: 90px;
+    /* ย่อขนาดรูปภาพ */
+  }
+
+  .category-title h2 {
+    font-size: 1.8rem;
+    /* ย่อขนาดตัวหนังสือ */
+  }
+
+  .category-tabs button,
+  .category-buttons button {
+    padding: 8px 18px;
+    /* ปรับขนาด padding */
+    font-size: 0.9rem;
+  }
 }
 
-.tag {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  max-width: 600px;
-  width: 100%;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
+@media (max-width: 992px) {
+  .category-title img {
+    width: 80px;
+  }
+
+  .category-title h2 {
+    font-size: 1.6rem;
+  }
+
+  .category-tabs,
+  .category-buttons {
+    gap: 5px;
+  }
+
+  .category-tabs button,
+  .category-buttons button {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+  }
 }
 
-.tag-list button {
-  max-width: 150px;
-  width: 100%;
-  max-height: 60px;
-  height: 100%;
-  padding: 10px;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  text-align: center;
-  background: #a99488;
-  border-radius: 10px;
-  transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: translateY(0);
-}
-
-.tag-list button:hover {
-  background-color: #8c7a6e;
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);
-}
-
-.tag-list button:active {
-  transform: translateY(1px);
-}
-
-/* Media Queries for responsiveness */
-
-/* For screens smaller than 768px (tablets and phones) */
 @media (max-width: 768px) {
-  .category {
-    flex-direction: column;
-    height: auto;
-    padding: 10px;
+  .category-title img {
+    width: 70px;
   }
 
-  .category-sub {
-    margin-left: 0;
-    align-items: center;
+  .category-title h2 {
+    font-size: 1.4rem;
   }
 
-  .tag {
-    max-width: 100%;
-  }
-
-  .tag-list button {
-    max-width: 120px; /* Reduce button width */
-    max-height: 50px; /* Reduce button height */
+  .category-tabs button,
+  .category-buttons button {
+    padding: 5px 14px;
+    font-size: 0.75rem;
   }
 }
 
-/* For screens smaller than 480px (mobile phones) */
-@media (max-width: 480px) {
-  .category {
-    padding: 5px;
+@media (max-width: 576px) {
+  .category-title img {
+    width: 60px;
   }
 
-  .category-sub h2 {
-    font-size: 1.2rem; /* Adjust heading size */
+  .category-title h2 {
+    font-size: 1.2rem;
   }
 
-  .tag-list button {
-    max-width: 100px; /* Further reduce button width */
-    max-height: 40px; /* Further reduce button height */
+  .category-tabs button,
+  .category-buttons button {
+    padding: 4px 12px;
+    font-size: 0.7rem;
   }
 }
 
-.popular {
-  display: flex;
-  flex-direction: column;
-  /* height: 300px; */
-  height: auto;
-  justify-items: center;
-  align-items: center;
-  /* position: relative; */
+
+
+
+
+
+.popcontent {
+  position: relative;
+  max-width: 1100px;
+  /* ความกว้างสูงสุด */
+  width: 100%;
+  margin: 0 auto;
   padding: 20px;
-  overflow: hidden;
-  background-color: #ffffffaf;
-  /* margin-bottom: 20px; */
-}
-
-.popular {
-  padding: 20px;
-}
-
-.popular h2 {
+  box-sizing: border-box;
   text-align: center;
-  font-size: 2rem;
-  color: #000000;
-  margin-bottom: 20px;
-  /* text-shadow: 2px 2px 10px #000000; */
+}
+
+.header-popular {
+  margin: 20px 0;
+  position: relative;
+  display: inline-block;
 }
 
 .popular-card {
   display: flex;
-  flex-wrap: nowrap;
-  min-width: 100%;
-  gap: 20px;
   justify-content: center;
+  gap: 40px;
+  margin-bottom: 40px;
 }
 
-.card-1 {
-  opacity: 10px;
-  border-radius: 12px;
-  text-decoration: none;
-  color: #333;
-  padding: 10px;
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 250px;
-}
-
-.card-1:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Media Queries for responsiveness */
-
-/* For screens smaller than 768px (tablets and phones) */
-@media (max-width: 768px) {
-  .popular {
-    height: auto;
-    padding: 15px;
-  }
-
-  .popular-card {
-    flex-wrap: wrap; /* Allows the cards to stack or wrap on smaller screens */
-  }
-
-  .card-1 {
-    width: 200px; /* Reduce the width of cards */
-  }
-
-  .popular h2 {
-    font-size: 1.5rem; /* Reduce the font size of heading */
-  }
-}
-
-/* For screens smaller than 480px (mobile phones) */
-@media (max-width: 480px) {
-  .popular {
-    padding: 10px;
-  }
-
-  .card-1 {
-    width: 150px; /* Further reduce the width of cards for small screens */
-  }
-
-  .popular h2 {
-    font-size: 1.2rem; /* Further reduce the font size */
-  }
-}
-
-/* .image-container {
-  position: relative;
-} */
-
-.image-container img {
-  width: 100%;
-  height: 200px;
+.popular-card img {
+  width: 200px;
+  height: 300px;
+  text-align: center;
   border-radius: 10px;
-  object-fit: cover;
+}
+
+.image-content {
+  position: relative;
 }
 
 .number {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: #f6eee0;
-  color: rgb(0, 0, 0);
-  padding: 5px 10px;
+  background-color: #000000;
+  color: #fff;
+  padding: 10px;
   border-radius: 50%;
-  font-size: 1.2rem;
+}
+
+.header-popular image {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.header-popular h2 {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
   font-weight: bold;
-}
-
-.card-1 h5 {
-  font-size: 1rem;
-  margin: 10px;
   color: #000000;
-  /* text-shadow: 2px 2px 10px #000000; */
 }
 
-.card-1 h6 {
-  font-size: 0.9rem;
-  margin: 5px 10px;
-  color: #555;
-  /* text-shadow: 2px 2px 10px #000000; */
+h5,
+h6 {
+  text-align: start;
+  margin: 2px 0;
 }
 
-.card-1 .fas {
-  margin-right: 5px;
-  color: #555;
-  /* text-shadow: 2px 2px 10px #000000; */
+/* Media Queries เพื่อย่อขนาดเมื่อหน้าจอเล็ก */
+@media (max-width: 1200px) {
+  .popular-card img {
+    width: 180px;
+    height: 270px;
+  }
+
+  .header-popular h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .popular-card img {
+    width: 150px;
+    height: 225px;
+  }
+
+  .header-popular h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .popular-card img {
+    width: 120px;
+    height: 180px;
+  }
+
+  .header-popular h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .popular-card img {
+    width: 100px;
+    height: 150px;
+  }
+
+  .header-popular h2 {
+    font-size: 1.2rem;
+  }
 }
 
 .recommend {
-  display: flex;
-  flex-direction: row;
-  height: auto;
-  justify-items: center;
-  align-items: center;
-  padding: 20px;
-  overflow: hidden;
-  background-color: #ffffffaf;
   position: relative;
-  transition: transform 0.5s ease;
-  /* height: 300px; */
-  /* margin-bottom: 20px; */
-  /* justify-content: space-between; */
-}
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0 auto;
+  /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 1); */
+  padding: 0 10px;
 
+}
 .recommend h2 {
+  display: inline-flex;
+  align-items: center;
   color: #000000;
-  font-size: 2rem;
-  margin-left: 6rem;
-  /* text-shadow: 2px 2px 10px #000000; */
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
 }
 
 .recommend-re {
   display: flex;
-  position: relative;
-  /* height: 100%; */
-  /* justify-content: space-around; */
-  align-items: center;
-  border-radius: 10px;
-  overflow: hidden;
-  gap: 2rem;
-  margin-left: 3rem;
-  /* ซ่อน scrollbar สำหรับเบราว์เซอร์ที่รองรับ Webkit (Chrome, Safari) */
-  scrollbar-width: none; /* สำหรับ Firefox */
-  margin: 10px;
+  width:100%;
+  padding: 10px;
+  gap: 20px;
+  overflow: auto;
+  scrollbar-width: none;
+  
+}
+.recommend-card {
+  text-align: center;
+}
+.recommend-card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
+}
+.card-img-sub {
+  font-size: 16px;
+  margin: 10px 0 5px;
 }
 
-.recommend-controls {
+.arrow {
   display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.btnSlideshow {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  padding: 16px;
-  background-color: #8c7a6e;
-  opacity: 90%;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-  z-index: 10;
-}
-
-/* สำหรับปุ่มซ้าย */
-.btnSlideshow-left {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  left: 0; /* ปรับตำแหน่ง */
-}
-
-/* สำหรับปุ่มขวา */
-.btnSlideshow-right {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  right: 0; /* ปรับตำแหน่ง */
-}
-
-.btnSlideshow:first-of-type {
-  left: 0; /* ปุ่มด้านซ้าย */
-}
-
-.btnSlideshow:last-of-type {
-  right: 0; /* ปุ่มด้านขวา */
-}
-
-.nav-button {
-  background-color: #ff0000;
-  text-align: center;
   align-items: center;
-  color: rgb(0, 0, 0);
-  border: none;
-  border-radius: 20px;
-  padding: 10px;
+  justify-content: center;
+  font-size: 15px;
+  padding: 5px;
+  color: #000;
   cursor: pointer;
-  font-size: 1.5rem;
-  z-index: 10;
+  background-color: #88583D;
+  border: 2px solid #000;
+  border-radius: 50px;
+ 
+}
+.arrow-left {
+  left: 0;
+}
+.arrow-right {
+  right: 0;
 }
 
-.nav-button:hover {
-  background-color: #d40000;
+h5,h6 {
+  text-wrap: nowrap;
 }
-
-.recommend-card,
-.novel-card {
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  height: 100%;
-  border-radius: 8px;
-  transition: all 0.5s ease;
-  transition: transform 0.5s ease;
-  /* background-color: #fff; */
-}
-
-.recommend-card img,
-.novel-card img {
-  width: 200px;
-  height: 270px;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
-  object-fit: cover;
-}
-
-.recommend-card h5,
-.novel-card h5 {
-  margin: 3px;
-  font-size: 1rem;
-  color: #000000;
-  /* text-shadow: 2px 2px 10px #000000; */
-}
-
-.recommend-card h6,
-.novel-card h6 {
-  margin: 2px;
-  color: #555;
-  /* text-shadow: 2px 2px 10px #000000; */
-}
-
-/* Media Queries for scaling down on smaller screens */
-
 @media (max-width: 768px) {
-  .recommend {
-    height: 350px;
-  }
-  .recommend h2 {
-    font-size: 1.5rem; /* ลดขนาดฟอนต์ */
-    margin-left: 3rem; /* ลดระยะห่าง */
-  }
-
   .recommend-re {
-    margin-left: 2rem;
-    gap: 5px; /* ลดระยะห่าง */
+    display: flex; /* ใช้ flexbox แทน grid */
+    flex-wrap: nowrap; /* ไม่ให้แถวเพิ่ม */
+    overflow-x: auto; /* ให้เลื่อนแนวนอนเมื่อเกิน */
+    gap: 20px; /* ระยะห่างระหว่างคอลัมน์ */
   }
 
-  .nav-button {
-    display: none;
-  }
-
-  .recommend-card img,
-  .novel-card img {
-    width: 150px; /* ลดขนาดรูปภาพ */
-    height: 80%;
-  }
-
-  .recommend-card h5,
-  .novel-card h5 {
-    font-size: 0.9rem; /* ลดขนาดฟอนต์ */
-  }
-
-  .recommend-card h6,
-  .novel-card h6 {
-    font-size: 0.8rem;
+  .recommend-card {
+    flex: 0 0 20%; /* กำหนดความกว้างของแต่ละคอลัมน์ให้เป็น 20% */
   }
 }
 
-@media (max-width: 480px) {
-  .recommend {
-    height: 250px;
-  }
-  .recommend h2 {
-    font-size: 1.2rem; /* ลดขนาดฟอนต์ลงสำหรับจอเล็ก */
-    margin-left: 1rem; /* ลดระยะห่าง */
-  }
 
-  .recommend-re {
-    margin-left: 1rem;
-    gap: 3px;
-  }
-
-  .nav-button {
-    font-size: 1rem; /* ลดขนาดปุ่มลงอีก */
-    padding: 6px;
-  }
-
-  .recommend-card img,
-  .novel-card img {
-    width: 120px; /* ลดขนาดรูปภาพ */
-    height: 70%;
-  }
-
-  .recommend-card h5,
-  .novel-card h5 {
-    font-size: 0.8rem; /* ลดขนาดฟอนต์ */
-  }
-
-  .recommend-card h6,
-  .novel-card h6 {
-    font-size: 0.7rem;
-  }
-}
 
 .novel-now {
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  align-content: space-around;
-  padding: 40px;
-  overflow: hidden;
-  background-color: #ffffff;
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0 auto;
+  /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 1); */
+  padding: 0 10px;
+
+  .novel-header {
+    display: flex;
+    justify-content: space-between; /* จัดให้ "ดูทั้งหมด" ไปทางขวาสุด */
+    align-items: center; /* จัดให้อยู่กลางในแนวแกนตั้ง */
+    margin-bottom: 10px; /* เพิ่มพื้นที่ว่างระหว่างหัวข้อกับรายการ */
+  }
 }
+
+.novel-now h2 {
+  display: inline-flex;
+  align-items: center;
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
 
 .header-update {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 1rem;
-}
-
-.novel-card {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  width: 200px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* สร้าง 5 คอลัมน์ */
+  grid-gap: 10px; /* ช่องว่างระหว่างคอลัมน์ */
+  
 }
 
 .novel-card img {
-  width: 100%;
-  height: 200px; /* ปรับขนาดของรูปภาพ */
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+  width: 150px;
+  height: 150px;
+  border-radius: 5px;
 }
-.novel-now h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: #000000;
-  margin-bottom: 20px;
-  /* text-shadow: 2px 2px 10px #000000; */
+.card-img-sub {
+  font-size: 16px;
+  margin: 10px 0 5px;
 }
 
-.novel-card h5 {
-  margin: 2px;
-  font-size: 1rem;
-  color: #000000;
-
-  /* text-shadow: 2px 2px 10px #000000; */
+.novel-header a {
+  display: inline-flex;
+  align-items: center;
+  background-color: #88583D; /* สีพื้นหลัง */
+  color: #fff; /* สีตัวอักษร */
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px; /* มุมโค้งมน */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.novel-card h6 {
-  margin: 2px;
-  color: #555;
-
-  /* text-shadow: 2px 2px 10px #000000; */
+.novel-header a i {
+  margin-left: 8px; /* เพิ่มช่องว่างระหว่างข้อความกับไอคอน */
+  transition: transform 0.3s ease; /* ใช้ transition สำหรับการขยับ */
 }
 
-.novel-card h6 i {
-  margin-right: 5px;
-  /* text-shadow: 2px 2px 10px #000000; */
+.novel-header a:hover {
+  background-color: #68442e; /* เปลี่ยนสีเมื่อ hover */
+  transform: translateY(-3px); /* ขยับขึ้นเล็กน้อยเมื่อ hover */
 }
 
-/* จัดการคำยาวเกิน */
-.novel-card h5,
-.novel-card h6 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.novel-header a:hover i {
+  transform: translateX(5px); /* ขยับไอคอนลูกศรไปทางขวาเมื่อ hover */
 }
 
-/* Media queries สำหรับการตอบสนองต่อหน้าจอขนาดเล็ก */
+@media (max-width: 1024px) {
+  .header-update {
+    grid-template-columns: repeat(3, 1fr); /* เมื่อหน้าจอเล็กกว่า 1024px จะแสดงเป็น 3 คอลัมน์ */
+  }
+}
+
 @media (max-width: 768px) {
   .header-update {
-    justify-content: center;
-  }
-
-  .novel-card {
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr); /* เมื่อหน้าจอเล็กกว่า 768px จะแสดงเป็น 2 คอลัมน์ */
   }
 }

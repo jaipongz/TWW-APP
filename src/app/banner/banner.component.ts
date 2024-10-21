@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy, AfterViewInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,7 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.css'
 })
-export class BannerComponent implements OnInit, OnDestroy {
+export class BannerComponent implements OnInit, OnDestroy,AfterViewInit {
   constructor(private router :Router, private http : HttpClient) {}
   faChevronLeft  = faChevronLeft ;
   faChevronRight   = faChevronRight  ;
@@ -32,7 +32,6 @@ export class BannerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.checkViewport();
     this.startAutoSlide();  // Start auto-sliding when component initializes
-    
     const token = localStorage.getItem('token');
     if (token) {
       console.log('Token found:', token);
@@ -41,6 +40,9 @@ export class BannerComponent implements OnInit, OnDestroy {
       console.log('No token found, redirecting to login');
       // this.router.navigate(['login']); // Redirect to login if no token
     }
+
+
+    this.generateButtonStyles(); //สีปุ่ม
   }
 
   ngOnDestroy(): void {
@@ -141,6 +143,46 @@ export class BannerComponent implements OnInit, OnDestroy {
     {tag: 'การเมือง'},
     {tag: 'โรแมนติกคอมเมดี้'},
   ]
+  buttonStyles: any[] = [];
+
+   // ฟังก์ชันสร้างสีสุ่ม
+   generateRandomColor(): string {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  // ฟังก์ชันตรวจสอบว่าใช้สีขาวหรือตัวหนังสือสีดำเพื่อให้มองเห็นได้ง่าย
+  getTextColor(bgColor: string): string {
+    // แปลง HEX เป็น RGB
+    const r = parseInt(bgColor.slice(1, 3), 16);
+    const g = parseInt(bgColor.slice(3, 5), 16);
+    const b = parseInt(bgColor.slice(5, 7), 16);
+    // คำนวณค่าความสว่าง (brightness)
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 125 ? '#000000' : '#FFFFFF'; // หากความสว่างมากพอให้ใช้สีดำ, น้อยให้ใช้สีขาว
+  }
+
+  // ฟังก์ชันสร้างสีของปุ่มและสีตัวหนังสือ
+  generateButtonStyles() {
+    const buttonCount = this.category.length; // จำนวนปุ่มที่ต้องการ (เปลี่ยนได้ตามต้องการ)
+    this.buttonStyles = [];
+
+    for (let i = 0; i < buttonCount; i++) {
+      const bgColor = this.generateRandomColor();
+      const textColor = this.getTextColor(bgColor);
+
+      this.buttonStyles.push({
+        backgroundColor: bgColor,
+        color: textColor
+      });
+    }
+  }
+
+
   goTotag() {
 
   }
@@ -168,44 +210,46 @@ export class BannerComponent implements OnInit, OnDestroy {
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
   ];
-  currentSlide: number = 0;
+  @ViewChild('recommendContainer', { static: false }) recommendContainer!: ElementRef;
+  showLeftArrow: boolean = false;
+  showRightArrow: boolean = true;
 
-  nextSlide() {
-    this.currentSlide = (this.currentSlide + 1) % this.recmmend.length; // เลื่อนไปข้างหน้า
-    this.updateSlidePosition();
+  ngAfterViewInit() {
+    this.checkScroll();  // เรียกใช้งานหลังจาก DOM ถูกสร้างเสร็จแล้ว
   }
 
-  prevSlide() {
-    this.currentSlide = (this.currentSlide - 1 + this.recmmend.length) % this.recmmend.length; // เลื่อนไปด้านหลัง
-    this.updateSlidePosition();
+  scrollRight() {
+    this.recommendContainer.nativeElement.scrollBy({ left: 520, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300); // ตรวจสอบการแสดงปุ่มหลังจากเลื่อนเสร็จ
   }
 
-  updateSlidePosition() {
-    const slideshow = document.querySelector('.recommend') as HTMLElement;
-    const slideWidth = 270; // กำหนดความกว้างรวมของการ์ดและ margin
-    const offset = -this.currentSlide * slideWidth; // เลื่อนตามตำแหน่งที่กำหนด
-    slideshow.style.transform = `translateX(${offset}px)`;
+  scrollLeft() {
+    this.recommendContainer.nativeElement.scrollBy({ left: -520, behavior: 'smooth' });
+    setTimeout(() => this.checkScroll(), 300); // ตรวจสอบการแสดงปุ่มหลังจากเลื่อนเสร็จ
   }
 
-  
-  // currentRecomment = 0;
-  // // itemsPerView = 3;
+  checkScroll() {
+    const container = this.recommendContainer.nativeElement;
+    const scrollLeft = container.scrollLeft;
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
 
-  // get visibleCards() {
-  //   return this.recmmend.slice(this.currentRecomment, this.currentRecomment + 5); // แสดงการ์ด 3 อันจากดัชนีปัจจุบัน
-  // }
+     // ตรวจสอบว่ามีรูปเพียงพอที่จะเลื่อนได้หรือไม่
+     if (scrollWidth <= clientWidth) {
+      // ถ้ารูปทั้งหมดไม่เกินความกว้างหน้าจอ ก็ซ่อนปุ่มทั้งซ้ายและขวา
+      this.showLeftArrow = false;
+      this.showRightArrow = false;
+    } else {
+      // ซ่อนปุ่มซ้ายถ้า scrollLeft อยู่ที่ 0 (เลื่อนไปซ้ายสุด)
+      this.showLeftArrow = scrollLeft > 0;
+      
+      // ซ่อนปุ่มขวาถ้า scrollLeft + clientWidth >= scrollWidth (เลื่อนไปขวาสุด)
+      this.showRightArrow = scrollLeft + clientWidth < scrollWidth;
+    }
 
-  // nextCard() {
-  //   if (this.currentRecomment < this.recmmend.length - 5) {
-  //     this.currentRecomment += 1; // เลื่อนดูการ์ดถัดไป
-  //   }
-  // }
+  }
 
-  // prevCard() {
-  //   if (this.currentRecomment > 0) {
-  //     this.currentRecomment -= 1; // เลื่อนดูการ์ดก่อนหน้า
-  //   }
-  // }
+
 
 
 
