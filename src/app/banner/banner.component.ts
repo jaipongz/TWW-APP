@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, HostListener, OnInit, ViewChild, ElementRef, OnDestroy} from '@angular/core';
 import { Router } from '@angular/router';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-banner',
@@ -9,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class BannerComponent implements OnInit, OnDestroy {
   constructor(private router :Router, private http : HttpClient) {}
+  faChevronLeft  = faChevronLeft ;
+  faChevronRight   = faChevronRight  ;
 
 
   @ViewChild('flexcard', { static: true }) flexcard!: ElementRef;
@@ -80,6 +83,27 @@ export class BannerComponent implements OnInit, OnDestroy {
     clearInterval(this.slideInterval);
   }
 
+  // @ViewChild('recommendContainer') recommendContainer!: ElementRef;
+
+  // // currentIndex = 0;
+  // itemsPerView = 3; // จำนวนการ์ดที่จะแสดงในแต่ละการเลื่อน
+
+  // slideLeft() {
+  //   this.currentIndex = Math.max(this.currentIndex - 1, 0);
+  //   this.updateSlidePosition();
+  // }
+
+  // slideRight() {
+  //   const totalItems = this.recmmend.length;
+  //   this.currentIndex = Math.min(this.currentIndex + 1, totalItems - this.itemsPerView);
+  //   this.updateSlidePosition();
+  // }
+
+  // updateSlidePosition() {
+  //   const offset = this.currentIndex * (this.recommendContainer.nativeElement.offsetWidth / this.itemsPerView);
+  //   this.recommendContainer.nativeElement.style.transform = `translateX(-${offset}px)`;
+  // }
+
 
   //taglist
   category = [
@@ -143,26 +167,45 @@ export class BannerComponent implements OnInit, OnDestroy {
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
     {image: 'https://image.cdn2.seaart.ai/2024-08-19/cr1fn4le878c739c4qv0/62e24d7ded28af7f3ae002db9e6ffe23f67f3d35_low.webp', name: 'title6', penname: 'penname6', ep: 'ep6'},
-  ]
+  ];
+  currentSlide: number = 0;
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.recmmend.length; // เลื่อนไปข้างหน้า
+    this.updateSlidePosition();
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide - 1 + this.recmmend.length) % this.recmmend.length; // เลื่อนไปด้านหลัง
+    this.updateSlidePosition();
+  }
+
+  updateSlidePosition() {
+    const slideshow = document.querySelector('.recommend') as HTMLElement;
+    const slideWidth = 270; // กำหนดความกว้างรวมของการ์ดและ margin
+    const offset = -this.currentSlide * slideWidth; // เลื่อนตามตำแหน่งที่กำหนด
+    slideshow.style.transform = `translateX(${offset}px)`;
+  }
 
   
-  currentRecomment = 0;
+  // currentRecomment = 0;
+  // // itemsPerView = 3;
 
-  get visibleCards() {
-    return this.recmmend.slice(this.currentRecomment, this.currentRecomment + 5); // แสดงการ์ด 3 อันจากดัชนีปัจจุบัน
-  }
+  // get visibleCards() {
+  //   return this.recmmend.slice(this.currentRecomment, this.currentRecomment + 5); // แสดงการ์ด 3 อันจากดัชนีปัจจุบัน
+  // }
 
-  nextCard() {
-    if (this.currentRecomment < this.recmmend.length - 5) {
-      this.currentRecomment += 1; // เลื่อนดูการ์ดถัดไป
-    }
-  }
+  // nextCard() {
+  //   if (this.currentRecomment < this.recmmend.length - 5) {
+  //     this.currentRecomment += 1; // เลื่อนดูการ์ดถัดไป
+  //   }
+  // }
 
-  prevCard() {
-    if (this.currentRecomment > 0) {
-      this.currentRecomment -= 1; // เลื่อนดูการ์ดก่อนหน้า
-    }
-  }
+  // prevCard() {
+  //   if (this.currentRecomment > 0) {
+  //     this.currentRecomment -= 1; // เลื่อนดูการ์ดก่อนหน้า
+  //   }
+  // }
 
 
 

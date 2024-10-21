@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+// import { SwiperModule } from 'swiper/angular'; 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 const appRoutes: Routes = [
@@ -45,6 +47,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatDialogModule,
     MatButtonModule,
+    FontAwesomeModule,
+    // SwiperModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [

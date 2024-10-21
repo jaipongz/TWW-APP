@@ -3,14 +3,11 @@
   flex-direction: column;
   background-color: #ffe3e3;
   justify-content: center;
-  background: url('/image/1329400.jpeg');
-  
-  
+  background: url("/image/1329400.jpeg");
 }
 
 .container-page-sub {
   padding: 0 1rem 0;
-
 }
 
 .banner {
@@ -20,7 +17,7 @@
   align-items: center;
   height: 500px;
   background-color: #000000;
-  
+
   overflow: hidden;
 }
 
@@ -127,18 +124,13 @@
   .flexcard a.active {
     flex: 1.1; /* Slightly expand the active card */
   }
-
 }
-
-
-
-
 
 .category {
   display: flex;
   padding-top: 10px;
   height: 300px;
-  background-color: #ffababc4 ;
+  background-color: #ffababc4;
   justify-content: space-around;
   overflow: hidden;
 }
@@ -152,7 +144,7 @@
 
 /* General Styles */
 body {
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f5f5f5;
@@ -231,7 +223,6 @@ body {
   background-color: #f4e0d2;
 }
 
-
 h2 {
   display: inline;
   font-size: 2rem;
@@ -260,7 +251,7 @@ h2 {
   border: none;
   cursor: pointer;
   text-align: center;
-  background: #A99488;
+  background: #a99488;
   border-radius: 10px;
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -318,18 +309,18 @@ h2 {
   }
 }
 
-
-.popular, .recommend {
+.popular {
   display: flex;
   flex-direction: column;
-  height: 450px;
+  /* height: 300px; */
+  height: auto;
   justify-items: center;
   align-items: center;
-  position: relative;
-  
+  /* position: relative; */
   padding: 20px;
   overflow: hidden;
   background-color: #ffffffaf;
+  /* margin-bottom: 20px; */
 }
 
 .popular {
@@ -357,7 +348,8 @@ h2 {
   border-radius: 12px;
   text-decoration: none;
   color: #333;
-  
+  padding: 10px;
+
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 250px;
 }
@@ -371,7 +363,7 @@ h2 {
 
 /* For screens smaller than 768px (tablets and phones) */
 @media (max-width: 768px) {
-  .popular{
+  .popular {
     height: auto;
     padding: 15px;
   }
@@ -391,7 +383,7 @@ h2 {
 
 /* For screens smaller than 480px (mobile phones) */
 @media (max-width: 480px) {
-  .popular{
+  .popular {
     padding: 10px;
   }
 
@@ -404,12 +396,9 @@ h2 {
   }
 }
 
-
-
-
-.image-container {
+/* .image-container {
   position: relative;
-}
+} */
 
 .image-container img {
   width: 100%;
@@ -450,14 +439,22 @@ h2 {
   /* text-shadow: 2px 2px 10px #000000; */
 }
 
-
-
-
-
 .recommend {
+  display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  height: auto;
+  justify-items: center;
+  align-items: center;
+  padding: 20px;
+  overflow: hidden;
+  background-color: #ffffffaf;
+  position: relative;
+  transition: transform 0.5s ease;
+  /* height: 300px; */
+  /* margin-bottom: 20px; */
+  /* justify-content: space-between; */
 }
+
 .recommend h2 {
   color: #000000;
   font-size: 2rem;
@@ -467,18 +464,58 @@ h2 {
 
 .recommend-re {
   display: flex;
-  height: 100%;
-  justify-content: space-around;
+  position: relative;
+  /* height: 100%; */
+  /* justify-content: space-around; */
   align-items: center;
   border-radius: 10px;
-  overflow: auto;
-  position: relative;
+  overflow: hidden;
   gap: 2rem;
   margin-left: 3rem;
-
   /* ซ่อน scrollbar สำหรับเบราว์เซอร์ที่รองรับ Webkit (Chrome, Safari) */
   scrollbar-width: none; /* สำหรับ Firefox */
+  margin: 10px;
+}
 
+.recommend-controls {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.btnSlideshow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 16px;
+  background-color: #8c7a6e;
+  opacity: 90%;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* สำหรับปุ่มซ้าย */
+.btnSlideshow-left {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  left: 0; /* ปรับตำแหน่ง */
+}
+
+/* สำหรับปุ่มขวา */
+.btnSlideshow-right {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  right: 0; /* ปรับตำแหน่ง */
+}
+
+.btnSlideshow:first-of-type {
+  left: 0; /* ปุ่มด้านซ้าย */
+}
+
+.btnSlideshow:last-of-type {
+  right: 0; /* ปุ่มด้านขวา */
 }
 
 .nav-button {
@@ -498,32 +535,38 @@ h2 {
   background-color: #d40000;
 }
 
-.recommend-card, .novel-card {
+.recommend-card,
+.novel-card {
   display: flex;
+  position: relative;
   flex-direction: column;
   flex-wrap: nowrap;
-  height: 90%;
+  height: 100%;
   border-radius: 8px;
   transition: all 0.5s ease;
   transition: transform 0.5s ease;
+  /* background-color: #fff; */
 }
 
-.recommend-card img, .novel-card img {
+.recommend-card img,
+.novel-card img {
   width: 200px;
-  height: 90%;
+  height: 270px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
   object-fit: cover;
 }
 
-.recommend-card h5, .novel-card h5 {
+.recommend-card h5,
+.novel-card h5 {
   margin: 3px;
   font-size: 1rem;
   color: #000000;
   /* text-shadow: 2px 2px 10px #000000; */
 }
 
-.recommend-card h6, .novel-card h6 {
+.recommend-card h6,
+.novel-card h6 {
   margin: 2px;
   color: #555;
   /* text-shadow: 2px 2px 10px #000000; */
@@ -534,7 +577,6 @@ h2 {
 @media (max-width: 768px) {
   .recommend {
     height: 350px;
-
   }
   .recommend h2 {
     font-size: 1.5rem; /* ลดขนาดฟอนต์ */
@@ -550,16 +592,19 @@ h2 {
     display: none;
   }
 
-  .recommend-card img, .novel-card img {
+  .recommend-card img,
+  .novel-card img {
     width: 150px; /* ลดขนาดรูปภาพ */
     height: 80%;
   }
 
-  .recommend-card h5, .novel-card h5 {
+  .recommend-card h5,
+  .novel-card h5 {
     font-size: 0.9rem; /* ลดขนาดฟอนต์ */
   }
 
-  .recommend-card h6, .novel-card h6 {
+  .recommend-card h6,
+  .novel-card h6 {
     font-size: 0.8rem;
   }
 }
@@ -583,16 +628,19 @@ h2 {
     padding: 6px;
   }
 
-  .recommend-card img, .novel-card img {
+  .recommend-card img,
+  .novel-card img {
     width: 120px; /* ลดขนาดรูปภาพ */
     height: 70%;
   }
 
-  .recommend-card h5, .novel-card h5 {
+  .recommend-card h5,
+  .novel-card h5 {
     font-size: 0.8rem; /* ลดขนาดฟอนต์ */
   }
 
-  .recommend-card h6, .novel-card h6 {
+  .recommend-card h6,
+  .novel-card h6 {
     font-size: 0.7rem;
   }
 }
@@ -641,7 +689,6 @@ h2 {
   /* text-shadow: 2px 2px 10px #000000; */
 }
 
-
 .novel-card h5 {
   margin: 2px;
   font-size: 1rem;
@@ -663,7 +710,8 @@ h2 {
 }
 
 /* จัดการคำยาวเกิน */
-.novel-card h5, .novel-card h6 {
+.novel-card h5,
+.novel-card h6 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -674,10 +722,8 @@ h2 {
   .header-update {
     justify-content: center;
   }
-  
+
   .novel-card {
     width: 100%;
   }
 }
-
-

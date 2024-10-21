@@ -2,89 +2,100 @@
 <div class="container-page">
   <div class="banner">
     <div class="flexcard" #flexcard>
-      <a *ngFor="let card of slides; let i = index" [ngClass]="{'active': i === currentIndex}"
-        (mouseover)="stopAutoSlide()" (mouseleave)="startAutoSlide()" class="card">
-        <img [src]="card.image" [alt]="card.title">
+      <a
+        *ngFor="let card of slides; let i = index"
+        [ngClass]="{ active: i === currentIndex }"
+        (mouseover)="stopAutoSlide()"
+        (mouseleave)="startAutoSlide()"
+        class="card"
+      >
+        <img [src]="card.image" [alt]="card.title" />
         <!-- <h5>{{ card.title }}</h5> -->
       </a>
     </div>
     <!-- Dot Navigation -->
     <div class="dots-container">
-      <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{'active': i === currentIndex}"
-        (click)="goToSlide(i)"></span>
+      <span
+        *ngFor="let slide of slides; let i = index"
+        class="dot"
+        [ngClass]="{ active: i === currentIndex }"
+        (click)="goToSlide(i)"
+      ></span>
     </div>
   </div>
-
 
   <!-- Category Section -->
   <section class="category-section">
     <div class="category-header">
-        <div class="category-title">
-            <img src="girlreading.png" alt="Character">
-            <h2>หมวดหมู่</h2>
-        </div>
-        <div class="category-tabs">
-            <button class="active">ยอดนิยม</button>
-            <button>คะแนน</button>
-            <button>นิยาย (ฟรี)</button>
-            <button>นิยาย (VIP)</button>
-        </div>
+      <div class="category-title">
+        <img src="girlreading.png" alt="Character" />
+        <h2>หมวดหมู่</h2>
+      </div>
+      <div class="category-tabs">
+        <button class="active">ยอดนิยม</button>
+        <button>คะแนน</button>
+        <button>นิยาย (ฟรี)</button>
+        <button>นิยาย (VIP)</button>
+      </div>
     </div>
 
     <!-- Category Buttons -->
     <div class="category-buttons">
       <a *ngFor="let tag of category; let i = index" class="tag-list">
-        <button (click)="goTotag()">{{tag.tag}}</button>
+        <button (click)="goTotag()">{{ tag.tag }}</button>
       </a>
     </div>
-</section>
+  </section>
 
-
-  <div class="popular">
+  <section class="popular">
     <h2>ยอดนิยม</h2>
     <div class="popular-card">
       <a *ngFor="let popcard of popular; let i = index" class="card-1">
         <div class="image-container">
-          <img [src]="popcard.image" [alt]="popcard.name">
-          <span class="number">{{ i+1 }}</span>
+          <img [src]="popcard.image" [alt]="popcard.name" />
+          <span class="number">{{ i + 1 }}</span>
         </div>
         <h5>{{ popcard.name }}</h5>
         <h5>{{ popcard.tag }}</h5>
         <h6>{{ popcard.penname }}</h6>
 
-        <h6><i class="fas fa-book">
-          </i> {{ popcard.ep }} ตอน</h6>
+        <h6><i class="fas fa-book"> </i> {{ popcard.ep }} ตอน</h6>
       </a>
     </div>
-  </div>
+  </section>
 
-  <div class="recommend">
-    <h2>รายการแนะนำ</h2>
+  <section class="recommend">
+    <h2 style="margin-right: 30px">รายการแนะนำ</h2>
+
     <div class="recommend recommend-re">
+      <div class="btnSlideshow btnSlideshow-left">
+        <fa-icon [icon]="faChevronLeft"></fa-icon>
+      </div>
       <div class="recommend-card" *ngFor="let rect of recmmend">
-        <img [src]="rect.image" [alt]="rect.name">
+        <img [src]="rect.image" [alt]="rect.name" />
         <div class="card-img-sub">
           <h5>{{ rect.name }}</h5>
           <h6>{{ rect.penname }}</h6>
-          <h6><i class="fas fa-book">
-            </i> {{ rect.ep }} ตอน</h6>
+          <h6><i class="fas fa-book"> </i> {{ rect.ep }} ตอน</h6>
         </div>
       </div>
+      <div class="btnSlideshow btnSlideshow-right">
+        <fa-icon [icon]="faChevronRight"></fa-icon>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="novel-now">
+  <section class="novel-now">
     <h2>นิยายอัพเดทล่าสุด</h2>
     <div class="header-update">
       <div class="novel-card" *ngFor="let nvupdate of novelupdate">
-        <img [src]="nvupdate.image" [alt]="nvupdate.name">
+        <img [src]="nvupdate.image" [alt]="nvupdate.name" />
         <div class="card-img-sub">
-        <h5>{{ nvupdate.name }}</h5>
-        <h6>{{ nvupdate.penname }}</h6>
-        <h6><i class="fas fa-book">
-          </i> {{ nvupdate.ep }} ตอน</h6>
+          <h5>{{ nvupdate.name }}</h5>
+          <h6>{{ nvupdate.penname }}</h6>
+          <h6><i class="fas fa-book"> </i> {{ nvupdate.ep }} ตอน</h6>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </div>
