@@ -22,6 +22,17 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // Check if token exists in localStorage
     const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No token found, redirecting to login');
+      
+      // บันทึก URL ปัจจุบันลงใน localStorage
+      localStorage.setItem('redirectUrl', window.location.href);
+
+      
+    } else {
+      console.log('Token found:', token);
+    }
+
     this.isLoggedIn = !!token; // Set isLoggedIn to true if token exists
   }
 
@@ -39,6 +50,7 @@ export class NavbarComponent implements OnInit {
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
+      disableClose: true
     //
     });
 
@@ -49,6 +61,7 @@ export class NavbarComponent implements OnInit {
 
   openRegisterDialog(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
+      disableClose: true
       //
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -70,4 +83,6 @@ export class NavbarComponent implements OnInit {
   //   // เพิ่มโค้ดการล็อกอินของคุณที่นี่
   //   this.closeLoginPopup(); // ปิด popup เมื่อเข้าสู่ระบบสำเร็จ
   // }
+
+  
 }

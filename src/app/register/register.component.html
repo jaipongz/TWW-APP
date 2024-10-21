@@ -1,45 +1,51 @@
-                <div class="login-content">
-                <!-- Image Section -->
-                <div class="image-container">
-                    <img src="image\g.png" alt="imagelogin">
-                </div>
-            <div class="login-container">
-                <h2>สมัครสมาชิก</h2>
-                <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
-                    <div class="input-group">
-                      <input type="text" id="username" placeholder="Username" name="username" [(ngModel)]="username" required #usernameInput="ngModel">
-                    </div>
-                                          
-                    <div class="input-group">
-                        <input type="email" id="mail" placeholder="Your email" name="email" [(ngModel)]="email" required email #emailInput="ngModel">
-                      </div>
-                  
-                    <div class="input-group">
-                        <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="Password" name="password" [(ngModel)]="password" required minlength="8" #passwordInput="ngModel">
-                        <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn">
-                          <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-                        </button>
-                      </div>
-                      
-                      <div class="input-group">
-                        <input [type]="showConfirmPassword ? 'text' : 'password'" id="password-confirm" placeholder="Confirm Password" name="passwordConfirm" [(ngModel)]="passwordConfirm" required #passwordConfirmInput="ngModel">
-                        <button type="button" (click)="toggleConfirmPasswordVisibility()" class="toggle-btn">
-                          <i [ngClass]="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-                        </button>
-                      </div>
+<div class="login-content">
+  <!-- Image Section -->
+  <div class="image-container">
+    <img src="image\g.png" alt="imagelogin">
+  </div>
+  <div class="login-container">
+    <h2>สมัครสมาชิก</h2>
+    <form (ngSubmit)="register()" #registerForm="ngForm" novalidate>
+      <div class="input-group">
+        <input type="text" id="username" placeholder="Username" name="username" [(ngModel)]="username" required
+          #usernameInput="ngModel">
+      </div>
 
-                  
-                    <div class="input-group2">
-                      <button type="button" (click)="return()" class="input-group2-sub">Login</button>
-                      <button type="submit" (click)="register()" >Register</button>
-                    </div>
-                  </form>
-                  
-                  <!-- Popup -->
-                  <div *ngIf="showPopup" class="popup">
-                    <div class="popup-content">
-                      <h3>{{ popupMessage }}</h3>
-                      <button (click)="closePopup()">OK</button>
-                    </div>
-                  </div>
-            </div>
+      <div class="input-group">
+        <input type="email" id="mail" placeholder="Your email" name="email" [(ngModel)]="email" required email
+          #emailInput="ngModel">
+      </div>
+
+      <div class="input-group">
+        <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="Password" name="password"
+          [(ngModel)]="password" required minlength="8" #passwordInput="ngModel">
+        <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn">
+          <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+        </button>
+      </div>
+
+      <div class="input-group">
+        <input [type]="showConfirmPassword ? 'text' : 'password'" id="password-confirm" placeholder="Confirm Password"
+          name="passwordConfirm" [(ngModel)]="passwordConfirm" required #passwordConfirmInput="ngModel">
+        <button type="button" (click)="toggleConfirmPasswordVisibility()" class="toggle-btn">
+          <i [ngClass]="showConfirmPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
+        </button>
+      </div>
+
+
+      <div class="input-group2">
+        <button type="button" (click)="return()" class="input-group2-sub">Login</button>
+        <button type="submit" (click)="register()">Register</button>
+      </div>
+    </form>
+
+    <!-- Popup -->
+    <div *ngIf="showPopup" class="popup">
+      <div class="popup-content">
+        <h3>{{ popupMessage }}</h3>
+        <button (click)="closePopup()">OK</button>
+      </div>
+    </div>
+    <button class="exitBtn" (click)="closeotp()">×</button>
+  </div>
+</div>

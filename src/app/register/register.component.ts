@@ -84,4 +84,7 @@ export class RegisterComponent {
   return() {
     this.router.navigate(['login']);
   }
+  closeotp() {
+    this.dialogRef.close(); 
+  }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,7 +11,7 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
@@ -19,11 +19,21 @@ export class LoginComponent {
   popupMessage: string = '';
   showPassword: boolean = false;
   // showLoginPopup: boolean = false;
-  
+
 
   constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog) { }
 
+  ngOnInit(): void {
+    // // หลังจาก login ผ่าน Google สำเร็จ
+    // const redirectUrl = localStorage.getItem('redirectUrl');
 
+    // if (redirectUrl) {
+    //   localStorage.removeItem('redirectUrl');  // ลบ URL หลังจาก redirect แล้ว
+    //   this.router.navigateByUrl(redirectUrl);  // เปลี่ยนเส้นทางไปที่ URL เดิม
+    // } else {
+    //   this.router.navigate(['banner']); // ถ้าไม่มี URL ให้เปลี่ยนไปหน้า default
+    // }
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -70,7 +80,7 @@ export class LoginComponent {
           this.router.navigate(['banner']).then(() => {
             window.location.reload(); // รีเฟรชหน้าเว็บหลังจากการ navigate สำเร็จ
           });
-          
+
         },
         error => {
           console.error('Login error:', error);
@@ -80,27 +90,39 @@ export class LoginComponent {
   }
 
   openRegisterDialog(): void {
-    this.dialogRef.close(); 
+    this.dialogRef.close();
     const dialogRef = this.dialog.open(RegisterComponent, {
+      disableClose: true
       //
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-    });}
+    });
+  }
 
-    openForgotpass(){ 
-      
-      const dialogRef = this.dialog.open(ForgotPasswordComponent, {
-        
-        
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
-    }
-    
+  openForgotpass() {
+    const dialogRef = this.dialog.open(ForgotPasswordComponent, {
+      disableClose: true
 
-    
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  // loginWithGoogle() {
+  //   const currentUrl = window.location.href;  // เก็บ URL ปัจจุบัน
+  //   localStorage.setItem('redirectUrl', currentUrl);  // เก็บ URL ใน localStorage
+
+  //   // นำทางไปยัง Google OAuth
+  //   window.location.href = 'http://localhost:3090/auth/google';
+  // }
+
+
+  closeotp() {
+    this.dialogRef.close();
+  }
+
 
   closePopup() {
     this.showPopup = false;
