@@ -1,11 +1,20 @@
+
 .container-page {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  /* background-image:  url('/image/1329400.jpeg'); */
   gap: 10px;
   justify-content: center;
   /* background: url("/image/1329400.jpeg"); */
+  background: rgba(255, 215, 215, 0.664);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-bottom: 10px;
 }
+
+
 
 .container-page-sub {
   padding: 0 1rem 0;
@@ -19,6 +28,7 @@
   height: 500px;
   /* background-color: #000000; */
   overflow: hidden;
+  
 }
 
 .flexcard {
@@ -28,6 +38,7 @@
   height: 95%;
   gap: 10px;
   justify-content: center;
+  
 }
 
 .flexcard a {
@@ -48,13 +59,15 @@
   margin: 0 10px;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 1); */
+
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
 .active {
@@ -143,8 +156,9 @@
   max-width: 1100px;
   padding: 10px 50px;
   border-radius: 10px;
-  margin: 0 auto;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 10px auto;
+  box-shadow: 0px 5px 15px rgb(95, 95, 95);
   z-index: 1;
   /* ให้อยู่เหนือ pseudo-element */
 }
@@ -159,7 +173,7 @@
   background-image: url('/image/image.png');
   background-size: cover;
   /* ทำให้ภาพเต็มพื้นที่ */
-  opacity: 0.5;
+  opacity: 100%;
   /* กำหนดความโปร่งใส 50% */
   z-index: -1;
   /* วางไว้ข้างหลังเนื้อหา */
@@ -313,20 +327,18 @@
   }
 }
 
-
-
-
-
-
 .popcontent {
   position: relative;
   max-width: 1100px;
-  /* ความกว้างสูงสุด */
   width: 100%;
   margin: 0 auto;
+  border-radius: 10px;
   padding: 20px;
   box-sizing: border-box;
   text-align: center;
+  background-color: #fff5f5;
+  box-shadow: 0px 5px 15px rgb(95, 95, 95);
+
 }
 
 .header-popular {
@@ -431,12 +443,14 @@ h6 {
 }
 
 .recommend {
+  background-color: #fff5f5;
   position: relative;
   max-width: 1100px;
   width: 100%;
   border-radius: 10px;
-  margin: 0 auto;
+  margin: 10px auto;
   /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 1); */
+  box-shadow: 0px 5px 15px rgb(95, 95, 95);
   padding: 0 10px;
 
 }
@@ -518,15 +532,15 @@ h5,h6 {
   max-width: 1100px;
   width: 100%;
   border-radius: 10px;
-  margin: 0 auto;
-  /* box-shadow: 0px 5px 15px rgba(0, 0, 0, 1); */
+  margin: 10px auto ;
   padding: 0 10px;
-
+  box-shadow: 0px 5px 15px rgb(95, 95, 95);
+  background-color: #fff5f5;
   .novel-header {
     display: flex;
     justify-content: space-between; /* จัดให้ "ดูทั้งหมด" ไปทางขวาสุด */
     align-items: center; /* จัดให้อยู่กลางในแนวแกนตั้ง */
-    margin-bottom: 10px; /* เพิ่มพื้นที่ว่างระหว่างหัวข้อกับรายการ */
+    margin: 10px; /* เพิ่มพื้นที่ว่างระหว่างหัวข้อกับรายการ */
   }
 }
 
@@ -546,27 +560,35 @@ h5,h6 {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* สร้าง 5 คอลัมน์ */
   grid-gap: 10px; /* ช่องว่างระหว่างคอลัมน์ */
+  margin: 10px;
   
 }
+.novelpic {
+  display: flex;
+  justify-content: center;  
+}
 
+
+.card-img-sub {
+  width: 150px; 
+  text-align: left;
+  margin: 10px 0 5px;
+}
 .novel-card img {
   width: 150px;
   height: 150px;
   border-radius: 5px;
 }
-.card-img-sub {
-  font-size: 16px;
-  margin: 10px 0 5px;
-}
+
 
 .novel-header a {
   display: inline-flex;
   align-items: center;
-  background-color: #88583D; /* สีพื้นหลัง */
-  color: #fff; /* สีตัวอักษร */
+  background-color: #88583D;
+  color: #fff;
   padding: 10px 15px;
   text-decoration: none;
-  border-radius: 5px; /* มุมโค้งมน */
+  border-radius: 5px;
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
@@ -587,7 +609,7 @@ h5,h6 {
 
 @media (max-width: 1024px) {
   .header-update {
-    grid-template-columns: repeat(3, 1fr); /* เมื่อหน้าจอเล็กกว่า 1024px จะแสดงเป็น 3 คอลัมน์ */
+    grid-template-columns: repeat(4, 1fr); /* เมื่อหน้าจอเล็กกว่า 1024px จะแสดงเป็น 3 คอลัมน์ */
   }
 }
 

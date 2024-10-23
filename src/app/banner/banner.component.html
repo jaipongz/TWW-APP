@@ -62,7 +62,7 @@
     <h2>รายการแนะนำ</h2>
     <div class="recommend-re" #recommendContainer (scroll)="checkScroll()">
       <div class="recommend-card" *ngFor="let rect of recmmend">
-        <img [src]="rect.image" [alt]="rect.name"/>
+        <img [src]="rect.image" [alt]="rect.name" />
         <div class="card-img-sub">
           <h5>{{ rect.name }}</h5>
           <h6>{{ rect.penname }}</h6>
@@ -73,25 +73,27 @@
         <i class="fas fa-arrow-left"></i>
       </span>
       <span class="arrow arrow-right" (click)="scrollRight()" *ngIf="showRightArrow">
-        <i class="fas fa-arrow-right" >
+        <i class="fas fa-arrow-right">
         </i>
-       </span>
+      </span>
     </div>
   </section>
 
   <section class="novel-now">
     <div class="novel-header">
-    <h2>นิยายอัพเดทล่าสุด</h2>
-    <a href="#">ดูทั้งหมด <i class="fas fa-arrow-right" >
-    </i></a>
-  </div>
+      <h2>นิยายอัพเดทล่าสุด</h2>
+      <a href="#">ดูทั้งหมด <i class="fas fa-arrow-right">
+        </i></a>
+    </div>
     <div class="header-update">
       <div class="novel-card" *ngFor="let nvupdate of novelupdate | slice:0:10;">
-        <img [src]="nvupdate.image" [alt]="nvupdate.name" />
-        <div class="card-img-sub">
-          <h5>{{ nvupdate.name }}</h5>
-          <h6>{{ nvupdate.penname }}</h6>
-          <h6><i class="fas fa-book"> </i> {{ nvupdate.ep }} ตอน</h6>
+        <div class="novelpic">
+          <div class="card-img-sub">
+            <img [src]="nvupdate.image" [alt]="nvupdate.name" />
+            <h5>{{ nvupdate.name }}</h5>
+            <h6>{{ nvupdate.penname }}</h6>
+            <h6><i class="fas fa-book"> </i> {{ nvupdate.ep }} ตอน</h6>
+          </div>
         </div>
       </div>
     </div>
