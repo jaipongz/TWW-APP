@@ -12,10 +12,11 @@ import { RegisterComponent } from '../register/register.component';
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   // Properties for login popup
-  username: string = '';
-  password: string = '';
+  // username: string = '';
+  // password: string = '';
   showPassword: boolean = false;
   // showLoginPopup: boolean = false;
+  username: string = 'usernamelove';
 
   constructor(private router: Router, public dialog: MatDialog) {}
 

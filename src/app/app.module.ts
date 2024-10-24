@@ -39,7 +39,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ForgotPasswordSubComponent
+    ForgotPasswordSubComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,82 +1,100 @@
 <nav class="navbar">
-    <div class="navbar-container">
-      <!-- Logo -->
-      <a href="#" class="logo">My App</a>
-  
-      <!-- Links for authenticated and unauthenticated users -->
-      <div *ngIf="isLoggedIn; else loggedOut" class="navbar-links">
-        <a routerLink="/dashboard">Dashboard</a>
-        <a routerLink="/profile">Profile</a>
-        <button (click)="logout()" class="logout-button">Logout</button>
+  <div class="navbar-container">
+
+    <!-- Links for authenticated and unauthenticated users -->
+    <div *ngIf="!isLoggedIn; else loggedOut" >
+      <button class="register-btn">
+        <!-- ไอคอนการเขียน (SVG) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+            <path d="M3 17.25V21h3.75l10.98-10.98-3.75-3.75L3 17.25zm3-12.75C5.66 4.5 5 5.16 5 6c0 0 3.14 0 3.14-3.14 0-.84-.68-1.53-1.52-1.53-.84 0-1.52.69-1.52 1.52C5 4.34 5.34 5 6.14 5zm15.73-.6l-2.12-2.12c-.39-.39-1.02-.39-1.41 0l-1.89 1.89 3.75 3.75 1.89-1.89c.39-.38.39-1.02 0-1.41z"/>
+        </svg> หน้าสำหรับนักเขียน
+    </button>
+      <!-- <a routerLink="/dashboard">Dashboard</a>
+        <a routerLink="/profile">Profile</a> -->
+      <!-- <button (click)="logout()" class="logout-button">Logout</button> -->
+    </div>
+    <!-- Logo -->
+    <img src="image\Thanwiwa.png" alt="Thanwiwa">
+    <ng-template #loggedOut>
+      <div class="navbar-links">
+        <i class="fa-solid fa-hand-middle-finger fa-beat"></i>
+        <!-- <i class="fa-solid fa-hand-middle-finger"></i> -->
+        <!-- <i class="fa-solid fa-wheelchair fa-bounce"></i> -->
+        <a (click)="openLoginDialog()">Login</a>
+        <label>/</label>
+        <a (click)="openRegisterDialog()">Register</a>
       </div>
-      
-      <ng-template #loggedOut>
-        <div class="navbar-links">
-          <!-- <a routerLink="/login">Login</a> -->
-          <button mat-button (click)="openLoginDialog()">Login</button>
-          <button mat-button (click)="openRegisterDialog()">Register</button>
+    </ng-template>
+
+
+    <div class="navbar-right">
+      <div class="search-bar">
+        <input type="text" class="input" placeholder="ค้นหาชื่อหนังสือ">
+        <!-- ไอคอนค้นหา (SVG) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon" fill="currentColor">
+          <path
+            d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+        <div class="bell-icon">
+        <i class="fa-regular fa-bell"></i>
+        <!-- <i class="fa-regular fa-bell fa-shake"></i> -->
         </div>
-      </ng-template>
-    </div>
-  </nav>
-
-
-  <!-- Popup login -->
-<!-- <div *ngIf="showLoginPopup" class="login-popup-overlay" (click)="closeLoginPopup()">
-  <div class="login-popup" (click)="$event.stopPropagation()"> -->
-    
-    <!-- style="background-color: red;" -->
-
-    <!-- ปุ่มปิด X อยู่เหนือ div ของ login-content -->
-    <!-- <div class="popup-header" >
-      <button class="close-btn" (click)="closeLoginPopup()">X</button>
-    </div>
-
-    <div class="login-content"> -->
-      <!-- Image Section -->
-      <!-- <div class="image-container">
-        <img src="image/g.png" alt="imagelogin">
+        <div class="user-icon">
+          <img src="/image/profile.png" alt="User">
+        </div>
+        </div>
+      <div class="nav-icons">
+        <a href="#">
+          <!-- ไอคอนหน้าแรก (SVG) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg> หน้าแรก
+        </a>
+        <a href="#">
+          <!-- ไอคอนนิยาย (SVG) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+            <path
+              d="M18 2H6C4.9 2 4 2.9 4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H6V4h12v14zM8 8h8v2H8V8zm0 4h5v2H8v-2z" />
+          </svg> นิยาย
+        </a>
+        <a href="#">
+          <!-- ไอคอนกระเป๋า (SVG) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+            <path
+              d="M16 6V4c0-1.11-.9-2-2-2H10c-1.11 0-2 .89-2 2v2H4v14h16V6h-4zM10 4h4v2h-4V4zm-4 14v-2h12v2H6zm12-4H6v-2h12v2zm0-4H6V8h12v2z" />
+          </svg> เติมคอยส์
+        </a>
       </div>
-
-      <div class="login-container">
-        <h2>Thanwiwa</h2>
-        <form id="loginForm" (ngSubmit)="login()" class="login-form" #loginForm="ngForm" novalidate>
-          <div class="input-group">
-            <input type="text" id="username" placeholder="username" name="username" [(ngModel)]="username" #usernameInput="ngModel" required>
-          </div>
-          <div class="input-group">
-            <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="password" name="password" [(ngModel)]="password" minlength="8" #passwordInput="ngModel" required>
-            <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn">
-              <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
-            </button>
-          </div>
-          <div class="input-group1">
-            <a [routerLink]="['/register']" class="text-login">
-                สมัครสมาชิก
-            </a>
-            <a [routerLink]="['/forgot-password']" class="text-login">
-                ลืมรหัสผ่าน?
-            </a>
-          </div>
-          <div class="input-group2">
-            <button type="submit">Login</button>
-          </div>
-          <div class="orlogin">
-            <div class="orlogin-by"></div>
-            <label for="" style="font-size: 14px; color:#88583D;">หรือเข้าสู่ระบบโดย</label>
-            <div class="orlogin-by"></div>
-          </div>
-          <div class="input-group3">
- 
-            
-            <div class="social">
-              <a><img src="image/facebook.png" alt="facebook-icon" style="width: 42px; height: 42px;"></a>
-              <a href="http://localhost:3090/auth/google"><img src="image/google.png" alt="google-icon" style="width: 42px; height: 42px;"></a>
-            </div>
-          </div>
-        </form>
+      <div class="navside">
+        <div class="header-navside">
+          <img src="/image/profile.png" alt="User" style="height: 60px;width: 60px;">
+          <h2>Username01</h2>
+          <h3>&#64;{{username}}</h3>
+        </div>
+        <div class="money-content">
+          <div class="coin">
+          <img src="/image/coin.png" alt="coin" style="height: 30px;width: 30px;">
+          <label>0.00</label>
+         </div>
+         <button>เติมเหรียญ</button>
+         <div class="wallet">
+          <i class="fa-solid fa-wallet"></i>
+         </div>
+         <div class="writer">
+          <i class="fa-regular fa-pen-to-square"></i>
+         </div>
+         <div class="book-floor">
+          <i class="fa-regular fa-bookmark"></i>
+         </div>
+         <div class="read-history">
+          <i class="fa-solid fa-book-open"></i>
+         </div>
+         <div class="setting">
+          <i class="fa-solid fa-gear"></i>
+         </div>
+         <div class="loggedOut"></div>
+        </div>
       </div>
     </div>
   </div>
-</div> -->
-  
+</nav>
