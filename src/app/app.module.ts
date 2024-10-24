@@ -17,10 +17,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 // import { SwiperModule } from 'swiper/angular'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LitsComponent } from './lits/lits.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: BannerComponent },
+  {path: '' , component: LitsComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -39,7 +40,8 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    ForgotPasswordSubComponent
+    ForgotPasswordSubComponent,
+    LitsComponent,
   ],
   imports: [
     BrowserModule,
