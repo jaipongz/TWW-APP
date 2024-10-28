@@ -84,6 +84,9 @@ export class NavbarComponent implements OnInit {
   //   // เพิ่มโค้ดการล็อกอินของคุณที่นี่
   //   this.closeLoginPopup(); // ปิด popup เมื่อเข้าสู่ระบบสำเร็จ
   // }
+  isMenuOpen = false;
 
-  
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
 }

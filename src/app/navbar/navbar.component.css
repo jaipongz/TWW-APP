@@ -1,7 +1,6 @@
 /* Navbar container */
 .navbar {
   background-color: #fAF8FF;
-  padding: 10px 0 0 0;
   /* opacity: 0.9; */
 }
 .navbar-container {
@@ -197,8 +196,104 @@
   width: 35px;
   height: 35px;
   border-radius: 50%;
+  cursor: pointer;
 
   img {
     object-fit: cover;
   }
+}
+
+.navside {
+  width: 300px;
+  height: 550px;
+  background-color: #f9f9f9;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 57px;
+  right: 50px;
+  /* transform: translate(-50%, -50%); */
+  z-index: 1000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  overflow: hidden;
+  
+}
+
+.header-navside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header-navside img {
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.header-navside a {
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.money-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.money-content div {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+  
+}
+
+.money-content i {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.money-content a {
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.money-content button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #88583D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.coin {
+  justify-content: space-between;
+  align-items: center;
+}
+.coin-sub label {
+  
+  align-items: center;
+}
+
+.loggedOut {
+  text-align: center;
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ff5a5f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body.overlay-active {
+  overflow: hidden; /* ป้องกันการเลื่อนเนื้อหาเมื่อ overlay แสดง */
 }

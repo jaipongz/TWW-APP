@@ -39,7 +39,7 @@
         <i class="fa-regular fa-bell"></i>
         <!-- <i class="fa-regular fa-bell fa-shake"></i> -->
         </div>
-        <div class="user-icon">
+        <div class="user-icon" (click)="toggleMenu()">
           <img src="/image/profile.png" alt="User">
         </div>
         </div>
@@ -65,36 +65,48 @@
           </svg> เติมคอยส์
         </a>
       </div>
-      <div class="navside">
+
+      <div class="navside" *ngIf="isMenuOpen">
         <div class="header-navside">
-          <img src="/image/profile.png" alt="User" style="height: 60px;width: 60px;">
-          <h2>Username01</h2>
-          <h3>&#64;{{username}}</h3>
+          <img src="/image/profile.png" alt="User">
+          <a>Username01</a>
+          <a>&#64;{{username}}</a>
         </div>
         <div class="money-content">
           <div class="coin">
-          <img src="/image/coin.png" alt="coin" style="height: 30px;width: 30px;">
-          <label>0.00</label>
-         </div>
-         <button>เติมเหรียญ</button>
-         <div class="wallet">
-          <i class="fa-solid fa-wallet"></i>
-         </div>
-         <div class="writer">
-          <i class="fa-regular fa-pen-to-square"></i>
-         </div>
-         <div class="book-floor">
-          <i class="fa-regular fa-bookmark"></i>
-         </div>
-         <div class="read-history">
-          <i class="fa-solid fa-book-open"></i>
-         </div>
-         <div class="setting">
-          <i class="fa-solid fa-gear"></i>
-         </div>
-         <div class="loggedOut"></div>
+            <span class="coin-sub">
+            <img src="/image/coin.png" alt="coin">
+            <label>0.00</label>
+            </span>
+            <button>เติมเหรียญ</button>
+          </div>
+          <div class="wallet">
+            <i class="fa-solid fa-wallet"></i>
+            <a>กระเป๋าเงิน</a>
+          </div>
+          <div class="writer">
+            <i class="fa-regular fa-pen-to-square"></i>
+            <a>เขียนนิยาย</a>
+          </div>
+          <div class="book-floor">
+            <i class="fa-regular fa-bookmark"></i>
+            <a>ชั้นหนังสือ</a>
+          </div>
+          <div class="read-history">
+            <i class="fa-solid fa-book-open"></i>
+            <a>ประวัติการอ่าน</a>
+          </div>
+          <div class="setting">
+            <i class="fa-solid fa-gear"></i>
+            <a>การตั้งค่า</a>
+          </div>
+        </div>
+        <div class="loggedOut">
+          <a><i class="fa-solid fa-right-from-bracket"></i><b>ออกจากระบบ</b></a>
         </div>
       </div>
+      
+      
     </div>
   </div>
 </nav>
