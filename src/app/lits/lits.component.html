@@ -1,475 +1,22 @@
 <app-navbar></app-navbar>
-<style>
-  /* ตั้งค่า container ให้ card อยู่ตรงกลาง */
-  .lits-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  /* ตั้งค่า card */
-  .lits-main-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-    font-family: Arial, sans-serif;
-  }
-
-  .lits-main-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  
-
-  .stars {
-    display: flex;
-    justify-content: flex-end;
-    gap: 5px;
-  }
-
-  .writer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    align-items: center;
-  }
-
-  .writer-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .writer-end {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-  }
-
-  .fiction-type {
-    margin-top: 10px;
-    font-size: 14px;
-    color: #666;
-  }
-  .numof {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin-top: 12px;
-  }
-  .quantity {
-    display: flex;
-    justify-content: center; /* จัดเรียงให้มีระยะห่างที่เท่าๆ กัน */
-    align-items: center;
-    padding: 10px;
-    /* background-color: #f9f9f9; */
-    border-radius: 8px; /* มุมโค้ง */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   */
-  }
-
-  .numof {
-    display: flex;
-    gap: 30px; /* ช่องว่างระหว่าง icon และ label */
-  }
-
-  .icon {
-    margin-right: 5px; /* ช่องว่างระหว่าง icon และ label */
-    font-size: 16px; /* ขนาดของ icon */
-  }
-
-  .recommend-story {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 20px;
-    font-size: 16px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border: 1px solid #d8d8d8; /* เส้นขอบหนา 2px สีเทาเข้ม */
-    border-radius: 8px; /* เพิ่มมุมโค้ง */
-    padding: 10px;
-    margin-top: 5px;
-  }
-
-  .recommend-head {
-    margin-bottom: 24px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-
-  .story-body {
-    margin: 10px 0;
-    margin-bottom: 20px;
-    margin-left: 28px;
-    margin-right: 28px;
-  }
-
-  .tag-recomm {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    gap: 10px;
-  }
-
-  .novelep-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .novel-eps {
-    display: flex;
-    justify-content: space-between; /* ให้ label อยู่ด้านซ้าย และปุ่มต่างๆ อยู่ด้านขวา */
-    align-items: center;
-    flex: 1;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .btn-group {
-    display: flex;
-    align-items: center; /* จัดปุ่มให้อยู่ในแนวนอน */
-    justify-content: flex-end;
-  }
-
-  .table-pagination {
-    display: flex;
-    justify-content: flex-end; /* จัด pagination ไปทางขวา */
-    align-items: center;
-    margin-top: 10px;
-  }
-
-  .btn-ep,
-  .btn-l,
-  .numep,
-  .btn-r {
-    margin-left: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
-  }
-  .btn-ep,
-  .numep {
-    justify-content: center;
-    align-items: center;
-    padding: 5px 16px;
-    margin: 5px;
-    border: 1px solid #9b9b9b;
-    border-radius: 10px;
-    box-shadow: 0px 3px 3px rgb(199, 199, 199) inset;
-    background-color: #f3f4f6;
-  }
-  .table-novels {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 20px auto; /* จัดให้อยู่กลาง */
-    border-collapse: collapse;
-    font-family: Arial, sans-serif;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-  }
-
-  .table-header .table-row,
-  .table-body .table-row {
-    display: flex;
-    justify-content: space-between; /* จัดระยะห่างระหว่างแต่ละคอลัมน์ */
-    padding: 10px 15px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  .table-row:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  .table-cell {
-    display: flex;
-    flex: 1; /* กำหนดให้ทุกคอลัมน์มีขนาดเท่ากัน */
-    text-align: center; /* จัดให้ข้อความอยู่ตรงกลาง */
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    width: 100px;
-  }
-
-  .table-header .table-cell {
-    font-weight: lighter; /* เน้นหัวข้อ */
-  }
-
-  .table-body .table-cell {
-    font-size: 14px;
-  }
-
-  .table-body .table-cell .fa-icon {
-    color: green; /* สีของ icon */
-  }
-
-  .recomm-novels {
-    padding: 16px;
-    background-color: #f3f4f6;
-    border-radius: 8px;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-  }
-
-  .novel-title {
-    font-weight: bold;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .novel-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .novel-card {
-    display: flex;
-    align-items: flex-start; /* เรียงเนื้อหาชิดด้านบน */
-    background-color: white;
-    padding: 16px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    min-width: 200px;
-  }
-
-  .novel-image {
-    width: 120px; /* กำหนดความกว้างของรูปภาพ */
-    height: 150px; /* กำหนดความสูงของรูปภาพ */
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 16px; /* ระยะห่างระหว่างรูปภาพกับข้อมูล */
-  }
-
-  .novel-info {
-    display: flex;
-    flex-direction: column; /* จัดเรียงข้อมูลในแนวตั้ง */
-    font-size: 16px;
-  }
-
-  .novel-name {
-    font-weight: 600;
-    margin: 0; /* ลบระยะมุมบนและล่าง */
-    font-size: 15px;
-  }
-
-  .novel-description {
-    color: #4b5563;
-  }
-
-  .leaveacomm {
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #f3f4f6;
-    border-radius: 10px;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-  }
-
-  .crad-commn {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%; /* ขยายให้การ์ดเต็มจอ */
-    height: 180px;
-    display: flex;
-    flex-direction: column; /* จัดการให้องค์ประกอบเรียงตามแนวตั้ง */
-    justify-content: center; /* จัดกึ่งกลางแนวแกน Y */
-    align-items: center; /* จัดกึ่งกลางแนวแกน X */
-    text-align: center; /* จัดข้อความให้อยู่กลาง */
-  }
-
-  .comment-title {
-    font-weight: 600;
-    margin-bottom: 16px;
-    display: block;
-  }
-
-  .btn-commn {
-    background-color: #7c4d3d;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-  }
-
-  .btn-commn:hover {
-    background-color: #683c2e;
-  }
-
-  .allcomments {
-    padding: 20px;
-    background-color: #f3f4f6;
-    width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
-    max-width: 1280px; /* ตั้งค่าให้ไม่เกิน 800px */
-    margin-left: 14%;
-    margin-right: 14%;
-  }
-
-  .allcomments-title {
-    font-weight: bold;
-    margin-bottom: 20px;
-    display: block;
-  }
-
-  .card-comments {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    background-color: white;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    align-items: center;
-  }
-
-  .avatar {
-    width: 60px;
-    height: 60px;
-    background-color: #ccc;
-    border-radius: 50%;
-  }
-
-  .comment-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .user-and-date {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .usename {
-    font-weight: bold;
-    margin-top: 5px;
-  }
-
-  .commndate {
-    font-size: 0.875rem;
-    color: gray;
-  }
-
-  .from-and-reply {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  .respond {
-    display: flex;
-    align-items: center; /* จัดให้กลางแนวตั้งภายใน respond */
-  }
-
-  .forward-icon-container {
-    margin-right: 4px; /* เว้นระยะระหว่างไอคอนกับข้อความ "ตอบกลับ" */
-    margin-top: 10px;
-  }
-
-  .forward-icon {
-    width: 20px; /* กำหนดขนาดรูปภาพตามต้องการ */
-    height: 20px;
-  }
-  .recomm-novels-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  .leaveacomm-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  .allcomments-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  .table-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  .table-cell:nth-child(6) {
-    width: 150px; /* ปรับความกว้างของคอลัมน์ที่ 6 */
-  }
-  label {
-    font-size: 14px;
-    font: bold;
-  }
-  p {
-    font-size: 14px;
-  }
-  .faicons {
-    margin-right: 5px;
-  }
-</style>
+<style></style>
 
 <div class="lits-head">
   <div class="lits-card">
     <!-- <div class="lits-image" title="image">image</div> -->
     <img src="/image/test3.jpg" alt="" class="lits-image" />
     <div class="btn-read">
-      <div class="btn">
-        <fa-icon
-          [icon]="faEye"
-          style="margin-right: 5px; font-size: 16px"
-        ></fa-icon>
-        <label for="">อ่านเลย</label>
-      </div>
+      <fa-icon [icon]="faEye" class="faicons"></fa-icon>
+      <label style="font-size: 14px" for="">อ่านเลย</label>
     </div>
     <div class="lits-ch">
       <div class="btn-save">
-        <div class="btn">
-          <fa-icon
-            [icon]="faPlus"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
-          <label for="">บันทึกลงคลัง</label>
-        </div>
+        <fa-icon [icon]="faPlus" class="faicons"></fa-icon>
+        <label style="font-size: 14px" for="">บันทึกลงคลัง</label>
       </div>
       <div class="btn-sentGift">
-        <div class="btn">
-          <fa-icon
-            [icon]="faGift"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
-          <label for="">ส่งของขวัญ</label>
-        </div>
+        <fa-icon [icon]="faGift" class="faicons"></fa-icon>
+        <label style="font-size: 14px" for="">ส่งของขวัญ</label>
       </div>
       <div class="fav-icon">
         <fa-icon [icon]="faHeart" style="font-size: 20px"></fa-icon>
@@ -498,10 +45,7 @@
         </div>
       </div>
       <div class="writer-end">
-        <fa-icon
-          [icon]="faHeart"
-          style="margin-right: 5px; font-size: 16px"
-        ></fa-icon>
+        <fa-icon [icon]="faHeart" class="faicons"></fa-icon>
         <label for="" name="following">50K</label>
       </div>
     </div>
@@ -510,31 +54,19 @@
     <div class="quantity">
       <div class="numof">
         <div class="numof-eps">
-          <fa-icon
-            [icon]="faList"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
+          <fa-icon [icon]="faList" class="faicons"></fa-icon>
           <label for="">20 ตอน</label>
         </div>
         <div class="numof-views">
-          <fa-icon
-            [icon]="faEye"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
+          <fa-icon [icon]="faEye" class="faicons"></fa-icon>
           <label for="">38.1K เข้าชม</label>
         </div>
         <div class="numof-comm">
-          <fa-icon
-            [icon]="faMessage"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
+          <fa-icon [icon]="faMessage" class="faicons"></fa-icon>
           <label for="">84 ความคิดเห็น</label>
         </div>
         <div class="numof-save">
-          <fa-icon
-            [icon]="faBookmark"
-            style="margin-right: 5px; font-size: 16px"
-          ></fa-icon>
+          <fa-icon [icon]="faBookmark" class="faicons"></fa-icon>
           <label for="">123 บันทึกลงคลัง</label>
         </div>
       </div>
@@ -555,62 +87,36 @@
       <label for="" style="font-size: 16px" class="bold-text">เพิ่มเติม</label>
       <div class="tag-recomm">
         <div class="btn-tag">
-          <div class="btn">
-            <fa-icon
-              [icon]="faTag"
-              style="margin-right: 5px; font-size: 16px"
-            ></fa-icon>
-            <label for="">ดราม่า</label>
-          </div>
+          <fa-icon [icon]="faTag" class="faicons"></fa-icon>
+          <label for="">ดราม่า</label>
         </div>
         <div class="btn-tag">
-          <div class="btn">
-            <fa-icon
-              [icon]="faTag"
-              style="margin-right: 5px; font-size: 16px"
-            ></fa-icon>
-            <label for="">ดราม่า</label>
-          </div>
+          <fa-icon [icon]="faTag" class="faicons"></fa-icon>
+          <label for="">ดราม่า</label>
         </div>
         <div class="btn-tag">
-          <div class="btn">
-            <fa-icon
-              [icon]="faTag"
-              style="margin-right: 5px; font-size: 16px"
-            ></fa-icon>
-            <label for="">ดราม่า</label>
-          </div>
+          <fa-icon [icon]="faTag" class="faicons"></fa-icon>
+          <label for="">ดราม่า</label>
         </div>
         <div class="btn-tag">
-          <div class="btn">
-            <fa-icon
-              [icon]="faTag"
-              style="margin-right: 5px; font-size: 16px"
-            ></fa-icon>
-            <label for="">ดราม่า</label>
-          </div>
+          <fa-icon [icon]="faTag" class="faicons"></fa-icon>
+          <label for="">ดราม่า</label>
         </div>
         <div class="btn-tag">
-          <div class="btn">
-            <fa-icon
-              [icon]="faTag"
-              style="margin-right: 5px; font-size: 16px"
-            ></fa-icon>
-            <label for="">ดราม่า</label>
-          </div>
+          <fa-icon [icon]="faTag" class="faicons"></fa-icon>
+          <label for="">ดราม่า</label>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="novelep-container">
+<!-- <div class="novelep-container">
   <div class="novel-eps">
     <div class="noeps" style="justify-content: start">
       <h4 for="" class="bold-text">นิยายตอน 16</h4>
     </div>
     <div class="btn-group">
-      <!-- เพิ่ม div นี้เพื่อจัดกลุ่มปุ่ม -->
       <div class="table-pagination">
         <button class="btn-ep">
           <label class="font-size: small">ตอนแรกสุด</label>
@@ -629,23 +135,34 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <div class="table-container">
   <div class="table-novels">
-    <!-- <div class="table-header">
-      <div class="table-row">
-        <div class="table-cell">Number</div>
-        <div class="table-cell">บทนำ</div>
-        <div class="table-cell">ยอดเข้าชม</div>
-        <div class="table-cell">ความคิดเห็น</div>
-        <div class="table-cell">จำนวนหน้า</div>
-        <div class="table-cell">วันเดือนปี เวลาอัพ</div>
-        <div class="table-cell">Free</div>
-      </div>
-    </div> -->
+    <!-- <div class="novel-eps"></div> -->
 
     <div class="table-body">
+      <!-- <div class="noeps">
+      </div> -->
+      <h3 for="" class="bold-text">นิยายตอน 16</h3>
+      <div class="btn-group">
+        <div class="table-pagination">
+          <button class="btn-ep">
+            <label class="font-size: small">ตอนแรกสุด</label>
+          </button>
+          <button class="btn-ep">
+            <fa-icon [icon]="faChevronLeft"></fa-icon>
+          </button>
+          <button class="numep">
+            <label class="font-size: small" style="padding: 5px 22px"
+              >1 - 10</label
+            >
+          </button>
+          <button class="btn-ep">
+            <fa-icon [icon]="faChevronRight"></fa-icon>
+          </button>
+        </div>
+      </div>
       <div class="table-row">
         <div class="table-cell" style="width: 32px">1</div>
         <div class="table-cell">
@@ -723,7 +240,7 @@
       </div>
     </div>
     <!-- Pagination Section -->
-    <div class="table-pagination" style="padding-right: 16px">
+    <div class="table-pagination">
       <div class="btn-ep"><fa-icon [icon]="faChevronLeft"></fa-icon></div>
       <div class="numep">
         <label class="font-size: small" style="padding: 5px 22px">1 - 10</label>

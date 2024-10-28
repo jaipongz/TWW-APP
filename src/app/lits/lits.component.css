@@ -30,26 +30,98 @@
   height: 330px;
 } */
 
-.btn {
+/* .btn {
   display: inline-block;
   background-color: #7c4d3d;
   color: white;
-  padding: 10px 30px;
+  padding: 10px 25px;
   border-radius: 20px;
   text-align: center;
   cursor: pointer;
   margin: 5px 0;
   width: 100%;
   transition: background-color 0.3s ease;
-  padding-left: 22px;
-  padding-right: 22px;
-}
+} */
 
 .btn:hover {
   background-color: #683c2e;
 }
 
-label {
+.btn-read {
+  display: inline-block;
+  background-color: #7c4d3d;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px 0;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.btn-save {
+  display: inline-block;
+  background-color: #7c4d3d;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px 0;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.btn-sentGift {
+  display: inline-block;
+  background-color: #7c4d3d;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px 0;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.btn-tag {
+  display: inline-block;
+  background-color: #7c4d3d;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  margin: 5px 0;
+  width: auto;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+/* เพิ่มเติมคุณสมบัติสำหรับปุ่มเมื่อโฮเวอร์ (ถ้าต้องการ) */
+.btn-read:hover {
+  background-color: #5a3c2f; /* สีพื้นหลังเมื่อโฮเวอร์สำหรับปุ่มอ่าน */
+}
+
+.btn-save:hover {
+  background-color: #5a3c2f; /* สีพื้นหลังเมื่อโฮเวอร์สำหรับปุ่มบันทึก */
+}
+
+.btn-sentGift:hover {
+  background-color: #5a3c2f; /* สีพื้นหลังเมื่อโฮเวอร์สำหรับปุ่มส่งของขวัญ */
+}
+
+.btn-tag:hover {
+  background-color: #5a3c2f; /* สีพื้นหลังเมื่อโฮเวอร์สำหรับปุ่มแท็ก */
+}
+
+.btn-follow:hover {
+  background-color: #5a3c2f; /* สีพื้นหลังเมื่อโฮเวอร์สำหรับปุ่มติดตาม */
+}
+
+.label {
   cursor: pointer;
   font-size: 14px;
 }
@@ -63,7 +135,7 @@ label {
 .fav-icon {
   justify-content: center;
   align-items: center;
-  margin-right: 5px;
+  margin: 5px;
 }
 
 .btn-read,
@@ -72,6 +144,7 @@ label {
 .btn-tag,
 .btn-follow {
   margin-bottom: 5px;
+  /* font-size: 14px; */
 }
 
 .btn-follow {
@@ -97,4 +170,657 @@ label {
 .btn-follow:active {
   background-color: #5c3d29;
   border-color: #5c3d29;
+}
+
+/* ตั้งค่า container ให้ card อยู่ตรงกลาง */
+.lits-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 20px; */
+  /* margin: 0 auto;
+  padding: 0 60px; */
+}
+
+/* ตั้งค่า card */
+.lits-main-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+
+  /* margin-left: 14%;
+  margin-right: 14%; */
+  font-family: Arial, sans-serif;
+}
+
+.lits-main-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stars {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.writer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.writer-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.writer-end {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.fiction-type {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+.numof {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 12px;
+  flex-wrap: nowrap;
+  font-size: 20px;
+}
+/* .numof-eps,
+.numof-views,
+.numof-comm,
+.numof-save {
+  font-size: 20px;
+} */
+
+.quantity {
+  display: flex;
+  justify-content: center; /* จัดเรียงให้มีระยะห่างที่เท่าๆ กัน */
+  align-items: center;
+  padding: 10px;
+  /* background-color: #f9f9f9; */
+  border-radius: 8px; /* มุมโค้ง */
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);   */
+}
+
+.numof {
+  display: flex;
+  gap: 30px; /* ช่องว่างระหว่าง icon และ label */
+}
+
+.quantity .numof label {
+  font-size: 14px; /* กำหนดขนาดฟอนต์ที่ต้องการ */
+  margin-left: 5px; /* เพิ่มระยะห่างระหว่างไอคอนกับข้อความ */
+}
+
+.icon {
+  margin-right: 5px; /* ช่องว่างระหว่าง icon และ label */
+  font-size: 16px; /* ขนาดของ icon */
+}
+/* .label-qtt {
+  font-size: 14px;
+} */
+
+.recommend-story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #d8d8d8; /* เส้นขอบหนา 2px สีเทาเข้ม */
+  border-radius: 8px; /* เพิ่มมุมโค้ง */
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.recommend-head {
+  margin-bottom: 24px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.story-body {
+  margin: 10px 0;
+  margin-bottom: 20px;
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+.tag-recomm {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.novelep-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.novel-eps {
+  display: flex;
+  justify-content: space-between; /* ให้ label อยู่ด้านซ้าย และปุ่มต่างๆ อยู่ด้านขวา */
+  align-items: center;
+  flex: 1;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+  /* margin-left: 14%;
+  margin-right: 14%; */
+}
+
+.noeps {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.btn-group {
+  display: flex;
+  align-items: center; /* จัดปุ่มให้อยู่ในแนวนอน */
+  justify-content: flex-end;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: flex-end; /* จัด pagination ไปทางขวา */
+  align-items: center;
+  margin-top: 10px;
+}
+
+.btn-ep,
+.btn-l,
+.numep,
+.btn-r {
+  margin-left: 10px; /* เพิ่มระยะห่างระหว่างปุ่ม */
+}
+.btn-ep,
+.numep {
+  justify-content: center;
+  align-items: center;
+  padding: 5px 16px;
+  margin: 5px;
+  border: 1px solid #9b9b9b;
+  border-radius: 10px;
+  box-shadow: 0px 3px 3px rgb(199, 199, 199) inset;
+  background-color: #f3f4f6;
+}
+.table-novels {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px auto; /* จัดให้อยู่กลาง */
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+  /* margin-left: 14%;
+  margin-right: 14%; */
+}
+
+.table-header .table-row,
+.table-body .table-row {
+  display: flex;
+  justify-content: space-between; /* จัดระยะห่างระหว่างแต่ละคอลัมน์ */
+  padding: 10px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-row:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table-cell {
+  display: flex;
+  flex: 1; /* กำหนดให้ทุกคอลัมน์มีขนาดเท่ากัน */
+  text-align: center; /* จัดให้ข้อความอยู่ตรงกลาง */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  width: 100px;
+}
+
+.table-header .table-cell {
+  font-weight: lighter; /* เน้นหัวข้อ */
+}
+
+.table-body .table-cell {
+  font-size: 14px;
+}
+
+.table-body .table-cell .fa-icon {
+  color: green; /* สีของ icon */
+}
+
+.recomm-novels {
+  padding: 16px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+  /* margin-left: 14%;
+  margin-right: 14%; */
+}
+
+.novel-title {
+  font-weight: bold;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.novel-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.novel-card {
+  display: flex;
+  align-items: flex-start; /* เรียงเนื้อหาชิดด้านบน */
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 200px;
+}
+
+.novel-image {
+  width: 120px; /* กำหนดความกว้างของรูปภาพ */
+  height: 150px; /* กำหนดความสูงของรูปภาพ */
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 16px; /* ระยะห่างระหว่างรูปภาพกับข้อมูล */
+}
+
+.novel-info {
+  display: flex;
+  flex-direction: column; /* จัดเรียงข้อมูลในแนวตั้ง */
+  font-size: 16px;
+}
+
+.novel-name {
+  font-weight: 600;
+  margin: 0; /* ลบระยะมุมบนและล่าง */
+  font-size: 15px;
+}
+
+.novel-description {
+  color: #4b5563;
+}
+
+.leaveacomm {
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #f3f4f6;
+  border-radius: 10px;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+  /* margin-left: 14%;
+  margin-right: 14%; */
+}
+
+.crad-commn {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%; /* ขยายให้การ์ดเต็มจอ */
+  height: 180px;
+  display: flex;
+  flex-direction: column; /* จัดการให้องค์ประกอบเรียงตามแนวตั้ง */
+  justify-content: center; /* จัดกึ่งกลางแนวแกน Y */
+  align-items: center; /* จัดกึ่งกลางแนวแกน X */
+  text-align: center; /* จัดข้อความให้อยู่กลาง */
+}
+
+.comment-title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.btn-commn {
+  background-color: #7c4d3d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 14px;
+}
+
+.btn-commn:hover {
+  background-color: #683c2e;
+}
+
+.allcomments {
+  padding: 20px;
+  background-color: #f3f4f6;
+  width: calc(100% - 100px); /* กำหนดให้กว้างเต็มจอหักลบ margin ซ้ายขวา */
+  /* max-width: 1280px; */
+  /* margin-left: 14%;
+  margin-right: 14%; */
+}
+
+.allcomments-title {
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.card-comments {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.comment-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user-and-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.usename {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.commndate {
+  font-size: 0.875rem;
+  color: gray;
+}
+
+.from-and-reply {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.respond {
+  display: flex;
+  align-items: center; /* จัดให้กลางแนวตั้งภายใน respond */
+}
+
+.forward-icon-container {
+  margin-right: 4px; /* เว้นระยะระหว่างไอคอนกับข้อความ "ตอบกลับ" */
+  margin-top: 10px;
+}
+
+.forward-icon {
+  width: 20px; /* กำหนดขนาดรูปภาพตามต้องการ */
+  height: 20px;
+}
+.recomm-novels-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.leaveacomm-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.allcomments-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.table-cell:nth-child(6) {
+  width: 150px; /* ปรับความกว้างของคอลัมน์ที่ 6 */
+}
+/* label {
+  font-size: 14px;
+  font: bold;
+} */
+p {
+  font-size: 14px;
+}
+.faicons {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+@media (min-width: 1280px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    margin: 0 auto;
+    padding: 0 50px;
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 20px; /* ลดขนาดฟอนต์ */
+  }
+}
+
+/* ขนาด 1024px */
+@media (min-width: 1024px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    margin: 0 auto;
+    padding: 0 50px; /* เพิ่ม padding ให้เนื้อหาไม่ชิดขอบ */
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 14px; /* ลดขนาดฟอนต์ */
+  }
+}
+
+/* ขนาด 900px */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    margin: 0 auto;
+    padding: 0 40px; /* ลด padding ให้น้อยลงสำหรับหน้าจอที่แคบลง */
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 14px; /* ลดขนาดฟอนต์ */
+  }
+}
+
+/* ขนาด 768px */
+@media (min-width: 768px) and (max-width: 899px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    margin: 0 auto;
+    padding: 0 30px; /* ลด padding ตามขนาดหน้าจอ */
+  }
+  .btn {
+    padding: 7px 15px;
+  }
+}
+
+/* ขนาด 600px */
+/* ขนาด 600px */
+@media (min-width: 600px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 7px 10px;
+    font-size: 10px; /* ขนาดฟอนต์สำหรับปุ่ม */
+    margin: 5px;
+  }
+
+  .numof {
+    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
+    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 12px; /* ขนาดฟอนต์ใหญ่ขึ้น */
+  }
+}
+
+/* ขนาด 480px */
+@media (min-width: 480px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    /* margin: 0 auto;
+    padding: 0 10px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 !important;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 5px 5px;
+    margin: 5px;
+    width: 100%;
+  }
+
+  .numof {
+    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
+    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 12px; /* ขนาดฟอนต์ลดลง */
+  }
+  .recommend-story {
+    margin: 0px;
+  }
+}
+
+/* ขนาด 320px */
+@media (min-width: 320px) {
+  .lits-container,
+  .novelep-container,
+  .table-container,
+  .recomm-novels-container,
+  .leaveacomm-container,
+  .allcomments-container {
+    /* margin: 0 auto;
+    padding: 0 10px; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 !important;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 5px 5px;
+    margin: 5px;
+    width: 100%;
+  }
+
+  .numof {
+    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
+    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+  }
+
+  .numof-eps,
+  .numof-views,
+  .numof-comm,
+  .numof-save {
+    font-size: 12px; /* ขนาดฟอนต์ลดลง */
+  }
+  .recommend-story {
+    margin: 0px;
+  }
 }
