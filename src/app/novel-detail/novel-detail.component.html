@@ -1,0 +1,22 @@
+<div class="container" *ngIf="novel">
+    <div class="novel-details">
+      <img [src]="novel.novel_propic" [alt]="novel.novel_name">
+      <h1>{{ novel.novel_name }}</h1>
+      <p><strong>Description:</strong> {{ novel.novel_desc }}</p>
+      <p><strong>Author:</strong> {{ novel.pen_name }}</p>
+      <p><strong>Tags:</strong> <span *ngFor="let tag of parseTags(novel.tag)">{{ tag }}</span></p>
+    </div>
+  
+    <h2>Chapters</h2>
+    <div class="chapter-list">
+      <div *ngFor="let chapter of chapters" class="chapter-card">
+        <h3>{{ chapter.chapter_name }}</h3>
+        <p><strong>Created At:</strong> {{ chapter.created_at | date:'medium' }}</p>
+        <p>{{ chapter.content }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+  </div>

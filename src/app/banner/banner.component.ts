@@ -32,14 +32,14 @@ export class BannerComponent implements OnInit, OnDestroy,AfterViewInit {
   ngOnInit(): void {
     // this.checkViewport();
     this.startAutoSlide();  // Start auto-sliding when component initializes
-    const token = localStorage.getItem('token');
-    if (token) {
-      console.log('Token found:', token);
-      // Proceed with banner page logic
-    } else {
-      console.log('No token found, redirecting to login');
-      // this.router.navigate(['login']); // Redirect to login if no token
-    }
+    // const token = localStorage.getItem('token');
+    // if (token) {
+    //   console.log('Token found:', token);
+      
+    // } else {
+    //   console.log('No token found, redirecting to login');
+      
+    // }
 
 
     this.generateButtonStyles(); //สีปุ่ม

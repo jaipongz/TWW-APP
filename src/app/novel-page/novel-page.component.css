@@ -1,0 +1,144 @@
+
+  .container {
+    margin: 0 auto;
+    background-color: #3a3333;
+    display: flex;
+    max-width: 1100px;
+    width: 100%;
+    flex-direction: column;
+  }
+  .header {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .header img {
+    width: 200px;
+    height: auto;
+  }
+  .header .buttons {
+    margin-top: 10px;
+  }
+  .header .buttons button {
+    background-color: #8b5e34;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .header .buttons button i {
+    margin-right: 5px;
+  }
+  .content {
+    text-align: center;
+    padding: 20px 0;
+    width: 100%;
+  }
+  .content h1 {
+    font-size: 24px;
+    color: #8b5e34;
+  }
+  .content p {
+    font-size: 18px;
+    color: #ffffff;
+  }
+  .content .main-title {
+    font-size: 36px;
+    color: #8b5e34;
+    text-decoration: underline;
+    text-decoration-color: #0000ff;
+  }
+  .content .buttons {
+    margin-top: 20px;
+  }
+  .content .buttons button {
+    background-color: #8b5e34;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  .comments-section {
+    background-color: #f5f0e6;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  .comments-section .title {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+  .comments-section .title button {
+    background-color: #8b5e34;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .comments-section .comments {
+    margin-top: 20px;
+  }
+  .comments-section .comments .comment {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  .comments-section .comments .comment img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .comments-section .comments .comment .text {
+    flex-grow: 1;
+  }
+  .comments-section .comments .comment .text p {
+    margin: 0;
+  }
+  .comments-section .comments .comment .actions {
+    text-align: right;
+  }
+  .comments-section .comments .comment .actions button {
+    background-color: transparent;
+    border: none;
+    color: #8b5e34;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1024px) {
+    .container {
+      width: 90%;
+      padding: 15px;
+    }
+  }
+  
+  /* Responsive adjustments for small tablets and large smartphones */
+  @media (max-width: 768px) {
+    .container {
+      width: 95%;
+      padding: 10px;
+    }
+    .header img {
+      width: 150px; /* ปรับขนาดรูปภาพใน header */
+    }
+    .content h1 {
+      font-size: 20px; /* ปรับขนาดข้อความหัวข้อ */
+    }
+  }
+  
+  /* Responsive adjustments for smartphones */
+  @media (max-width: 480px) {
+    .container {
+      width: 100%;
+      padding: 5px;
+    }
+    .content .main-title {
+      font-size: 24px; /* ปรับขนาดหัวเรื่องหลัก */
+    }
+  }
+  

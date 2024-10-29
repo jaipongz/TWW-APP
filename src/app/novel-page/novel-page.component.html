@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="header">
+        <img alt="Cover image of a novel with a man and a woman" height="300"
+            src="https://storage.googleapis.com/a1aa/image/xK9JQeijXwV9GiJywdCfGaCrF0qlKoYsjrl7UxVFnDZuUlrTA.jpg"
+            width="200" />
+        <div class="buttons">
+            <button>
+                <i class="fas fa-book"></i>
+                บันทึกลงชั้น
+            </button>
+            <button>
+                <i class="fas fa-heart"></i>
+                ชื่นชอบ
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1>นิยายเรื่อง</h1>
+        <div class="introduction">
+            <p>บทนำ</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur obcaecati aliquam, totam aperiam velit architecto ullam voluptates, alias corrupti in? Veniam, id ad possimus perferendis culpa delectus sequi modi vero ut sint ipsum commodi totam consequatur est eaque aut temporibus illum doloribus fugiat quae esse at odit voluptate. In?</p>
+        </div>
+
+        <h1 class="main-title">เนื้อเรื่อง</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique commodi 
+                consequatur porro maxime nemo magnam repudiandae accusantium id quod temporibus 
+                dolor eaque asperiores, nulla quos inventore, eligendi ad amet itaque 
+                nostrum excepturi cum dolorem. Perspiciatis impedit aliquam quia 
+                dolorem provident, consequuntur ut, vero deserunt numquam 
+                cupiditate, libero consectetur fugit voluptate? Soluta 
+                odit minus itaque esse consequatur nobis quidem dolores, 
+                quisquam repudiandae quod excepturi ratione delectus velit 
+                vitae placeat accusamus repellendus alias. Totam et magni, 
+                architecto eum aut fuga aspernatur vero dicta inventore deserunt, 
+                omnis nostrum pariatur laboriosam rem quis delectus! Pariatur accusamus
+                 aliquam veniam quaerat tempore dolore delectus. Ipsum quae officiis
+                 quisquam consequatur dolorum sequi tempora placeat quam quia deleniti 
+                 maiores iusto, quibusdam doloribus nesciunt beatae, tempore repellat sed rerum. 
+                 Necessitatibus qui laborum quae, optio aut assumenda distinctio fugiat! Cum incidunt 
+                 atque nulla iste ratione quas quaerat dolorum id, eligendi voluptas nostrum vitae soluta 
+                 nesciunt aliquam adipisci eaque veniam repellat? Doloremque fuga eligendi odio, maxime molestiae 
+                 atque quo dolore optio corrupti excepturi ut ipsum! Doloribus quas cumque quis nostrum porro dolore 
+                 ipsa voluptatum fugit quaerat in eaque maiores unde deserunt, sint neque voluptas architecto exercitationem, 
+                 officiis perferendis animi. Tenetur possimus maxime, modi qui tempore sapiente voluptas? Culpa dolorum odit 
+                 accusamus eligendi sapiente, voluptatum nisi, tempore libero suscipit quam perspiciatis quia ipsum exercitationem 
+                 velit vel ipsam adipisci sunt vero fugiat. Optio error qui quas facere sunt? Expedita doloribus at autem, quis quaerat dolor, 
+                 cumque unde esse culpa officia reiciendis maiores sunt neque accusamus libero sed. Ullam reprehenderit temporibus fugit suscipit 
+                 vel excepturi eligendi sint quod, quos quas a numquam eum, accusamus nobis reiciendis. Voluptatibus culpa et cum laboriosam temporibus 
+                 voluptas consequatur voluptatem reprehenderit deserunt doloremque explicabo harum fugit sapiente labore sint neque, libero eveniet nesciunt! Quam, 
+                 inventore doloremque voluptas ea quaerat temporibus. Optio architecto quae eveniet praesentium vero possimus consequatur maxime numquam provident repellat. 
+                 Numquam perferendis ratione recusandae laboriosam nesciunt! Corrupti recusandae consequatur eligendi atque magni, ad amet culpa cupiditate animi facere! 
+                 Magnam culpa est facilis commodi nulla accusantium molestiae laudantium expedita eum, quasi accusamus quis laboriosam dolore soluta suscipit earum? Mollitia 
+                 consectetur vel aspernatur architecto quaerat voluptatum neque earum non, cupiditate ducimus dolore incidunt sapiente a provident labore. Est ut dolorum ex? 
+                 Dolor qui commodi voluptatibus in rerum dolorem, velit totam hic odit fuga excepturi corporis. Praesentium modi, iste quia vero aperiam magnam delectus amet. 
+                 Fugit id repudiandae vitae quae voluptatibus magni numquam quaerat, quas accusamus illum laudantium fuga tenetur illo autem animi iste libero dicta 
+                 cupiditate quis exercitationem quos unde quibusdam delectus. Voluptas sint itaque aut eligendi temporibus iste officiis quo dolorem accusamus praesentium,
+                  tempora aspernatur soluta ullam dolore veritatis, totam nostrum! Maiores, ipsum modi unde enim at, sit, nostrum quidem rem possimus sint eveniet molestiae 
+                  ea. Ut cum nobis, facere libero officiis voluptatibus veniam nemo distinctio quo eos quisquam asperiores sequi itaque vel culpa? Deleniti soluta voluptate 
+                  ipsum praesentium architecto accusantium voluptas esse beatae, repellat pariatur a? Earum velit cum, nulla voluptates hic illo eaque, possimus distinctio 
+                  repellat atque iste, repellendus dolores ex iure nam sapiente fugiat modi.</p>
+        <div class="buttons">
+            <button>กลับหน้าเรื่อง</button>
+            <button>ตอนต่อไป &gt;</button>
+        </div>
+    </div>
+
+    <div class="comments-section">
+        <div class="title">
+            <p>แสดงความคิดเห็น</p>
+            <button>เข้าสู่ระบบ</button>
+        </div>
+        <div class="comments">
+            <div *ngFor="let comment of comments" class="comment">
+                <img alt="User avatar" height="40" [src]="comment.avatarUrl" width="40" />
+                <div class="text">
+                    <p>{{comment.title}}</p>
+                    <p>{{comment.text}}</p>
+                </div>
+                <div class="actions">
+                    <button (click)="reply(comment.id)">ตอบกลับ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

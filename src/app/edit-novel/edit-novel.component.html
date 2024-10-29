@@ -1,0 +1,56 @@
+<div class="form-container">
+    <h1>Edit Novel</h1>
+    <form [formGroup]="editNovelForm" (ngSubmit)="onSubmit()">
+      <!-- Novel Name -->
+      <label for="novelName">Novel Name</label>
+      <input type="text" id="novelName" formControlName="novelName" required />
+  
+      <!-- Pen Name -->
+      <label for="penName">Pen Name</label>
+      <input type="text" id="penName" formControlName="penName" required />
+  
+      <!-- Group (Dropdown) -->
+      <label for="group">Group</label>
+      <select id="group" formControlName="group" required>
+        <option value="fiction">แฟนฟิค (Fiction)</option>
+        <option value="normal">ออริจินอล (Original)</option>
+      </select>
+  
+      <!-- Type (Dropdown) -->
+      <label for="type">Type</label>
+      <select id="type" formControlName="type" required>
+        <option value="DES">บรรยาย (Description)</option>
+        <option value="CHT">แชท (Chat)</option>
+        <option value="CTN">การ์ตูน (Cartoon)</option>
+        <option value="TPC">กระทู้ (Forum)</option>
+      </select>
+  
+      <!-- Tags (Checkboxes) -->
+      <label>Tags</label>
+      <div class="tags-container">
+        <label *ngFor="let tag of tags">
+          <input type="checkbox" formControlName="tags" [value]="tag.value" /> {{ tag.label }}
+        </label>
+      </div>
+  
+      <!-- Rating -->
+      <label for="rate">Rating</label>
+      <input type="number" id="rate" formControlName="rate" min="1" max="5" required />
+  
+      <!-- Description -->
+      <label for="desc">Description</label>
+      <textarea id="desc" formControlName="desc" required></textarea>
+  
+      <!-- Novel Profile Picture -->
+      <label for="novel_propic">Novel Profile Picture</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+  
+      <!-- User ID -->
+      <label for="userId">User ID</label>
+      <input type="number" id="userId" formControlName="userId" required />
+  
+      <!-- Submit Button -->
+      <button type="submit">Update Novel</button>
+    </form>
+  </div>
+  

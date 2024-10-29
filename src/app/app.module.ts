@@ -18,17 +18,23 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 // import { SwiperModule } from 'swiper/angular'; 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LitsComponent } from './lits/lits.component';
+import { EditNovelComponent } from './edit-novel/edit-novel.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateNovelComponent } from './create-novel/create-novel.component';
+import { NovelDetailComponent } from './novel-detail/novel-detail.component';
+import { NovelService } from './services/novel.service';
+import { NovelPageComponent } from './novel-page/novel-page.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: LitsComponent },
+  {path: '' , component: NovelPageComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
   {path: 'forgot-password' , component: ForgotPasswordComponent },
   {path: 'forgot-password-sub' , component: ForgotPasswordSubComponent },
-  
-
+  {path: 'edit-novel', component: EditNovelComponent },
+  {path: 'create-novel', component: CreateNovelComponent },
 ]
 
 @NgModule({
@@ -42,11 +48,16 @@ const appRoutes: Routes = [
     ForgotPasswordComponent,
     ForgotPasswordSubComponent,
     LitsComponent,
+    EditNovelComponent,
+    CreateNovelComponent,
+    NovelDetailComponent,
+    NovelPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatDialogModule,
     MatButtonModule,
@@ -55,6 +66,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
   ],
   providers: [
+    NovelService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

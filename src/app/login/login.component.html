@@ -1,24 +1,24 @@
-<div class="login-content">
+<div class="gblogin-content">
   <!-- Image Section -->
-  <div class="image-container">
+  <div class="gbimage-container">
     <img src="image/g.png" alt="imagelogin">
   </div>
 
-  <div class="login-container">
+  <div class="gblogin-container">
     <h2>Thanwiwa</h2>
-    <form id="loginForm" (ngSubmit)="login()" class="login-form" #loginForm="ngForm" novalidate>
-      <div class="input-group">
+    <form id="loginForm" (ngSubmit)="login()" class="gblogin-form" #loginForm="ngForm" novalidate>
+      <div class="gbinput-group">
         <input type="text" id="username" placeholder="username" name="username" [(ngModel)]="username"
           #usernameInput="ngModel" required>
       </div>
-      <div class="input-group">
+      <div class="gbinput-group">
         <input [type]="showPassword ? 'text' : 'password'" id="password" placeholder="password" name="password"
           [(ngModel)]="password" minlength="8" #passwordInput="ngModel" required>
-        <button type="button" (click)="togglePasswordVisibility()" class="toggle-btn">
+        <button type="button" (click)="togglePasswordVisibility()" class="gbtoggle-btn">
           <i [ngClass]="showPassword ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
         </button>
       </div>
-      <div class="input-group1">
+      <div class="gbinput-group1">
         <a (click)="openRegisterDialog()" class="text-login">
           สมัครสมาชิก
         </a>
@@ -26,18 +26,18 @@
           ลืมรหัสผ่าน?
         </a>
       </div>
-      <div class="input-group2">
+      <div class="gbinput-group2">
         <button type="submit">Login</button>
       </div>
-      <div class="orlogin">
+      <div class="gborlogin">
         <div class="orlogin-by"></div>
         <label for="" style="font-size: 14px; color:#88583D;">หรือเข้าสู่ระบบโดย</label>
         <div class="orlogin-by"></div>
       </div>
-      <div class="input-group3">
+      <div class="gbinput-group3">
 
 
-        <div class="social">
+        <div class="gbsocial">
           <a><img src="image/facebook.png" alt="facebook-icon" style="width: 42px; height: 42px;"></a>
           <a href="http://localhost:3090/auth/google"><img src="image/google.png" alt="google-icon"
               style="width: 42px; height: 42px;"></a>

@@ -74,12 +74,18 @@ export class LoginComponent implements OnInit {
         }
       }).subscribe(
         (response: any) => {
-          console.log('Login successful:', response);
-          localStorage.setItem('token', response.token); // Store the token\
-          this.dialogRef.close();
-          this.router.navigate(['banner']).then(() => {
-            window.location.reload(); // รีเฟรชหน้าเว็บหลังจากการ navigate สำเร็จ
-          });
+          if (response.success) {  // สมมติว่า response.success แสดงสถานะสำเร็จ
+            console.log('Login successful:', response);
+            localStorage.setItem('token', response.token); // Store the token
+            this.dialogRef.close();
+          } else {
+            // Show error message if login failed
+            this.popupMessage = response.message || 'Login failed. Please check your username and password';
+            this.showPopup = true;
+          }
+          // this.router.navigate(['banner']).then(() => {
+          //   window.location.reload(); 
+          // });
 
         },
         error => {

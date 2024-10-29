@@ -1,0 +1,57 @@
+<div class="form-container">
+    <h1>Create Novel</h1>
+    <form [formGroup]="novelForm" (ngSubmit)="submitForm()">
+      <!-- Novel Name -->
+      <label for="novelName">Novel Name</label>
+      <input type="text" formControlName="novelName" required>
+  
+      <!-- Pen Name -->
+      <label for="penName">Pen Name</label>
+      <input type="text" formControlName="penName" required>
+  
+      <!-- Group (Dropdown) -->
+      <label for="group">Group</label>
+      <select formControlName="group" required>
+        <option value="fiction">แฟนฟิค (Fiction)</option>
+        <option value="normal">ออริจินอล (Original)</option>
+      </select>
+  
+      <!-- Type (Dropdown) -->
+      <label for="type">Type</label>
+      <select formControlName="type" required>
+        <option value="DES">บรรยาย (Description)</option>
+        <option value="CHT">แชท (Chat)</option>
+        <option value="CTN">การ์ตูน (Cartoon)</option>
+        <option value="TPC">กระทู้ (Forum)</option>
+      </select>
+  
+      <!-- Tags (Checkboxes) -->
+      <label>Tags</label>
+      <div class="tags-container">
+        <label *ngFor="let tag of tagsList">
+          <input type="checkbox" (change)="onTagChange($event, tag.value)">
+          {{ tag.label }}
+        </label>
+      </div>
+  
+      <!-- Rating -->
+      <label for="rate">Rating</label>
+      <input type="number" formControlName="rate" min="1" max="5" required>
+  
+      <!-- Description -->
+      <label for="desc">Description</label>
+      <textarea formControlName="desc" required></textarea>
+  
+      <!-- Novel Profile Picture -->
+      <label for="novel_propic">Novel Profile Picture</label>
+      <input type="file" (change)="onFileChange($event)" accept="image/*" required>
+  
+      <!-- User ID -->
+      <label for="userId">User ID</label>
+      <input type="number" formControlName="userId" required>
+  
+      <!-- Submit Button -->
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  

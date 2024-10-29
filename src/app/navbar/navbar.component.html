@@ -2,7 +2,7 @@
   <div class="navbar-container">
 
     <!-- Links for authenticated and unauthenticated users -->
-    <div *ngIf="!isLoggedIn; else loggedOut" >
+    <div *ngIf="isLoggedIn; else loggedOut" >
       <button class="register-btn">
         <!-- ไอคอนการเขียน (SVG) -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
@@ -101,7 +101,7 @@
             <a>การตั้งค่า</a>
           </div>
         </div>
-        <div class="loggedOut">
+        <div class="loggedOut" (click)="logout()">
           <a><i class="fa-solid fa-right-from-bracket"></i><b>ออกจากระบบ</b></a>
         </div>
       </div>

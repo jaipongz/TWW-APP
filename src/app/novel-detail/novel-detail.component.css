@@ -1,0 +1,29 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .novel-details {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .novel-details img {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 8px;
+  }
+  
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chapter-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }

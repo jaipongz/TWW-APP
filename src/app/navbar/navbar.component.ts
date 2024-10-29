@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     // Check if token exists in localStorage
     const token = localStorage.getItem('token');
+    this.isLoggedIn = !!token; // Set isLoggedIn to true if token exists
     if (!token) {
       console.log('No token found, redirecting to login');
       
@@ -32,9 +33,10 @@ export class NavbarComponent implements OnInit {
       
     } else {
       console.log('Token found:', token);
+      this.isLoggedIn = false;
     }
 
-    this.isLoggedIn = !!token; // Set isLoggedIn to true if token exists
+    
   }
 
   logout(): void {
