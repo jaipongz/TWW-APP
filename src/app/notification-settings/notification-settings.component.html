@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>การตั้งค่าการแจ้งเตือน</h1>
+  
+    <div *ngFor="let section of notificationSections" class="section">
+      <h2>{{ section.title }}</h2>
+      <div *ngFor="let setting of section.settings" class="item">
+        <span>{{ setting.label }}</span>
+        <div
+          class="toggle-switch"
+          [class.active]="setting.active"
+          (click)="toggleNotification(setting)"
+        ></div>
+      </div>
+      <hr *ngIf="section.settings.length > 1" />
+    </div>
+  
+    <div class="buttons">
+      <button class="cancel" (click)="cancel()">ยกเลิก</button>
+      <button (click)="save()">บันทึก</button>
+    </div>
+  </div>
+  

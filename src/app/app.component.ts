@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,4 +9,17 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 export class AppComponent {
   title = 'thanwiwa';
   faCoffee = faCoffee;
+
+  // @HostListener('document:contextmenu', ['$event'])
+  // onRightClick(event: MouseEvent) {
+  //   event.preventDefault();
+  // }
+
+  // ปิดการลากรูปภาพ
+  @HostListener('dragstart', ['$event'])
+  onDragStart(event: DragEvent) {
+    event.preventDefault();
+  }
+
+
 }

@@ -24,10 +24,13 @@ import { CreateNovelComponent } from './create-novel/create-novel.component';
 import { NovelDetailComponent } from './novel-detail/novel-detail.component';
 import { NovelService } from './services/novel.service';
 import { NovelPageComponent } from './novel-page/novel-page.component';
+import { CommentComponent } from './comment/comment.component';
+import { CoinRechargeComponent } from './coin-recharge/coin-recharge.component';
+import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: NovelPageComponent },
+  {path: '' , component: LitsComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -52,6 +55,9 @@ const appRoutes: Routes = [
     CreateNovelComponent,
     NovelDetailComponent,
     NovelPageComponent,
+    CommentComponent,
+    CoinRechargeComponent,
+    NotificationSettingsComponent,
   ],
   imports: [
     BrowserModule,
