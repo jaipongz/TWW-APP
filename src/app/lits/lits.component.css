@@ -1,12 +1,29 @@
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.lits-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
 .lits-head {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 24px;
+  margin: 0; /* ปรับระยะขอบให้เป็น 0 */
+  padding: 0; /* ปรับระยะการจัดวางภายใน */
+  width: 100%; /* เพิ่มให้มีความกว้าง 100% */
+  /* background-color: red; */
+  margin-bottom: 20px;
 }
 
 .lits-card {
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 450px;
   background-color: white;
   border-radius: 10px;
@@ -130,7 +147,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 3px;
+  width: 100%;
+  gap: 5px;
 }
 .fav-icon {
   justify-content: center;
@@ -634,6 +652,7 @@ p {
   font-size: 14px;
 }
 
+/* ขนาด 1280px ขึ้นไป */
 @media (min-width: 1280px) {
   .lits-container,
   .novelep-container,
@@ -649,12 +668,12 @@ p {
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 20px; /* ลดขนาดฟอนต์ */
+    font-size: 20px;
   }
 }
 
-/* ขนาด 1024px */
-@media (min-width: 1024px) {
+/* ขนาด 1024px - 1279px */
+@media (min-width: 1024px) and (max-width: 1279px) {
   .lits-container,
   .novelep-container,
   .table-container,
@@ -662,18 +681,18 @@ p {
   .leaveacomm-container,
   .allcomments-container {
     margin: 0 auto;
-    padding: 0 50px; /* เพิ่ม padding ให้เนื้อหาไม่ชิดขอบ */
+    padding: 0 50px;
   }
 
   .numof-eps,
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 14px; /* ลดขนาดฟอนต์ */
+    font-size: 14px;
   }
 }
 
-/* ขนาด 900px */
+/* ขนาด 900px - 1023px */
 @media (min-width: 900px) and (max-width: 1023px) {
   .lits-container,
   .novelep-container,
@@ -682,18 +701,18 @@ p {
   .leaveacomm-container,
   .allcomments-container {
     margin: 0 auto;
-    padding: 0 40px; /* ลด padding ให้น้อยลงสำหรับหน้าจอที่แคบลง */
+    padding: 0 40px;
   }
 
   .numof-eps,
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 14px; /* ลดขนาดฟอนต์ */
+    font-size: 14px;
   }
 }
 
-/* ขนาด 768px */
+/* ขนาด 768px - 899px */
 @media (min-width: 768px) and (max-width: 899px) {
   .lits-container,
   .novelep-container,
@@ -702,16 +721,16 @@ p {
   .leaveacomm-container,
   .allcomments-container {
     margin: 0 auto;
-    padding: 0 30px; /* ลด padding ตามขนาดหน้าจอ */
+    padding: 0 30px;
   }
+
   .btn {
     padding: 7px 15px;
   }
 }
 
-/* ขนาด 600px */
-/* ขนาด 600px */
-@media (min-width: 600px) {
+/* ขนาด 600px - 767px */
+@media (min-width: 600px) and (max-width: 767px) {
   .lits-container,
   .novelep-container,
   .table-container,
@@ -726,35 +745,32 @@ p {
   }
 
   .btn {
-    display: inline-block;
     padding: 7px 10px;
-    font-size: 10px; /* ขนาดฟอนต์สำหรับปุ่ม */
+    font-size: 10px;
     margin: 5px;
   }
 
   .numof {
-    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
-    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+    gap: 20px;
+    font-size: 12px;
   }
 
   .numof-eps,
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 12px; /* ขนาดฟอนต์ใหญ่ขึ้น */
+    font-size: 12px;
   }
 }
 
-/* ขนาด 480px */
-@media (min-width: 480px) {
+/* ขนาด 480px - 599px */
+@media (min-width: 480px) and (max-width: 599px) {
   .lits-container,
   .novelep-container,
   .table-container,
   .recomm-novels-container,
   .leaveacomm-container,
   .allcomments-container {
-    /* margin: 0 auto;
-    padding: 0 10px; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -763,38 +779,49 @@ p {
   }
 
   .btn {
-    display: inline-block;
     padding: 5px 5px;
     margin: 5px;
     width: 100%;
   }
 
   .numof {
-    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
-    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+    gap: 20px;
+    font-size: 12px;
   }
 
   .numof-eps,
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 12px; /* ขนาดฟอนต์ลดลง */
+    font-size: 12px;
   }
-  .recommend-story {
-    margin: 0px;
+
+  .lits-card {
+    width: 90%;
+    height: 450px;
+  }
+  .btn-save,
+  .btn-sentGift {
+    padding: 8px 4px;
+  }
+  .table-header .table-row,
+  .table-body .table-row {
+    display: flex;
+    justify-content: space-between; /* จัดระยะห่างระหว่างแต่ละคอลัมน์ */
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+    gap: 15px;
   }
 }
 
-/* ขนาด 320px */
-@media (min-width: 320px) {
+/* ขนาด 320px - 479px */
+@media (max-width: 320px) {
   .lits-container,
   .novelep-container,
   .table-container,
   .recomm-novels-container,
   .leaveacomm-container,
   .allcomments-container {
-    /* margin: 0 auto;
-    padding: 0 10px; */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -803,24 +830,95 @@ p {
   }
 
   .btn {
-    display: inline-block;
     padding: 5px 5px;
     margin: 5px;
     width: 100%;
   }
 
   .numof {
-    gap: 20px; /* ลดช่องว่างระหว่าง icon และ label */
-    font-size: 12px; /* ขนาดฟอนต์สำหรับ numof */
+    gap: 20px;
+    font-size: 12px;
   }
 
   .numof-eps,
   .numof-views,
   .numof-comm,
   .numof-save {
-    font-size: 12px; /* ขนาดฟอนต์ลดลง */
+    font-size: 12px;
   }
-  .recommend-story {
-    margin: 0px;
+
+  .lits-card {
+    width: 95%;
+    height: 450px;
+  }
+
+  .lits-image {
+    background-color: #f1f1f1;
+    height: 70%;
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .lits-ch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .btn-save,
+  .btn-sentGift {
+    padding: 8px 3px;
+  }
+  .table-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* ปรับให้เนื้อหาจัดเรียงตามแนวตั้ง */
+    padding: 0; /* ลบ padding */
+    width: 100%; /* ให้เต็มจอ */
+    margin: 0; /* ลบ margin */
+  }
+
+  .table-novels {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    /* width: calc(100% - 100px); */ /* ลบเพราะเราใช้ width 100% */
+    /* max-width: 1280px; */
+  }
+
+  .table-row {
+    display: flex;
+    justify-content: space-between; /* ปรับให้แต่ละแถวจัดเรียงให้มีระยะห่าง */
+    padding: 10px 0; /* เพิ่ม padding ระหว่างแถว */
+  }
+
+  .table-cell {
+    flex: 1; /* ปรับให้ cell ทุกอันมีขนาดเท่ากัน */
+    text-align: center; /* จัดกึ่งกลาง */
+  }
+
+  .lits-container {
+    display: flex;
+    justify-content: center; /* จัดกลาง */
+    padding: 20px; /* เพิ่ม padding ตามต้องการ */
+    width: 100%; /* กำหนดให้เต็มจอ */
+    box-sizing: border-box; /* รวม padding และ border ในขนาด */
+  }
+
+  .lits-main-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 100%;
+    max-width: 320px;
+    font-family: Arial, sans-serif;
   }
 }
