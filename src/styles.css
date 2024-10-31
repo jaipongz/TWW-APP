@@ -129,13 +129,14 @@ h2 {
   width: 100%;
   /* ปรับเป็น 100% เพื่อรองรับ responsive */
   height: 40px;
-
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
   background-color: rgba(255, 255, 255, 0.6);
   /* สีพื้นหลังโปร่งใส */
 }
-
+input:focus {
+  outline: none;
+}
 .gbinput-group input {
   text-align: start;
   width: 100%;
@@ -199,10 +200,10 @@ h2 {
   gap: 10px;
 }
 
-.gbtext-login {
+.text-login {
   font-size: 12px;
+  cursor: pointer;
 }
-
 .gborlogin {
   display: flex;
   justify-content: space-between;

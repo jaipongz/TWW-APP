@@ -30,7 +30,7 @@ import { NotificationSettingsComponent } from './notification-settings/notificat
 
 
 const appRoutes: Routes = [
-  {path: '' , component: LitsComponent },
+  {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },

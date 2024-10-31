@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
   // username: string = '';
   // password: string = '';
   showPassword: boolean = false;
+  popupMessage: string = '';
+  showPopup: boolean = false;
   // showLoginPopup: boolean = false;
   username: string = 'usernamelove';
 
@@ -26,23 +28,21 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn = !!token; // Set isLoggedIn to true if token exists
     if (!token) {
       console.log('No token found, redirecting to login');
-      
       // บันทึก URL ปัจจุบันลงใน localStorage
-      localStorage.setItem('redirectUrl', window.location.href);
-
-      
+      // localStorage.setItem('redirectUrl', window.location.href);
     } else {
       console.log('Token found:', token);
-      this.isLoggedIn = false;
+      this.isLoggedIn = true;
     }
-
-    
   }
 
   logout(): void {
+
     localStorage.removeItem('token'); // Remove token on logout
     this.isLoggedIn = false;
-    this.router.navigate(['banner']); // Redirect to login page
+    this.isMenuOpen = false;
+    window.location.reload();
+    
   }
   // showLoginPopup = false; // ตัวแปรนี้จะใช้สำหรับควบคุมการแสดง popup
 
@@ -90,5 +90,9 @@ export class NavbarComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  
+  closePopup() {
+    this.showPopup = false;
   }
 }
