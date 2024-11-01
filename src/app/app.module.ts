@@ -27,7 +27,7 @@ import { NovelPageComponent } from './novel-page/novel-page.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: NovelPageComponent },
+  {path: '' , component: CreateNovelComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },

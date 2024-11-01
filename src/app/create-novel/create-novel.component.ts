@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NovelService } from '../services/novel.service';
+import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-novel',
@@ -9,29 +10,58 @@ import { NovelService } from '../services/novel.service';
   styleUrl: './create-novel.component.css'
 })
 export class CreateNovelComponent {
+  faCamera = faCamera;
+  faCaretDown = faCaretDown;
+  faPlus = faPlus;
+  faBookOpen = faBookOpen;
+  faArrowUpWideShort = faArrowUpWideShort;
+
+  showSortDropdown = false;
+  showStatusStoryDropdown = false;
+  showStatusCompleteDropdown = false;
+
+  @ViewChild('sortDropdown', { static: false }) sortDropdown!: ElementRef;
+  @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;
+
+  toggleSortDropdown() {
+    this.showSortDropdown = !this.showSortDropdown;
+  }
+
+  @HostListener('document:click', ['$event'])
+  closeDropdown(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const dropdown = this.sortDropdown?.nativeElement;
+    if (this.showSortDropdown && dropdown && !dropdown.contains(target)) {
+      this.showSortDropdown = false;
+    }
+  }
+
+  toggleStatusStoryDropdown() {
+    this.showStatusStoryDropdown = !this.showStatusStoryDropdown;
+  }
+
+  toggleStatusCompleteDropdown() {
+    this.showStatusCompleteDropdown = !this.showStatusCompleteDropdown;
+  }
+
+  // ฟังก์ชันเปิดและปิด popup
+  openPopup() {
+    this.createPopup.nativeElement.classList.remove('hidden');
+  }
+
+  closePopup(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target === this.createPopup.nativeElement) {
+      this.createPopup.nativeElement.classList.add('hidden');
+    }
+  }
+
   novelForm: FormGroup;
   tagsList = [
     { value: 'fantasy', label: 'แฟนตาซี (Fantasy)' },
     { value: 'romance', label: 'โรแมนติก (Romance)' },
     { value: 'action', label: 'แอ็คชั่น (Action)' },
-    { value: "adventure", label: 'ผจญภัย (Adventure)' },
-    { value: "mystery", label: 'สืบสวนสอบสวน (Mystery)' },
-    { value: "horror", label: 'สยองขวัญ (Horror)' },
-    { value: "sci-fi", label: 'ไซไฟ (Sci-Fi)' },
-    { value: "supernatural", label: 'เหนือธรรมชาติ (Supernatural)' },
-    { value: "drama", label: 'ดราม่า (Drama)' },
-    { value: "comedy", label: 'คอมเมดี้ (Comedy)' },
-    { value: "historical", label: 'ประวัติศาสตร์ (Historical)' },
-    { value: "time_travel", label: 'ย้อนเวลา (Time Travel)' },
-    { value: "slice_of_life", label: 'ชีวิตประจำวัน (Slice of Life)' },
-    { value: "yaoi", label: 'วาย (Yaoi/BL)' },
-    { value: "yuri", label: 'ยูริ (Yuri/GL)' },
-    { value: "system_game", label: 'ระบบ/เกม (System/Game)' },
-    { value: "war", label: 'สงคราม (War)' },
-    { value: "tragedy", label: 'โศกนาฏกรรม (Tragedy)' },
-    { value: "isekai", label: 'เอเซไก (Isekai)' },
-    { value: "political", label: 'การเมือง (Political)' },
-    { value: "romantic_comedy", label: 'โรแมนติกคอมเมดี้ (Romantic Comedy)' },
+    // (รายการแท็กอื่น ๆ ...)
   ];
 
   constructor(private fb: FormBuilder, private novelService: NovelService) {
