@@ -9,6 +9,7 @@
   /* font-family: ; */
   font-family: cursive;
 }
+
 app-navbar {
   position: fixed;
   top: 0;
@@ -19,10 +20,20 @@ app-navbar {
 }
 
 body {
-  background:rgb(255, 225, 225);
+  background: rgb(255, 225, 225);
   position: relative;
   padding-bottom: 10px;
   z-index: 1;
+
+  -webkit-user-select: none;
+  /* สำหรับ Safari */
+  -moz-user-select: none;
+  /* สำหรับ Firefox */
+  -ms-user-select: none;
+  /* สำหรับ IE10+/Edge */
+  user-select: none;
+  /* สำหรับเบราว์เซอร์ที่รองรับ */
+
 }
 
 body::before {
@@ -41,16 +52,21 @@ body::before {
   z-index: -1;
 }
 
+.containerfornav {
+  margin-top: 95px;
+}
+
 /* cssของlogin&register */
 .gbcontainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  
   /* background-color: #d60000; */
   position: relative;
   flex-direction: row;
 }
+
 .gbcontainer-sub {
   display: flex;
   flex-direction: row;
@@ -90,6 +106,7 @@ body::before {
   margin-bottom: 10px;
   margin-right: 10px;
 }
+
 .gblogin-form {
   display: flex;
   flex-direction: column;
@@ -109,14 +126,17 @@ h2 {
   display: flex;
   margin-bottom: 5px;
   align-items: center;
-  width: 100%; /* ปรับเป็น 100% เพื่อรองรับ responsive */
+  width: 100%;
+  /* ปรับเป็น 100% เพื่อรองรับ responsive */
   height: 40px;
-
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
-  background-color: rgba(255, 255, 255, 0.6); /* สีพื้นหลังโปร่งใส */
+  background-color: rgba(255, 255, 255, 0.6);
+  /* สีพื้นหลังโปร่งใส */
 }
-
+input:focus {
+  outline: none;
+}
 .gbinput-group input {
   text-align: start;
   width: 100%;
@@ -126,6 +146,7 @@ h2 {
   padding: 20px;
   border-radius: 50px 50px 50px 50px;
 }
+
 .gbinput-group1 {
   display: flex;
   flex-direction: row;
@@ -134,12 +155,14 @@ h2 {
   width: 100%;
   grid: 50px;
 }
+
 .gbinput-group1 a {
   display: inline;
   color: #88583d;
   text-decoration: none;
   font-weight: bold;
 }
+
 .gbinput-group2 {
   display: flex;
   gap: 30px;
@@ -158,6 +181,7 @@ h2 {
   cursor: pointer;
   text-align: center;
 }
+
 .gbinput-group3 {
   display: flex;
   flex-direction: column;
@@ -165,6 +189,7 @@ h2 {
   align-items: center;
   gap: 10px;
 }
+
 .gbinput-group3 label {
   color: #88583d;
 }
@@ -175,10 +200,10 @@ h2 {
   gap: 10px;
 }
 
-.gbtext-login {
+.text-login {
   font-size: 12px;
+  cursor: pointer;
 }
-
 .gborlogin {
   display: flex;
   justify-content: space-between;
@@ -199,15 +224,18 @@ h2 {
   .gbcontainer {
     flex-direction: column;
     height: auto;
-    gap: 20px; /* ลดระยะห่างสำหรับหน้าจอเล็ก */
+    gap: 20px;
+    /* ลดระยะห่างสำหรับหน้าจอเล็ก */
   }
 
   .gbimage-container,
   .gblogin-container {
-    position: relative; /* เอา absolute ออกเพื่อให้ซ้อนกัน */
+    position: relative;
+    /* เอา absolute ออกเพื่อให้ซ้อนกัน */
     left: 0;
     right: 0;
-    max-width: 100%; /* ให้กล่องขยายเต็มหน้าจอเล็ก */
+    max-width: 100%;
+    /* ให้กล่องขยายเต็มหน้าจอเล็ก */
   }
 }
 
@@ -247,6 +275,7 @@ h2 {
 .popup-content button:hover {
   background-color: #0056b3;
 }
+
 .gbinput-group {
   position: relative;
   width: 100%;
@@ -296,7 +325,8 @@ h2 {
 /* จัดปุ่มปิด X ให้ไปอยู่มุมขวาสุด */
 .popup-header {
   display: flex;
-  justify-content: flex-end; /* ทำให้ปุ่มไปอยู่ฝั่งขวาสุด */
+  justify-content: flex-end;
+  /* ทำให้ปุ่มไปอยู่ฝั่งขวาสุด */
   padding-bottom: 10px;
 }
 
@@ -340,9 +370,12 @@ h2 {
   height: auto;
   border-radius: 8px;
 }
+
 .bold-text {
-  font-weight: 700; /* 700 แสดงถึงน้ำหนักหนา */
+  font-weight: 700;
+  /* 700 แสดงถึงน้ำหนักหนา */
 }
+
 /****************************************************************************************************************************************************************************/
 
 /* html,

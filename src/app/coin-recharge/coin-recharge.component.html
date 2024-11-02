@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="header">เติมเหรียญ</div>
+    <div class="balance">
+      <div class="icon">
+        <i class="fas fa-coins"></i>
+      </div>
+      <div class="amount">0</div>
+      <div class="history">ประวัติ</div>
+    </div>
+    <div class="section-title">ช่องทางการเติมเหรียญ</div>
+    <div class="qr-code">
+      <img
+        src="https://storage.googleapis.com/a1aa/image/FVRtwLu733KaGZuxxFeGj5NvvfNQ7oGrnBcsZJ9gt4thSqrTA.jpg"
+        alt="QR Code"
+        width="150"
+        height="150"
+      />
+      <p>QR CODE</p>
+    </div>
+    <div class="coin-list">
+      <div *ngFor="let coin of coins" class="coin-item">
+        <div class="icon">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="amount">{{ coin.amount }}</div>
+        <div class="price">{{ coin.price | number }}</div>
+      </div>
+    </div>
+  </div>
+  

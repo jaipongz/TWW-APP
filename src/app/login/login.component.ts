@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+
     // // หลังจาก login ผ่าน Google สำเร็จ
     // const redirectUrl = localStorage.getItem('redirectUrl');
 
@@ -69,27 +70,29 @@ export class LoginComponent implements OnInit {
 
       this.http.post('http://localhost:3090/login', payload, {
         headers: {
-          'Accept': 'application/json',
+          'accept': 'application/json',
           'Content-Type': 'application/json'
         }
       }).subscribe(
         (response: any) => {
-          if (response.success) {  // สมมติว่า response.success แสดงสถานะสำเร็จ
+          if (!response.data.error) {
             console.log('Login successful:', response);
-            localStorage.setItem('token', response.token); // Store the token
+            localStorage.setItem('token', response.data.token); // Store the token
             this.dialogRef.close();
+            window.location.reload();
+            // const redirectUrl = localStorage.getItem('redirectUrl') || '/defaultRoute';
+            // this.router.navigate([redirectUrl]);
+            // localStorage.removeItem('redirectUrl');
           } else {
             // Show error message if login failed
-            this.popupMessage = response.message || 'Login failed. Please check your username and password';
+            this.popupMessage = response.data.error || 'Login failed. Please check your username and password';
             this.showPopup = true;
           }
-          // this.router.navigate(['banner']).then(() => {
-          //   window.location.reload(); 
-          // });
-
         },
-        error => {
-          console.error('Login error:', error);
+        (error) => {
+          // Handle any errors from the HTTP request itself
+          this.popupMessage = 'An error occurred. Please try again later.';
+          this.showPopup = true;
         }
       );
     }
