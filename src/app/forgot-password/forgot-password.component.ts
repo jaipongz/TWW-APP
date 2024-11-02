@@ -1,9 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
+import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
 
 @Component({
@@ -12,9 +10,9 @@ import { PopupService } from '../services/popup.service';
   styleUrl: './forgot-password.component.css'
 })
 export class ForgotPasswordComponent {
- 
 
-  constructor (private router : Router, private http :HttpClient, public dialog: MatDialog, public dialogRef: MatDialogRef<ForgotPasswordComponent>, private popupService:PopupService ) {
+
+  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService) {
     this.startTimer();
   }
 
@@ -24,50 +22,41 @@ export class ForgotPasswordComponent {
   passwordConfirm: string = '';
   isOtpVerified: boolean = false; // ตัวแปรเพื่อแสดงฟอร์มกรอกรหัสผ่าน
   isEmailSubmitted: boolean = false;
-
-  
-
   otp: string[] = ['', '', '', '', '', '']; // ช่องสำหรับเก็บ OTP
+  showResendButton: boolean = true;
+  counter: number = 60;
+  interval: any;
 
 
 
-
-
-  
-
- showResendButton: boolean = true;
- counter: number = 60;
- interval: any;
-
-
-  
   submitemail() {
     if (!this.email) {
       this.popupService.showPopup('Emailไม่ถูกต้องหรือEmailนี้ยังไม่ได้สมัคร');
-    }else {
-    this.isEmailSubmitted = true;
+    } else {
+      this.isEmailSubmitted = true;
 
-    const payload = {
-      email: this.email
-    };
-    this.http.post('http://localhost:3090/forgotPassword',payload, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
-      response => {
-        this.isEmailSubmitted = true;
-        console.log('Registration successful:', response);
-        // Navigate to login page or perform other actions
-        this.emailForOtp = this.email;
-      },
-      error => {
-        console.error('Registration error:', error);
-        // Handle error, e.g., show a notification to the user
-      }
-    )
-  }}
+      const payload = {
+        email: this.email
+      };
+      this.http.post('http://localhost:3090/forgotPassword', payload, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).subscribe(
+        response => {
+          this.isEmailSubmitted = true;
+          console.log('Registration successful:', response);
+          // Navigate to login page or perform other actions
+          this.emailForOtp = this.email;
+        },
+        error => {
+          console.error('Registration error:', error);
+          // Handle error, e.g., show a notification to the user
+        }
+      )
+    }
+  }
 
 
   startTimer() {
@@ -86,7 +75,7 @@ export class ForgotPasswordComponent {
     const payload = {
       email: this.emailForOtp
     };
-    this.http.post('http://localhost:3090/forgotPassword',payload, {
+    this.http.post('http://localhost:3090/forgotPassword', payload, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -112,7 +101,7 @@ export class ForgotPasswordComponent {
       email: this.emailForOtp, // ดึงค่า email ที่เก็บไว้จาก component
       otp: userOtp
     };
-  
+
     this.http.post('http://localhost:3090/verifyPassword', payload, {
       headers: {
         'Accept': 'application/json',
@@ -120,14 +109,14 @@ export class ForgotPasswordComponent {
       }
     }).subscribe(
       (response: any) => {
-        if (response.status === 'success') { 
+        if (response.status === 'success') {
           console.log('OTP Verified Successfully');
           this.isOtpVerified = true;
-         
+
 
         } else {
-           this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
-           console.error('Invalid OTP:', response.message);
+          this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
+          console.error('Invalid OTP:', response.message);
 
         }
       },
@@ -142,15 +131,15 @@ export class ForgotPasswordComponent {
   resetPassword() {
     if (this.password !== this.passwordConfirm) {
       this.popupService.showPopup('รหัสผ่านไม่ตรงกัน');
-      
+
       return;
     }
-  
+
     const payload = {
       email: this.emailForOtp,
       newPassword: this.password
     };
-  
+
     this.http.post('http://localhost:3090/resetPassword', payload, {
       headers: {
         'Accept': 'application/json',
@@ -158,20 +147,19 @@ export class ForgotPasswordComponent {
       }
     }).subscribe(
       response => {
-        this.dialogRef.close();
+        this.dialogService.closeDialog('forgotPassword');
         console.log('Password reset successful');
         // อาจเปลี่ยนไปหน้าอื่น หรือแสดงข้อความสำเร็จ
-        this.dialog.open(LoginComponent);
+        this.dialogService.openLoginDialog();
       },
       error => {
         this.popupService.showPopup('ไม่สามารถรีเซ็ตรหัสผ่านได้');
-
       }
     );
   }
 
-   // ฟังก์ชันสำหรับย้ายไปยังช่องถัดไปเมื่อกรอก OTP เสร็จ
-   moveToNext(event: any, nextInput: any) {
+  // ฟังก์ชันสำหรับย้ายไปยังช่องถัดไปเมื่อกรอก OTP เสร็จ
+  moveToNext(event: any, nextInput: any) {
     if (event.target.value.length === 1 && nextInput) {
       nextInput.focus();
     }
@@ -179,15 +167,15 @@ export class ForgotPasswordComponent {
 
 
 
- // ฟังก์ชันตรวจสอบรูปแบบอีเมลอย่างง่าย
- validateEmail(email: string): boolean {
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  return emailPattern.test(email);
-}
+  // ฟังก์ชันตรวจสอบรูปแบบอีเมลอย่างง่าย
+  validateEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(email);
+  }
 
 
   closeotp() {
-    this.dialogRef.close(); 
+    this.dialogService.closeDialog('forgotPassword');
   }
 
   closePopup() {

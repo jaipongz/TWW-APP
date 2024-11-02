@@ -3,10 +3,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
 import { PopupService } from '../services/popup.service';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
+import { DialogService } from '../services/dialog.service';
+
 
 @Component({
   selector: 'app-register',
@@ -27,14 +26,11 @@ export class RegisterComponent {
   isInputReadonly: boolean = false;
   otpVerified: boolean = false;
 
-  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<RegisterComponent>, public dialog: MatDialog, private popupService: PopupService) {
+  constructor(private router: Router, private http: HttpClient,private dialogService: DialogService, private popupService: PopupService) {
 
   }
 
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -137,14 +133,7 @@ export class RegisterComponent {
           this.isInputReadonly = true;
           this.countdown = 0;
           this.otpVerified = true;
-          this.dialogRef.close();
-          const dialogRef = this.dialog.open(LoginComponent, {
-            disableClose: true
-            //
-          });
-          dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
-          });
+          this.dialogService.openLoginDialog()
         } else {
           this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
         }
@@ -182,16 +171,9 @@ export class RegisterComponent {
   }
 
   return() {
-    this.dialogRef.close();
-    const dialogRef = this.dialog.open(LoginComponent, {
-      disableClose: true
-      //
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.dialogService.openLoginDialog();
   }
   closeotp() {
-    this.dialogRef.close();
+    this.dialogService.closeDialog('register');
   }
 }

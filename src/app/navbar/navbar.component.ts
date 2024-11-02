@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { DialogService } from '../services/dialog.service';
+import { PopupService } from '../services/popup.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,16 +10,10 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
-  // Properties for login popup
-  // username: string = '';
-  // password: string = '';
   showPassword: boolean = false;
-  popupMessage: string = '';
-  showPopup: boolean = false;
-  // showLoginPopup: boolean = false;
   username: string = 'usernamelove';
 
-  constructor(private router: Router, public dialog: MatDialog) {}
+  constructor(private router: Router, public dialogService: DialogService, private popupService: PopupService) {}
 
   ngOnInit(): void {
     // Check if token exists in localStorage
@@ -52,40 +45,13 @@ export class NavbarComponent implements OnInit {
   }
 
   openLoginDialog(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      disableClose: true
-    //
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.dialogService.openLoginDialog()
   }
 
   openRegisterDialog(): void {
-    const dialogRef = this.dialog.open(RegisterComponent, {
-      disableClose: true
-      //
-    });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
+    this.dialogService.openRegisterDialog()
   }
 
-  // ฟังก์ชันสำหรับแสดง popup
-  // openLoginPopup() {
-  //   this.showLoginPopup = true;
-  // }
-
-  // ฟังก์ชันสำหรับปิด popup
-  // closeLoginPopup() {
-  //   this.showLoginPopup = false;
-  // }
-
-  // login() {
-  //   // เพิ่มโค้ดการล็อกอินของคุณที่นี่
-  //   this.closeLoginPopup(); // ปิด popup เมื่อเข้าสู่ระบบสำเร็จ
-  // }
   isMenuOpen = false;
 
   toggleMenu() {
@@ -93,6 +59,6 @@ export class NavbarComponent implements OnInit {
   }
   
   closePopup() {
-    this.showPopup = false;
+    this.popupService.closePopup();
   }
 }

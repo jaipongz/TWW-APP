@@ -110,10 +110,5 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showPopup" class="popup">
-    <div class="popup-content">
-      <h3>{{ popupMessage }}</h3>
-      <button (click)="closePopup()">OK</button>
-    </div>
-  </div>
+  <app-popup></app-popup>
 </nav>
