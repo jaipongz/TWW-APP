@@ -2,7 +2,7 @@ import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NovelService } from '../services/novel.service';
-import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort, faPenToSquare, faComment, faPen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-create-novel',
@@ -15,10 +15,23 @@ export class CreateNovelComponent {
   faPlus = faPlus;
   faBookOpen = faBookOpen;
   faArrowUpWideShort = faArrowUpWideShort;
+  faPenToSquare = faPenToSquare;
+  faComment = faComment;
+  faPen = faPen;
+  // faTwitch = faTwitch;
+  
 
   showSortDropdown = false;
   showStatusStoryDropdown = false;
   showStatusCompleteDropdown = false;
+
+  isOriginal = true;  // ค่าเริ่มต้นให้เป็นนิยายออรินอล
+  isFanfiction = false;
+
+  selectCategory(category: string) {
+    this.isOriginal = category === 'original';
+    this.isFanfiction = category === 'fanfiction';
+  }
 
   @ViewChild('sortDropdown', { static: false }) sortDropdown!: ElementRef;
   @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;

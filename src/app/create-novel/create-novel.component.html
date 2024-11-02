@@ -259,18 +259,19 @@
   }
 
   .popup-title {
-    font-size: 1.5em;
+    font-size: 1rem;
     margin-bottom: 20px;
+    color: #7c4d3d;
   }
 
   .popup-row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 10px 0;
   }
 
   .popup-button {
-    width: 160px;
+    width: 170px;
     padding: 5px 20px;
     background-color: #fff;
     color: #7c4d3d;
@@ -280,19 +281,24 @@
     font-size: 14px;
     border-radius: 10px;
     border: solid 1px #7c4d3d;
+    text-align: start;
+  }
+
+  .popup-button:hover {
+    background: #dcc1a0;
   }
 
   .label-popup {
     display: flex;
     color: #7c4d3d;
     text-align: start;
-    padding-left: 10px;
     margin-top: 20px;
+    font-size: 14px;
   }
 
   .popup-create-button {
-    width: 50%;
-    padding: 10px 20px;
+    width: 35%;
+    padding: 8px 20px;
     background-color: #7c4d3d;
     color: white;
     border: none;
@@ -302,6 +308,30 @@
     border-radius: 20px;
     border: solid 1px #f1f1f1;
     margin-top: 20px;
+    font-size: 14px;
+  }
+
+  .popup-create-button:hover {
+    /*background-color: #683c2e;*/
+    background-color: #fff;
+    color: #7c4d3d;
+    cursor: pointer;
+    border: solid 1px #7c4d3d;
+  }
+
+  .popup-advice {
+    margin: 0 auto; /* กำหนดให้อยู่ตรงกลาง */
+    padding: 5px 20px;
+    background-color: #fff;
+    color: #7c4d3d;
+    border: solid 1px #7c4d3d;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: start; /* จัดข้อความให้อยู่ตรงกลาง */
+  }
+
+  .popup-button.active {
+    background-color: #dcc1a0;
   }
 
   /* Update Novel Card */
@@ -662,22 +692,68 @@
       <h2 class="popup-title">สร้างงานเขียน</h2>
 
       <div class="popup-row">
-        <button class="popup-button" style="background: #bf6a02">
+        <button
+          class="popup-button"
+          [ngClass]="{ active: isOriginal }"
+          (click)="selectCategory('original')"
+          style="text-align: center"
+        >
           นิยายออรินอล
         </button>
-        <button class="popup-button">แฟนฟิคชั่น</button>
+        <button
+          class="popup-button"
+          [ngClass]="{ active: isFanfiction }"
+          (click)="selectCategory('fanfiction')"
+          style="text-align: center"
+        >
+          แฟนฟิคชั่น
+        </button>
+      </div>
+
+      <label for="" class="label-popup">คำแนะนำ</label>
+
+      <!-- คำแนะนำ -->
+      <div
+        *ngIf="isFanfiction"
+        class="popup-advice"
+        style="
+          border: 1px solid #7c4d3d;
+          padding: 10px 20px;
+          margin: 10px 0;
+          text-align: start;
+        "
+      >
+        <p>
+          แฟนฟิคชั่น : <br />
+          งานเขียนหรืองานวาดที่สร้างสรรค์ต่อยอดจากความชอบในเรื่องใดเรื่องหรึ่ง
+          เช่น บุคคลสาธารณะ ภาพยนตร์ ซีรี่ย์ แอนิเมชัน เกม นิยาย มังงะ ฯลฯ
+          ทั้งนี้
+          เมื่อเลือกเป็นแฟนฟิคชั่นแล้วจะไม่สามารถเปลี่ยนเป็นนิยายออริจินอลได้
+        </p>
       </div>
 
       <label for="" class="label-popup">สไตล์งานเขียน</label>
 
-      <div class="popup-row">
-        <button class="popup-button">บรรยาย</button>
-        <button class="popup-button">แชท</button>
+      <!-- สไตล์งานเขียน -->
+      <div *ngIf="isOriginal">
+        <div class="popup-row">
+          <button class="popup-button">บรรยาย</button>
+          <button class="popup-button">แชท</button>
+        </div>
+        <div class="popup-row">
+          <button class="popup-button">การ์ตูน/ภาพประกอบ</button>
+          <button class="popup-button">กระทู้</button>
+        </div>
       </div>
 
-      <div class="popup-row">
-        <button class="popup-button">การ์ตูน/ภาพประกอบ</button>
-        <button class="popup-button">กระทู้</button>
+      <div *ngIf="isFanfiction">
+        <div class="popup-row">
+          <button class="popup-button">ฟิคบรรยาย</button>
+          <button class="popup-button">ฟิคแชท</button>
+        </div>
+        <div class="popup-row">
+          <button class="popup-button">โดจินชิ/แฟนอาร์ต</button>
+        </div>
       </div>
 
       <button class="popup-create-button">สร้าง</button>
