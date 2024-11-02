@@ -27,6 +27,9 @@ import { NovelPageComponent } from './novel-page/novel-page.component';
 import { CommentComponent } from './comment/comment.component';
 import { CoinRechargeComponent } from './coin-recharge/coin-recharge.component';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
+import { PopupComponent } from './popup/popup.component';
+import { PopupService } from './services/popup.service';
+
 
 
 const appRoutes: Routes = [
@@ -58,6 +61,7 @@ const appRoutes: Routes = [
     CommentComponent,
     CoinRechargeComponent,
     NotificationSettingsComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +77,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     NovelService,
+    PopupService,
     provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]

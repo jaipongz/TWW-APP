@@ -12,8 +12,18 @@
       </div>
 
       <div class="gbinput-group">
-        <input type="email" id="mail" placeholder="Your email" name="email" [(ngModel)]="email" required email
-          #emailInput="ngModel">
+        <input type="email" id="mail" placeholder="Your email" name="email" [(ngModel)]="email"  [readonly]="isInputReadonly" 
+        required email #emailInput="ngModel">
+        <a class="verifyButton" type="button" (click)="verifyEmail()" *ngIf="!otpVerified && (!showOtpInput || countdown === 0)">
+          {{ countdown > 0 ? countdown : 'ยืนยัน' }}
+        </a>
+        <a class="verifyButton" type="button" *ngIf="otpVerified">
+          <i class="fa fa-check" style="color: green;"></i>
+        </a>
+      </div>      
+      
+      <div class="gbinput-group" *ngIf="showOtpInput">
+        <input type="number" required="required" oninput="this.value = this.value.slice(0, this.maxLength)" maxlength="6" id="otp" [readonly]="isInputReadonly" placeholder="กรอก OTP" name="otp" [(ngModel)]="otpcheck" (keyup)="checkOtpLength()">
       </div>
 
       <div class="gbinput-group">
@@ -24,6 +34,7 @@
         </button>
       </div>
 
+
       <div class="gbinput-group">
         <input [type]="showConfirmPassword ? 'text' : 'password'" id="password-confirm" placeholder="Confirm Password"
           name="passwordConfirm" [(ngModel)]="passwordConfirm" required #passwordConfirmInput="ngModel">
@@ -32,20 +43,11 @@
         </button>
       </div>
 
-
       <div class="gbinput-group2">
         <button type="button" (click)="return()" class="gbinput-group2-sub">Login</button>
         <button type="submit" (click)="register()">Register</button>
       </div>
     </form>
-
-    <!-- Popup -->
-    <div *ngIf="showPopup" class="popup">
-      <div class="popup-content">
-        <h3>{{ popupMessage }}</h3>
-        <button (click)="closePopup()">OK</button>
-      </div>
-    </div>
+    <app-popup></app-popup>
     <button class="exitBtn" (click)="closeotp()">×</button>
-  </div>
 </div>

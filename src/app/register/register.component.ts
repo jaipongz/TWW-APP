@@ -1,34 +1,41 @@
 // register.component.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient
-import { Observable } from 'rxjs'; // Optional for handling responses
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
-
+import { PopupService } from '../services/popup.service';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'] // Fix the property name to `styleUrls`
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  username: string = '';
-  password: string = '';
-  passwordConfirm: string = '';
-  email: string = '';
-  showPopup: boolean = false;
-  popupMessage: string = '';
-  showPassword: boolean = false;
-  showConfirmPassword: boolean = false;
+  username = '';
+  email = '';
+  otpcheck = '';
+  password = '';
+  passwordConfirm = '';
+  showOtpInput = false;
+  countdown = 0;
+  countdownInterval: any;
+  showPassword = false;
+  showConfirmPassword = false;
+  isInputReadonly: boolean = false;
+  otpVerified: boolean = false;
 
- 
-  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<RegisterComponent>) { }
+  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<RegisterComponent>, public dialog: MatDialog, private popupService: PopupService) {
+
+  }
 
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
@@ -36,17 +43,16 @@ export class RegisterComponent {
   toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
- 
+
   register() {
     if (!this.username || !this.password || !this.passwordConfirm || !this.email) {
-      this.popupMessage = 'กรุณาใส่ข้อมูลให้ครบทุกช่อง';
-      this.showPopup = true;
+      this.popupService.showPopup('กรุณาใส่ข้อมูลให้ครบทุกช่อง');
     } else if (this.password.length < 8) {
-      this.popupMessage = 'Password must be at least 8 characters';
-      this.showPopup = true;
+      this.popupService.showPopup('กรุณาใส่ข้อมูลไม่ถึง8ตัว');
+    } else if (!this.otpVerified) {
+      this.popupService.showPopup('กรุณายืนยันEMAIL');
     } else if (this.password !== this.passwordConfirm) {
-      this.popupMessage = 'Passwords do not match';
-      this.showPopup = true;
+      this.popupService.showPopup('รหัสผ่านไม่ตรงกัน');
     } else {
       // Register logic here
       console.log('Form Submitted');
@@ -56,35 +62,136 @@ export class RegisterComponent {
         email: this.email,
         password: this.password,
       };
-  
-  
-  
       this.http.post('http://localhost:3090/register', payload, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
       }).subscribe(
-        response => {
-          console.log('Registration successful:', response);
-          // Navigate to login page or perform other actions
-          this.router.navigate(['banner']);
+        (response: any) => {
+          if (response.status === 'success') {
+            this.popupService.showPopup('Registration successful');
+          } else {
+            this.popupService.showPopup(response.data || 'Registration failed');
+          }
         },
         error => {
-          console.error('Registration error:', error);
-          // Handle error, e.g., show a notification to the user
+          console.error('Error:', error);
+          this.popupService.showPopup('An error occurred during registration');
         }
       );
     }
-    }
-    
-  closePopup() {
-    this.showPopup = false;
   }
+
+  verifyEmail() {
+    if (!this.email || !this.validateEmail(this.email)) {
+      this.popupService.showPopup('Email ไม่ถูกต้อง');
+      return;
+    }
+
+    const payload = { email: this.email };
+    this.http.post('http://localhost:3090/verifiedEmail', payload).subscribe(
+      (response: any) => {
+        if (response.status === 'success') {
+          this.showOtpInput = true; // แสดง input สำหรับ OTP
+          this.popupService.showPopup(response.message)
+          this.startCountdown(); // เริ่มนับถอยหลัง
+          this.email = response.data;
+
+        } else {
+          this.popupService.showPopup(response.message || 'Verification failed');
+        }
+      },
+      error => {
+        if (error.status === 409) {
+          this.popupService.showPopup('Email นี้ได้รับการยืนยันแล้วหรือมีปัญหา กรุณาตรวจสอบอีกครั้ง');
+        } else {
+          console.error('Error:', error);
+          this.popupService.showPopup('An error occurred. Please try again later.');
+        }
+      }
+    );
+  }
+
+  checkOtpLength() {
+    if (this.otpcheck && this.otpcheck.toString().length === 6) {
+      this.verifyOtp();
+    }
+  }
+  verifyOtp() {
+
+    const payload = {
+      email: this.email,
+      otp: this.otpcheck.toString(),
+    };
+
+    this.http.post('http://localhost:3090/verifyPassword', payload, {
+      headers: {
+        'accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).subscribe(
+      (response: any) => {
+        if (response.status === 'success') {
+          this.popupService.showPopup('OTP Verified Successfully');
+          this.isInputReadonly = true;
+          this.countdown = 0;
+          this.otpVerified = true;
+          this.dialogRef.close();
+          const dialogRef = this.dialog.open(LoginComponent, {
+            disableClose: true
+            //
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
+        } else {
+          this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
+        }
+      },
+      error => {
+        console.error('Verification error:', error);
+        // แสดงข้อความข้อผิดพลาดหากเกิดปัญหาในการติดต่อ API
+        this.popupService.showPopup('มีข้อผิดพลาดในการยืนยัน OTP');
+      }
+    );
+  }
+
+  // ฟังก์ชันเริ่มต้นนับถอยหลัง
+  startCountdown() {
+    this.countdown = 60;
+    this.countdownInterval = setInterval(() => {
+      this.countdown -= 1;
+      if (this.countdown === 0) {
+        clearInterval(this.countdownInterval);
+      }
+    }, 1000);
+  }
+
+
+
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+
+  resendOtp() {
+    clearInterval(this.countdownInterval);
+    this.verifyEmail(); // ส่ง OTP ใหม่
+  }
+
   return() {
-    this.router.navigate(['login']);
+    this.dialogRef.close();
+    const dialogRef = this.dialog.open(LoginComponent, {
+      disableClose: true
+      //
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
   closeotp() {
-    this.dialogRef.close(); 
+    this.dialogRef.close();
   }
 }

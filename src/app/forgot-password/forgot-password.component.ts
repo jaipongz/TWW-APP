@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
+import { PopupService } from '../services/popup.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,18 +14,17 @@ import { LoginComponent } from '../login/login.component';
 export class ForgotPasswordComponent {
  
 
-  constructor (private router : Router, private http :HttpClient, public dialog: MatDialog, public dialogRef: MatDialogRef<ForgotPasswordComponent> ) {
+  constructor (private router : Router, private http :HttpClient, public dialog: MatDialog, public dialogRef: MatDialogRef<ForgotPasswordComponent>, private popupService:PopupService ) {
     this.startTimer();
   }
 
   email: string = '';
   emailForOtp: string = '';
-  popupMessage: string = '';
   password: string = '';
   passwordConfirm: string = '';
   isOtpVerified: boolean = false; // ตัวแปรเพื่อแสดงฟอร์มกรอกรหัสผ่าน
   isEmailSubmitted: boolean = false;
-  showPopup: boolean = false;
+
   
 
   otp: string[] = ['', '', '', '', '', '']; // ช่องสำหรับเก็บ OTP
@@ -43,9 +43,7 @@ export class ForgotPasswordComponent {
   
   submitemail() {
     if (!this.email) {
-      this.popupMessage = 'Emailไม่ถูกต้องหรือEmailนี้ยังไม่ได้สมัคร';
-      this.showPopup = true;
-      
+      this.popupService.showPopup('Emailไม่ถูกต้องหรือEmailนี้ยังไม่ได้สมัคร');
     }else {
     this.isEmailSubmitted = true;
 
@@ -128,24 +126,23 @@ export class ForgotPasswordComponent {
          
 
         } else {
-           this.popupMessage = response.message;  // ข้อความที่ได้รับจาก API
+           this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
            console.error('Invalid OTP:', response.message);
-           this.showPopup = true; // แสดง popup ข้อความ OTP ผิดพลาด
+
         }
       },
       error => {
         console.error('Verification error:', error);
         // แสดงข้อความข้อผิดพลาดหากเกิดปัญหาในการติดต่อ API
-        this.popupMessage = 'มีข้อผิดพลาดในการยืนยัน OTP';
-        this.showPopup = true;
+        this.popupService.showPopup('มีข้อผิดพลาดในการยืนยัน OTP');
       }
     );
   }
 
   resetPassword() {
     if (this.password !== this.passwordConfirm) {
-      this.popupMessage = 'รหัสผ่านไม่ตรงกัน';
-      this.showPopup = true;
+      this.popupService.showPopup('รหัสผ่านไม่ตรงกัน');
+      
       return;
     }
   
@@ -167,8 +164,8 @@ export class ForgotPasswordComponent {
         this.dialog.open(LoginComponent);
       },
       error => {
-        this.popupMessage = 'ไม่สามารถรีเซ็ตรหัสผ่านได้';
-        this.showPopup = true;
+        this.popupService.showPopup('ไม่สามารถรีเซ็ตรหัสผ่านได้');
+
       }
     );
   }
@@ -194,7 +191,7 @@ export class ForgotPasswordComponent {
   }
 
   closePopup() {
-    this.showPopup = false;
+    this.popupService.closePopup()
   }
 
 

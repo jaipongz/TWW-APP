@@ -136,7 +136,13 @@ h2 {
 }
 input:focus {
   outline: none;
+  
 }
+input:not(:placeholder-shown) {
+  background-color: none;
+  
+}
+
 .gbinput-group input {
   text-align: start;
   width: 100%;
@@ -239,42 +245,7 @@ input:focus {
   }
 }
 
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.popup-content h3 {
-  margin-bottom: 15px;
-}
-
-.popup-content button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.popup-content button:hover {
-  background-color: #0056b3;
-}
 
 .gbinput-group {
   position: relative;
@@ -375,6 +346,23 @@ input:focus {
   font-weight: 700;
   /* 700 แสดงถึงน้ำหนักหนา */
 }
+
+.exitBtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.171);
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  border: none;
+  color: black;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+
 
 /****************************************************************************************************************************************************************************/
 

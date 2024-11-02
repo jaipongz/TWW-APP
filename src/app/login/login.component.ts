@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { PopupService } from '../services/popup.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,12 @@ export class LoginComponent implements OnInit {
 
   username: string = '';
   password: string = '';
-  showPopup: boolean = false;
-  popupMessage: string = '';
+
   showPassword: boolean = false;
   // showLoginPopup: boolean = false;
 
 
-  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog) { }
+  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog, private popupService: PopupService) { }
 
   ngOnInit(): void {
 
@@ -54,11 +54,11 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (!this.username || !this.password) {
-      this.popupMessage = 'กรุณาใส่ข้อมูลให้ครบทุกช่อง';
-      this.showPopup = true;
+      this.popupService.showPopup('กรุณาใส่ข้อมูลให้ครบทุกช่อง');
+
     } else if (this.password.length < 8) {
-      this.popupMessage = 'Password must be at least 8 characters';
-      this.showPopup = true;
+      this.popupService.showPopup('กรุณาใส่ข้อมูลไม่ถึง8ตัว');
+
     } else {
       // Register logic here
       console.log('Form Submitted');
@@ -75,6 +75,7 @@ export class LoginComponent implements OnInit {
         }
       }).subscribe(
         (response: any) => {
+          // if (response.status === 'success' && !response.data.error)
           if (!response.data.error) {
             console.log('Login successful:', response);
             localStorage.setItem('token', response.data.token); // Store the token
@@ -85,14 +86,13 @@ export class LoginComponent implements OnInit {
             // localStorage.removeItem('redirectUrl');
           } else {
             // Show error message if login failed
-            this.popupMessage = response.data.error || 'Login failed. Please check your username and password';
-            this.showPopup = true;
+            this.popupService.showPopup = response.data.error || 'Login failed. Please check your username and password';
+
           }
         },
         (error) => {
           // Handle any errors from the HTTP request itself
-          this.popupMessage = 'An error occurred. Please try again later.';
-          this.showPopup = true;
+          this.popupService.showPopup('An error occurred. Please try again later.');
         }
       );
     }
@@ -133,7 +133,5 @@ export class LoginComponent implements OnInit {
   }
 
 
-  closePopup() {
-    this.showPopup = false;
-  }
+
 }

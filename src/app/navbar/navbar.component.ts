@@ -67,9 +67,9 @@ export class NavbarComponent implements OnInit {
       disableClose: true
       //
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed');
+    // });
   }
 
   // ฟังก์ชันสำหรับแสดง popup

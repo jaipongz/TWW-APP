@@ -1,0 +1,6 @@
+<div *ngIf="popupVisible$ | async" class="popup">
+    <div class="popup-content">
+      <h3>{{ popupMessage$ | async }}</h3>
+      <button (click)="closePopup()">OK</button>
+    </div>
+</div>
