@@ -25,6 +25,7 @@
     "@angular/router": "^18.2.0",
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "cropperjs": "^1.6.2",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.14",
     "tslib": "^2.3.0",

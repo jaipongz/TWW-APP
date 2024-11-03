@@ -29,6 +29,8 @@ import { CoinRechargeComponent } from './coin-recharge/coin-recharge.component';
 import { NotificationSettingsComponent } from './notification-settings/notification-settings.component';
 import { PopupComponent } from './popup/popup.component';
 import { PopupService } from './services/popup.service';
+import { NovelFormComponent } from './novel-form/novel-form.component';
+import { UploadimageComponent } from './uploadimage/uploadimage.component';
 
 
 
@@ -62,6 +64,8 @@ const appRoutes: Routes = [
     CoinRechargeComponent,
     NotificationSettingsComponent,
     PopupComponent,
+    NovelFormComponent,
+    UploadimageComponent,
   ],
   imports: [
     BrowserModule,
