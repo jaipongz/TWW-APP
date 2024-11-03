@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog } from '@angular/material/dialog';
-import { RegisterComponent } from '../register/register.component';
-import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
 
 @Component({
@@ -21,36 +18,16 @@ export class LoginComponent implements OnInit {
   // showLoginPopup: boolean = false;
 
 
-  constructor(private router: Router, private http: HttpClient, public dialogRef: MatDialogRef<LoginComponent>, public dialog: MatDialog, private popupService: PopupService) { }
+  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService) { }
 
   ngOnInit(): void {
 
-    // // หลังจาก login ผ่าน Google สำเร็จ
-    // const redirectUrl = localStorage.getItem('redirectUrl');
-
-    // if (redirectUrl) {
-    //   localStorage.removeItem('redirectUrl');  // ลบ URL หลังจาก redirect แล้ว
-    //   this.router.navigateByUrl(redirectUrl);  // เปลี่ยนเส้นทางไปที่ URL เดิม
-    // } else {
-    //   this.router.navigate(['banner']); // ถ้าไม่มี URL ให้เปลี่ยนไปหน้า default
-    // }
   }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
-  // ฟังก์ชันสำหรับแสดง popup
-  // openLoginPopup() {
-  //   this.showLoginPopup = true;
-  // }
 
-  // ฟังก์ชันสำหรับปิด popup
-  // closeLoginPopup() {
-  //   this.showLoginPopup = false;
-  // }
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
 
   login() {
     if (!this.username || !this.password) {
@@ -79,7 +56,7 @@ export class LoginComponent implements OnInit {
           if (!response.data.error) {
             console.log('Login successful:', response);
             localStorage.setItem('token', response.data.token); // Store the token
-            this.dialogRef.close();
+            this.dialogService.closeDialog('login');
             window.location.reload();
             // const redirectUrl = localStorage.getItem('redirectUrl') || '/defaultRoute';
             // this.router.navigate([redirectUrl]);
@@ -98,25 +75,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  openRegisterDialog(): void {
-    this.dialogRef.close();
-    const dialogRef = this.dialog.open(RegisterComponent, {
-      disableClose: true
-      //
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  openRegisterDialog(){
+    this.dialogService.openRegisterDialog();
   }
 
   openForgotpass() {
-    const dialogRef = this.dialog.open(ForgotPasswordComponent, {
-      disableClose: true
-
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this.dialogService.openForgotpassDialog();
   }
 
   // loginWithGoogle() {
@@ -129,7 +93,7 @@ export class LoginComponent implements OnInit {
 
 
   closeotp() {
-    this.dialogRef.close();
+    this.dialogService.closeDialog('login');
   }
 
 
