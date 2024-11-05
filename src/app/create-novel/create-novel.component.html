@@ -5,29 +5,41 @@
       <div class="header">
         นิยาย (บรรยาย)
       </div>
-      <div class="file-upload-head" >
-        <div class="file-upload-sub" >
-          <div class="file-upload" (click)="uploadImage()">
-          <label class="file-label" for="fileInput">
-            <i class="upload-icon">📁</i>
-            <p>Drag &amp; Drop your files here or click to upload</p>
-          </label>
+      <div class="file-upload-head">
+        <div class="file-upload-sub">
+          <div class="file-upload" (click)="fileInput.click()">
+            <label class="file-label">
+              <i class="upload-icon">📁</i>
+              <p>Drag & Drop your files here or click to upload</p>
+            </label>
+            <input #fileInput type="file" id="fileInput" (change)="handleFileSelect($event)" style="display: none;" />
+            <div *ngIf="croppedImage" class="cropped-image-preview">
+              <img [src]="croppedImage" alt="Cropped Image" />
+            </div>
+          </div>
+          <a>+ นามปากกา</a>
         </div>
-          <a >+ นามปากกา</a>
+        <div id="cropModal" style="display: none;">
+          <img id="imagePreview" alt="Image preview for cropping" />
+          <button id="cropButton">Crop</button>
+          <button id="closeModal">Close</button>
+        </div>
+        <div id="croppedImageContainer" style="display: none;">
+          <img id="croppedImage" alt="Cropped Image Preview" />
         </div>
         <!-- <img *ngIf="imageUrl" [src]="imageUrl" alt="Placeholder image for book cover" height="100" width="100" /> -->
-          
-      
 
-      <div class="form-group-1">
-        <label for="title">ชื่อเรื่อง</label>
-        <input id="title" name="title" [(ngModel)]="novel.title" type="text" >
-        <label for="subtitle">คำโปรย/เรื่องย่อ</label>
-        <textarea  id="subtitle" name="subtitle" [(ngModel)]="novel.subtitle" type="text" ></textarea>
+
+
+        <div class="form-group-1">
+          <label for="title">ชื่อเรื่อง</label>
+          <input id="title" name="title" [(ngModel)]="novel.title" type="text">
+          <label for="subtitle">คำโปรย/เรื่องย่อ</label>
+          <textarea id="subtitle" name="subtitle" [(ngModel)]="novel.subtitle" type="text"></textarea>
+        </div>
       </div>
     </div>
-    </div>
-    
+
 
     <div class="form-group">
       <label for="main-category">หมวดหมู่หลัก</label>
@@ -47,7 +59,7 @@
 
       </div>
     </div>
-  
+
     <div class="form-group">
       <label for="rating">ระดับของเนื้อหา (Rating)</label>
       <select id="rating" name="rating" [(ngModel)]="novel.rating">

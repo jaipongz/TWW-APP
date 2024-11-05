@@ -31,6 +31,8 @@ import { PopupComponent } from './popup/popup.component';
 import { PopupService } from './services/popup.service';
 import { NovelFormComponent } from './novel-form/novel-form.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
+import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
+
 
 
 
@@ -66,6 +68,7 @@ const appRoutes: Routes = [
     PopupComponent,
     NovelFormComponent,
     UploadimageComponent,
+    ProfileDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -67,6 +67,7 @@
     display: flex;
     justify-content: space-around;
 }
+
 .file-upload {
     position: relative;
     border: 2px dashed #b8bcbf;
@@ -84,6 +85,11 @@
 .file-upload:hover {
     background-color: #e2e6ea;
 }
+.cropped-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
 .file-input {
     display: none;  
@@ -114,6 +120,21 @@
     color: white;
 }
 
+#cropModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #croppedImageContainer {
+    margin-top: 20px;
+  }
 
 .tags {
     display: flex;

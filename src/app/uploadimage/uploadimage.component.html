@@ -1,6 +1,23 @@
-<div class="file-upload" (click)="uploadImage()">
-    <label class="file-label" for="fileInput">
-      <i class="upload-icon">📁</i>
-      <p>Drag &amp; Drop your files here or click to upload</p>
-    </label>
+<div class="container">
+  <h2>Upload Profile Picture</h2>
+  <input type="file" (change)="onFileChange($event)" accept="image/*" />
+
+  <div *ngIf="croppedBlob">
+    <h3>Cropped Image Preview:</h3>
+    <img [src]="croppedBlob ? createImageURL(croppedBlob) : ''" alt="Cropped Profile Picture" />
+    <button (click)="uploadImage()">Upload Profile Picture</button>
   </div>
+
+  <div #cropModal class="modal" [class.show]="showModal">
+    <div class="modal-content">
+      <span (click)="closeModal()" class="close">&times;</span>
+      <h3>Crop Your Image</h3>
+      <div class="image-container">
+        <img #imagePreview alt="Profile Picture Preview" style="max-width: 100%; height: auto;" />
+      </div>
+      <button (click)="cropImage()">Crop</button>
+    </div>
+  </div>
+  
+
+  

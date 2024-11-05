@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './create-novel.component.css'
 })
 export class CreateNovelComponent {
+
+  selectedFile: File | null = null;
+
   novel = {
     title: '',
     subtitle: '',
@@ -15,12 +18,32 @@ export class CreateNovelComponent {
     subCategory2: '',
     rating: ''
   };
+  
   imageUrl: string = '';
   tags: string[] = [];
   newTag: string = '';
 
-  uploadImage() {
-    // Image upload logic
+  croppedImage: string | null = null;
+
+  handleFileSelect(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target?.result as string;
+        img.onload = () => {
+          this.openCropTool(img);
+        };
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  openCropTool(image: HTMLImageElement): void {
+    // Open a cropping tool here or use a cropping library like CropperJS
+    // After cropping, set the cropped image data URL
+    this.croppedImage = image.src; // Replace with cropped image's data URL
   }
   addTag() {
     if (this.newTag && this.tags.length < 5) {
