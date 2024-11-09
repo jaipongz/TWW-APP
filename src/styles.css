@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&family=Roboto:wght@400;700&display=swap");
 @import "swiper/swiper-bundle.css";
+@import 'cropperjs/dist/cropper.css';
 
 /* You can add global styles to this file, and also import other style files */
 * {
@@ -53,7 +54,7 @@ body::before {
 }
 
 .containerfornav {
-  margin-top: 95px;
+  margin-top: 6rem;
 }
 
 /* cssของlogin&register */
