@@ -69,58 +69,6 @@
     justify-content: space-around;
 }
 
-.file-upload {
-    position: relative;
-    border: 2px dashed #b8bcbf;
-    border-radius: 10px;
-    width: 300px;
-    height: 300px;
-    cursor: pointer;
-    text-align: center;
-    align-content: center;
-    
-    background-color: rgb(255, 255, 255);
-    transition: background-color 0.3s ease-in-out;
-}
-
-.file-upload:hover {
-    background-color: #e2e6ea;
-}
-.cropped-image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-
-.file-input {
-    display: none;  
-}
-
-.file-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-   
-}
-
-.upload-icon {
-    font-size: 50px;
-    color: #007bff;
-    margin-bottom: 10px;
-}
-
-.file-upload p {
-    margin: 0;
-    font-size: 16px;
-    color: #6c757d;
-}
-
-.file-upload.dragover {
-    background-color: #007bff;
-    color: white;
-}
 
 .main-category-sub {
     display: flex;
@@ -136,72 +84,7 @@
     max-width: 90%;
     width: 100%;
   }
-  .image-container {
-    max-width: 100%;
-    overflow: hidden;
-  }
-  #imagePreview {
-    max-width: 100%;
-    height: auto;
-  }
-  button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-
-  #croppedImageContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
   
-  #croppedImage {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  /* Modal styling */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #f4f4f4;
-    margin: 0 auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    border-radius: 10px;
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .close:hover {
-    color: #000;
-  }
 
   #rating {
     margin-bottom: 10px;

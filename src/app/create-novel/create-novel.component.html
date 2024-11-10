@@ -8,27 +8,19 @@
         </div>
         <div class="file-upload-head">
           <div class="file-upload-sub">
-            <div class="file-upload" (click)="fileInput.click()">
-              <label class="file-label">
-                <i class="upload-icon">📁</i>
-                <p>Drag & Drop your files here or click to upload</p>
-              </label>
-              <div id="croppedImageContainer">
-                <img id="croppedImage" alt="Cropped Image Preview" />
-              </div>
-              <input #fileInput type="file" id="fileInput" (change)="handleFileSelect($event)" style="display: none;" />
+            <app-uploadimage></app-uploadimage>
+            <!-- 
+            <button (click)="submitProfilePic()">อัปโหลดรูปภาพ</button> -->
+            <div class="penname">
+              <!-- แสดงลิงก์เมื่อไม่อยู่ในโหมดแก้ไข -->
+              <a *ngIf="!isEditingPenName" (click)="penName()">
+                {{ novel.penName ? novel.penName : '+ นามปากกา' }}
+              </a>
 
+              <!-- แสดง input เมื่ออยู่ในโหมดแก้ไข -->
+              <input *ngIf="isEditingPenName" #penNameInput type="text" [(ngModel)]="novel.penName"
+                (keydown.enter)="confirmPenName()">
             </div>
-
-
-            <div id="cropModal" style="display: none;">
-              <img id="imagePreview" alt="Image preview for cropping" />
-              <button (click)="cropImage()">Crop</button>
-              <button (click)="closeModal()">Close</button>
-            </div>
-
-            <button (click)="submitProfilePic()">อัปโหลดรูปภาพ</button>
-            <a>+ นามปากกา</a>
           </div>
           <div id="croppedImageContainer" style="display: none;">
             <img id="croppedImage" alt="Cropped Image Preview" />
@@ -49,9 +41,8 @@
       <div class="form-group">
         <label for="main-category">หมวดหมู่หลัก</label>
         <div class="dropdown-container">
-
           <select id="subItemSelect" [(ngModel)]="selectedItem" (change)="onSelectItem($event)">
-            <option value="" disabled selected>Select an option</option>
+            <option value="" disabled selected>เลือกหมวดหมู่หลัก</option>
             <!-- Group items -->
             <optgroup *ngFor="let group of groupedData | keyvalue" [label]="group.key">
               <!-- Sub-item option with tooltip for 'desc' on hover -->
@@ -65,30 +56,33 @@
 
         <div class="main-category-sub">
           <div class="category-sub">
-            <label for="sub-category1">หมวดหมู่รอง 1 (ไม่จำเป็นต้องใส่)</label>
-            <select id="sub-category1" name="sub-category1" [(ngModel)]="novel.selectedSubCategory1" >
-                <option *ngFor="let subGroup of filteredSubGroups('sub-category1')" [value]="subGroup.label">
-                    {{ subGroup.label }}
-                </option>
+            <label for="sub-category1">หมวดหมู่รอง 1 <b>(ไม่จำเป็นต้องใส่)</b></label>
+            <select id="sub-category1" name="sub-category1" [(ngModel)]="novel.selectedSubCategory1">
+              <option value="" disabled selected>หมวดหมู่รอง</option>
+              <option *ngFor="let subGroup of filteredSubGroups('sub-category1')" [value]="subGroup.label">
+                {{ subGroup.label }}
+              </option>
             </select>
-        </div>
-        
-        <div class="category-sub">
-            <label for="sub-category2">หมวดหมู่รอง 2 (ไม่จำเป็นต้องใส่)</label>
-            <select id="sub-category2" name="sub-category2" [(ngModel)]="novel.selectedSubCategory2" >
-                <option *ngFor="let subGroup of filteredSubGroups('sub-category2')" [value]="subGroup.label">
-                    {{ subGroup.label }}
-                </option>
+          </div>
+
+          <div class="category-sub">
+            <label for="sub-category2">หมวดหมู่รอง 2 <b>(ไม่จำเป็นต้องใส่)</b></label>
+            <select id="sub-category2" name="sub-category2" [(ngModel)]="novel.selectedSubCategory2">
+              <option value="" disabled selected>หมวดหมู่รอง</option>
+              <option *ngFor="let subGroup of filteredSubGroups('sub-category2')" [value]="subGroup.label">
+                {{ subGroup.label }}
+              </option>
             </select>
-        </div>
-        
+          </div>
+
         </div>
       </div>
 
       <div class="form-group">
         <label for="rating">ระดับของเนื้อหา (Rating)</label>
         <select id="rating" name="rating" [(ngModel)]="novel.rate">
-          <option>เลือกระดับของเนื้อหา</option>
+          <option value="" disabled selected>เลือกระดับของเนื้อหา</option>
+          <option *ngFor="let rate of rates">{{ rate.rate }}</option>
         </select>
         <label class="tags-head">แท็ก (0/18)</label>
         <div class="tags">
@@ -109,3 +103,4 @@
     </div>
   </div>
 </div>
+<app-popup></app-popup>

@@ -4,12 +4,11 @@
     <p>Drag & Drop your files here or click to upload</p>
   </label>
   <div id="croppedImageContainer">
-    <img id="croppedImage" alt="Cropped Image Preview" />
+    <img [src]="croppedImage" alt="Cropped Image Preview" />
   </div>
-  <input #fileInput type="file" id="fileInput" (change)="handleFileSelect($event)" style="display: none;" />
-  
+  <input #fileInput type="file" id="fileInput" accept="image/*" (change)="handleFileSelect($event)"
+    style="display: none;" />
 </div>
-
 
 <div id="cropModal" style="display: none;">
   <img id="imagePreview" alt="Image preview for cropping" />

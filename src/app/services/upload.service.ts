@@ -1,25 +1,72 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import Cropper from 'cropperjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UploadService {
-  private apiUrl = 'http://localhost:3090/api/user/updateProfilePic';
+  private cropper: Cropper | null = null;
+  private cropModal: HTMLElement | null = null;
+  private imagePreview: HTMLImageElement | null = null;
 
-  constructor(private http: HttpClient) { }
+  constructor() {}
 
-  uploadProfilePicture(blob: Blob): Observable<any> {
-    const formData = new FormData();
-    formData.append('userId', '36'); // Replace with actual user ID
-    formData.append('profile_pic', blob, 'profile.jpg');
-    
-    const headers = new HttpHeaders({
-      Authorization: 'Bearer YOUR_TOKEN_HERE' // Replace with actual token if required
-    });
-
-    return this.http.post(this.apiUrl, formData, { headers });
+  handleFileSelect(event: Event, openCropToolCallback: (imageSrc: string) => void): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.src = e.target?.result as string;
+        img.onload = () => {
+          openCropToolCallback(img.src);
+        };
+      };
+      reader.readAsDataURL(file);
+    }
   }
-  
+
+  openCropTool(imageSrc: string, cropModalId: string, imagePreviewId: string): void {
+    this.cropModal = document.getElementById(cropModalId);
+    this.imagePreview = document.getElementById(imagePreviewId) as HTMLImageElement;
+    if (this.imagePreview && this.cropModal) {
+      this.imagePreview.src = imageSrc;
+      this.cropModal.style.display = 'block';
+      this.cropper = new Cropper(this.imagePreview, {
+        aspectRatio: 1,
+        viewMode: 2,
+        movable: false,
+        zoomable: false,
+        scalable: false,
+        rotatable: false,
+      });
+    }
+  }
+
+  cropImage(): Promise<Blob | null> {
+    return new Promise((resolve) => {
+      if (this.cropper) {
+        const croppedCanvas = this.cropper.getCroppedCanvas({
+          width: 300,
+          height: 300,
+        });
+        croppedCanvas.toBlob((blob: Blob | null) => {
+          resolve(blob);
+        }, 'image/jpeg');
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+  closeModal(): void {
+    if (this.cropModal) {
+      this.cropModal.style.display = 'none';
+    }
+    if (this.cropper) {
+      this.cropper.destroy();
+      this.cropper = null;
+    }
+  }
 }
