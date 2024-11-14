@@ -1,0 +1,321 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.profile-container {
+  padding: 0px 20px;
+}
+.profile-detail-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  /*background-color: #f8f9fa; */
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+  padding: 150px;
+  padding-bottom: 20px;
+}
+.avatar-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.camera-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.upload-input {
+  display: none;
+}
+
+.account-name {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* CSS */
+.stats-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid #ddd; /* เพิ่มเส้นขอบ */
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: small;
+  color: #bf6a02;
+  margin-top: 5px;
+}
+
+.all-works {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px auto; /* ตั้ง margin ด้านบนและล่าง */
+  max-width: 800px; /* กำหนดขนาดสูงสุดให้กับคอนเทนเนอร์ */
+}
+
+.stat-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.coin-count,
+.support-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* ให้ค่าจำนวนอยู่ขวาสุด */
+  flex: 1;
+  flex-direction: row;
+  text-align: left; /* เปลี่ยนให้เป็น left เพื่อให้ไอคอนและ label อยู่ซ้ายสุด */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.count-value {
+  font-size: 14px;
+  font-weight: small;
+  color: #bf6a02;
+  margin-left: auto; /* เพิ่มระยะห่างจาก label ไปทางขวา */
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 10px auto;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.view-item,
+.review-item,
+.shelf-item,
+.comment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%; /* ใช้ width 100% เพื่อให้มีขนาดเต็มพื้นที่ */
+  background-color: #f9f9f9;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.info-label {
+  font-size: 16px;
+  margin-right: auto; /* ชิดซ้ายสุด */
+}
+
+.info-count {
+  font-size: 14px;
+  font-weight: small;
+  color: #bf6a02;
+  margin-left: auto; /* ชิดขวาสุด */
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 10px;
+  gap: 10px;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 10px; /* ระยะห่างจากขอบซ้าย */
+  font-size: 16px;
+}
+
+.search-input {
+  flex: 1; /* ให้ search input ขยายเต็มพื้นที่ด้านซ้าย */
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  color: black;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 10px; /* ระยะห่างระหว่าง dropdown และปุ่ม */
+}
+
+.sort-dropdown {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.view-all-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #7c4d3d;
+  border: solid 1px transparent; /* กำหนด border ไว้ตั้งแต่แรก */
+  border-radius: 10px;
+}
+
+.view-all-button:hover {
+  background-color: #fff;
+  border-color: #7c4d3d; /* เปลี่ยนสี border เมื่อ hover */
+  color: #7c4d3d;
+}
+
+.empty-library-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-library-icon {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.empty-library-message {
+  font: bold;
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.add-book-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #7c4d3d;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.add-book-button:hover {
+  background-color: #fff;
+  border: solid 1px #7c4d3d;
+  color: #7c4d3d;
+}
+
+@media (max-width: 600px) {
+  .stats-container,
+  .stat-container,
+  .info-container,
+  .search-container,
+  .empty-library-container,
+  .profile-detail-container,
+  .all-works,
+  .support-count,
+  .coin-count,
+  .view-item,
+  .review-item,
+  .shelf-item,
+  .comment-item,
+  .search-input,
+  .sort-dropdown,
+  .view-all-button,
+  .add-book-button,
+  .empty-library-message,
+  .info-label,
+  .stat-value {
+    font-size: 14px;
+  }
+
+  .profile-container {
+    padding: 0px 10px;
+  }
+
+  .info-count,
+  .count-value {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* สร้าง 2 คอลัมน์ที่ขนาดเท่ากัน */
+    gap: 10px; /* ระยะห่างระหว่างแถวและคอลัมน์ */
+  }
+
+  .search-container {
+    display: flex;
+    flex-direction: column; /* เปลี่ยนเป็นแนวตั้ง */
+    gap: 10px; /* ระยะห่างระหว่าง search-input และ filter-actions */
+  }
+
+  .search-input-container {
+    width: 100%; /* ขยาย search-input ให้เต็มความกว้าง */
+  }
+
+  .filter-actions {
+    display: flex;
+    width: 100%; /* ให้ filter-actions ขยายเต็มความกว้าง */
+  }
+
+  .search-input {
+    width: 100%; /* ขยาย search-input ให้เต็มความกว้าง */
+  }
+}

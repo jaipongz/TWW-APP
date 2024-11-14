@@ -1,1 +1,111 @@
-<p>profile-detail works!</p>
+<app-navbar></app-navbar>
+<div class="profile-container">
+  <div class="profile-detail-container">
+    <!-- รูปโปรไฟล์ -->
+    <div class="avatar-container">
+      <img src="/image/avartar.jpg" alt="Account Avatar" class="avatar" />
+      <label for="upload-avatar" class="camera-icon">
+        <!-- <fa-icon [icon]="faCamera"></fa-icon> -->
+        <i class="fa-solid fa-camera"></i>
+      </label>
+      <input
+        type="file"
+        id="upload-avatar"
+        class="upload-input"
+        accept="image/*"
+      />
+    </div>
+
+    <div class="account-name">
+      <label for="account-name">ชื่อบัญชี:</label>
+      <p id="account-name">ชื่อบัญชีของคุณ</p>
+    </div>
+  </div>
+
+  <div class="stats-container">
+    <div class="stat-item">
+      <label>เรื่องที่แต่ง</label>
+      <p class="stat-value">5</p>
+    </div>
+    <div class="stat-item">
+      <label>ตอนทั้งหมด</label>
+      <p class="stat-value">10</p>
+    </div>
+    <div class="stat-item">
+      <label>ผู้ติดตาม</label>
+      <p class="stat-value">250</p>
+    </div>
+    <div class="stat-item">
+      <label>กำลังติดตาม</label>
+      <p class="stat-value">150</p>
+    </div>
+  </div>
+  <div class="all-works">
+    <h4 for="">ผลงานทั้งหมด</h4>
+  </div>
+
+  <div class="stat-container">
+    <div class="support-count">
+      <i class="fa-solid fa-circle-dollar-to-slot"></i>
+      <label style="margin-left: 5px">จำนวนเหรียญที่มี</label>
+
+      <p class="count-value">50</p>
+    </div>
+    <div class="coin-count">
+      <i class="fa-regular fa-heart"></i>
+      <label style="margin-left: 5px">จำนวนกำลังใจ</label>
+
+      <p class="count-value">100</p>
+    </div>
+  </div>
+
+  <div class="info-container">
+    <div class="view-item">
+      <i class="fa-regular fa-eye"></i>
+      <label class="info-label">ยอดวิว</label>
+      <label class="info-count">1234</label>
+    </div>
+    <div class="review-item">
+      <i class="fa-regular fa-thumbs-up"></i>
+      <label class="info-label">รีวิว</label>
+      <label class="info-count">567</label>
+    </div>
+    <div class="shelf-item">
+      <i class="fa-solid fa-list"></i>
+      <label class="info-label">ชั้นหนังสือ</label>
+      <label class="info-count">89</label>
+    </div>
+    <div class="comment-item">
+      <i class="fa-regular fa-message"></i>
+      <label class="info-label">ความคิดเห็น</label>
+      <label class="info-count">45</label>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <div class="search-input-container">
+      <input type="text" class="search-input" placeholder="ค้นหาชื่อหนังสือ" />
+    </div>
+
+    <div class="filter-actions">
+      <select class="sort-dropdown">
+        <option>เรียงตามอัพเดตล่าสุด</option>
+        <option>เรียงตามความนิยม</option>
+        <option>เรียงตามคะแนนสูงสุด</option>
+      </select>
+      <button class="view-all-button">
+        <i class="fa-solid fa-bars" style="margin-right: 5px"></i>ทั้งหมด
+      </button>
+    </div>
+  </div>
+
+  <div class="empty-library-container">
+    <div class="empty-library-icon">
+      <i class="fa fa-file-text fa-5x"></i>
+    </div>
+    <p class="empty-library-message">ไม่มีหนังสือ</p>
+    <button class="add-book-button">
+      <i class="fa-solid fa-plus" style="margin-right: 5px"></i>เพิ่มนิยาย
+    </button>
+  </div>
+</div>

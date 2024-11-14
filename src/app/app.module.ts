@@ -37,7 +37,7 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 
 
 const appRoutes: Routes = [
-  {path: '' , component: CreateNovelComponent },
+  {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -45,6 +45,7 @@ const appRoutes: Routes = [
   {path: 'forgot-password-sub' , component: ForgotPasswordSubComponent },
   {path: 'edit-novel', component: EditNovelComponent },
   {path: 'create-novel', component: CreateNovelComponent },
+  {path: 'profile-detail', component: ProfileDetailComponent },
 ]
 
 @NgModule({
