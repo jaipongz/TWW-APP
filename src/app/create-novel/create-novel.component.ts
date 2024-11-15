@@ -357,6 +357,7 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
     error: (error) => this.popupService.showPopup(error.message),
   });
 }
+
       // fetch('http://localhost:3090/api/novel/storeNovel', {
       //   method: 'POST',
       //   headers: {

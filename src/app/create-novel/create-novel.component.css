@@ -9,7 +9,9 @@
     max-width: 1100px;
    
 }
-
+/* .containerfornav{
+    margin: 0px;
+} */
 .container {
     text-align: center;
     height: 100%;
@@ -38,11 +40,12 @@
 }
 
 .form-group input[type="text"],
-.form-group select {
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .form-group-1 {
     
@@ -74,7 +77,7 @@
 
 .main-category-sub {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 
     .category-sub {
         width: 48%;
