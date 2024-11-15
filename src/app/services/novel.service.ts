@@ -9,7 +9,7 @@ export class NovelService {
   private apiUrl = 'http://localhost:3090/api/novel';
   // private apiUrl = 'http://localhost:3090/api/novel/storeNovel';
   private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImlhdCI6MTczMDYyMTY4OSwiZXhwIjoxNzMzMjEzNjg5fQ.3cWhDqm_371U6wJwUFWH8of0JJ6Mjox74NnMiNSqgTg';
-
+  
   constructor(private http: HttpClient) {}
 
   getNovelDetail(novelId: number, start: number, limit: number): Observable<any> {
@@ -26,4 +26,6 @@ export class NovelService {
       catchError((error) => throwError(() => new Error(`HTTP error! Status: ${error.status}`)))
     );
   }
+
+ 
 }

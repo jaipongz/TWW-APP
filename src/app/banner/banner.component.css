@@ -1,13 +1,13 @@
 .container-page {
   display: flex;
   flex-direction: column;
-  margin-top: 6rem;
   gap: 10px;
   justify-content: center;
   background:rgb(255, 225, 225);
   position: relative;
   padding-bottom: 10px;
   z-index: 1;
+  margin: 0 6% 0 6%;
 }
 
 .container-page::before {
@@ -68,7 +68,6 @@
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  margin: 0 10px;
   border-radius: 8px;
   overflow: hidden;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 1); */
@@ -165,8 +164,8 @@
 
 .category-section {
   position: relative;
-  max-width: 1100px;
-  padding: 10px 50px;
+  /* max-width: 1100px; */
+  padding: 1% 5%;
   border-radius: 10px;
   background-color: #ffffff;
   margin: 10px auto;
@@ -341,7 +340,7 @@
 
 .popcontent {
   position: relative;
-  max-width: 1100px;
+  /* max-width: 1100px; */
   width: 100%;
   margin: 0 auto;
   border-radius: 10px;
@@ -457,7 +456,7 @@ h6 {
 .recommend {
   background-color: #fff5f5;
   position: relative;
-  max-width: 1100px;
+  /* max-width: 1100px; */
   width: 100%;
   border-radius: 10px;
   margin: 10px auto;
@@ -541,7 +540,7 @@ h5,h6 {
 
 .novel-now {
   position: relative;
-  max-width: 1100px;
+  /* max-width: 1100px; */
   width: 100%;
   border-radius: 10px;
   margin: 10px auto ;

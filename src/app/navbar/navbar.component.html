@@ -1,21 +1,23 @@
 <nav class="navbar">
   <div class="navbar-container">
-
     <!-- Links for authenticated and unauthenticated users -->
     <div *ngIf="isLoggedIn; else loggedOut">
-      <button class="register-btn">
+      <button routerLink="/novel-detail" class="register-btn">
         <!-- ไอคอนการเขียน (SVG) -->
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
           <path
             d="M3 17.25V21h3.75l10.98-10.98-3.75-3.75L3 17.25zm3-12.75C5.66 4.5 5 5.16 5 6c0 0 3.14 0 3.14-3.14 0-.84-.68-1.53-1.52-1.53-.84 0-1.52.69-1.52 1.52C5 4.34 5.34 5 6.14 5zm15.73-.6l-2.12-2.12c-.39-.39-1.02-.39-1.41 0l-1.89 1.89 3.75 3.75 1.89-1.89c.39-.38.39-1.02 0-1.41z" />
-        </svg> หน้าสำหรับนักเขียน
+        </svg> <p>หน้าสำหรับนักเขียน</p>
       </button>
+      
       <!-- <a routerLink="/dashboard">Dashboard</a>
         <a routerLink="/profile">Profile</a> -->
       <!-- <button (click)="logout()" class="logout-button">Logout</button> -->
     </div>
+    <div routerLink="/banner" class="tanwiwalogo">
     <!-- Logo -->
     <img src="image\Thanwiwa.png" alt="Thanwiwa">
+    </div>
     <ng-template #loggedOut>
       <div class="navbar-links">
         <i class="fa-solid fa-hand-middle-finger fa-beat"></i>
@@ -47,31 +49,31 @@
         </ng-container>
       </div>
       <div class="nav-icons">
-        <a href="#">
+        <a routerLink="/banner">
           <!-- ไอคอนหน้าแรก (SVG) -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-          </svg> หน้าแรก
+          </svg> <p>หน้าแรก</p>
         </a>
-        <a href="#">
+        <a routerLink="/">
           <!-- ไอคอนนิยาย (SVG) -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
             <path
               d="M18 2H6C4.9 2 4 2.9 4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H6V4h12v14zM8 8h8v2H8V8zm0 4h5v2H8v-2z" />
-          </svg> นิยาย
+          </svg> <p>นิยาย</p>
         </a>
-        <a href="#">
+        <a routerLink="/">
           <!-- ไอคอนกระเป๋า (SVG) -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
             <path
               d="M16 6V4c0-1.11-.9-2-2-2H10c-1.11 0-2 .89-2 2v2H4v14h16V6h-4zM10 4h4v2h-4V4zm-4 14v-2h12v2H6zm12-4H6v-2h12v2zm0-4H6V8h12v2z" />
-          </svg> เติมคอยส์
+          </svg> <p>เติมคอยส์</p>
         </a>
       </div>
 
       <div class="navside" *ngIf="isMenuOpen">
-        <div class="header-navside">
-          <img src="/image/profile.png" alt="User">
+        <div  class="header-navside">
+          <img routerLink="/profile-detail" src="/image/profile.png" alt="User">
           <a>Username01</a>
           <a>&#64;{{username}}</a>
         </div>
@@ -87,19 +89,19 @@
             <i class="fa-solid fa-wallet"></i>
             <a>กระเป๋าเงิน</a>
           </div>
-          <div class="writer">
+          <div routerLink="/create-novel" class="writer">
             <i class="fa-regular fa-pen-to-square"></i>
             <a>เขียนนิยาย</a>
           </div>
-          <div class="book-floor">
+          <div routerLink="profile-detail" class="book-floor">
             <i class="fa-regular fa-bookmark"></i>
             <a>ชั้นหนังสือ</a>
           </div>
-          <div class="read-history">
+          <div routerLink="profile-detail" class="read-history">
             <i class="fa-solid fa-book-open"></i>
             <a>ประวัติการอ่าน</a>
           </div>
-          <div class="setting">
+          <div routerLink="/" class="setting">
             <i class="fa-solid fa-gear"></i>
             <a>การตั้งค่า</a>
           </div>

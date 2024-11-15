@@ -1,38 +1,23 @@
 /* Navbar container */
 .navbar {
   background-color: #fAF8FF;
-  /* opacity: 0.9; */
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+  height: 100px;
 }
+
 .navbar-container {
   display: flex;
-  justify-content: center;
-  /* จัดกึ่งกลางในแนวนอน */
-  /* align-items: center;    จัดกึ่งกลางในแนวตั้ง */
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
+  justify-content: space-between;
+  margin: 1rem 6% 0 6%;
 }
 
-.navbar-container image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Navbar links container */
 .navbar-links {
   display: flex;
-  position: absolute;
   justify-content: space-evenly;
-  align-items: center;
-  top: 20%;
-  left: 3%;
-  transform: translate(-10%, -3%);
   max-width: 217px;
   max-height: 33px;
-  width: 100%;
-  height: 100%;
   background: #F6EEE0;
   border-radius: 10px;
   padding: 2px 10px;
@@ -71,17 +56,14 @@
 
 .register-btn {
   display: flex;
-  position: absolute;
   align-items: center;
-  top: 20%;
-  left: 3%;
-  transform: translate(-10%, -3%);
   background-color: #b07a58;
   color: white;
   padding: 10px 15px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  text-wrap: nowrap;
 }
 
 
@@ -89,9 +71,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  position: absolute;
-  top: 20%;
-  right: 3%;
 }
 
 /* Search Bar */
@@ -134,7 +113,6 @@
   background-color: #fff;
   border-radius: 10px;
   pointer-events: none;
-  z-index: 10001;
   fill: #8b4513;
   border: 1px solid #8b4513;
 }
@@ -144,7 +122,6 @@
   transition: .2s ease-in-out;
 }
 .search-bar input:focus + .icon,.search-bar input:not(:placeholder-shown) + .icon {
-  z-index: 10002;
   background-color: transparent;
   border: none;
 }
@@ -157,6 +134,9 @@
   flex-direction: row;
   margin-top: 10px;
   /* Spacing between search bar and icons */
+  a {
+    text-wrap: nowrap;
+  }
 }
 
 .nav-icons a {
@@ -203,23 +183,26 @@
   }
 }
 
+.tanwiwalogo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
 .navside {
   width: 300px;
   height: 550px;
   background-color: #f9f9f9;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 57px;
-  right: 50px;
+  position: absolute;
+  top: 0;
   /* transform: translate(-50%, -50%); */
   z-index: 1000;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   border-radius: 10px;
-  overflow: hidden;
-  
 }
 
 .header-navside {
@@ -294,6 +277,51 @@
   cursor: pointer;
 }
 
-body.overlay-active {
-  overflow: hidden; /* ป้องกันการเลื่อนเนื้อหาเมื่อ overlay แสดง */
+@media (max-width: 888px) {
+  .nav-icons p {
+    display: none;
+  }
+  .register-btn p {
+    display: none;
+  }
 }
+@media (max-width: 768px) {
+
+  .navside {
+    width: 250px;
+  }
+  .nav-icons a {
+    margin: 1px;
+  }
+  .search-bar input {
+    width: 25px;
+    height: 25px;
+  }
+
+  .icon {
+    height: 25px;
+    width: 25px;
+
+  }
+
+.username-input svg,
+.register-btn svg,
+.nav-icons a svg {
+
+  width: 20px;
+  height: 20px;
+
+}
+
+.bell-icon i{
+
+  font-size: 20px;
+}
+
+.user-icon {
+  width: 30px;
+  height: 30px;
+
+}
+}
+

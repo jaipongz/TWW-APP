@@ -32,6 +32,7 @@ import { PopupService } from './services/popup.service';
 import { NovelFormComponent } from './novel-form/novel-form.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
+import { LockpageComponent } from './lockpage/lockpage.component';
 
 
 
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   {path: 'edit-novel', component: EditNovelComponent },
   {path: 'create-novel', component: CreateNovelComponent },
   {path: 'profile-detail', component: ProfileDetailComponent },
+  {path: 'novel-detail', component: NovelDetailComponent },
 ]
 
 @NgModule({
@@ -70,6 +72,7 @@ const appRoutes: Routes = [
     NovelFormComponent,
     UploadimageComponent,
     ProfileDetailComponent,
+    LockpageComponent,
   ],
   imports: [
     BrowserModule,

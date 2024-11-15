@@ -19,16 +19,17 @@ export class DialogService {
     if (this.loginDialogRef) {
       this.loginDialogRef.close(); // ปิด dialog ก่อนหน้า
     }
-
+  
     this.loginDialogRef = this.dialog.open(LoginComponent, {
-      disableClose: true
+      disableClose: true,
+      panelClass: 'custom-dialog-container' // กำหนดคลาส CSS
     });
-
+  
     this.loginDialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.loginDialogRef = null; // รีเซ็ต dialogRef หลังปิด Dialog
     });
-  }
+  }  
 
   // เปิด Register Dialog
   openRegisterDialog(): void {
@@ -57,6 +58,8 @@ export class DialogService {
       this.forgotPasswordDialogRef = null; // รีเซ็ต dialogRef หลังปิด Dialog
     });
   }
+
+
   // ปิด Dialog ปัจจุบัน
   closeDialog(dialogType: 'login' | 'register' | 'forgotPassword'): void {
     switch (dialogType) {

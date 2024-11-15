@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
           if (!response.data.error) {
             console.log('Login successful:', response);
             localStorage.setItem('token', response.data.token); // Store the token
+            localStorage.setItem('userId', this.username);
             this.dialogService.closeDialog('login');
             window.location.reload();
             // const redirectUrl = localStorage.getItem('redirectUrl') || '/defaultRoute';

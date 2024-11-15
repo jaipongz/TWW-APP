@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import Cropper from 'cropperjs';
 import { PopupService } from '../services/popup.service';
 import { NovelService } from '../services/novel.service';
-
+import { AuthService } from '../services/auth.service';
 interface Novel {
   novelName: string;
   penName: string;
@@ -83,12 +83,15 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
   };
 
 
-  constructor(private http: HttpClient,private novelService: NovelService, private popupService: PopupService) { }
+  constructor(private http: HttpClient,
+    private novelService: NovelService, 
+    private popupService: PopupService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.getSubGroups();
     this.fetchData();
-
+    this.authService.checkLoginStatus();
   }
 
 

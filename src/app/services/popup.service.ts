@@ -18,6 +18,7 @@ export class PopupService {
   showPopup(message: string) {
     this.popupMessage.next(message);
     this.popupVisibility.next(true);
+    return this.popupVisibility.next(true);
   }
 
   // ปิด Popup

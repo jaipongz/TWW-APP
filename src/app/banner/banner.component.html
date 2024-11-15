@@ -1,5 +1,7 @@
 <app-navbar></app-navbar>
+
 <div class="container-page">
+  <div class="containerfornav">
   <div class="banner">
     <div class="flexcard" #flexcard>
       <a *ngFor="let card of slides; let i = index" [ngClass]="{ active: i === currentIndex }"
@@ -98,4 +100,5 @@
       </div>
     </div>
   </section>
+</div>
 </div>
