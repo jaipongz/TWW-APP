@@ -8,7 +8,8 @@ import { UploadService } from '../services/upload.service';
 })
 export class UploadimageComponent {
   croppedImage: string | null = null;
-
+  croppedImageBlob: Blob | null = null;
+  
   constructor(private uploadService: UploadService ) {}
 
   handleFileSelect(event: Event): void {
@@ -25,6 +26,7 @@ export class UploadimageComponent {
       if (croppedImageContainer) {
         croppedImageContainer.style.display = 'block';
       }
+      this.croppedImageBlob = blob;
       this.uploadService.closeModal();
     }
   }

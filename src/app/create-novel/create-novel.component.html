@@ -1,21 +1,18 @@
 <app-navbar></app-navbar>
 <app-lockpage></app-lockpage>
- 
-  <div class="container-page">
-    <div class="containerfornav">
+<div class="container-page">
+  <div class="containerfornav">
     <div class="container">
-      <div class="form-group" style="margin-top:50px ;">
+      <div class="form-group">
         <div class="header">
           นิยาย (บรรยาย)
         </div>
         <div class="file-upload-head">
           <div class="file-upload-sub">
             <app-uploadimage></app-uploadimage>
-            <!-- 
-            <button (click)="submitProfilePic()">อัปโหลดรูปภาพ</button> -->
             <div class="penname">
               <!-- แสดงลิงก์เมื่อไม่อยู่ในโหมดแก้ไข -->
-              <a *ngIf="!isEditingPenName" (click)="penName()">
+              <a id="penNameInput" *ngIf="!isEditingPenName" (click)="penName()">
                 {{ novel.penName ? novel.penName : '+ นามปากกา' }}
               </a>
 
@@ -60,24 +57,26 @@
           <div class="category-sub">
             <label for="sub-category1">หมวดหมู่รอง 1 <b>(ไม่จำเป็นต้องใส่)</b></label>
             <select id="sub-category1" name="sub-category1" [(ngModel)]="novel.selectedSubCategory1">
-              <option value="" disabled selected>หมวดหมู่รอง</option>
+              <option value="" disabled>หมวดหมู่รอง</option>
+              <!-- แสดงตัวเลือกที่ผ่านการกรอง -->
               <option *ngFor="let subGroup of filteredSubGroups('sub-category1')" [value]="subGroup.label">
                 {{ subGroup.label }}
               </option>
             </select>
           </div>
-
+        
           <div class="category-sub">
             <label for="sub-category2">หมวดหมู่รอง 2 <b>(ไม่จำเป็นต้องใส่)</b></label>
             <select id="sub-category2" name="sub-category2" [(ngModel)]="novel.selectedSubCategory2">
-              <option value="" disabled selected>หมวดหมู่รอง</option>
+              <option value="" disabled>หมวดหมู่รอง</option>
+              <!-- แสดงตัวเลือกที่ผ่านการกรอง -->
               <option *ngFor="let subGroup of filteredSubGroups('sub-category2')" [value]="subGroup.label">
                 {{ subGroup.label }}
               </option>
             </select>
           </div>
-
         </div>
+        
       </div>
 
       <div class="form-group">
@@ -88,7 +87,7 @@
         </select>
         <label class="tags-head">แท็ก (0/18)</label>
         <div class="tags">
-          <span *ngFor="let tag of tags">{{ tag }}</span>
+          <span id="tag" *ngFor="let tag of tags">{{ tag }}</span>
         </div>
         <label for="tags">แท็กแนะนำ</label>
         <div class="tags">
@@ -105,5 +104,4 @@
     </div>
   </div>
 </div>
-
 <app-popup></app-popup>

@@ -46,24 +46,20 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
+    outline: none;
+
+
 }
 .form-group-1 {
     
     width: 600px;
     
-    input textarea {
-        width: 100%;
-        height: 88px;
-        font-size: 24px;
-
-    }
     textarea {
         padding: 10px;
-        width: 100%;
         resize: none;
-        font-size: 20px;
+        font-size: 18px;
         height: 200px;
-        border-radius: 5px;
+
     }
 
 }

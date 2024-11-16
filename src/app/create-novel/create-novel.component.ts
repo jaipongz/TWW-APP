@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, HostListener, AfterViewChecked } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import Cropper from 'cropperjs';
 import { PopupService } from '../services/popup.service';
 import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
+import { UploadimageComponent } from '../uploadimage/uploadimage.component';
 interface Novel {
   novelName: string;
   penName: string;
@@ -33,11 +33,7 @@ interface DropdownItem {
 
 export class CreateNovelComponent implements OnInit,AfterViewChecked {
   novel_propic: File | null = null;
-  croppedImage: string | null = null;
-  croppedImageBlob: Blob | null = null;
-  cropper: any;
   isModalOpen = false;
-  imageUrl: string = '';
   newTag: string = '';
   tags: string[] = [];
 
@@ -86,7 +82,7 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
   constructor(private http: HttpClient,
     private novelService: NovelService, 
     private popupService: PopupService,
-    private authService: AuthService) { }
+    private authService: AuthService,) { }
 
   ngOnInit(): void {
     this.getSubGroups();
@@ -103,19 +99,20 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
 
 
   filteredSubGroups(category: string) {
-    // กรองตัวเลือกที่ต้องซ่อนในแต่ละ dropdown
     return this.subGroups.filter(subGroup => {
+      // กรองตัวเลือกที่ไม่ต้องแสดงในแต่ละ dropdown
       if (category === 'sub-category1') {
-        return subGroup.label !== this.selectedSubCategory2;
+        return subGroup.label !== this.novel.selectedSubCategory2; // ไม่แสดงค่าที่เลือกใน sub-category2
       } else if (category === 'sub-category2') {
-        return subGroup.label !== this.selectedSubCategory1;
+        return subGroup.label !== this.novel.selectedSubCategory1; // ไม่แสดงค่าที่เลือกใน sub-category1
       }
-      return true;
+      return true; // กรณี default แสดงทั้งหมด
     });
   }
+  
 
   // updateNovelSubGroups() {
-  //   this.novel.subGroups = [this.selectedSubCategory1, this.selectedSubCategory2].filter(val => val);
+  //   this.subGroups = [this.selectedSubCategory1, this.selectedSubCategory2].filter(val => val);
   // }
 
   // onSelectionChange(): void {
@@ -212,7 +209,7 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
       });
   }
 
-  // Get the subgroups for categories
+
   getSubGroups(): void {
     this.http.get<any>('http://localhost:3090/subGroup', {
       headers: {
@@ -229,134 +226,115 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
     );
   }
 
-  // Handle file selection and trigger the cropper tool
-  handleFileSelect(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.src = e.target?.result as string;
-        img.onload = () => {
-          this.openCropTool(img.src);
-        };
-      };
-      reader.readAsDataURL(file);
-    }
+// ฟังก์ชันสำหรับเพิ่มคลาส invalid-field
+setInvalidField(fieldId: string) {
+  const field = document.getElementById(fieldId);
+  if (field) {
+    field.classList.add('invalid-field');
   }
+}
 
-  // Initialize the cropping tool with Cropper.js
-  openCropTool(imageSrc: string): void {
-    const cropModal = document.getElementById('cropModal') as HTMLElement;
-    const imagePreview = document.getElementById('imagePreview') as HTMLImageElement;
-    imagePreview.src = imageSrc;
-    cropModal.style.display = 'block';
-    this.cropper = new Cropper(imagePreview, {
-      aspectRatio: 1,
-      viewMode: 2,
-      movable: false,
-      zoomable: false,
-      scalable: false,
-      rotatable: false,
-    });
-  }
+// ฟังก์ชันสำหรับลบคลาส invalid-field
+resetValidation() {
+  const invalidFields = document.querySelectorAll('.invalid-field');
+  invalidFields.forEach((field) => field.classList.remove('invalid-field'));
+}
+  
 
-  // Crop the image and store the blob
-  cropImage(): void {
-    if (!this.cropper) return;
-    const croppedCanvas = this.cropper.getCroppedCanvas({
-      width: 300,
-      height: 300,
-    });
-    if (croppedCanvas) {
-      croppedCanvas.toBlob((blob: Blob | null) => {
-        if (blob) {
-          this.croppedImageBlob = blob;
-          this.croppedImage = URL.createObjectURL(blob);
-          const croppedImageContainer = document.getElementById('croppedImageContainer') as HTMLElement;
-          const croppedImage = document.getElementById('croppedImage') as HTMLImageElement;
-          croppedImage.src = this.croppedImage;
-          croppedImageContainer.style.display = 'block';
-          this.isModalOpen = false;
-          this.closeModal();
-        }
-      }, 'image/jpeg');
-    }
-  }
-
-  // Close the modal and reset the cropper
-  closeModal(): void {
-    const cropModal = document.getElementById('cropModal') as HTMLElement;
-    cropModal.style.display = 'none';
-    if (this.cropper) {
-      this.cropper.destroy();
-      this.cropper = null;
-    }
-  }
-
-  // Submit the profile picture
-  // submitProfilePic(): void {
-  //   if (!this.croppedImageBlob) {
-  //     console.error("กรุณาเลือกรูปภาพก่อน");
-  //     return;
-  //   }
-  //   const formData = new FormData();
-  //   formData.append('userId', 'bonza1230');
-  //   formData.append("profile_pic", this.croppedImageBlob, " .jpg");
-  //   const headers = new HttpHeaders({
-  //     Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImlhdCI6MTczMDYyMTY4OSwiZXhwIjoxNzMzMjEzNjg5fQ.3cWhDqm_371U6wJwUFWH8of0JJ6Mjox74NnMiNSqgTg',
-  //   });
-  //   this.http.post('http://localhost:3090/api/user/updateProfilePic', formData, { headers })
-  //     .subscribe(
-  //       (response) => console.log('อัปเดตรูปโปรไฟล์สำเร็จ:', response),
-  //       (error) => console.error('เกิดข้อผิดพลาดในการอัปเดตรูปโปรไฟล์:', error)
-  //     );
-  // }
-
-
-
+  @ViewChild(UploadimageComponent) uploadimageComponent!: UploadimageComponent;
 
   // Submit the novel form
-  submit(): void {
+ submit(): void {
     console.log('Form Submitted', this.novel);
-    if (!this.croppedImageBlob) {
-      this.popupService.showPopup("กรุณาเลือกรูปภาพก่อน");
+
+    // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
+    if (!this.uploadimageComponent?.croppedImageBlob) {
+      this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
       return;
-    } else if (!this.novel.novelName || !this.novel.penName || !this.novel.mainGroups || !this.novel.selectedSubCategory1 || !this.novel.selectedSubCategory2 || !this.novel.tag || !this.novel.rate || !this.novel.desc) {
-      this.popupService.showPopup("กรอกข้อมูลให้ครบ");
-    } else {
-      const formData = new FormData();
+    }
 
-      // เพิ่มข้อมูล text fields ลงใน FormData
-      formData.append('novelName', this.novel.novelName);
-      formData.append('penName', this.novel.penName);
-      formData.append('group', this.novel.group);
-      formData.append('type', this.novel.type);
-      formData.append('mainGroup', this.novel.mainGroups);
-      formData.append('subGroup1', this.novel.selectedSubCategory1);
-      formData.append('subGroup2', this.novel.selectedSubCategory2);
-      formData.append('tag', this.novel.tag);
-      formData.append('rate', this.novel.rate);
-      formData.append('desc', this.novel.desc);
-      formData.append('userId', this.novel.userId);
+    // ตรวจสอบข้อมูลที่กรอก
+    // if (!this.novel.novelName || !this.novel.penName || !this.novel.mainGroups ||  
+    //     !this.novel.tag || !this.novel.rate || !this.novel.desc) {
+    //   this.popupService.showPopup("กรอกข้อมูลให้ครบ");
+    //   return;
+    // }
 
-      // เพิ่ม `subGroups` เป็น JSON string ใน FormData
-      // formData.append('subGroups', JSON.stringify(this.novel.subGroups));
+    this.resetValidation();
 
-      formData.append('novel_propic', this.croppedImageBlob, "novelpropic.jpg");
- // เรียกใช้ service เพื่อส่งข้อมูลไปยัง API
-  this.novelService.storeNovel(formData).subscribe({
-    next: (data) => {
-      // แสดง popup แจ้งผลลัพธ์
-      this.popupService.showPopup(JSON.stringify(data));
-      setTimeout(() => {
-        this.popupService.closePopup(); // ปิด popup
-        window.location.reload(); // reload หน้า
-      }, 2000); // กำหนดเวลา 2 วินาทีก่อน reload (สามารถปรับได้ตามต้องการ)
-    },
-    error: (error) => this.popupService.showPopup(error.message),
-  });
-}
+    let hasError = false;
+  
+    // ตรวจสอบฟิลด์แต่ละอัน
+    if (!this.novel.novelName) {
+      this.setInvalidField('title');
+      hasError = true;
+    }
+    if (!this.novel.penName) {
+      this.setInvalidField('penNameInput');
+      hasError = true;
+    }
+    if (!this.novel.desc) {
+      this.setInvalidField('subtitle');
+      hasError = true;
+    }
+    if (!this.novel.rate) {
+      this.setInvalidField('rating');
+      hasError = true;
+    }
+    if (!this.novel.tag) {
+      this.setInvalidField('tag');
+      hasError = true;
+    }  
+    if (!this.selectedItem) {
+      this.setInvalidField('subItemSelect');
+      hasError = true;
+    }
+  
+    // ถ้ามีข้อผิดพลาด ให้แสดงข้อความเตือน
+    if (hasError) {
+      this.popupService.showPopup('กรอกข้อมูลให้ครบ');
+      return;
+    }
+    
+  // ถ้าข้อมูลครบถ้วนให้ดำเนินการบันทึก
+  this.saveNovel();
+  }
+
+  saveNovel() {
+    console.log('Saving novel...', this.novel);
+    // เพิ่มโค้ดสำหรับบันทึกข้อมูล
+    const formData = new FormData();
+    // เพิ่มข้อมูล text fields ลงใน FormData
+    formData.append('novelName', this.novel.novelName);
+    formData.append('penName', this.novel.penName);
+    formData.append('group', this.novel.group);
+    formData.append('type', this.novel.type);
+    formData.append('mainGroup', this.novel.mainGroups);
+    formData.append('subGroup1', this.novel.selectedSubCategory1);
+    formData.append('subGroup2', this.novel.selectedSubCategory2);
+    formData.append('tag', this.novel.tag);
+    formData.append('rate', this.novel.rate);
+    formData.append('desc', this.novel.desc);
+    formData.append('userId', this.novel.userId);
+
+    // เพิ่มรูปภาพที่ครอบแล้วลงใน FormData
+    const croppedImageBlob = this.uploadimageComponent.croppedImageBlob;
+    if (croppedImageBlob) {
+      formData.append('novel_propic', croppedImageBlob, "novelpropic.jpg");
+    }
+
+    // เรียกใช้ service เพื่อส่งข้อมูลไปยัง API
+    this.novelService.storeNovel(formData).subscribe({
+      next: (data) => {
+        this.popupService.showPopup(JSON.stringify(data));
+        setTimeout(() => {
+          this.popupService.closePopup();
+          window.location.reload();
+        }, 2000);
+      },
+      error: (error) => this.popupService.showPopup(error.message),
+    });
+  }
 
       // fetch('http://localhost:3090/api/novel/storeNovel', {
       //   method: 'POST',
@@ -382,7 +360,7 @@ export class CreateNovelComponent implements OnInit,AfterViewChecked {
       //   .catch((error) => this.popupService.showPopup(JSON.stringify(error.error)));
 
 
-  }
+
 
   // Adjust the textarea height as the user types
   adjustHeight(event: Event): void {

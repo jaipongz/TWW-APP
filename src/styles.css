@@ -66,6 +66,11 @@ body::before {
 
 }
 
+.invalid-field {
+  outline: 2px solid red;
+  outline-offset: 2px;
+}
+
 /* cssของlogin&register */
 .gbcontainer {
   display: flex;
@@ -145,8 +150,7 @@ h2 {
   /* สีพื้นหลังโปร่งใส */
 }
 input:focus {
-  outline: none;
-  
+  outline: none; 
 }
 input:not(:placeholder-shown) {
   background-color: none;
