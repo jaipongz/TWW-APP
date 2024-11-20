@@ -15,6 +15,7 @@
 .container {
     text-align: center;
     height: 100%;
+    margin-bottom: 2rem;
 }
 
 .header {
@@ -94,10 +95,18 @@
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
     
 }
 
-.tags span {
+.remove-tag {
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+.tags .tag {
     background-color: #e0f7fa;
     border: 1px solid #00acc1;
     border-radius: 5px;
@@ -107,14 +116,33 @@
 
 .buttons {
     display: flex;
+    position: fixed ;
     justify-content: space-between;
+    padding: 10px;
+    background: #000;
+    border-radius: 10px;
+    top: 6.3rem;
+    right: 50%;
+    transform: translatex(50%);
+    width: 50%;
+    align-items: center;
+    text-wrap: nowrap;
+    a {
+        color: #fff;
+        font-size: 1em;
+    }
+}
+
+.buttons-sub {
+    display: flex;
+    gap: 5px;
 }
 
 .buttons button {
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 0.7em;
     cursor: pointer;
 }
 
@@ -179,3 +207,103 @@
   /* .dropdown-item:hover .child-dropdown {
     display: block;
   } */ 
+
+  .toggle-button-cover {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .button-cover {
+    background-color: #fff;
+    box-shadow: 0 7.7px 15px -6.6px #c5d6d6; /* ปรับเพิ่ม */
+    border-radius: 10px; /* เพิ่มขึ้น 10% จาก 2.8px */
+  }
+  
+  .button-cover:before {
+    counter-increment: button-counter;
+    content: counter(button-counter);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #d7e3e3;
+    font-size: 9.24px; /* เพิ่มขึ้น 10% จาก 8.4px */
+    line-height: 1;
+    padding: 3.85px; /* เพิ่มขึ้น 10% จาก 3.5px */
+  }
+  
+  .button-cover,
+  .knobs,
+  .layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .button {
+    position: relative;
+    width: 40px; /* เพิ่มขึ้น 10% จาก 51.8px */
+    height: 20px; /* เพิ่มขึ้น 10% จาก 25.2px */
+    overflow: hidden;
+  }
+  #status{
+    color: #ffff;
+    font-size: 1em;
+    
+
+    }
+  .checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+  }
+  
+  .knobs {
+    z-index: 2;
+  }
+  
+  .layer {
+    max-width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+  }
+  
+  .button.r,
+  .button.r .layer {
+    border-radius: 77px; /* เพิ่มขึ้น 10% จาก 70px */
+  }
+  
+  #button-3 .knobs:before {
+    content: "PB";
+    position: absolute;
+    top: 0; /* เพิ่มขึ้น 10% จาก 2.8px */
+    left: 0; /* เพิ่มขึ้น 10% จาก 2.8px */
+    width: 15px; /* เพิ่มขึ้น 10% จาก 14px */
+    height: 7px; /* เพิ่มขึ้น 10% จาก 7px */
+    color: #fff;
+    font-size: 9px; /* เพิ่มขึ้น 10% จาก 8.4px */
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 6.93px 3.08px; /* เพิ่มขึ้น 10% */
+    background-color: #1c739b;
+    border-radius: 50%; /* เพิ่มขึ้น 10% จาก 35% */
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+  }
+  
+  #button-3 .checkbox:checked + .knobs:before {
+    content: "PV";
+    left: 20px; /* เพิ่มขึ้น 10% จาก 29.4px */
+    background-color: #b6413b;
+  }
+  

@@ -1,31 +1,79 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+
+interface Novel {
+  novelName: string;
+  penName: string;
+  group: string;
+  type: string;
+  mainGroups: string;
+  selectedSubCategory1: string;
+  selectedSubCategory2: string;
+  tag: string;
+  rate: string;
+  desc: string;
+  novel_propic: File | null;
+  userId: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class NovelService {
-  private apiUrl = 'http://localhost:3090/api/novel';
-  // private apiUrl = 'http://localhost:3090/api/novel/storeNovel';
-  private token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzYsImlhdCI6MTczMDYyMTY4OSwiZXhwIjoxNzMzMjEzNjg5fQ.3cWhDqm_371U6wJwUFWH8of0JJ6Mjox74NnMiNSqgTg';
+
+  private novelCreate = {
+    group: '',
+    type: '',
+  };
+
+  private novelData: Novel = {
+    novelName: '',
+    penName: '',
+    group: '',
+    type: '',
+    mainGroups: '',
+    selectedSubCategory1: '',
+    selectedSubCategory2: '',
+    tag: '',
+    rate: '',
+    desc: '',
+    novel_propic: null,
+    userId: '',
+  };
+
   
-  constructor(private http: HttpClient) {}
-
-  getNovelDetail(novelId: number, start: number, limit: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getNovelDetail/${novelId}?start=${start}&limit=${limit}`);
-  }
-
-  storeNovel(formData: FormData): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.token}`,
-    });
-
-    return this.http.post<any>(`${this.apiUrl}/storeNovel`, formData, { headers }).pipe(
-      map((response) => response.data || 'No data received'),
-      catchError((error) => throwError(() => new Error(`HTTP error! Status: ${error.status}`)))
-    );
-  }
-
  
+
+  constructor() {}
+
+  setNovelCreate(data: { group: string; type: string }): void {
+    this.novelCreate = data;
+  }
+
+  getNovelCreate(): { group: string; type: string } {
+    return this.novelCreate;
+  }
+
+  typeMapping(): { [key: string]: string } {
+    return {
+      describe: 'บรรยาย',
+      chat: 'แชท',
+      cartoon: 'การ์ตูน/ภาพประกอบ',
+      gist: 'กระทู้',
+      fic_describe: 'ฟิคบรรยาย',
+      fic_chat: 'ฟิคแชท',
+      fic_doujinshi: 'โดจินชิ/แฟนอาร์ต',
+    };
+  }
+
+   // Set novel data
+   setNovelData(novel: Novel): void {
+    this.novelData = { ...novel };
+  }
+
+  // Get novel data
+  getNovelData(): Novel {
+    return this.novelData;
+  }
+
+
 }

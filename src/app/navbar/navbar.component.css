@@ -199,7 +199,7 @@
   top: 0;
   /* transform: translate(-50%, -50%); */
   z-index: 1000;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;

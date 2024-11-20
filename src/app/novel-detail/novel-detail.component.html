@@ -108,19 +108,19 @@
         <!-- สไตล์งานเขียน -->
         <div *ngIf="isOriginal">
           <div class="popup-row">
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.describe }" (click)="selectType('describe')" class="popup-button">
               <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon>บรรยาย
             </button>
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.chat }" (click)="selectType('chat')" class="popup-button">
               <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>แชท
             </button>
           </div>
           <div class="popup-row">
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.cartoon }" (click)="selectType('cartoon')" class="popup-button">
               <fa-icon [icon]="faPen" class="icon-pop"></fa-icon
               >การ์ตูน/ภาพประกอบ
             </button>
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.gist }" (click)="selectType('gist')" class="popup-button">
               <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>กระทู้
             </button>
           </div>
@@ -128,23 +128,23 @@
 
         <div *ngIf="isFanfiction">
           <div class="popup-row">
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.fic_describe }" (click)="selectType('fic_describe')" class="popup-button">
               <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon
               >ฟิคบรรยาย
             </button>
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.fic_chat }" (click)="selectType('fic_chat')" class="popup-button">
               <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>ฟิคแชท
             </button>
           </div>
           <div class="popup-row">
-            <button class="popup-button">
+            <button [ngClass]="{ active: typeStatus.fic_doujinshi }" (click)="selectType('fic_doujinshi')" class="popup-button">
               <fa-icon [icon]="faPen" class="icon-pop"></fa-icon
               >โดจินชิ/แฟนอาร์ต
             </button>
           </div>
         </div>
 
-        <button class="popup-create-button">สร้าง</button>
+        <button (click)="precreate()" class="popup-create-button">ตกลง</button>
       </div>
     </div>
   </div>

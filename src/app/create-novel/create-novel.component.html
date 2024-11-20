@@ -5,7 +5,7 @@
     <div class="container">
       <div class="form-group">
         <div class="header">
-          นิยาย (บรรยาย)
+          นิยาย ({{ typeMapping()[novel.type] || 'ไม่ระบุ'}})
         </div>
         <div class="file-upload-head">
           <div class="file-upload-sub">
@@ -18,7 +18,7 @@
 
               <!-- แสดง input เมื่ออยู่ในโหมดแก้ไข -->
               <input *ngIf="isEditingPenName" #penNameInput type="text" [(ngModel)]="novel.penName"
-                (keydown.enter)="confirmPenName()">
+                (ngModelChange)="saveToLocalStorage()" (keydown.enter)="confirmPenName()">
             </div>
           </div>
           <div id="croppedImageContainer" style="display: none;">
@@ -29,9 +29,11 @@
 
           <div class="form-group-1">
             <label for="title">ชื่อเรื่อง</label>
-            <input id="title" name="title" [(ngModel)]="novel.novelName" type="text">
+            <input id="title" name="title" [(ngModel)]="novel.novelName" (ngModelChange)="saveToLocalStorage()"
+              type="text">
             <label for="subtitle">คำโปรย/เรื่องย่อ</label>
-            <textarea id="subtitle" name="subtitle" [(ngModel)]="novel.desc" type="text"></textarea>
+            <textarea id="subtitle" name="subtitle" [(ngModel)]="novel.desc" (ngModelChange)="saveToLocalStorage()"
+              type="text"></textarea>
           </div>
         </div>
       </div>
@@ -40,8 +42,9 @@
       <div class="form-group">
         <label for="main-category">หมวดหมู่หลัก</label>
         <div class="dropdown-container ">
-          <select id="subItemSelect" [(ngModel)]="selectedItem" (change)="onSelectItem($event)">
-            <option value="" disabled selected>เลือกหมวดหมู่หลัก</option>
+          <select id="subItemSelect" [(ngModel)]="selectedItem" (change)="onSelectItem($event)"
+            (ngModelChange)="saveToLocalStorage()">
+            <option value="" disabled>เลือกหมวดหมู่หลัก</option>
             <!-- Group items -->
             <optgroup *ngFor="let group of groupedData | keyvalue" [label]="group.key">
               <!-- Sub-item option with tooltip for 'desc' on hover -->
@@ -51,12 +54,13 @@
             </optgroup>
           </select>
         </div>
-
+        <br>
 
         <div class="main-category-sub">
           <div class="category-sub">
             <label for="sub-category1">หมวดหมู่รอง 1 <b>(ไม่จำเป็นต้องใส่)</b></label>
-            <select id="sub-category1" name="sub-category1" [(ngModel)]="novel.selectedSubCategory1">
+            <select id="sub-category1" name="sub-category1" [(ngModel)]="novel.selectedSubCategory1"
+              (ngModelChange)="saveToLocalStorage()">
               <option value="" disabled>หมวดหมู่รอง</option>
               <!-- แสดงตัวเลือกที่ผ่านการกรอง -->
               <option *ngFor="let subGroup of filteredSubGroups('sub-category1')" [value]="subGroup.label">
@@ -64,10 +68,11 @@
               </option>
             </select>
           </div>
-        
+
           <div class="category-sub">
             <label for="sub-category2">หมวดหมู่รอง 2 <b>(ไม่จำเป็นต้องใส่)</b></label>
-            <select id="sub-category2" name="sub-category2" [(ngModel)]="novel.selectedSubCategory2">
+            <select id="sub-category2" name="sub-category2" [(ngModel)]="novel.selectedSubCategory2"
+              (ngModelChange)="saveToLocalStorage()">
               <option value="" disabled>หมวดหมู่รอง</option>
               <!-- แสดงตัวเลือกที่ผ่านการกรอง -->
               <option *ngFor="let subGroup of filteredSubGroups('sub-category2')" [value]="subGroup.label">
@@ -76,30 +81,47 @@
             </select>
           </div>
         </div>
-        
+
       </div>
 
       <div class="form-group">
         <label for="rating">ระดับของเนื้อหา (Rating)</label>
-        <select id="rating" name="rating" [(ngModel)]="novel.rate">
-          <option value="" disabled selected>เลือกระดับของเนื้อหา</option>
+        <select id="rating" name="rating" [(ngModel)]="novel.rate" (ngModelChange)="saveToLocalStorage()">
+          <option value="" disabled>เลือกระดับของเนื้อหา</option>
           <option *ngFor="let rate of rates">{{ rate.rate }}</option>
         </select>
         <label class="tags-head">แท็ก (0/18)</label>
         <div class="tags">
-          <span id="tag" *ngFor="let tag of tags">{{ tag }}</span>
+          <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" (click)="deltag(tag)" class="tag">
+            {{ tag }} <span class="remove-tag">×</span>
+          </span>
         </div>
+
         <label for="tags">แท็กแนะนำ</label>
         <div class="tags">
-          <span *ngFor="let tag of tageRec" (click)="addTagRec(tag.tag)" class="tag">{{ tag.tag }}</span>
+          <span *ngFor="let tag of tageRec; trackBy: trackByTag" (click)="addTagRec(tag.tag)" class="tag">
+            {{ tag.tag }}
+          </span>
         </div>
-        <input id="tags" name="tags" type="text" placeholder="ใส่แท็กเพิ่ม (กด Enter เพื่อเพิ่มแท็กใหม่)"
-          (keyup.enter)="addTag()" [(ngModel)]="newTag" />
+
+        <input name="tags" type="text" placeholder="ใส่แท็กเพิ่ม (กด Enter เพื่อเพิ่มแท็กใหม่)" (keyup.enter)="addTag()"
+          [(ngModel)]="newTag" />
       </div>
 
-      <div class="buttons">
-        <button class="back-button" (click)="goBack()">ย้อนกลับ</button>
-        <button class="submit-button" (click)="submit()">บันทึก</button>
+      <div class="buttons" *ngIf="checkform">
+        <a>คุณต้องการบันทึกหรือไม่</a>
+        <div class="toggle-button-cover">
+          <div class="button r" id="button-3">
+            <input type="checkbox" class="checkbox" (change)="toggleStatus($event)">
+            <div class="knobs"></div>
+            <div class="layer"></div>
+          </div>
+          <a id="status">{{ novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }}</a>
+        </div>
+        <div class="buttons-sub">
+          <button class="back-button" (click)="goBack()">ย้อนกลับ</button>
+          <button class="submit-button" (click)="presubmit()">บันทึก</button>
+        </div>
       </div>
     </div>
   </div>

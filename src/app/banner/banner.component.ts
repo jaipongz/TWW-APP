@@ -9,9 +9,13 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
   styleUrl: './banner.component.css'
 })
 export class BannerComponent implements OnInit, OnDestroy,AfterViewInit {
-  constructor(private router :Router, private http : HttpClient) {}
+  constructor(private router :Router, private http : HttpClient) {
+    this.updateBtnTag();
+  }
   faChevronLeft  = faChevronLeft ;
   faChevronRight   = faChevronRight  ;
+
+  btnTag = true;
 
 
   @ViewChild('flexcard', { static: true }) flexcard!: ElementRef;
@@ -30,21 +34,14 @@ export class BannerComponent implements OnInit, OnDestroy,AfterViewInit {
   
 
   ngOnInit(): void {
-    // this.checkViewport();
     this.startAutoSlide();  // Start auto-sliding when component initializes
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   console.log('Token found:', token);
-      
-    // } else {
-    //   console.log('No token found, redirecting to login');
-      
-    // }
-
-
     this.generateButtonStyles(); //สีปุ่ม
   }
 
+  @HostListener('window:resize', [])
+  onResize() {
+    this.updateBtnTag();
+  }
   ngOnDestroy(): void {
     this.stopAutoSlide();  // Clear the interval when the component is destroyed
   }
@@ -182,6 +179,15 @@ export class BannerComponent implements OnInit, OnDestroy,AfterViewInit {
     }
   }
 
+  showsBtn() {
+     if (window.innerWidth >= 980) {
+      this.btnTag = !this.btnTag; 
+    }
+  }
+
+  private updateBtnTag() {
+    this.btnTag = window.innerWidth < 980; // กำหนด true เสมอถ้าจอเล็กกว่า 980px
+  }
 
   goTotag() {
 

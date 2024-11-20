@@ -13,6 +13,14 @@
   --background: #f5ece3;
 }
 
+.justi-cent {
+  justify-content: center;
+}
+
+.justi-aroun {
+  justify-content: space-around;
+}
+
 .col-100{
   width: 100%;
 }
@@ -27,6 +35,17 @@
 }
 .col-33{
   width: 33.33%;
+}
+
+.grow-1 {
+  flex-grow: 1;
+}
+.grow-2 {
+  flex-grow: 2;
+}
+
+.grow-8{
+  flex-grow: 8;
 }
 
 body {
@@ -63,7 +82,6 @@ body::before {
 
 .containerfornav {
   margin-top: 7rem;
-
 }
 
 .invalid-field {
@@ -134,7 +152,7 @@ body::before {
 h2 {
   display: inline;
   text-align: center;
-  margin-bottom: 20px;
+
 }
 
 .gbinput-group {
