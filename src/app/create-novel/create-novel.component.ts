@@ -85,7 +85,9 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private novelService: NovelService,
     private popupService: PopupService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef) { }
+    private cdr: ChangeDetectorRef) { 
+      this.getToLocalStorage();
+    }
 
   ngOnInit(): void {
     this.getSubGroups();
@@ -96,7 +98,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.novelData = this.novelService.getNovelCreate();
     this.updateNovel();
 
-    this.getToLocalStorage();
+    
  
   }
 
@@ -110,19 +112,14 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
  getToLocalStorage() {
   const storedData = localStorage.getItem('getNovelCreate');
   if (storedData) {
-    const confirmed = confirm('ต้องการนำนิยายที่เขียนไว้กลับมาหรือไม่');
-    if (confirmed) {
-      try {
-        this.novel = JSON.parse(storedData);
-        console.log('Loaded data from localStorage:', this.novel);
-      } catch (error) {
-        console.error('Failed to parse JSON:', error);
-        localStorage.removeItem('getNovelCreate');
-      }
-    } else {
-      localStorage.removeItem('getNovelCreate');
-    }
+  const confirmed = confirm(`ต้องการนำนิยายที่เขียนไว้กลับมาหรือไม่`);
+  if (confirmed) {
+    this.novel = JSON.parse(storedData);
+    console.log('Loaded data from localStorage:', this.novel);
+  } else {
+    localStorage.removeItem('getNovelCreate');
   }
+}
  }
 
   onSelectItem(event: Event): void {
@@ -363,7 +360,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    const confirmed = confirm('คุณต้องการบันเป็นสาธารณะหรือไม่');
+    const confirmed = confirm(`คุณต้องการบันเป็น${ this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }ใช่หรือไม่`);
     if (confirmed) {
       this.novel.status = 'T';
       if (this.novel.status){

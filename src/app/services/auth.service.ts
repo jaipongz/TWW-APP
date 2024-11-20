@@ -28,7 +28,7 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     });
     
-    return this.http.get(`${this.apiUrl}/myNovelList/?keyword=${keyword}start=${start}&limit=${limit}`, { headers });
+    return this.http.get(`${this.apiUrl}/myNovelList/?keyword=${keyword}&start=${start}&limit=${limit}`, { headers });
   }
 
   storeNovel(formData: FormData): Observable<any> {

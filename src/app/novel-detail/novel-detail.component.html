@@ -253,6 +253,13 @@
   </div>
 </div>
 
+<div *ngFor="let novel of noveldata">
+  <h3>{{ novel.novel_name }}</h3>
+  <p>By {{ novel.pen_name }}</p>
+  <p>{{ novel.novel_desc }}</p>
+  <hr />
+</div>
+
 <script>
   function showPopup() {
     document.getElementById("popup").classList.remove("hidden");

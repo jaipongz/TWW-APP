@@ -28,6 +28,7 @@ export class NovelDetailComponent {
   
   constructor(private novelService: NovelService, private authService:AuthService,private popupService:PopupService,private router:Router) {
     this.authService.checkLoginStatus();
+    this.getNovel();
   }
 
 
@@ -124,6 +125,28 @@ export class NovelDetailComponent {
     if (target === this.createPopup.nativeElement) {
       this.createPopup.nativeElement.classList.add('hidden');
     }
+  }
+  
+  noveldata: any[] = [];
+
+  getNovel() {
+  const keyword = ''; // ใส่ keyword ที่ต้องการ
+  const start = 0; 
+  const limit = 10; 
+
+  this.authService.getNovelDetail(keyword, start, limit).subscribe({
+    next: (response) => {
+      if (response?.status === 'success') {
+        this.noveldata = response.data.data; // เก็บข้อมูล novel ใน array
+        console.log('Novels:', this.noveldata);
+      } else {
+        console.error('Failed to fetch novels:', response);
+      }
+    },
+    error: (err) => {
+      console.error('Error fetching novels:', err);
+    },
+  });
   }
 
 
