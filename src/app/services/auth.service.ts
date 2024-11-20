@@ -10,15 +10,25 @@ import { PopupService } from './popup.service';
 })
 export class AuthService {
   private readonly tokenKey = 'token';
-  private readonly userIdKey = 'userId';
+  // private readonly userIdKey = 'userId';
   private apiUrl = 'http://localhost:3090/api/novel';
 
   constructor(private router: Router, private dialogService: DialogService, private http: HttpClient, private popupService: PopupService) { }
 
 
 
-  getNovelDetail(novelId: number, start: number, limit: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/getNovelDetail/${novelId}?start=${start}&limit=${limit}`);
+  getNovelDetail(keyword: string, start: number, limit: number): Observable<any> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    
+    return this.http.get(`${this.apiUrl}/myNovelList/?keyword=${keyword}start=${start}&limit=${limit}`, { headers });
   }
 
   storeNovel(formData: FormData): Observable<any> {
@@ -62,9 +72,9 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  getUserId(): string | null {
-    return localStorage.getItem(this.userIdKey);
-  }
+  // getUserId(): string | null {
+  //   return localStorage.getItem(this.userIdKey);
+  // }
 
 
   goTo( key:any ){
@@ -87,9 +97,9 @@ export class AuthService {
 
   checkLoginStatus() {
     const token = this.getToken();
-    const userId = this.getUserId();
-
-    if (!token && !userId) {
+    // const userId = this.getUserId();
+    // && !userId
+    if (!token ) {
       console.log('No token found, redirecting to login');
       const cpnfirmed = confirm('กรุณาเข้าสู่ระบบ');
       if (cpnfirmed) {
@@ -113,7 +123,7 @@ export class AuthService {
     this.router.navigate(['/banner']).then(() => {
       window.location.reload();
       localStorage.removeItem(this.tokenKey);
-      localStorage.removeItem(this.userIdKey);
+      // localStorage.removeItem(this.userIdKey);
       this.popupService.showPopup('ออกจากระบบเรียบร้อยแล้ว');
     });
   }

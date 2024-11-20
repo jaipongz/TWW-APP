@@ -92,19 +92,12 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.fetchData();
     this.authService.checkLoginStatus();
     this.typeMapping();
-    this.novel.userId = this.authService.getUserId();
+    // this.novel.userId = this.authService.getUserId();
     this.novelData = this.novelService.getNovelCreate();
     this.updateNovel();
-    
-   
-    console.log(this.novel);
 
-
-    // const storedData = localStorage.getItem('getNovelCreate');
-    // if (storedData) {
-    //   this.novel = JSON.parse(storedData);
-    //   console.log('Loaded data from sessionStorage:', this.novel);
-    // }
+    this.getToLocalStorage();
+ 
   }
 
   saveToLocalStorage() {
@@ -114,6 +107,23 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.checkform = true;
   }
 
+ getToLocalStorage() {
+  const storedData = localStorage.getItem('getNovelCreate');
+  if (storedData) {
+    const confirmed = confirm('ต้องการนำนิยายที่เขียนไว้กลับมาหรือไม่');
+    if (confirmed) {
+      try {
+        this.novel = JSON.parse(storedData);
+        console.log('Loaded data from localStorage:', this.novel);
+      } catch (error) {
+        console.error('Failed to parse JSON:', error);
+        localStorage.removeItem('getNovelCreate');
+      }
+    } else {
+      localStorage.removeItem('getNovelCreate');
+    }
+  }
+ }
 
   onSelectItem(event: Event): void {
     this.novel.mainGroups = (event.target as HTMLSelectElement).value;
@@ -461,12 +471,12 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     formData.append('status', this.novel.status);
 
     // formData.append('userId', this.novel.userId ||'');
-    const userId = this.novel.userId; // userId เป็น string | null
-    if (userId !== null) {
-        formData.append("userId", userId);
-    } else {
-        console.error("User ID is null, skipping...");
-    }
+    // const userId = this.novel.userId; // userId เป็น string | null
+    // if (userId !== null) {
+    //     formData.append("userId", userId);
+    // } else {
+    //     console.error("User ID is null, skipping...");
+    // }
     
     // เพิ่มรูปภาพที่ครอบแล้วลงใน FormData
     if (this.uploadimageComponent.croppedImageBlob) {
