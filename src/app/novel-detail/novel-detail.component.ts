@@ -19,14 +19,14 @@ export class NovelDetailComponent {
   faComment = faComment;
   faPen = faPen;
   // faTwitch = faTwitch;
-  
+
 
   showSortDropdown = false;
   showStatusStoryDropdown = false;
   showStatusCompleteDropdown = false;
 
-  
-  constructor(private novelService: NovelService, private authService:AuthService,private popupService:PopupService,private router:Router) {
+
+  constructor(private novelService: NovelService, private authService: AuthService, private popupService: PopupService, private router: Router) {
     this.authService.checkLoginStatus();
     this.getNovel();
   }
@@ -36,7 +36,7 @@ export class NovelDetailComponent {
     group: 'original',
     type: 'describe',
   };
-  
+
   typeStatus = {
     describe: true,
     chat: false,
@@ -47,24 +47,24 @@ export class NovelDetailComponent {
     fic_doujinshi: false,
   };
 
-  
+
   isOriginal = true;  // ค่าเริ่มต้นให้เป็นนิยายออรินอล
   isFanfiction = false;
 
   selectCategory(group: string) {
     this.isOriginal = group === 'original';
     this.isFanfiction = group === 'fanfiction';
-  
-     // ตั้งค่า group ใหม่ใน getNovelCreate
+
+    // ตั้งค่า group ใหม่ใน getNovelCreate
     this.getNovelCreate.group = group;
 
     //เคลียร์ค่า type ให้เป็นค่าว่าง
     this.getNovelCreate.type = '';
 
-     // ตั้งค่าทุก typeStatus เป็น false
-     Object.keys(this.typeStatus).forEach((key) => {
+    // ตั้งค่าทุก typeStatus เป็น false
+    Object.keys(this.typeStatus).forEach((key) => {
       this.typeStatus[key as string as keyof typeof this.typeStatus] = false;
-  });
+    });
   }
 
 
@@ -81,14 +81,14 @@ export class NovelDetailComponent {
   }
 
   precreate() {
-    if (!this.getNovelCreate.group || !this.getNovelCreate.type ) {
+    if (!this.getNovelCreate.group || !this.getNovelCreate.type) {
       this.popupService.showPopup('ตัวเลือกไม่ครบ');
     } else {
       this.novelService.setNovelCreate(this.getNovelCreate);
       this.router.navigate(['create-novel']);
     }
-    
-    
+
+
   }
 
   @ViewChild('sortDropdown', { static: false }) sortDropdown!: ElementRef;
@@ -126,29 +126,63 @@ export class NovelDetailComponent {
       this.createPopup.nativeElement.classList.add('hidden');
     }
   }
-  
+
   noveldata: any[] = [];
 
   getNovel() {
-  const keyword = ''; // ใส่ keyword ที่ต้องการ
-  const start = 0; 
-  const limit = 10; 
+    const keyword = ''; // ใส่ keyword ที่ต้องการ
+    const start = 0;
+    const limit = 10;
 
-  this.authService.getNovelDetail(keyword, start, limit).subscribe({
-    next: (response) => {
-      if (response?.status === 'success') {
-        this.noveldata = response.data.data; // เก็บข้อมูล novel ใน array
-        console.log('Novels:', this.noveldata);
-      } else {
-        console.error('Failed to fetch novels:', response);
-      }
-    },
-    error: (err) => {
-      console.error('Error fetching novels:', err);
-    },
-  });
+    this.authService.getNovelDetail(keyword, start, limit).subscribe({
+      next: (response) => {
+        if (response?.status === 'success') {
+          this.noveldata = response.data.data; // เก็บข้อมูล novel ใน array
+          // console.log('Novels:', this.noveldata);
+        } else {
+          console.error('Failed to fetch novels:', response);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching novels:', err);
+      },
+    });
   }
 
+  timeAgoThai(updatedAt: string): string {
+    const now = new Date();
+    const updatedTime = new Date(updatedAt); // Convert string to Date object
+    const diffInSeconds = Math.floor((now.getTime() - updatedTime.getTime()) / 1000);
+
+    const secondsInMinute = 60;
+    const secondsInHour = 60 * secondsInMinute;
+    const secondsInDay = 24 * secondsInHour;
+    const secondsInWeek = 7 * secondsInDay;
+    const secondsInMonth = 30 * secondsInDay; // Approximation
+    const secondsInYear = 365 * secondsInDay; // Approximation
+
+    if (diffInSeconds < secondsInMinute) {
+      return `${diffInSeconds} วินาที ที่แล้ว`;
+    } else if (diffInSeconds < secondsInHour) {
+      const minutes = Math.floor(diffInSeconds / secondsInMinute);
+      return `${minutes} นาที ที่แล้ว`;
+    } else if (diffInSeconds < secondsInDay) {
+      const hours = Math.floor(diffInSeconds / secondsInHour);
+      return `${hours} ชั่วโมง ที่แล้ว`;
+    } else if (diffInSeconds < secondsInWeek) {
+      const days = Math.floor(diffInSeconds / secondsInDay);
+      return `${days} วัน ที่แล้ว`;
+    } else if (diffInSeconds < secondsInMonth) {
+      const weeks = Math.floor(diffInSeconds / secondsInWeek);
+      return `${weeks} สัปดาห์ ที่แล้ว`;
+    } else if (diffInSeconds < secondsInYear) {
+      const months = Math.floor(diffInSeconds / secondsInMonth);
+      return `${months} เดือน ที่แล้ว`;
+    } else {
+      const years = Math.floor(diffInSeconds / secondsInYear);
+      return `${years} ปี ที่แล้ว`;
+    }
+  }
 
 
 }

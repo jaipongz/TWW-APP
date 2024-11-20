@@ -353,7 +353,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    //ตรวจสอบข้อมูลที่กรอก
+    
     if (!this.novel.novelName || !this.novel.penName || !this.novel.mainGroups ||
       !this.novel.tag || !this.novel.rate || !this.novel.desc) {
       this.popupService.showPopup("กรอกข้อมูลให้ครบ");
