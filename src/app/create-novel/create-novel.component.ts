@@ -86,7 +86,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private popupService: PopupService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef) { 
-      this.getToLocalStorage();
+      
     }
 
   ngOnInit(): void {
@@ -97,28 +97,39 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     // this.novel.userId = this.authService.getUserId();
     this.novelData = this.novelService.getNovelCreate();
     this.updateNovel();
-
-    
- 
+    this.getToLocalStorage();
   }
 
   saveToLocalStorage() {
-    // เก็บค่าล่าสุดลงใน LocalStorage
-    console.log('Saving to localStorage', this.novel);
-    localStorage.setItem('getNovelCreate', JSON.stringify(this.novel));
-    this.checkform = true;
+    try {
+      // แปลงข้อมูล novel เป็น JSON และเก็บใน localStorage
+      console.log('Saving to localStorage', this.novel);
+      localStorage.setItem('getNovelCreate', JSON.stringify(this.novel));
+  
+      // ตรวจสอบว่าข้อมูลถูกเก็บไว้สำเร็จหรือไม่
+      const savedData = localStorage.getItem('getNovelCreate');
+      if (savedData) {
+        this.checkform = true; // หากข้อมูลถูกเก็บไว้แล้วให้ตั้งค่าค่า checkform เป็น true
+      } else {
+        console.error('Failed to save data to localStorage');
+        this.checkform = false; // หากไม่สามารถบันทึกข้อมูลได้
+      }
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+      this.checkform = false; // กรณีเกิดข้อผิดพลาดระหว่างการบันทึก
+    }
   }
 
  getToLocalStorage() {
   const storedData = localStorage.getItem('getNovelCreate');
   if (storedData) {
-  const confirmed = confirm(`ต้องการนำนิยายที่เขียนไว้กลับมาหรือไม่`);
-  if (confirmed) {
-    this.novel = JSON.parse(storedData);
-    console.log('Loaded data from localStorage:', this.novel);
-  } else {
-    localStorage.removeItem('getNovelCreate');
-  }
+    try {
+      this.novel = JSON.parse(storedData);
+      console.log('Loaded data from localStorage:', this.novel);
+    } catch (error) {
+      console.error('Failed to parse JSON:', error);
+      localStorage.removeItem('getNovelCreate');
+    }
 }
  }
 
@@ -518,9 +529,16 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     input.style.height = 'auto';
     input.style.height = `${input.scrollHeight}px`;
   }
+  
 
   goBack() {
-    window.history.back();
-    this.checkform = false;
+    const confirmed = confirm('ต้องการเก็บการเขียนไว้ชั่วคราวหรือไม่')
+    if (confirmed){
+      window.history.back();
+      this.checkform = false;
+    }else {
+      window.history.back();
+      localStorage.removeItem('getNovelCreate')
+    }
   }
 }

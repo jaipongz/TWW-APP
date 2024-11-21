@@ -12,6 +12,8 @@ export class NavbarComponent implements OnInit {
 
   showPassword: boolean = false;
   username: string = 'usernamelove';
+  isSideOpen: boolean = false;
+  isMenuOpen = false;
 
   constructor(private router: Router, public dialogService: DialogService, 
     private popupService: PopupService,private elementRef: ElementRef,private authService:AuthService) {}
@@ -46,7 +48,7 @@ export class NavbarComponent implements OnInit {
     this.dialogService.openRegisterDialog()
   }
 
-  isMenuOpen = false;
+  
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -62,6 +64,11 @@ export class NavbarComponent implements OnInit {
   }
 
   
+  sidebar($event:any){
+  this.isSideOpen = !this.isSideOpen; // เปลี่ยนสถานะ true <-> false
+  console.log('Sidebar status:', this.isSideOpen); // ตรวจสอบสถานะ
+  
+  }
   
   closePopup() {
     this.popupService.closePopup();
