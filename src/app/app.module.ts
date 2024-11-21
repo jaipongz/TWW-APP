@@ -33,6 +33,7 @@ import { NovelFormComponent } from './novel-form/novel-form.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { LockpageComponent } from './lockpage/lockpage.component';
+import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component';
 
 
 
@@ -73,6 +74,7 @@ const appRoutes: Routes = [
     UploadimageComponent,
     ProfileDetailComponent,
     LockpageComponent,
+    CeateNovelEpComponent,
   ],
   imports: [
     BrowserModule,
