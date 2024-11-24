@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface Novel {
   novelName: string;
@@ -19,7 +20,7 @@ interface Novel {
   providedIn: 'root'
 })
 export class NovelService {
-
+  private readonly tokenKey = 'token';
   private novelCreate = {
     group: '',
     type: '',
@@ -42,8 +43,11 @@ export class NovelService {
 
   
  
+  private apiUrl = 'http://localhost:3090';
 
-  constructor() {}
+  constructor(private http: HttpClient) {
+
+  }
 
   setNovelCreate(data: { group: string; type: string }): void {
     this.novelCreate = data;
@@ -75,5 +79,22 @@ export class NovelService {
     return this.novelData;
   }
 
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  getCountNovel() {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get(`${this.apiUrl}/api/user/getCountNovel`, { headers });
+  }
 
 }

@@ -9,14 +9,16 @@ import { AuthService } from '../services/auth.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-
+  profileData: any;
   showPassword: boolean = false;
   username: string = 'usernamelove';
   isSideOpen: boolean = false;
   isMenuOpen = false;
 
   constructor(private router: Router, public dialogService: DialogService, 
-    private popupService: PopupService,private elementRef: ElementRef,private authService:AuthService) {}
+    private popupService: PopupService,private elementRef: ElementRef,private authService:AuthService) {
+      this.getProfile();
+    }
 
   ngOnInit(): void {
     this.authService.getToken();
@@ -72,5 +74,23 @@ export class NavbarComponent implements OnInit {
   
   closePopup() {
     this.popupService.closePopup();
+  }
+
+  getProfile() {
+    this.authService.getProfile().subscribe({
+      next: (response: any) => {
+        if (response?.status === 'success') {
+          console.log(response);
+          
+          this.profileData = response.data; // Store fetched data in `profileData`
+          console.log('Profile Data:', this.profileData);
+        } else {
+          console.error('Failed to fetch novels:', response);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching novels:', err);
+      },
+    });
   }
 }

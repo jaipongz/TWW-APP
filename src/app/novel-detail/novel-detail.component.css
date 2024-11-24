@@ -15,7 +15,7 @@
   align-items: center;
   padding: 20px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   /*background-color: #f8f9fa; */
   border-radius: 10px;
@@ -131,7 +131,7 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 10px;
@@ -254,11 +254,11 @@
   border-radius: 8px;
   text-align: center;
   width: 80%;
-  max-width: 400px;
+  max-width: 600px;
 }
 
 .popup-title {
-  font-size: 1rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   color: #7c4d3d;
 }
@@ -270,17 +270,17 @@
 }
 
 .popup-button {
-  width: 175px;
-  padding: 5px 8px;
+  width: 250px;
+  padding: 10px 20px;
   background-color: #fff;
   color: #7c4d3d;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
-  border-radius: 10px;
+  font-size: 20px;
+  border-radius: 20px;
   border: solid 1px #7c4d3d;
-  text-align: start;
+  text-align: center;
 }
 
 .popup-button:hover {
@@ -292,22 +292,22 @@
   color: #7c4d3d;
   text-align: start;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .popup-create-button {
   width: 35%;
-  padding: 8px 20px;
+  padding: 15px 20px;
   background-color: #7c4d3d;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 20px;
   border-radius: 20px;
   border: solid 1px #f1f1f1;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .popup-create-button:hover {
@@ -325,7 +325,7 @@
   color: #7c4d3d;
   border: solid 1px #7c4d3d;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 18px;
   text-align: start; /* จัดข้อความให้อยู่ตรงกลาง */
 }
 
@@ -343,7 +343,7 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 10px 10px 0 0;
@@ -380,9 +380,16 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 20px;
   border-radius: 10px;
   border: solid 1px #7c4d3d;
+  width:auto ;
+}
+.card-header ul li{
+  font-size: 20px;
+}
+.card-right-buttons ul li{
+  font-size: 20px;
 }
 
 .dropdown-button:hover {
@@ -470,7 +477,7 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 0 0 10px 10px;

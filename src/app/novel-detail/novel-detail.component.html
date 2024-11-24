@@ -4,7 +4,7 @@
   <div class="create-novel-container">
     <!-- รูปโปรไฟล์ -->
     <div class="avatar-container">
-      <img src="/image/avartar.jpg" alt="Account Avatar" class="avatar" />
+      <img [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="Account Avatar" class="avatar" />
       <label for="upload-avatar" class="camera-icon">
         <fa-icon [icon]="faCamera"></fa-icon>
       </label>
@@ -14,8 +14,8 @@
     <!-- <h1>สร้างนิยายใหม่</h1> -->
 
     <div class="account-name">
-      <label for="account-name">ชื่อบัญชี:</label>
-      <p id="account-name">ชื่อบัญชีของคุณ</p>
+      <!-- <label for="account-name">ชื่อบัญชี:</label> -->
+      <h2 id="account-name">{{ profileData?.user_name || 'ชื่อบัญชีของคุณ' }}</h2>
     </div>
 
     <div class="button-group">
@@ -33,7 +33,7 @@
       <div class="card-left">
         <div class="work-details">
           <label for="total-works" class="bold-text">จำนวนผลงาน</label>
-          <p id="total-works">12 ผลงาน</p>
+          <p id="total-works">{{ countNovel.novel_count || 0 }} ผลงาน</p>
         </div>
       </div>
 
@@ -43,7 +43,7 @@
       <div class="card-right">
         <div class="episode-details">
           <label for="total-episodes" class="bold-text">ตอนทั้งหมด</label>
-          <p id="total-episodes">50 ตอน</p>
+          <p id="total-episodes">{{ countNovel.chapter_count || 0 }} ตอน</p>
         </div>
       </div>
     </div>

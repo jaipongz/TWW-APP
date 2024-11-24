@@ -54,7 +54,7 @@
           </div>
 
           <div class="user-icon" (click)="toggleMenu()">
-            <img src="/image/profile.png" alt="User">
+            <img [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="User">
           </div>
         </ng-container>
         <!-- Links for authenticated and unauthenticated users -->
@@ -63,9 +63,9 @@
 
       <div class="navside" *ngIf="isMenuOpen">
         <div class="header-navside">
-          <img routerLink="/profile-detail" src="/image/profile.png" alt="User">
-          <a>Username01</a>
-          <a>&#64;{{username}}</a>
+          <img routerLink="/profile-detail" [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="User">
+          <a>{{ profileData?.user_name || 'ชื่อบัญชีของคุณ' }}</a>
+          <a>{{ profileData?.user_email}}</a>
         </div>
         <div class="money-content">
           <div class="coin">

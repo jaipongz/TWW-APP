@@ -29,6 +29,8 @@ export class NovelDetailComponent {
   constructor(private novelService: NovelService, private authService: AuthService, private popupService: PopupService, private router: Router) {
     this.authService.checkLoginStatus();
     this.getNovel();
+    this.getProfile();
+    this.getCountNovel();
   }
 
 
@@ -127,8 +129,10 @@ export class NovelDetailComponent {
     }
   }
 
+  
   noveldata: any[] = [];
-
+  profileData: any;
+  countNovel: any;
   getNovel() {
     const keyword = ''; // ใส่ keyword ที่ต้องการ
     const start = 0;
@@ -183,6 +187,38 @@ export class NovelDetailComponent {
       return `${years} ปี ที่แล้ว`;
     }
   }
-
-
+  getProfile() {
+    this.authService.getProfile().subscribe({
+      next: (response: any) => {
+        if (response?.status === 'success') {
+          console.log(response);
+          
+          this.profileData = response.data; // Store fetched data in `profileData`
+          console.log('Profile Data:', this.profileData);
+        } else {
+          console.error('Failed to fetch novels:', response);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching novels:', err);
+      },
+    });
+  }
+  getCountNovel() {
+    this.novelService.getCountNovel().subscribe({
+      next: (response: any) => {
+        if (response?.status === 'success') {
+          console.log(response);
+          
+          this.countNovel = response.data; // Store fetched data in `countNovel`
+          console.log('Count Data:', this.countNovel);
+        } else {
+          console.error('Failed to fetch novels:', response);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching novels:', err);
+      },
+    });
+  }
 }

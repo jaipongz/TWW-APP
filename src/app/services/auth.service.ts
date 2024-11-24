@@ -11,7 +11,7 @@ import { PopupService } from './popup.service';
 export class AuthService {
   private readonly tokenKey = 'token';
   // private readonly userIdKey = 'userId';
-  private apiUrl = 'http://localhost:3090/api/novel';
+  private apiUrl = 'http://localhost:3090';
 
   constructor(private router: Router, private dialogService: DialogService, private http: HttpClient, private popupService: PopupService) { }
 
@@ -27,8 +27,22 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    
-    return this.http.get(`${this.apiUrl}/myNovelList/?keyword=${keyword}&start=${start}&limit=${limit}`, { headers });
+
+    return this.http.get(`${this.apiUrl}/api/novel/myNovelList/?keyword=${keyword}&start=${start}&limit=${limit}`, { headers });
+  }
+
+  getProfile() {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get(`${this.apiUrl}/api/user/getProfile`, { headers });
   }
 
   storeNovel(formData: FormData): Observable<any> {
@@ -42,7 +56,7 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.post<any>(`${this.apiUrl}/storeNovel`, formData, { headers }).pipe(
+    return this.http.post<any>(`${this.apiUrl}/api/novel/storeNovel`, formData, { headers }).pipe(
       map((response) => response.data || 'No data received'),
       catchError((error) => throwError(() => new Error(`HTTP error! Status: ${error.status}`)))
     );
@@ -77,17 +91,17 @@ export class AuthService {
   // }
 
 
-  goTo( key:any ){
+  goTo(key: any) {
     switch (key) {
       case 'create':
         this.router.navigate(['/create-novel']);
         break;
-    
+
       case 'firstpage':
         this.router.navigate(['/banner']);
         break;
-    
-    
+
+
       default:
         console.warn('Invalid key provided:', key);
         break;
@@ -99,7 +113,7 @@ export class AuthService {
     const token = this.getToken();
     // const userId = this.getUserId();
     // && !userId
-    if (!token ) {
+    if (!token) {
       console.log('No token found, redirecting to login');
       const cpnfirmed = confirm('กรุณาเข้าสู่ระบบ');
       if (cpnfirmed) {
