@@ -14,16 +14,7 @@
       <!-- Logo -->
       <img routerLink="/banner" src="image\Thanwiwa.png" alt="Thanwiwa">
     </div>
-    <ng-template #loggedOut>
-      <div class="navbar-links">
-        <i class="fa-solid fa-hand-middle-finger fa-beat"></i>
-        <!-- <i class="fa-solid fa-hand-middle-finger"></i> -->
-        <!-- <i class="fa-solid fa-wheelchair fa-bounce"></i> -->
-        <a (click)="openLoginDialog()">Login</a>
-        <label>/</label>
-        <a (click)="openRegisterDialog()">Register</a>
-      </div>
-    </ng-template>
+    
     <div class="search">
       <input type="text" class="input" placeholder="ค้นหาชื่อหนังสือ">
       <!-- ไอคอนค้นหา (SVG) -->
@@ -47,11 +38,6 @@
             <i class="fa-regular fa-bell"></i>
             <!-- <i class="fa-regular fa-bell fa-shake"></i> -->
           </div>
-          <div *ngIf="isLoggedIn; else loggedOut">
-            <!-- <a routerLink="/dashboard">Dashboard</a>
-            <a routerLink="/profile">Profile</a> -->
-            <!-- <button (click)="logout()" class="logout-button">Logout</button> -->
-          </div>
 
           <div class="user-icon" (click)="toggleMenu()">
             <img [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="User">
@@ -59,6 +45,16 @@
         </ng-container>
         <!-- Links for authenticated and unauthenticated users -->
       </div>
+      <ng-container *ngIf="!isLoggedIn">
+        <div class="navbar-links" >
+          <i class="fa-solid fa-hand-middle-finger fa-beat"></i>
+          <!-- <i class="fa-solid fa-hand-middle-finger"></i> -->
+          <!-- <i class="fa-solid fa-wheelchair fa-bounce"></i> -->
+          <a (click)="openLoginDialog()">Login</a>
+          <label>/</label>
+          <a (click)="openRegisterDialog()">Register</a>
+        </div>
+      </ng-container>
 
 
       <div class="navside" *ngIf="isMenuOpen">
@@ -103,87 +99,87 @@
     </div>
   </div>
   <app-popup></app-popup>
+  <div class="nav-icons" *ngIf="isSideOpen">
+    <div class="iconsub">
+      <a routerLink="/banner">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <p>หน้าแรก</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path
+            d="M18 2H6C4.9 2 4 2.9 4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H6V4h12v14zM8 8h8v2H8V8zm0 4h5v2H8v-2z" />
+        </svg>
+        <p>นิยาย</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path
+            d="M16 6V4c0-1.11-.9-2-2-2H10c-1.11 0-2 .89-2 2v2H4v14h16V6h-4zM10 4h4v2h-4V4zm-4 14v-2h12v2H6zm12-4H6v-2h12v2zm0-4H6V8h12v2z" />
+        </svg>
+        <p>เติมคอยส์</p>
+      </a>
+    </div>
+  
+    <div class="iconsub" *ngIf="isLoggedIn">
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+          <path
+            d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
+        </svg>
+        <p>ประวัติการอ่าน</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"/></svg>
+        <p>คลังนิยาย</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 96C0 43 43 0 96 0l96 0 0 190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5L352 0l32 0 32 0c17.7 0 32 14.3 32 32l0 320c0 17.7-14.3 32-32 32l0 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0L96 512c-53 0-96-43-96-96L0 96zM64 416c0 17.7 14.3 32 32 32l256 0 0-64L96 384c-17.7 0-32 14.3-32 32z"/></svg>
+        <p>นิยายที่ชอบ</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path
+            d="M3 17.25V21h3.75l10.98-10.98-3.75-3.75L3 17.25zm3-12.75C5.66 4.5 5 5.16 5 6c0 0 3.14 0 3.14-3.14 0-.84-.68-1.53-1.52-1.53-.84 0-1.52.69-1.52 1.52C5 4.34 5.34 5 6.14 5zm15.73-.6l-2.12-2.12c-.39-.39-1.02-.39-1.41 0l-1.89 1.89 3.75 3.75 1.89-1.89c.39-.38.39-1.02 0-1.41z" />
+        </svg>
+        <p>สร้างนิยาย</p>
+      </a>
+    </div>
+  
+    <div class="iconsub" *ngIf="isLoggedIn">
+      <p>การติดตาม</p>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <p>คนที่ติดตาม</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <p>คนที่ติดตาม</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <p>คนที่ติดตาม</p>
+      </a>
+      <a routerLink="/">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        </svg>
+        <p>คนที่ติดตาม</p>
+      </a>
+      <a routerLink="/" id="detail">
+        <i class="fa-solid fa-chevron-down"></i>
+        <p>แสดงเพิ่มเติม</p>
+      </a>
+    </div>
+  </div>
 </nav>
 
-<div class="nav-icons" *ngIf="isSideOpen">
-  <div class="iconsub">
-    <a routerLink="/banner">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </svg>
-      <p>หน้าแรก</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path
-          d="M18 2H6C4.9 2 4 2.9 4 4v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 16H6V4h12v14zM8 8h8v2H8V8zm0 4h5v2H8v-2z" />
-      </svg>
-      <p>นิยาย</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path
-          d="M16 6V4c0-1.11-.9-2-2-2H10c-1.11 0-2 .89-2 2v2H4v14h16V6h-4zM10 4h4v2h-4V4zm-4 14v-2h12v2H6zm12-4H6v-2h12v2zm0-4H6V8h12v2z" />
-      </svg>
-      <p>เติมคอยส์</p>
-    </a>
-  </div>
-
-  <div class="iconsub">
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-        <path
-          d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z" />
-      </svg>
-      <p>ประวัติการอ่าน</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M290.7 311L95 269.7 86.8 309l195.7 41zm51-87L188.2 95.7l-25.5 30.8 153.5 128.3zm-31.2 39.7L129.2 179l-16.7 36.5L293.7 300zM262 32l-32 24 119.3 160.3 32-24zm20.5 328h-200v39.7h200zm39.7 80H42.7V320h-40v160h359.5V320h-40z"/></svg>
-      <p>คลังนิยาย</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 96C0 43 43 0 96 0l96 0 0 190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5L352 0l32 0 32 0c17.7 0 32 14.3 32 32l0 320c0 17.7-14.3 32-32 32l0 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0L96 512c-53 0-96-43-96-96L0 96zM64 416c0 17.7 14.3 32 32 32l256 0 0-64L96 384c-17.7 0-32 14.3-32 32z"/></svg>
-      <p>นิยายที่ชอบ</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path
-          d="M3 17.25V21h3.75l10.98-10.98-3.75-3.75L3 17.25zm3-12.75C5.66 4.5 5 5.16 5 6c0 0 3.14 0 3.14-3.14 0-.84-.68-1.53-1.52-1.53-.84 0-1.52.69-1.52 1.52C5 4.34 5.34 5 6.14 5zm15.73-.6l-2.12-2.12c-.39-.39-1.02-.39-1.41 0l-1.89 1.89 3.75 3.75 1.89-1.89c.39-.38.39-1.02 0-1.41z" />
-      </svg>
-      <p>สร้างนิยาย</p>
-    </a>
-  </div>
-
-  <div class="iconsub">
-    <p>การติดตาม</p>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </svg>
-      <p>คนที่ติดตาม</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </svg>
-      <p>คนที่ติดตาม</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </svg>
-      <p>คนที่ติดตาม</p>
-    </a>
-    <a routerLink="/">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px">
-        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-      </svg>
-      <p>คนที่ติดตาม</p>
-    </a>
-    <a routerLink="/" id="detail">
-      <i class="fa-solid fa-chevron-down"></i>
-      <p>แสดงเพิ่มเติม</p>
-    </a>
-  </div>
-</div>

@@ -221,4 +221,11 @@ export class NovelDetailComponent {
       },
     });
   }
+
+  addChapter(novel: any) {
+    this.router.navigate(['/subject'], {
+      state: { novel }
+    });
+  }
+
 }

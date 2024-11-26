@@ -17,12 +17,11 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, public dialogService: DialogService, 
     private popupService: PopupService,private elementRef: ElementRef,private authService:AuthService) {
-      this.getProfile();
+      
     }
 
   ngOnInit(): void {
-    this.authService.getToken();
-
+    this.getProfile();
   }
 
   get isLoggedIn(): boolean {
@@ -77,20 +76,22 @@ export class NavbarComponent implements OnInit {
   }
 
   getProfile() {
-    this.authService.getProfile().subscribe({
-      next: (response: any) => {
-        if (response?.status === 'success') {
-          console.log(response);
-          
-          this.profileData = response.data; // Store fetched data in `profileData`
-          console.log('Profile Data:', this.profileData);
-        } else {
-          console.error('Failed to fetch novels:', response);
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching novels:', err);
-      },
-    });
-  }
+    const token = this.authService.isLoggedIn;
+    if (token) {
+      this.authService.getProfile().subscribe({
+        next: (response: any) => {
+          if (response?.status === 'success') {
+            console.log(response);
+            this.profileData = response.data; // Store fetched data in `profileData`
+            console.log('Profile Data:', this.profileData);
+          } else {
+            console.error('Failed to fetch novels:', response);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching novels:', err);
+        },
+      });
+    }
+    }
 }

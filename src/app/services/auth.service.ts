@@ -62,6 +62,65 @@ export class AuthService {
     );
   }
 
+  addCharacter(formData: FormData) : Observable<any> {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/novel/charactor`, formData, { headers }).pipe(
+      map((response) => response.data || 'No data received'),
+      catchError((error) => throwError(() => new Error(`HTTP error! Status: ${error.status}`)))
+    );
+  }
+
+  getCharacter(novelId:string) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/api/novel/allCharactor/${novelId}`, { headers });
+  }
+
+  updateCharacter(charId:string, formData: FormData){
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/novel/charactor/${charId}`, formData, { headers });
+  }
+
+  deleteCharacter(charId:string){
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.delete<any>(`${this.apiUrl}/api/novel/charactor/${charId}`,{ headers });
+  }
+
   // storeNovel(payload: any): Observable<any> {
   //   const token = this.getToken();
 
@@ -135,10 +194,10 @@ export class AuthService {
   // Clear all auth-related localStorage items when logging out
   logout(): void {
     this.router.navigate(['/banner']).then(() => {
+      this.popupService.showPopup('ออกจากระบบเรียบร้อยแล้ว');
       window.location.reload();
       localStorage.removeItem(this.tokenKey);
       // localStorage.removeItem(this.userIdKey);
-      this.popupService.showPopup('ออกจากระบบเรียบร้อยแล้ว');
     });
   }
 }

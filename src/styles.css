@@ -24,6 +24,9 @@
 .col-100{
   width: 100%;
 }
+.col-80 {
+  width: 80%;
+}
 .col-75{
   width: 75%;
 }
@@ -79,6 +82,7 @@ body::before {
   opacity: 100%;
   z-index: -1;
 }
+
 
 .containerfornav {
   margin-top: 3.5rem;
@@ -149,11 +153,7 @@ body::before {
   gap: 10px;
 }
 
-h2 {
-  display: inline;
-  text-align: center;
 
-}
 
 .gbinput-group {
   display: flex;
@@ -397,4 +397,64 @@ input:not(:placeholder-shown) {
 
 
 /****************************************************************************************************************************************************************************/
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+
+
+/*cropmodal*/
+#cropModal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
+
+.image-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+.modal-content {
+  background-color: #f4f4f4;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+
+  /* เพิ่มเติมเพื่อจัดกลาง */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#imagePreview {
+  max-width: 100%;
+  height: auto;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #000;
+}

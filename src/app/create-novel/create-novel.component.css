@@ -96,7 +96,6 @@
     gap: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-    
 }
 
 .remove-tag {
@@ -107,8 +106,8 @@
   }
   
 .tags .tag {
-    background-color: #e0f7fa;
-    border: 1px solid #00acc1;
+    background-color: #f5e9d7;
+    border: 1px solid #d4a373;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 14px;

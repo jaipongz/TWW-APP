@@ -1,0 +1,527 @@
+.container {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.profile-card {
+    display: flex;
+    padding: 0;
+}
+
+.profile-card img {
+    border-radius: 10px 0 0 10px;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+    background: linear-gradient(to right, #000000, #434343);
+    color: white;
+    border-radius: 0 10px 10px 0;
+    flex-grow: 1;
+}
+
+.profile-info h2 {
+    font-size: 24px;
+}
+
+.profile-info a {
+    font-size: 12px;
+    color: aqua;
+}
+
+.profile-info .status {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.profile-info .status img {
+    display: inline-flex;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+.profile-info .actions {
+    margin-top: 10px;
+}
+
+.profile-info .actions i {
+    margin-right: 10px;
+}
+
+.settings,
+.recommendations,
+.tags,
+.story,
+.responses {
+    margin-top: 20px;
+}
+
+.settings {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.settings .toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings .toggle label {
+    font-size: 18px;
+}
+
+.settings .toggle input {
+    margin-left: 10px;
+}
+
+.settings .buttons {
+    display: flex;
+    margin: 0 auto;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.settings .buttons button {
+    background-color: #bf6a02;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.settings .buttons #exambtn {
+    background-color: #000000;
+    color: white;
+}
+
+.recommendations .add-character {
+    text-align: center;
+}
+
+.recommendations .add-character button {
+    background-color: #bf6a02;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.tags .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.tags .tag-list span {
+    background-color: #f5e9d7;
+    border: 1px solid #d4a373;
+    border-radius: 5px;
+    color: #d4a373;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.story .add-story {
+    text-align: center;
+}
+
+.story .add-story button {
+    background-color: #bf6a02;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.responses .response-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.responses .response-header .response-count {
+    font-size: 18px;
+}
+
+.responses .response-header .add-response button {
+    background-color: #bf6a02;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.responses .response-list {
+    margin-top: 20px;
+}
+
+.responses .response-list .response-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.responses .response-list .response-item .response-text {
+    flex-grow: 1;
+}
+
+.responses .response-list .response-item .response-actions {
+    display: flex;
+    align-items: center;
+}
+
+.responses .response-list .response-item .response-actions i {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+.toggle-button-cover {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.button-cover {
+    background-color: #bf6a02;
+    box-shadow: 0 7.7px 15px -6.6px #c5d6d6;
+    /* ปรับเพิ่ม */
+    border-radius: 10px;
+    /* เพิ่มขึ้น 10% จาก 2.8px */
+}
+
+.button-cover:before {
+    counter-increment: button-counter;
+    content: counter(button-counter);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #bf6a02;
+    font-size: 9.24px;
+    /* เพิ่มขึ้น 10% จาก 8.4px */
+    line-height: 1;
+    padding: 3.85px;
+    /* เพิ่มขึ้น 10% จาก 3.5px */
+}
+
+.button-cover,
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: relative;
+    width: 40px;
+    /* เพิ่มขึ้น 10% จาก 51.8px */
+    height: 20px;
+    /* เพิ่มขึ้น 10% จาก 25.2px */
+    overflow: hidden;
+}
+
+#status {
+    color: #000;
+    font-size: 1em;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    max-width: 100%;
+    border: 1px solid #000;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+.button.r,
+.button.r .layer {
+    border-radius: 77px;
+    /* เพิ่มขึ้น 10% จาก 70px */
+}
+
+#button-3 .knobs:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    /* เพิ่มขึ้น 10% จาก 2.8px */
+    left: 0;
+    /* เพิ่มขึ้น 10% จาก 2.8px */
+    width: 15px;
+    /* เพิ่มขึ้น 10% จาก 14px */
+    height: 7px;
+    /* เพิ่มขึ้น 10% จาก 7px */
+    color: #fff;
+    font-size: 9px;
+    /* เพิ่มขึ้น 10% จาก 8.4px */
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 6.93px 3.08px;
+    /* เพิ่มขึ้น 10% */
+    background-color: #1c739b;
+    border-radius: 50%;
+    /* เพิ่มขึ้น 10% จาก 35% */
+    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+}
+
+#button-3 .checkbox:checked+.knobs:before {
+    content: "";
+    left: 20px;
+    /* เพิ่มขึ้น 10% จาก 29.4px */
+    background-color: #b6413b;
+}
+
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    position: relative;
+    span{
+        position: absolute;
+        top: 0;
+        right: 10px;
+    }
+}
+
+.popup-input {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: center;
+    width: 60%;
+    margin: 0 auto;
+
+    input {
+        text-align: start;
+        border: 1px solid ;
+        float: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        background: #ffffff;
+    }
+}
+
+.popup-create-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #7c4d3d;
+    /* สีน้ำเงินสำหรับปุ่มผลงานนิยาย */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 20px;
+    border: solid 1px #f1f1f1;
+}
+
+.avatar-container {
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 20px;
+
+    input {
+        display: none;
+    }
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.charactor {
+    display: flex;
+    flex-wrap: wrap; /* ทำให้แถวใหม่เกิดขึ้นเมื่อพื้นที่ไม่พอ */
+    justify-content: center;
+    gap: 20px; /* ระยะห่างระหว่างแต่ละตัว */
+    padding: 10px;
+}
+
+.char-sub {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+    width: 100px; /* ขนาดเริ่มต้น */
+    height: 140px;
+}
+
+.char-sub span {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background: #bf6a02;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.image-wrapper {
+    width: 80px; /* เริ่มต้น */
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    transition: width 0.3s, height 0.3s; /* ทำให้การเปลี่ยนขนาดนุ่มนวล */
+}
+
+.image-wrapper img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.charname, .charrole {
+    white-space: nowrap;       /* ไม่ให้ข้อความขึ้นบรรทัดใหม่ */
+    overflow: hidden;          /* ซ่อนข้อความที่เกิน */
+    text-overflow: ellipsis;   /* แสดง ... สำหรับข้อความที่ถูกตัด */
+    display: inline-block;     /* เพื่อใช้กับ text-overflow */
+}
+
+.charname {
+    font-size: 16px; /* ปรับขนาด */
+}
+
+.charrole {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+/* ใช้ media queries เพื่อเปลี่ยน layout ตามขนาดหน้าจอ */
+@media (min-width: 768px) {
+    .char-sub {
+        width: 120px; /* ขนาดใหญ่ขึ้น */
+        height: 160px;
+    }
+
+    .image-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+
+    .charname {
+        font-size: 18px;
+    }
+
+    .charrole {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 1100px) {
+    .charactor {
+        gap: 30px; /* ระยะห่างเพิ่มขึ้น */
+    }
+
+    .char-sub {
+        width: 150px;
+        height: 180px;
+    }
+
+    .image-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+
+    .charname {
+        font-size: 20px;
+    }
+
+    .charrole {
+        font-size: 16px;
+    }
+}
+

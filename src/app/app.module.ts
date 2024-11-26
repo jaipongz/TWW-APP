@@ -34,6 +34,7 @@ import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { LockpageComponent } from './lockpage/lockpage.component';
 import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component';
+import { SubjectComponent } from './subject/subject.component';
 
 
 
@@ -49,6 +50,8 @@ const appRoutes: Routes = [
   {path: 'create-novel', component: CreateNovelComponent },
   {path: 'profile-detail', component: ProfileDetailComponent },
   {path: 'novel-detail', component: NovelDetailComponent },
+  {path: 'subject', component: SubjectComponent },
+  
 ]
 
 @NgModule({
@@ -75,6 +78,7 @@ const appRoutes: Routes = [
     ProfileDetailComponent,
     LockpageComponent,
     CeateNovelEpComponent,
+    SubjectComponent,
   ],
   imports: [
     BrowserModule,

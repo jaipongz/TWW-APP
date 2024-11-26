@@ -1,0 +1,181 @@
+<app-navbar></app-navbar>
+<div class="containerfornav">
+<div class="container col-80">
+    <div class="card profile-card">
+        <img src="{{novel.novel_propic || '/image/test1.jpg'}}" alt="ภาพเรื่องที่สร้าง" />
+        <div class="profile-info">
+            <a > {{ typeMapping()[novel.type] }}</a>
+            <h2>
+                {{ novel.novel_name }}
+            </h2>
+            <div class="status">
+                <img [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="Account Avatar" class="avatar" />
+                <span>
+                    {{ novel.pen_name || novel.novel_name }}
+                </span>
+            </div>
+            <div class="actions">
+                <i class="fas fa-heart" style="color: pink;">
+                </i>
+                <i class="fas fa-comment">
+                </i>
+                <i class="fas fa-share">
+                </i>
+            </div>
+        </div>
+    </div>
+    <div class="card settings">
+        <h3>
+            ตั้งค่าสถานะเรื่อง
+        </h3>
+        <div class="toggle">
+            <label>
+                สถานะเรื่อง
+            </label>
+            <div class="toggle-button-cover">
+                <a id="status">{{ novel.published === 'T' ? 'ส่วนตัว' : 'เผยแผร่' }}</a>
+                <div class="button r" id="button-3">
+                  <input type="checkbox" class="checkbox" [checked]="novel.published === 'T'" (change)="toggleStatus($event)">
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+        </div>
+        <div class="toggle">
+            <label>
+                สถานะจบ
+            </label>
+            <div class="toggle-button-cover">
+                <a id="status">{{ novel.status === 'T' ? 'จบ' : 'ยังไม่จบ' }}</a>
+                <div class="button r" id="button-3">
+                  <input type="checkbox" class="checkbox" [checked]="novel.status === 'T'"   (change)="toggleStatusEnd($event)">
+                  <div class="knobs"></div>
+                  <div class="layer"></div>
+                </div>
+              </div>
+        </div>
+        <div class="buttons">
+            <button id="exambtn">
+                ดูตัวอย่าง
+            </button>
+            <button id="editbtn">
+                แก้ไข
+            </button>
+        </div>
+    </div>
+    <div class="card recommendations">
+        <h3>
+            แนะนำตัวละคร (ไม่บังคับสร้าง)
+        </h3>
+        <div class="charactor">
+            <div *ngFor="let charactor of charactors; let i = index">
+                <div class="char-sub">
+                    <span (click)="charDelete(i)">x</span>
+                    <div class="image-wrapper" (click)="charEdit(i)">
+                        <img [src]="croppedImageBlob  || charactor.image_path || '/image/avartar.jpg'" alt="ภาพตัวละคร">
+                    </div>
+                    <a class="charname">{{ charactor.name }}</a>
+                    <a class="charrole">({{ charactor.role }})</a>
+                </div>
+            </div>
+        </div>
+        <div class="add-character" (click)="onAdd()">
+            <button>
+                เพิ่มตัวละคร
+            </button>
+        </div>
+    </div>
+    <div class="create-character" *ngIf="createCharacter">
+        <div class="popup">
+            <div class="popup-content">
+                <span (click)="closeAdd()">x</span>
+                <div class="avatar-container avatar">
+                    <img [src]="croppedImageBlob  || '/image/avartar.jpg'" alt="ภาพตัวละคร" class="avatar" />
+                    <label for="upload-avatar" class="camera-icon" (click)="fileInput.click()">
+                    <i class="fa-solid fa-camera" ></i>
+                    </label>
+                    <input #fileInput type="file" id="fileInput" accept="image/*" (change)="handleFileSelect($event)" />
+                </div>
+
+                <div class="popup-input">
+                    <label>กรอกชิ่อตัวละคร</label>
+                    <input type="text" [(ngModel)]="name" required>
+                </div>
+
+                <div class="popup-input">
+                    <label>สถานะตัวละคร</label>
+                    <input type="text" [(ngModel)]="role" required>
+                </div>
+              <button (click)="precreate()" class="popup-create-button">ตกลง</button>
+            </div>
+        </div>
+    </div>
+    <div class="card tags">
+        <h3>
+            แท็ก
+        </h3>
+        <div class="tag-list">
+            <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" class="tag">
+                {{ tag }}
+              </span>
+        </div>
+    </div>
+    <div class="card story">
+        <h3>
+            แนะนำเรื่อง
+        </h3>
+        <div class="add-story">
+            <button>
+                เพิ่มแนะนำเรื่อง
+            </button>
+        </div>
+    </div>
+    <div class="card responses">
+        <div class="response-header">
+            <span class="response-count">
+                ตอนทั้งหมด (0)
+            </span>
+            <div class="add-response">
+                <button>
+                    เพิ่มตอนใหม่
+                </button>
+            </div>
+        </div>
+        <div class="response-list">
+            <div class="response-item">
+                <div class="response-text">
+                    ตอนที่ 1
+                </div>
+                <div class="response-actions">
+                    <i class="fas fa-edit">
+                    </i>
+                    <i class="fas fa-trash">
+                    </i>
+                </div>
+            </div>
+            <div class="response-item">
+                <div class="response-text">
+                    ตอนที่ 2
+                </div>
+                <div class="response-actions">
+                    <i class="fas fa-edit">
+                    </i>
+                    <i class="fas fa-trash">
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="file-upload">
+<div id="cropModal" >
+    <div class="modal-content">
+      <div class="image-container">
+    <img id="imagePreview" alt="Image preview for cropping" />
+  </div>
+    <button (click)="cropImage()">Crop</button>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>
+</div>
+

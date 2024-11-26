@@ -373,20 +373,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
     const confirmed = confirm(`คุณต้องการบันเป็น${ this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }ใช่หรือไม่`);
     if (confirmed) {
-      this.novel.status = 'T';
-      if (this.novel.status){
         this.saveNovel();
-      } else {
-        console.log('สเตตัสไม่ถูกต้อง')
-      }
-    } else {
-      this.novel.status = 'F';
-      if (this.novel.status){
-        this.saveNovel();
-      } else {
-        console.log('สเตตัสไม่ถูกต้อง')
-      }
-    }
+    } 
   }
 
   // Submit the novel form
