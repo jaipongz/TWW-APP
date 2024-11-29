@@ -15,12 +15,21 @@
                 <p>Drag & Drop your files here or click to upload</p>
               </label>
               <div id="croppedImageContainer">
-                <img [src]="uploadService.imagePreview" alt="Cropped Image Preview" />
+                <img [src]="uploadService.croppedImage" alt="Cropped Image Preview" />
               </div>
               <input #fileInput type="file" id="fileInput" accept="image/*" (change)="onFileChange($event)"
                 style="display: none;" />
             </div>
-            <app-uploadimage></app-uploadimage>
+            
+            <div id="cropModal" >
+              <div class="modal-content">
+                <div class="image-container">
+              <img id="imagePreview" alt="Image preview for cropping" />
+            </div>
+              <button (click)="cropImage()">Crop</button>
+              <button >Close</button>
+            </div>
+            </div>
             <div class="penname">
               <!-- แสดงลิงก์เมื่อไม่อยู่ในโหมดแก้ไข -->
               <a id="penNameInput" *ngIf="!isEditingPenName" (click)="penName()">
@@ -122,12 +131,12 @@
       <div class="buttons" *ngIf="checkform">
         <a>คุณต้องการบันทึกหรือไม่</a>
         <div class="toggle-button-cover">
+          <a id="status">{{ novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }}</a>
           <div class="button r" id="button-3">
             <input type="checkbox" class="checkbox" (change)="toggleStatus($event)">
             <div class="knobs"></div>
             <div class="layer"></div>
           </div>
-          <a id="status">{{ novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }}</a>
         </div>
         <div class="buttons-sub">
           <button class="back-button" (click)="goBack()">ย้อนกลับ</button>

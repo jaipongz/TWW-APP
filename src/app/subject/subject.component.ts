@@ -32,8 +32,6 @@ export class SubjectComponent implements OnInit {
     this.getNovel();
     this.typeMapping();
     this.getCharactor();
-    
-
   }
 
   @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;

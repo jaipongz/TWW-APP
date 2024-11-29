@@ -89,7 +89,6 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private cdr: ChangeDetectorRef,
     private customconfirm:customConfirm,
     public uploadService: UploadService) { 
-      
     }
 
   ngOnInit(): void {
@@ -97,10 +96,10 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.fetchData();
     this.authService.checkLoginStatus();
     this.typeMapping();
-    // this.novel.userId = this.authService.getUserId();
     this.novelData = this.novelService.getNovelCreate();
     this.updateNovel();
     this.getToLocalStorage();
+    
   }
 
   saveToLocalStorage() {
@@ -108,15 +107,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       // แปลงข้อมูล novel เป็น JSON และเก็บใน localStorage
       console.log('Saving to localStorage', this.novel);
       localStorage.setItem('getNovelCreate', JSON.stringify(this.novel));
-  
-      // ตรวจสอบว่าข้อมูลถูกเก็บไว้สำเร็จหรือไม่
-      const savedData = localStorage.getItem('getNovelCreate');
-      if (savedData) {
-        this.checkform = true; // หากข้อมูลถูกเก็บไว้แล้วให้ตั้งค่าค่า checkform เป็น true
-      } else {
-        console.error('Failed to save data to localStorage');
-        this.checkform = false; // หากไม่สามารถบันทึกข้อมูลได้
-      }
+      this.checkform = true;
+    
     } catch (error) {
       console.error('Error saving to localStorage:', error);
       this.checkform = false; // กรณีเกิดข้อผิดพลาดระหว่างการบันทึก
@@ -196,18 +188,6 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       default: //กรณีที่ยังไม่ได้เลือก
         return this.subGroups; //ส่งsubGroups ออกไปโดยไม่ได้ซ่อนตัวเลือก
     }
-
-
-
-    // return this.subGroups.filter(subGroup => {
-    //   // กรองตัวเลือกที่ไม่ต้องแสดงในแต่ละ dropdown
-    //   if (category === 'sub-category1') {
-    //     return subGroup.label !== this.novel.selectedSubCategory2; // ไม่แสดงค่าที่เลือกใน sub-category2
-    //   } else if (category === 'sub-category2') {
-    //     return subGroup.label !== this.novel.selectedSubCategory1; // ไม่แสดงค่าที่เลือกใน sub-category1
-    //   }
-    //   return true; // กรณี default แสดงทั้งหมด
-    // });
   }
 
 
@@ -363,6 +343,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       // หลังจากเลือกไฟล์จะเปิดเครื่องมือการครอปภาพ
       this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
     });
+    
   }
 
   cropImage(): void {

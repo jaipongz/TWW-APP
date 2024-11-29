@@ -64,25 +64,21 @@ export class UploadService {
       return;
     }
 
-    const croppedCanvas = this.cropper.getCroppedCanvas({
-      width: 300,
-      height: 300,
-    });
+    const croppedCanvas = this.cropper.getCroppedCanvas({ width: 300, height: 300 });
+    const blob = await new Promise<Blob | null>((resolve) =>
+      croppedCanvas.toBlob(resolve, 'image/jpeg')
+    );
 
-    croppedCanvas.toBlob((blob: Blob | null) => {
-      if (blob) {
-        this.croppedImage =  URL.createObjectURL(blob);
-        const croppedImageContainer = document.getElementById('croppedImageContainer');
-        if (croppedImageContainer) {
-          croppedImageContainer.style.display = 'block';
-        }
-        this.croppedImageBlob = blob;
-        console.log('cropurl:',this.croppedImage);
-        console.log('croblob:',this.croppedImageBlob);
-        // onCropComplete(croppedImage, blob);
-        this.closeModal();
+    if (blob) {
+      this.croppedImage = URL.createObjectURL(blob);
+      console.log('Cropped Image:', this.croppedImage);
+      const croppedImageContainer = document.getElementById('croppedImageContainer');
+      if (croppedImageContainer) {
+        croppedImageContainer.style.display = 'block';
       }
-    }, 'image/jpeg');
+      this.croppedImageBlob = blob;
+      this.closeModal();
+    }
   }
 
   closeModal(): void {
