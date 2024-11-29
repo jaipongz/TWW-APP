@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, } from '@angular/core';
 import { UploadService } from '../services/upload.service';
 
 @Component({
@@ -6,29 +6,18 @@ import { UploadService } from '../services/upload.service';
   templateUrl: './uploadimage.component.html',
   styleUrl: './uploadimage.component.css'
 })
-export class UploadimageComponent {
-  croppedImage: string | null = null;
-  croppedImageBlob: Blob | null = null;
-  
-  constructor(private uploadService: UploadService ) {}
+export class UploadimageComponent implements OnInit {
 
-  handleFileSelect(event: Event): void {
-    this.uploadService.handleFileSelect(event, (imageSrc: string) => {
-      this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
-    });
+
+  constructor(private uploadService: UploadService,private cdr: ChangeDetectorRef ) {}
+
+  ngOnInit(): void {
+
   }
 
-  async cropImage(): Promise<void> {
-    const blob = await this.uploadService.cropImage();
-    if (blob) {
-      this.croppedImage = URL.createObjectURL(blob);
-      const croppedImageContainer = document.getElementById('croppedImageContainer');
-      if (croppedImageContainer) {
-        croppedImageContainer.style.display = 'block';
-      }
-      this.croppedImageBlob = blob;
-      this.uploadService.closeModal();
-    }
+  cropImage(): void {
+    this.uploadService.cropImage();
+    this.cdr.detectChanges();
   }
 
   closeModal(): void {

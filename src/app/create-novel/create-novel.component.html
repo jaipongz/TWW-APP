@@ -9,6 +9,17 @@
         </div>
         <div class="file-upload-head">
           <div class="file-upload-sub">
+            <div class="file-upload" (click)="fileInput.click()">
+              <label class="file-label">
+                <i class="upload-icon">📁</i>
+                <p>Drag & Drop your files here or click to upload</p>
+              </label>
+              <div id="croppedImageContainer">
+                <img [src]="uploadService.imagePreview" alt="Cropped Image Preview" />
+              </div>
+              <input #fileInput type="file" id="fileInput" accept="image/*" (change)="onFileChange($event)"
+                style="display: none;" />
+            </div>
             <app-uploadimage></app-uploadimage>
             <div class="penname">
               <!-- แสดงลิงก์เมื่อไม่อยู่ในโหมดแก้ไข -->

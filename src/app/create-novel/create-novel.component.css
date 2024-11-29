@@ -305,4 +305,79 @@
     left: 20px; /* เพิ่มขึ้น 10% จาก 29.4px */
     background-color: #b6413b;
   }
+
+
+  .file-upload:hover {
+    background-color: #e2e6ea;
+  }
+  .cropped-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .file-input {
+    display: none;  
+  }
+  
+  .file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    
+   
+  }
+  
+  .upload-icon {
+    font-size: 50px;
+    color: #007bff;
+    margin-bottom: 10px;
+  }
+  
+  .file-upload p {
+    margin: 0;
+    font-size: 16px;
+    color: #6c757d;
+  }
+  
+  .file-upload.dragover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .image-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  #imagePreview {
+    max-width: 100%;
+    height: auto;
+  }
+  button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+  
+  
+  #croppedImageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  
+    img  {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  }
   

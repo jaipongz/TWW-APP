@@ -1,15 +1,4 @@
-<div class="file-upload" (click)="fileInput.click()">
-  <label class="file-label">
-    <i class="upload-icon">📁</i>
-    <p>Drag & Drop your files here or click to upload</p>
-  </label>
-  <div id="croppedImageContainer">
-    <img [src]="croppedImage" alt="Cropped Image Preview" />
-  </div>
-  <input #fileInput type="file" id="fileInput" accept="image/*" (change)="handleFileSelect($event)"
-    style="display: none;" />
-</div>
-
+<div class="file-upload">
 <div id="cropModal" >
   <div class="modal-content">
     <div class="image-container">
@@ -17,5 +6,6 @@
 </div>
   <button (click)="cropImage()">Crop</button>
   <button (click)="closeModal()">Close</button>
+</div>
 </div>
 </div>

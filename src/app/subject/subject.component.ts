@@ -14,8 +14,6 @@ import { customConfirm } from '../services/customConfirm.service';
 export class SubjectComponent implements OnInit {
   novel: any;
   createCharacter = false;
-  croppedImage: string | null = null;
-  croppedImageBlob: Blob | null = null;
   name = '';
   role = '';
 
@@ -24,7 +22,7 @@ export class SubjectComponent implements OnInit {
     private novelService: NovelService,
     private authService: AuthService,
     private popupService: PopupService,
-    private uploadService: UploadService,
+    public uploadService: UploadService,
     private customconfirm: customConfirm) { }
 
 
@@ -34,6 +32,7 @@ export class SubjectComponent implements OnInit {
     this.getNovel();
     this.typeMapping();
     this.getCharactor();
+    
 
   }
 
@@ -79,6 +78,7 @@ export class SubjectComponent implements OnInit {
     this.name = '';
     this.role = '';
     this.currentCharactor = null;
+    this.uploadService.croppedImage = null;
     this.createCharacter = !this.createCharacter;
   }
 
@@ -89,38 +89,14 @@ export class SubjectComponent implements OnInit {
     }
   }
 
-  handleFileSelect(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      this.popupService.showPopup("กรุณาอัปโหลดไฟล์ภาพเท่านั้น");
-      return;
-    }
-
-    if (file.size > 5 * 1024 * 1024) { // ขนาดไฟล์เกิน 5MB
-      this.popupService.showPopup("ไฟล์ภาพต้องมีขนาดไม่เกิน 5MB");
-      return;
-    }
-
+  onFileChange(event: Event): void {
     this.uploadService.handleFileSelect(event, (imageSrc: string) => {
+      // หลังจากเลือกไฟล์จะเปิดเครื่องมือการครอปภาพ
       this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
     });
+    
   }
-
-  async cropImage(): Promise<void> {
-    const blob = await this.uploadService.cropImage();
-    if (blob) {
-      this.croppedImage = URL.createObjectURL(blob);
-      const croppedImageContainer = document.getElementById('croppedImageContainer');
-      if (croppedImageContainer) {
-        croppedImageContainer.style.display = 'block';
-      }
-      this.croppedImageBlob = blob;
-      this.uploadService.closeModal();
-    }
-  }
-
+  
   closeModal(): void {
     this.uploadService.closeModal();
   }
@@ -131,9 +107,9 @@ export class SubjectComponent implements OnInit {
     formData.append('role', this.role);
 
     // ตรวจสอบรูปภาพ
-    if (this.croppedImageBlob) {
+    if (this.uploadService.croppedImageBlob) {
       // หากมีรูปภาพที่ถูกครอบใหม่
-      formData.append('charPic', this.croppedImageBlob, 'charactor.png');
+      formData.append('charPic', this.uploadService.croppedImageBlob, 'charactor.png');
     } else if (this.currentCharactor?.image_path) {
       // หากไม่มีการครอบรูปใหม่ ให้ใช้รูปเดิม
       formData.append('existingCharPic', this.currentCharactor.image_path);
@@ -196,7 +172,7 @@ export class SubjectComponent implements OnInit {
 
   async precreate() {
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
-    if (!this.croppedImageBlob) {
+    if (!this.uploadService.croppedImageBlob) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
       return;
     }
@@ -262,7 +238,7 @@ export class SubjectComponent implements OnInit {
     // ทำการแก้ไข
     this.name = this.currentCharactor.name;
     this.role = this.currentCharactor.role;
-    this.croppedImage = this.currentCharactor.image_path;
+    this.uploadService.croppedImage = this.currentCharactor.image_path;
 
   }
 

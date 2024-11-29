@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { PopupService } from '../services/popup.service';
 import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
-import { UploadimageComponent } from '../uploadimage/uploadimage.component';
 import { customConfirm } from '../services/customConfirm.service';
+import { UploadService } from '../services/upload.service';
 
 interface Novel {
   novelName: string;
@@ -87,7 +87,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private popupService: PopupService,
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
-    private customconfirm:customConfirm) { 
+    private customconfirm:customConfirm,
+    public uploadService: UploadService) { 
       
     }
 
@@ -341,6 +342,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       }
     );
   }
+  
 
   // ฟังก์ชันสำหรับเพิ่มคลาส invalid-field
   setInvalidField(fieldId: string) {
@@ -356,102 +358,62 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     invalidFields.forEach((field) => field.classList.remove('invalid-field'));
   }
 
+  onFileChange(event: Event): void {
+    this.uploadService.handleFileSelect(event, (imageSrc: string) => {
+      // หลังจากเลือกไฟล์จะเปิดเครื่องมือการครอปภาพ
+      this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
+    });
+  }
 
-  @ViewChild(UploadimageComponent) uploadimageComponent!: UploadimageComponent;
+  cropImage(): void {
+    this.uploadService.cropImage();
+  }
 
-  async presubmit(){
-    // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
-    if (!this.uploadimageComponent?.croppedImageBlob) {
+  async presubmit(): Promise<void> {
+    // ตรวจสอบข้อมูลที่จำเป็น
+    const isFormValid = this.validateForm();
+    if (!isFormValid) return;
+  
+    // ยืนยันว่ามีภาพที่ครอบแล้ว
+    if (!this.uploadService?.croppedImageBlob) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
       return;
     }
-
-    
-    if (!this.novel.novelName || !this.novel.penName || !this.novel.mainGroups ||
-      !this.novel.tag || !this.novel.rate || !this.novel.desc) {
-      this.popupService.showPopup("กรอกข้อมูลให้ครบ");
-      return;
-    }
-
-    const confirmed = await this.customconfirm.customConfirm(`คุณต้องการบันเป็น${ this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }ใช่หรือไม่`);
+  
+    // ยืนยันการเปลี่ยนสถานะ
+    const confirmed = await this.customconfirm.customConfirm(
+      `คุณต้องการบันทึกเป็น${this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ'}ใช่หรือไม่`
+    );
+  
     if (confirmed) {
-        this.saveNovel();
-    } 
+      this.saveNovel();
+    }
   }
-
-  // Submit the novel form
-  // submit(): void {
-  //   console.log('Form Submitted', this.novel);
-
-  //   // this.resetValidation();
-
-  //   // let hasError = false;
-
-  //   // // ตรวจสอบฟิลด์แต่ละอัน
-  //   // if (!this.novel.novelName) {
-  //   //   this.setInvalidField('title');
-  //   //   hasError = true;
-  //   // }
-  //   // if (!this.novel.penName) {
-  //   //   this.setInvalidField('penNameInput');
-  //   //   hasError = true;
-  //   // }
-  //   // if (!this.novel.desc) {
-  //   //   this.setInvalidField('subtitle');
-  //   //   hasError = true;
-  //   // }
-  //   // if (!this.novel.rate) {
-  //   //   this.setInvalidField('rating');
-  //   //   hasError = true;
-  //   // }
-  //   // if (!this.novel.tag) {
-  //   //   this.setInvalidField('tag');
-  //   //   hasError = true;
-  //   // }  
-  //   // if (!this.selectedItem) {
-  //   //   this.setInvalidField('subItemSelect');
-  //   //   hasError = true;
-  //   // }
-
-  //   // // ถ้ามีข้อผิดพลาด ให้แสดงข้อความเตือน
-  //   // if (hasError) {
-  //   //   this.popupService.showPopup('กรอกข้อมูลให้ครบ');
-  //   //   return;
-  //   // }
-
-  //   // ถ้าข้อมูลครบถ้วนให้ดำเนินการบันทึก
-  //   this.saveNovel();
-  // }
+  
+  // ฟังก์ชันสำหรับตรวจสอบข้อมูลฟอร์ม
+  private validateForm(): boolean {
+    const requiredFields = [
+      { field: this.novel.novelName, name: "ชื่อเรื่อง" },
+      { field: this.novel.penName, name: "นามปากกา" },
+      { field: this.novel.mainGroups, name: "กลุ่มหลัก" },
+      { field: this.novel.tag, name: "แท็ก" },
+      { field: this.novel.rate, name: "เรตติ้ง" },
+      { field: this.novel.desc, name: "คำอธิบาย" },
+    ];
+  
+    // ตรวจหาฟิลด์ที่ว่างเปล่า
+    const missingFields = requiredFields.filter((field) => !field.field);
+    if (missingFields.length > 0) {
+      const missingFieldNames = missingFields.map((field) => field.name).join(", ");
+      this.popupService.showPopup(`กรุณากรอกข้อมูลให้ครบ: ${missingFieldNames}`);
+      return false;
+    }
+  
+    return true;
+  }
+ 
 
   saveNovel() {
-
-    // const payload = {
-    //   novelName: this.novel.novelName,
-    //   penName: this.novel.penName,
-    //   group: this.novel.group,
-    //   type: this.novel.type,
-    //   mainGroup: this.novel.mainGroups,
-    //   subGroup1: this.novel.selectedSubCategory1,
-    //   subGroup2: this.novel.selectedSubCategory2,
-    //   tag: this.novel.tag,
-    //   rate: this.novel.rate,
-    //   desc: this.novel.desc,
-    //   userId: this.novel.userId,
-    //   novel_propic: this.novel.novel_propic,
-    // };
-
-  
-
-    // if (this.uploadimageComponent.croppedImageBlob) {
-    //   const reader = new FileReader();
-    //   reader.onload = () => {
-    //     payload.novel_propic = reader.result as string; // แปลงให้เป็น string
-    //     this.sendJsonPayload(payload); // ส่งข้อมูล
-    //   };
-    //   reader.readAsDataURL(this.uploadimageComponent.croppedImageBlob);
-    // } else {
-    //   this.sendJsonPayload(payload);
-    // }
 
     // // เพิ่มโค้ดสำหรับบันทึกข้อมูล
     const formData = new FormData();
@@ -468,17 +430,10 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     formData.append('desc', this.novel.desc);
     formData.append('status', this.novel.status);
 
-    // formData.append('userId', this.novel.userId ||'');
-    // const userId = this.novel.userId; // userId เป็น string | null
-    // if (userId !== null) {
-    //     formData.append("userId", userId);
-    // } else {
-    //     console.error("User ID is null, skipping...");
-    // }
     
     // เพิ่มรูปภาพที่ครอบแล้วลงใน FormData
-    if (this.uploadimageComponent.croppedImageBlob) {
-      formData.append('novel_propic', this.uploadimageComponent.croppedImageBlob, "novel_propic.png");
+    if (this.uploadService.croppedImageBlob) {
+      formData.append('novel_propic', this.uploadService.croppedImageBlob, "novel_propic.png");
     }
 
     // เรียกใช้ service เพื่อส่งข้อมูลไปยัง API
@@ -495,21 +450,6 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     });
   }
 
-
-
-  // sendJsonPayload(payload: any): void {
-  //   this.authService.storeNovel(payload).subscribe({
-  //     next: (data) => {
-  //       this.popupService.showPopup(JSON.stringify(data));
-  //       console.log('Saving novel...', payload);
-  //       setTimeout(() => {
-  //         this.popupService.closePopup();
-  //         // window.location.reload();
-  //       }, 2000);
-  //     },
-  //     error: (error) => this.popupService.showPopup(error.message),
-  //   });
-  // }
 
 
 
