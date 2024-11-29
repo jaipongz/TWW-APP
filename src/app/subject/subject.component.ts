@@ -97,9 +97,15 @@ export class SubjectComponent implements OnInit {
     
   }
   
-  closeModal(): void {
-    this.uploadService.closeModal();
+  // closeModal(): void {
+  //   this.uploadService.closeModal();
+  // }
+  onAutoClick(): void {
+    console.log('Auto-click triggered!');
+    // You can perform any action here that you want to run automatically after closing the modal
+    // this.createcharacter();
   }
+  
 
   private createFormData(): FormData {
     const formData = new FormData();
@@ -171,6 +177,8 @@ export class SubjectComponent implements OnInit {
   }
 
   async precreate() {
+    console.log('On precreate');
+    
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
     if (!this.uploadService.croppedImageBlob) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");

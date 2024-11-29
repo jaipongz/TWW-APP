@@ -12,7 +12,7 @@ export class UploadService {
   public  imagePreview: HTMLImageElement | null = null;
   public  croppedImageBlob: Blob | null = null;
   public  croppedImage: string | null = null;
-  
+  canClick = true;
 
   constructor(private popupService: PopupService) {}
 
@@ -79,6 +79,7 @@ export class UploadService {
         this.croppedImageBlob = blob;
         console.log('cropurl:',this.croppedImage);
         console.log('croblob:',this.croppedImageBlob);
+        // onCropComplete(croppedImage, blob);
         this.closeModal();
       }
     }, 'image/jpeg');
@@ -92,5 +93,11 @@ export class UploadService {
       this.cropper.destroy();
       this.cropper = null;
     }
+    setTimeout(() => {
+      const autoClickButton = document.getElementById('autoClickButton');
+      if (autoClickButton) {
+        autoClickButton.click();
+      }
+    }, 100);
   }
 }
