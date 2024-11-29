@@ -4,6 +4,7 @@ import { PopupService } from '../services/popup.service';
 import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
 import { UploadimageComponent } from '../uploadimage/uploadimage.component';
+import { customConfirm } from '../services/customConfirm.service';
 
 interface Novel {
   novelName: string;
@@ -85,7 +86,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private novelService: NovelService,
     private popupService: PopupService,
     private authService: AuthService,
-    private cdr: ChangeDetectorRef) { 
+    private cdr: ChangeDetectorRef,
+    private customconfirm:customConfirm) { 
       
     }
 
@@ -357,7 +359,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
   @ViewChild(UploadimageComponent) uploadimageComponent!: UploadimageComponent;
 
-  presubmit(){
+  async presubmit(){
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
     if (!this.uploadimageComponent?.croppedImageBlob) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
@@ -371,7 +373,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    const confirmed = confirm(`คุณต้องการบันเป็น${ this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }ใช่หรือไม่`);
+    const confirmed = await this.customconfirm.customConfirm(`คุณต้องการบันเป็น${ this.novel.status === 'T' ? 'ส่วนตัว' : 'สาธารณะ' }ใช่หรือไม่`);
     if (confirmed) {
         this.saveNovel();
     } 
@@ -519,8 +521,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
   }
   
 
-  goBack() {
-    const confirmed = confirm('ต้องการเก็บการเขียนไว้ชั่วคราวหรือไม่')
+  async goBack() {
+    const confirmed = await this.customconfirm.customConfirm('ต้องการเก็บการเขียนไว้ชั่วคราวหรือไม่')
     if (confirmed){
       window.history.back();
       this.checkform = false;

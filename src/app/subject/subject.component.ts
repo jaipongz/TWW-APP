@@ -3,6 +3,7 @@ import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { UploadService } from '../services/upload.service';
+import { customConfirm } from '../services/customConfirm.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class SubjectComponent implements OnInit {
     private novelService: NovelService,
     private authService: AuthService,
     private popupService: PopupService,
-    private uploadService: UploadService) { }
+    private uploadService: UploadService,
+    private customconfirm: customConfirm) { }
 
 
 
@@ -77,7 +79,6 @@ export class SubjectComponent implements OnInit {
     this.name = '';
     this.role = '';
     this.currentCharactor = null;
-    this.croppedImage = null;
     this.createCharacter = !this.createCharacter;
   }
 
@@ -193,7 +194,7 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  precreate() {
+  async precreate() {
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
     if (!this.croppedImageBlob) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
@@ -210,7 +211,7 @@ export class SubjectComponent implements OnInit {
       return;
     }
 
-    const confirmed = confirm("คุณต้องการสร้างตัวละครนี้?");
+    const confirmed = await this.customconfirm.customConfirm("คุณต้องการสร้างตัวละครนี้?");
     if (confirmed) {
       if (this.currentCharactor?.id) {
         this.updatecharacter();
@@ -261,11 +262,11 @@ export class SubjectComponent implements OnInit {
     // ทำการแก้ไข
     this.name = this.currentCharactor.name;
     this.role = this.currentCharactor.role;
-    this.croppedImageBlob = this.currentCharactor.image_path;
+    this.croppedImage = this.currentCharactor.image_path;
 
   }
 
-  charDelete(index: number){
+  async charDelete(index: number){
     const charId = this.charactors[index]?.id;
 
     if (!charId) {
@@ -273,7 +274,7 @@ export class SubjectComponent implements OnInit {
       return;
     }
 
-    const confirmed = confirm(`ต้องการลบตัวละคร${this.charactors[index]?.name}`)
+    const confirmed = await this.customconfirm.customConfirm(`ต้องการลบตัวละคร${this.charactors[index]?.name}`)
     if (confirmed) {
       this.authService.deleteCharacter(charId).subscribe({
         next: (data) => {

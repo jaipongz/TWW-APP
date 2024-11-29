@@ -72,7 +72,7 @@
                 <div class="char-sub">
                     <span (click)="charDelete(i)">x</span>
                     <div class="image-wrapper" (click)="charEdit(i)">
-                        <img [src]="croppedImageBlob  || charactor.image_path || '/image/avartar.jpg'" alt="ภาพตัวละคร">
+                        <img [src]="croppedImage  || charactor.image_path || '/image/avartar.jpg'" alt="ภาพตัวละคร">
                     </div>
                     <a class="charname">{{ charactor.name }}</a>
                     <a class="charrole">({{ charactor.role }})</a>
@@ -90,7 +90,7 @@
             <div class="popup-content">
                 <span (click)="closeAdd()">x</span>
                 <div class="avatar-container avatar">
-                    <img [src]="croppedImageBlob  || '/image/avartar.jpg'" alt="ภาพตัวละคร" class="avatar" />
+                    <img [src]="croppedImage  || '/image/avartar.jpg'" alt="ภาพตัวละคร" class="avatar" />
                     <label for="upload-avatar" class="camera-icon" (click)="fileInput.click()">
                     <i class="fa-solid fa-camera" ></i>
                     </label>
