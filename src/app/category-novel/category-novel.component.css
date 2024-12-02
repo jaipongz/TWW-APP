@@ -1,0 +1,97 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+h2 {
+    font-size: 28px;
+    color: #522504;
+}
+.lists{
+    background: #ffffff;
+    width: 80%;
+    height: 150px;
+    border-radius: 15px;
+    margin: 10px auto;
+    box-shadow: 0 0 5px #432818 ;
+    padding:15px 20px;
+  
+}
+.listhead{
+    display: flex;
+    color: #88583d;
+    font-weight: bold;
+
+}
+.listhead a{
+    cursor: pointer;
+    font-size: 20px;
+    color: #88583d;
+    text-decoration: none;
+    padding: 5px 10px;
+    
+}
+.listhead a:hover{
+    color: #6f1d1b;
+}
+.listsub{
+    padding: 5px 5px;
+    font-weight: bold;
+}
+.listsub a{
+    margin: 0 auto;
+    padding: 5px 15px;
+    color: #88583d;
+    font-size: 16px;
+}
+.listsub b{
+    text-decoration: underline;
+    color: #88583d;
+    font-size: 16px;
+}   
+h1 {
+    font-size: 26px;
+    color: #88583d;
+    text-align: center;
+    margin-bottom: 20px;
+ }
+ p {
+    font-size: 18px;
+    color: #88583d;
+    margin-bottom: 20px;
+    text-align: center;
+}
+ button {
+    background-color: #975102; 
+    color: #FFFFFF; 
+    font-size: 20px; 
+    font-weight: bold;
+    padding:15px 40px; 
+    border: none; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+ .center-container {
+    text-align: center;
+}
+button:active {
+    background-color: #482e16; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+ .character-image {
+    width: 216px;
+    height: 286px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;  
+ }
+.listhead a.active {
+    color: #6f1d1b;
+    padding: 5px 15px; 
+}
+  
+

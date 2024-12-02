@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="lists">
+        <h2>คลังนิยาย</h2>
+        <div class="listhead">
+            <a (click)="activateTab('novel')" [ngClass]="{'active': activeTab === 'novel'}">นิยายบรรยาย</a>
+            <a (click)="activateTab('ebook')" [ngClass]="{'active': activeTab === 'ebook'}">นิยายแชท</a>
+            <a (click)="activateTab('cartoon')" [ngClass]="{'active': activeTab === 'cartoon'}">กระทู้</a>
+        </div>
+        <div class="listsub" *ngIf="activeTab === 'novel'">
+            <b>นิยายบรรยาย</b>
+            <a>ประวัติการอ่าน</a>
+        </div>
+        <div class="listsub" *ngIf="activeTab === 'ebook'">
+            <b>นิยายแชท</b>
+            <a>ประวัติการอ่าน</a>
+        </div>
+        <div class="listsub" *ngIf="activeTab === 'cartoon'">
+            <b>กระทู้</b>
+            <a>ประวัติการอ่าน</a>
+        </div>
+    </div>
+        <img src="https://s3-alpha-sig.figma.com/img/8eee/004f/b462b0467c60a2eb1e1de2bd66fe93aa?Expires=1733702400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=VGcM~y96WwdRJa0iCMODnjO~FWZnXS-iUBpaP7MZ0Ows9Xihg1r-Bg~N2ffNAmC3CzMNfgvdLqAOj9WWUUiE0SvsNgZ-9VERvUpeCNQixl8DZzlczAaJyLKH0Q~pqPwwyg0nfgKR4M4qrPt7sQWMIlK0dDDcd02eodBeGoS557xBC9434tPlO0G6mKJbuk8EwQdHz3F59Bn2fSRQ~KBVJAIHQLePGS54kp3enKWWy2TzvIz4HSfEX4PSxPTTDDvJPqKy5KOFaihR2RiUDChW08QUAJbznFHMUtA6UazEbJ-pEW~el~twyKldxu5zw98OpRepfYFbgfEQol50TwT92Q__" alt="Character Image" class="character-image">
+        <h1>ยังไม่มีลิสต์ของฉัน</h1>
+        <p>สร้างลิสต์ใหม่เพื่อจัดลิสต์หนังสือของคุณ</p>
+        <div class="center-container">
+        <button class="custom-button">ค้นหานิยายบรรยาย</button>
+    </div>
+</div>

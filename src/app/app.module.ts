@@ -35,12 +35,12 @@ import { ProfileDetailComponent } from './profile-detail/profile-detail.componen
 import { LockpageComponent } from './lockpage/lockpage.component';
 import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component';
 import { SubjectComponent } from './subject/subject.component';
-
+import { CategoryNovelComponent } from './category-novel/category-novel.component';
 
 
 
 const appRoutes: Routes = [
-  {path: '' , component: BannerComponent },
+  {path: '' , component: CategoryNovelComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -79,6 +79,7 @@ const appRoutes: Routes = [
     LockpageComponent,
     CeateNovelEpComponent,
     SubjectComponent,
+    CategoryNovelComponent,
   ],
   imports: [
     BrowserModule,
