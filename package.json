@@ -26,6 +26,8 @@
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "cropperjs": "^1.6.2",
+    "echarts": "^5.5.1",
+    "ngx-echarts": "^19.0.0",
     "rxjs": "~7.8.0",
     "swiper": "^11.1.14",
     "tslib": "^2.3.0",

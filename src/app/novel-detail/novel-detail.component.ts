@@ -89,8 +89,130 @@ export class NovelDetailComponent {
       this.novelService.setNovelCreate(this.getNovelCreate);
       this.router.navigate(['create-novel']);
     }
+  }
 
+  showDashboard = false; // ตัวแปรควบคุมการแสดงผลแดชบอร์ด
+  chartOptions = {
+    tooltip: {
+      trigger: 'item',
+    },
+    legend: {
+      top: '5%',
+      left: 'center',
+    },
+    series: [
+      {
+        name: 'Example Data',
+        type: 'pie',
+        radius: '50%',
+        data: [
+          { value: 1048, name: 'Item A' },
+          { value: 735, name: 'Item B' },
+          { value: 580, name: 'Item C' },
+          { value: 484, name: 'Item D' },
+          { value: 300, name: 'Item E' },
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        },
+      },
+    ],
+  };
 
+  option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        crossStyle: {
+          color: '#999',
+        },
+      },
+    },
+    toolbox: {
+      feature: {
+        dataView: { show: true, readOnly: false },
+        magicType: { show: true, type: ['line', 'bar'] },
+        restore: { show: true },
+        saveAsImage: { show: true },
+      },
+    },
+    legend: {
+      data: ['Evaporation', 'Precipitation', 'Temperature'],
+    },
+    xAxis: [
+      {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+    ],
+    yAxis: [
+      {
+        type: 'value',
+        name: 'Precipitation',
+        min: 0,
+        max: 250,
+        interval: 50,
+        axisLabel: {
+          formatter: '{value} ml',
+        },
+      },
+      {
+        type: 'value',
+        name: 'Temperature',
+        min: 0,
+        max: 25,
+        interval: 5,
+        axisLabel: {
+          formatter: '{value} °C',
+        },
+      },
+    ],
+    // เพิ่ม series ที่นี่
+    series: [
+      {
+        name: 'Evaporation',
+        type: 'bar',
+        tooltip: {
+          valueFormatter: function (value: number) {
+            return value + ' ml';
+          },
+        },
+        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6],
+      },
+      {
+        name: 'Precipitation',
+        type: 'bar',
+        tooltip: {
+          valueFormatter: function (value: number) {
+            return value + ' ml';
+          },
+        },
+        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6],
+      },
+      {
+        name: 'Temperature',
+        type: 'line',
+        yAxisIndex: 1,
+        tooltip: {
+          valueFormatter: function (value: number) {
+            return value + ' °C';
+          },
+        },
+        data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3],
+      },
+    ],
+  };
+
+  toggleDashboard() {
+    this.showDashboard = !this.showDashboard;
   }
 
   @ViewChild('sortDropdown', { static: false }) sortDropdown!: ElementRef;

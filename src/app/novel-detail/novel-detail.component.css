@@ -64,6 +64,28 @@
   gap: 20px; /* เว้นระยะห่างระหว่างปุ่ม */
 }
 
+.button-group button {
+  padding: 10px 20px;
+  border: #7c4d3d;
+  cursor: pointer;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-group button {
+  background-color: #fff;
+  color: #000; /* สีปกติ */
+  border: solid 1px #7c4d3d; /* กำหนด border ที่มองไม่เห็น */
+}
+
+.button-group button.active,
+.button-group button:hover {
+  background-color: #7c4d3d;
+  color: #fff;
+  border: solid 1px #7c4d3d;
+}
+
 .novel-button {
   padding: 10px 20px;
   background-color: #7c4d3d; /* สีน้ำเงินสำหรับปุ่มผลงานนิยาย */
@@ -98,6 +120,16 @@
   background-color: #7c4d3d; /* สีเมื่อชี้ปุ่มแดชบอร์ด */
   color: #f1f1f1;
 }
+
+/* .novel-button.active {
+  background-color: #429BCD;
+  color: white;
+}
+
+.dashboard-button.active {
+  background-color: #DFCC80;
+  color: white;
+} */
 
 /* Responsive Design */
 @media (max-width: 600px) {
@@ -383,12 +415,12 @@
   font-size: 20px;
   border-radius: 10px;
   border: solid 1px #7c4d3d;
-  width:auto ;
+  width: auto;
 }
-.card-header ul li{
+.card-header ul li {
   font-size: 20px;
 }
-.card-right-buttons ul li{
+.card-right-buttons ul li {
   font-size: 20px;
 }
 
@@ -530,6 +562,33 @@
 }
 .story-icon {
   padding-right: 5px;
+}
+
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+}
+
+.chart-wrapper {
+  display: flex;
+  flex-direction: column; /* จัด Chart ให้อยู่ในแนวตั้ง */
+  gap: 20px; /* เพิ่มระยะห่างระหว่าง Chart */
+  width: 100%;
+}
+
+.chart-pie,
+.chart-bar {
+  width: 100%; /* ให้ Chart กว้างเต็มคอนเทนเนอร์ */
+  height: 400px; /* กำหนดความสูงของแต่ละ Chart */
 }
 
 /* Responsive styles for smaller screens */

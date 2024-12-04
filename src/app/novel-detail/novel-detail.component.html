@@ -1,222 +1,328 @@
 <app-navbar></app-navbar>
 <div class="writer-container">
   <div class="containerfornav">
-  <div class="create-novel-container">
-    <!-- รูปโปรไฟล์ -->
-    <div class="avatar-container">
-      <img [src]="profileData?.user_profile || '/image/avartar.jpg'" alt="Account Avatar" class="avatar" />
-      <label for="upload-avatar" class="camera-icon">
-        <fa-icon [icon]="faCamera"></fa-icon>
-      </label>
-      <input type="file" id="upload-avatar" class="upload-input" accept="image/*" />
+    <div class="create-novel-container">
+      <!-- รูปโปรไฟล์ -->
+      <div class="avatar-container">
+        <img
+          [src]="profileData?.user_profile || '/image/avartar.jpg'"
+          alt="Account Avatar"
+          class="avatar"
+        />
+        <label for="upload-avatar" class="camera-icon">
+          <fa-icon [icon]="faCamera"></fa-icon>
+        </label>
+        <input
+          type="file"
+          id="upload-avatar"
+          class="upload-input"
+          accept="image/*"
+        />
+      </div>
+
+      <!-- <h1>สร้างนิยายใหม่</h1> -->
+
+      <div class="account-name">
+        <!-- <label for="account-name">ชื่อบัญชี:</label> -->
+        <h2 id="account-name">
+          {{ profileData?.user_name || "ชื่อบัญชีของคุณ" }}
+        </h2>
+      </div>
+
+      <div class="button-group">
+        <button
+          class="novel-button"
+          [class.active]="!showDashboard"
+          (click)="showDashboard = false"
+        >
+          ผลงานนิยาย
+        </button>
+        <button
+          class="dashboard-button"
+          [class.active]="showDashboard"
+          (click)="showDashboard = true"
+        >
+          แดชบอร์ด
+        </button>
+      </div>
     </div>
 
-    <!-- <h1>สร้างนิยายใหม่</h1> -->
+    <div class="create-novelifo-container">
+      <img src="/image/g.png" alt="ผลงาน" class="work-image" />
 
-    <div class="account-name">
-      <!-- <label for="account-name">ชื่อบัญชี:</label> -->
-      <h2 id="account-name">{{ profileData?.user_name || 'ชื่อบัญชีของคุณ' }}</h2>
-    </div>
+      <div class="card-container">
+        <!-- div คลุม card left-right -->
+        <!-- ฝั่งซ้าย -->
+        <div class="card-left">
+          <div class="work-details">
+            <label for="total-works" class="bold-text">จำนวนผลงาน</label>
+            <p id="total-works">{{ countNovel.novel_count || 0 }} ผลงาน</p>
+          </div>
+        </div>
 
-    <div class="button-group">
-      <button class="novel-button">ผลงานนิยาย</button>
-      <button class="dashboard-button">แดชบอร์ด</button>
-    </div>
-  </div>
+        <div class="border-center"></div>
 
-  <div class="create-novelifo-container">
-    <img src="/image/g.png" alt="ผลงาน" class="work-image" />
-
-    <div class="card-container">
-      <!-- div คลุม card left-right -->
-      <!-- ฝั่งซ้าย -->
-      <div class="card-left">
-        <div class="work-details">
-          <label for="total-works" class="bold-text">จำนวนผลงาน</label>
-          <p id="total-works">{{ countNovel.novel_count || 0 }} ผลงาน</p>
+        <!-- ฝั่งขวา -->
+        <div class="card-right">
+          <div class="episode-details">
+            <label for="total-episodes" class="bold-text">ตอนทั้งหมด</label>
+            <p id="total-episodes">{{ countNovel.chapter_count || 0 }} ตอน</p>
+          </div>
         </div>
       </div>
 
-      <div class="border-center"></div>
+      <button class="add-work-button" (click)="openPopup()">
+        <fa-icon [icon]="faPlus" class="create-icon"></fa-icon> นิยายใหม่
+      </button>
 
-      <!-- ฝั่งขวา -->
-      <div class="card-right">
-        <div class="episode-details">
-          <label for="total-episodes" class="bold-text">ตอนทั้งหมด</label>
-          <p id="total-episodes">{{ countNovel.chapter_count || 0 }} ตอน</p>
+      <!-- Popup -->
+      <div #createPopup class="popup hidden" (click)="closePopup($event)">
+        <div class="popup-content">
+          <h2 class="popup-title">สร้างงานเขียน</h2>
+
+          <div class="popup-row">
+            <button
+              class="popup-button"
+              [ngClass]="{ active: isOriginal }"
+              (click)="selectCategory('original')"
+              style="text-align: center"
+            >
+              นิยายออริจินอล
+            </button>
+            <button
+              class="popup-button"
+              [ngClass]="{ active: isFanfiction }"
+              (click)="selectCategory('fanfiction')"
+              style="text-align: center"
+            >
+              แฟนฟิคชั่น
+            </button>
+          </div>
+
+          <label for="" *ngIf="isFanfiction" class="label-popup">คำแนะนำ</label>
+          <!-- คำแนะนำ -->
+          <div
+            *ngIf="isFanfiction"
+            class="popup-advice"
+            style="
+              border: 1px solid #7c4d3d;
+              padding: 10px 10px;
+              margin: 10px 0;
+              text-align: start;
+            "
+          >
+            <p>
+              แฟนฟิคชั่น : <br />
+              งานเขียนหรืองานวาดที่สร้างสรรค์ต่อยอดจากความชอบในเรื่องใดเรื่องหนึ่ง
+              เช่น บุคคลสาธารณะ ภาพยนตร์ ซีรี่ย์ อนิเมชัน เกม นิยาย มังงะ ฯลฯ
+              ทั้งนี้ <br />
+              เมื่อเลือกเป็นแฟนฟิคชั่นแล้ว<span style="color: red"
+                >จะไม่สามารถเปลี่ยนเป็นนิยายออริจินอลได้</span
+              >
+            </p>
+          </div>
+
+          <label for="" class="label-popup">สไตล์งานเขียน</label>
+
+          <!-- สไตล์งานเขียน -->
+          <div *ngIf="isOriginal">
+            <div class="popup-row">
+              <button
+                [ngClass]="{ active: typeStatus.describe }"
+                (click)="selectType('describe')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon
+                >บรรยาย
+              </button>
+              <button
+                [ngClass]="{ active: typeStatus.chat }"
+                (click)="selectType('chat')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>แชท
+              </button>
+            </div>
+            <div class="popup-row">
+              <button
+                [ngClass]="{ active: typeStatus.cartoon }"
+                (click)="selectType('cartoon')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faPen" class="icon-pop"></fa-icon
+                >การ์ตูน/ภาพประกอบ
+              </button>
+              <button
+                [ngClass]="{ active: typeStatus.gist }"
+                (click)="selectType('gist')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>กระทู้
+              </button>
+            </div>
+          </div>
+
+          <div *ngIf="isFanfiction">
+            <div class="popup-row">
+              <button
+                [ngClass]="{ active: typeStatus.fic_describe }"
+                (click)="selectType('fic_describe')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon
+                >ฟิคบรรยาย
+              </button>
+              <button
+                [ngClass]="{ active: typeStatus.fic_chat }"
+                (click)="selectType('fic_chat')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>ฟิคแชท
+              </button>
+            </div>
+            <div class="popup-row">
+              <button
+                [ngClass]="{ active: typeStatus.fic_doujinshi }"
+                (click)="selectType('fic_doujinshi')"
+                class="popup-button"
+              >
+                <fa-icon [icon]="faPen" class="icon-pop"></fa-icon
+                >โดจินชิ/แฟนอาร์ต
+              </button>
+            </div>
+          </div>
+
+          <button (click)="precreate()" class="popup-create-button">
+            ตกลง
+          </button>
         </div>
       </div>
     </div>
 
-    <button class="add-work-button" (click)="openPopup()">
-      <fa-icon [icon]="faPlus" class="create-icon"></fa-icon> นิยายใหม่
-    </button>
-
-    <!-- Popup -->
-    <div #createPopup class="popup hidden" (click)="closePopup($event)">
-      <div class="popup-content">
-        <h2 class="popup-title">สร้างงานเขียน</h2>
-
-        <div class="popup-row">
-          <button class="popup-button" [ngClass]="{ active: isOriginal }" (click)="selectCategory('original')"
-            style="text-align: center">
-            นิยายออริจินอล
-          </button>
-          <button class="popup-button" [ngClass]="{ active: isFanfiction }" (click)="selectCategory('fanfiction')"
-            style="text-align: center">
-            แฟนฟิคชั่น
-          </button>
+    <div *ngIf="!showDashboard">
+      <div class="update-card-container">
+        <div class="card-header">
+          <label class="sort-label">เรียงตาม</label>
+          <div class="button-container">
+            <button class="dropdown-button" (click)="toggleSortDropdown()">
+              อัพเดต
+              <fa-icon [icon]="faCaretDown" class="update-icon"></fa-icon>
+            </button>
+            <!-- ปุ่มใหม่ที่มีไอคอน faArrowUpWideShort -->
+            <button class="dropdown-button">
+              <fa-icon
+                [icon]="faArrowUpWideShort"
+                class="listup-icon"
+              ></fa-icon>
+            </button>
+          </div>
+          <ul
+            *ngIf="showSortDropdown"
+            class="dropdown-menu"
+            style="max-width: 104px"
+          >
+            <li>ล่าสุด</li>
+            <div
+              style="
+                display: flex;
+                border: 1px solid rgba(124, 77, 61, 0.5);
+                width: 100%;
+              "
+            ></div>
+            <li>เก่าสุด</li>
+          </ul>
         </div>
 
-        <label for="" *ngIf="isFanfiction" class="label-popup">คำแนะนำ</label>
-        <!-- คำแนะนำ -->
-        <div *ngIf="isFanfiction" class="popup-advice" style="
-            border: 1px solid #7c4d3d;
-            padding: 10px 10px;
-            margin: 10px 0;
-            text-align: start;
-          ">
-          <p>
-            แฟนฟิคชั่น : <br />
-            งานเขียนหรืองานวาดที่สร้างสรรค์ต่อยอดจากความชอบในเรื่องใดเรื่องหนึ่ง
-            เช่น บุคคลสาธารณะ ภาพยนตร์ ซีรี่ย์ อนิเมชัน เกม นิยาย มังงะ ฯลฯ
-            ทั้งนี้ <br />
-            เมื่อเลือกเป็นแฟนฟิคชั่นแล้ว<span style="color: red">จะไม่สามารถเปลี่ยนเป็นนิยายออริจินอลได้</span>
+        <div class="card-right-buttons">
+          <div class="status-group">
+            <label for="status-story" class="status-label">สถานะเรื่อง</label>
+            <button
+              id="status-story"
+              class="dropdown-button"
+              (click)="toggleStatusStoryDropdown()"
+            >
+              ทั้งหมด
+              <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
+            </button>
+            <ul *ngIf="showStatusStoryDropdown" class="dropdown-menu">
+              <li>เผยแพร่แล้ว</li>
+              <div
+                style="
+                  display: flex;
+                  border: 1px solid rgba(124, 77, 61, 0.5);
+                  width: 100%;
+                "
+              ></div>
+              <li>ร่าง</li>
+            </ul>
+          </div>
+
+          <div class="status-group">
+            <label for="status-complete" class="status-label">สถานะจบ</label>
+            <button
+              id="status-complete"
+              class="dropdown-button"
+              (click)="toggleStatusCompleteDropdown()"
+            >
+              ทั้งหมด
+              <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
+            </button>
+            <ul *ngIf="showStatusCompleteDropdown" class="dropdown-menu">
+              <li>จบแล้ว</li>
+              <div
+                style="
+                  display: flex;
+                  border: 1px solid rgba(124, 77, 61, 0.5);
+                  width: 100%;
+                "
+              ></div>
+              <li>ยังไม่จบ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-card-container" *ngFor="let novel of noveldata">
+        <!-- รูปด้านซ้าย -->
+        <div class="story-image">
+          <img
+            src="{{ novel.novel_propic || '/image/test1.jpg' }}"
+            alt="ภาพเรื่องที่สร้าง"
+          />
+        </div>
+
+        <!-- ข้อมูลเรื่องด้านข้างรูป -->
+        <div class="story-info">
+          <h3 class="story-title">
+            <fa-icon [icon]="faBookOpen" class="story-icon"></fa-icon>
+            {{ novel.novel_name }}
+          </h3>
+          <p class="story-update">
+            อัปเดต: {{ timeAgoThai(novel.updated_at) }}
+          </p>
+          <p class="story-episodes">
+            จำนวนตอน: {{ novel.total_episodes || 0 }}
           </p>
         </div>
 
-        <label for="" class="label-popup">สไตล์งานเขียน</label>
-
-        <!-- สไตล์งานเขียน -->
-        <div *ngIf="isOriginal">
-          <div class="popup-row">
-            <button [ngClass]="{ active: typeStatus.describe }" (click)="selectType('describe')" class="popup-button">
-              <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon>บรรยาย
-            </button>
-            <button [ngClass]="{ active: typeStatus.chat }" (click)="selectType('chat')" class="popup-button">
-              <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>แชท
-            </button>
-          </div>
-          <div class="popup-row">
-            <button [ngClass]="{ active: typeStatus.cartoon }" (click)="selectType('cartoon')" class="popup-button">
-              <fa-icon [icon]="faPen" class="icon-pop"></fa-icon>การ์ตูน/ภาพประกอบ
-            </button>
-            <button [ngClass]="{ active: typeStatus.gist }" (click)="selectType('gist')" class="popup-button">
-              <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>กระทู้
-            </button>
-          </div>
+        <!-- ปุ่มด้านขวาสุดสำหรับเพิ่มตอนใหม่ -->
+        <div class="story-action">
+          <button class="new-episode-button" (click)="addChapter(novel)">
+            <fa-icon [icon]="faPlus" class="new-episode-icon"></fa-icon> ตอนใหม่
+          </button>
         </div>
+      </div>
+    </div>
 
-        <div *ngIf="isFanfiction">
-          <div class="popup-row">
-            <button [ngClass]="{ active: typeStatus.fic_describe }" (click)="selectType('fic_describe')"
-              class="popup-button">
-              <fa-icon [icon]="faPenToSquare" class="icon-pop"></fa-icon>ฟิคบรรยาย
-            </button>
-            <button [ngClass]="{ active: typeStatus.fic_chat }" (click)="selectType('fic_chat')" class="popup-button">
-              <fa-icon [icon]="faComment" class="icon-pop"></fa-icon>ฟิคแชท
-            </button>
-          </div>
-          <div class="popup-row">
-            <button [ngClass]="{ active: typeStatus.fic_doujinshi }" (click)="selectType('fic_doujinshi')"
-              class="popup-button">
-              <fa-icon [icon]="faPen" class="icon-pop"></fa-icon>โดจินชิ/แฟนอาร์ต
-            </button>
-          </div>
-        </div>
-
-        <button (click)="precreate()" class="popup-create-button">ตกลง</button>
+    <div *ngIf="showDashboard" class="dashboard-container">
+      <div class="chart-wrapper">
+        <!-- Pie Chart -->
+        <div echarts [options]="chartOptions" class="chart-pie"></div>
+        <!-- Bar/Line Chart -->
+        <div echarts [options]="option" class="chart-bar"></div>
       </div>
     </div>
   </div>
-
-  <div class="update-card-container">
-    <div class="card-header">
-      <label class="sort-label">เรียงตาม</label>
-      <div class="button-container">
-        <button class="dropdown-button" (click)="toggleSortDropdown()">
-          อัพเดต
-          <fa-icon [icon]="faCaretDown" class="update-icon"></fa-icon>
-        </button>
-        <!-- ปุ่มใหม่ที่มีไอคอน faArrowUpWideShort -->
-        <button class="dropdown-button">
-          <fa-icon [icon]="faArrowUpWideShort" class="listup-icon"></fa-icon>
-        </button>
-      </div>
-      <ul *ngIf="showSortDropdown" class="dropdown-menu" style="max-width: 104px">
-        <li>ล่าสุด</li>
-        <div style="
-            display: flex;
-            border: 1px solid rgba(124, 77, 61, 0.5);
-            width: 100%;
-          "></div>
-        <li>เก่าสุด</li>
-      </ul>
-    </div>
-
-    <div class="card-right-buttons">
-      <div class="status-group">
-        <label for="status-story" class="status-label">สถานะเรื่อง</label>
-        <button id="status-story" class="dropdown-button" (click)="toggleStatusStoryDropdown()">
-          ทั้งหมด
-          <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
-        </button>
-        <ul *ngIf="showStatusStoryDropdown" class="dropdown-menu">
-          <li>เผยแพร่แล้ว</li>
-          <div style="
-              display: flex;
-              border: 1px solid rgba(124, 77, 61, 0.5);
-              width: 100%;
-            "></div>
-          <li>ร่าง</li>
-        </ul>
-      </div>
-
-      <div class="status-group">
-        <label for="status-complete" class="status-label">สถานะจบ</label>
-        <button id="status-complete" class="dropdown-button" (click)="toggleStatusCompleteDropdown()">
-          ทั้งหมด
-          <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
-        </button>
-        <ul *ngIf="showStatusCompleteDropdown" class="dropdown-menu">
-          <li>จบแล้ว</li>
-          <div style="
-              display: flex;
-              border: 1px solid rgba(124, 77, 61, 0.5);
-              width: 100%;
-            "></div>
-          <li>ยังไม่จบ</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="story-card-container" *ngFor="let novel of noveldata">
-    <!-- รูปด้านซ้าย -->
-    <div class="story-image">
-      <img src="{{novel.novel_propic || '/image/test1.jpg'}}" alt="ภาพเรื่องที่สร้าง" />
-    </div>
-
-    <!-- ข้อมูลเรื่องด้านข้างรูป -->
-    <div class="story-info">
-      <h3 class="story-title">
-        <fa-icon [icon]="faBookOpen" class="story-icon"></fa-icon>
-        {{ novel.novel_name }}
-      </h3>
-      <p class="story-update">
-        อัปเดต: {{ timeAgoThai(novel.updated_at) }}
-      </p>
-      <p class="story-episodes">จำนวนตอน: {{ novel.total_episodes || 0 }}</p>
-    </div>
-
-    <!-- ปุ่มด้านขวาสุดสำหรับเพิ่มตอนใหม่ -->
-    <div class="story-action">
-      <button class="new-episode-button" (click)="addChapter(novel)">
-        <fa-icon [icon]="faPlus" class="new-episode-icon"></fa-icon> ตอนใหม่
-      </button>
-    </div>
-  </div>
-</div>
 </div>
 
 <!-- <div *ngFor="let novel of noveldata">
@@ -234,6 +340,4 @@
   function hidePopup() {
     document.getElementById("popup").classList.add("hidden");
   }
-
- 
 </script>

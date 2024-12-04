@@ -36,11 +36,12 @@ import { LockpageComponent } from './lockpage/lockpage.component';
 import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component';
 import { SubjectComponent } from './subject/subject.component';
 import { CategoryNovelComponent } from './category-novel/category-novel.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 
 
 const appRoutes: Routes = [
-  {path: '' , component: CategoryNovelComponent },
+  {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -92,6 +93,10 @@ const appRoutes: Routes = [
     FontAwesomeModule,
     // SwiperModule,
     RouterModule.forRoot(appRoutes),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts'),
+    }),
+
   ],
   providers: [
     NovelService,
