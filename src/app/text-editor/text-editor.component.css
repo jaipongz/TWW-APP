@@ -1,0 +1,18 @@
+.container {
+    width: 100%;
+    height: 500px;
+}
+/* .angular-editor-textarea::before {
+   
+  } */
+::ng-deep .angular-editor-textarea {
+    background-color: #fff !important;
+    border-radius: 5px;
+    /* resize: none !important; */
+
+}
+::ng-deep .angular-editor-textarea::after {
+
+    /* display: none !important; */
+
+}

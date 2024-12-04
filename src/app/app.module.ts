@@ -37,11 +37,13 @@ import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component
 import { SubjectComponent } from './subject/subject.component';
 import { CategoryNovelComponent } from './category-novel/category-novel.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { AngularEditorModule } from '@wfpena/angular-wysiwyg';
+import { TextEditorComponent } from './text-editor/text-editor.component';
 
 
 
 const appRoutes: Routes = [
-  {path: '' , component: BannerComponent },
+  {path: '' , component: TextEditorComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -81,6 +83,7 @@ const appRoutes: Routes = [
     CeateNovelEpComponent,
     SubjectComponent,
     CategoryNovelComponent,
+    TextEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +94,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatButtonModule,
     FontAwesomeModule,
+    AngularEditorModule,
     // SwiperModule,
     RouterModule.forRoot(appRoutes),
     NgxEchartsModule.forRoot({
