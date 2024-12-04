@@ -121,6 +121,20 @@ export class AuthService {
     return this.http.delete<any>(`${this.apiUrl}/api/novel/charactor/${charId}`,{ headers });
   }
 
+  addEpsode(novel_id: string, payload:any){
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/api/novel/desc/${novel_id}`, payload, { headers });
+  }
+
   // storeNovel(payload: any): Observable<any> {
   //   const token = this.getToken();
 

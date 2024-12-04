@@ -43,7 +43,7 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: TextEditorComponent },
+  {path: '' , component: CeateNovelEpComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
