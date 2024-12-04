@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { UploadService } from '../services/upload.service';
 import { customConfirm } from '../services/customConfirm.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class SubjectComponent implements OnInit {
     private authService: AuthService,
     private popupService: PopupService,
     public uploadService: UploadService,
-    private customconfirm: customConfirm) { }
+    private customconfirm: customConfirm,
+    private router: Router) { }
 
 
 
@@ -172,6 +174,20 @@ export class SubjectComponent implements OnInit {
         this.handleError(error, 'การอัปเดตตัวละครล้มเหลว');
       },
     });
+  }
+  addNewChapter() {
+    const novelId = this.novel?.novel_id;
+
+    if (novelId) {
+      // ส่งค่า novelId ไปหน้าใหม่ผ่าน queryParams
+      this.router.navigate(['/createEp'], { queryParams: { novelId } });
+      
+      // หรือส่งผ่าน state (หากต้องการข้อมูลเพิ่มเติม)
+      // this.router.navigateByUrl('/new-chapter', { state: { novelId } });
+    } else {
+      console.warn('Novel ID is undefined!');
+    }
+  
   }
 
   async precreate() {

@@ -1,5 +1,5 @@
 <div class="container" >
-    <angular-editor id="editor1" [(ngModel)]="htmlContent" autofocus="true" [config]="config1" (ngModelChange)="onChange($event)" (blur)="onBlur($event)">
+    <angular-editor id="editor1" [(ngModel)]="htmlContent" autofocus="true" [config]="config" (ngModelChange)="onChange($event)" (blur)="onBlur($event)">
       <!-- <ng-template #customButtons let-executeCommandFn="executeCommandFn">
         <ae-toolbar-set>
           <ae-button iconClass="fa fa-html5" title="Angular editor logo" (buttonClick)="executeCommandFn('insertHtml', angularEditorLogo)"></ae-button>

@@ -12,7 +12,7 @@ import { angularEditorConfig, AngularEditorConfig } from '@wfpena/angular-wysiwy
       <angular-editor
         id="editor1"
         [(ngModel)]="htmlContent"
-        [config]="config1"
+        [config]="config"
         (ngModelChange)="onModelChange($event)"
         (blur)="onBlur($event)">
       </angular-editor>
@@ -28,13 +28,15 @@ export class TextEditorComponent {
   editorConfig!: AngularEditorConfig;
   angularEditorLogo:any;
   form!: FormGroup;
+  novel: any;
 
   constructor( 
     private formBuilder: FormBuilder,
-    private http: HttpClient,){}
+    private http: HttpClient,){
 
-    // @Input() 
-    config1: AngularEditorConfig = {
+    }
+
+    @Input() config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     minHeight: '300px',
@@ -106,10 +108,7 @@ export class TextEditorComponent {
   onModelChange(newContent: string) {
     this.htmlContentChange.emit(newContent); // ส่งค่าออกไป
 
-    // if (this.config) {
-    //   // Merge the custom config with the default config if necessary
-    //   this.config = { ...this.editorConfig, ...this.config };
-    // }
+      this.config = { ...this.editorConfig, ...this.config };
   }
   // ngOnChanges() {
   
