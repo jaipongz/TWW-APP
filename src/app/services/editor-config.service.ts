@@ -1,41 +1,22 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { angularEditorConfig, AngularEditorConfig } from '@wfpena/angular-wysiwyg';
+import { Injectable } from '@angular/core';
+import { AngularEditorConfig } from '@wfpena/angular-wysiwyg';
 
-@Component({
-  selector: 'app-text-editor',
-  templateUrl: './text-editor.component.html',
-  styleUrl: './text-editor.component.css',
+@Injectable({
+  providedIn: 'root'
 })
-export class TextEditorComponent {
+export class EditorConfigService {
 
-  htmlContent = '';
-
-  editorConfig!: AngularEditorConfig;
-  // angularEditorLogo:any;
-  // form!: FormGroup;
-  novel: any;
-
-  constructor( 
-    private formBuilder: FormBuilder,
-    private http: HttpClient,){
-
-    }
-
-    config: AngularEditorConfig = {
-    minHeight: '300px',
-    minWidth: '160px',
-    maxHeight: '15rem',
-    
+  constructor() { }
+  public mainconfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
     textAreaBackgroundColor: 'white',
     // textAreaResize:'none',
     placeholder: 'Enter text here...',
     translate: 'yes',
-    sanitize: false,
+    sanitize: true,
     enableToolbar: true,
+    outline: false,
     // toolbarPosition: 'top',
     defaultFontName: 'Comic Sans MS',
     defaultFontSize: '5',
@@ -49,7 +30,7 @@ export class TextEditorComponent {
     ],
     showToolbar: true,
     // defaultParagraphSeparator: 'p',
-    textPatternsEnabled: false,
+    textPatternsEnabled: true,
     customClasses: [
       {
         name: 'quote',
@@ -88,36 +69,14 @@ export class TextEditorComponent {
       // ['bold', 'italic'],
       // ['fontSize'],
       ['insertVideo'],
-      // ['insertHTML'],
+      // ['toggleEditorMode'],
     ]
+  }
+
+  public config: AngularEditorConfig = {
+    ...this.mainconfig,
+    minHeight: '300px',
+    maxHeight: '600px',
+    minWidth: '160px',
   };
-  // @Output() config1ContentChange = new EventEmitter<string>();
-  // ngOnChanges() {
-  
-  // }
-  
-  onChange(event: any) {
-    console.log('changed');
-    // const text = this.htmlContent;
-    // console.log('text',text);
-  }
-
-  onBlur(event: any) {
-    console.log('blur ' + event);
-  }
-
-  // onChange2(event: any) {
-  //   console.warn(this.form.value);
-  // }
-
-  // onChange3(event: any) {}
-
-  isObject(val: any): boolean {
-    return this.getTypeofVariable(val) === 'object';
-  }
-
-  getTypeofVariable(value: any) {
-    return typeof value;
-  }
-
 }

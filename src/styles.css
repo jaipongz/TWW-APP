@@ -56,13 +56,13 @@ body {
   /* position: relative; */
   padding-bottom: 10px;
   z-index: 1;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none; */
   /* สำหรับ Safari */
-  -moz-user-select: none;
+  /* -moz-user-select: none; */
   /* สำหรับ Firefox */
-  -ms-user-select: none;
+  /* -ms-user-select: none; */
   /* สำหรับ IE10+/Edge */
-  user-select: none;
+  /* user-select: none; */
   /* สำหรับเบราว์เซอร์ที่รองรับ */
 
 }

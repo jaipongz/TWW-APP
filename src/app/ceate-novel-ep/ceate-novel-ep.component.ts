@@ -3,34 +3,12 @@ import { AngularEditorConfig } from '@wfpena/angular-wysiwyg';
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EditorConfigService } from '../services/editor-config.service';
 
 @Component({
   selector: 'app-ceate-novel-ep',
   templateUrl: './ceate-novel-ep.component.html',
   styleUrl: './ceate-novel-ep.component.css',
-  template: `
-    <div class="editorContent1">
-      <h3>Editor 1</h3>
-      <app-text-editor
-        [htmlContent]="editorContent1"
-        (htmlContentChange)="onEditor1Change($event)"
-        [config]="config1">
-        <!-- (config1ContentChange)="onEditor1Change($event)" -->
-      </app-text-editor>
-      <p>Output Editor 1: {{ editorContent1 }}</p>
-    </div>
-
-    <div>
-      <h3>Editor 2</h3>
-      <app-text-editor
-        [htmlContent]="editorContent2"
-        (htmlContentChange)="onEditor2Change($event)"
-        [config]="config2">
-        
-      </app-text-editor>
-      <p>Output Editor 2: {{ editorContent2 }}</p>
-    </div>
-  `,
 })
 export class CeateNovelEpComponent {
 
@@ -39,18 +17,19 @@ export class CeateNovelEpComponent {
   editorContent2: string = '';
   chaptername: string = ''
 
-  writerMsg= '';
   isLoading: boolean | undefined;
   novelId = '';
   comment: 'T' | 'F' = 'F';
-
+  
 
   constructor(private authService: AuthService,
     private popupService:PopupService,
     private route:ActivatedRoute,
+    private configService: EditorConfigService,
   ){
     this.authService.getToken();
     this.getNovel();
+    
   }
 
   config1: AngularEditorConfig = { 
@@ -58,6 +37,48 @@ export class CeateNovelEpComponent {
     minHeight: '300px',
     maxHeight: '600px',
     placeholder: 'Enter text here...',
+    spellcheck: true,
+    minWidth: '160px',
+    textAreaBackgroundColor: 'white',
+    translate: 'yes',
+    sanitize: false,
+    enableToolbar: true,
+    defaultFontName: 'Comic Sans MS',
+    defaultFontSize: '5',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'roboto-condensed-embedded', name: 'Roboto' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+      { class: 'roboto-slab', name: 'RobotoSlab', label: 'Roboto Custom' },
+      { class: 'custom-font', name: 'Custom Font', label: 'ฟอนต์พิเศษ' } // ฟอนต์ใหม่
+    ],
+    showToolbar: true,
+    // defaultParagraphSeparator: 'p',
+    textPatternsEnabled: false,
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'angular-editor-quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    editHistoryLimit: 3,
+    imageResizeSensitivity: 2,
+    toolbarHiddenButtons: [
+      // ['bold', 'italic'],
+      // ['fontSize'],
+      ['insertVideo'],
+      // ['insertHTML'],
+    ]
    };
 
   config2: AngularEditorConfig = {
@@ -65,7 +86,57 @@ export class CeateNovelEpComponent {
     minHeight: '200px',
     maxHeight: '300px',
     placeholder: 'Enter text here...',
+    spellcheck: true,
+    minWidth: '160px',
+    textAreaBackgroundColor: 'white',
+    translate: 'yes',
+    sanitize: false,
+    enableToolbar: true,
+    defaultFontName: 'Comic Sans MS',
+    defaultFontSize: '5',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'roboto-condensed-embedded', name: 'Roboto' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+      { class: 'roboto-slab', name: 'RobotoSlab', label: 'Roboto Custom' },
+      { class: 'custom-font', name: 'Custom Font', label: 'ฟอนต์พิเศษ' } // ฟอนต์ใหม่
+    ],
+    showToolbar: true,
+    // defaultParagraphSeparator: 'p',
+    textPatternsEnabled: false,
+    customClasses: [
+      {
+        name: 'quote',
+        class: 'angular-editor-quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText',
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    editHistoryLimit: 3,
+    imageResizeSensitivity: 2,
+    toolbarHiddenButtons: [
+      // ['bold', 'italic'],
+      // ['fontSize'],
+      ['insertVideo'],
+      // ['insertHTML'],
+    ]
    };
+
+   isObject(val: any): boolean {
+    return this.getTypeofVariable(val) === 'object';
+  }
+
+  getTypeofVariable(value: any) {
+    return typeof value;
+  }
 
    toggle(event: Event) {
     const checkbox = event.target as HTMLInputElement;
@@ -73,15 +144,7 @@ export class CeateNovelEpComponent {
     console.log('Comment Permission:', this.comment);
   }
 
-  // อัปเดตค่าเมื่อ Editor 1 มีการเปลี่ยนแปลง
-  onEditor1Change(newContent: string) {
-    this.editorContent1 = newContent;
-  }
 
-  // อัปเดตค่าเมื่อ Editor 2 มีการเปลี่ยนแปลง
-  onEditor2Change(newContent: string) {
-    this.editorContent2 = newContent;
-  }
 
   getNovel = () => {
     this.route.queryParams.subscribe(params => {
@@ -99,6 +162,7 @@ export class CeateNovelEpComponent {
       comment: this.comment,
 
     }
+    console.log('editorContent1:', payload);
   
     // append('chapterName', 'testttttt');
     // append('content', 'sdfddfsdfsdfdsfdsf');

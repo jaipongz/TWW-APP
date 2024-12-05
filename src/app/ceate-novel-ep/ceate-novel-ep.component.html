@@ -5,21 +5,22 @@
     <div class="header">
         <h3>ชื่อตอน</h3>
         <input type="text" [(ngModel)]="chaptername">
-        <a>{{ chaptername }}</a>
+        <!-- <a>{{ chaptername }}</a> -->
     </div>
 
     <div class="editorContent1">
         <h3>เนื้อหา</h3>
-        <app-text-editor id="editor1" autofocus="true" [htmlContent]="editorContent1" (htmlContentChange)="onEditor1Change($event)" [config]="config1" >>  
-            <!-- รับค่าจาก Editor 1 -->
-        </app-text-editor>
+        <angular-editor id="editor1" autofocus="true" [(ngModel)]="editorContent1"  [config]="config1" >>  
+           
+        </angular-editor>
         <!-- <p>Output Editor 1: {{ editorContent1 }}</p> -->
     </div>
 
     <div class="editorContent2">
         <h3>ข้อความจากนักเขียน</h3>
-        <app-text-editor id="editor2"  [htmlContent]="editorContent2" (htmlContentChange)="onEditor2Change($event)" [config]="config2">
-        </app-text-editor>
+        <angular-editor id="editor2"  [(ngModel)]="editorContent2"  [config]="config2" >>  
+           
+        </angular-editor>
         <!-- <p>Output Editor 2: {{ editorContent2 }}</p> -->
     </div>
 
