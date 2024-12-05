@@ -34,6 +34,7 @@ export class SubjectComponent implements OnInit {
     this.getNovel();
     this.typeMapping();
     this.getCharactor();
+    this.getChapter();
   }
 
   @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;
@@ -154,6 +155,33 @@ export class SubjectComponent implements OnInit {
       },
     });
   }
+
+  chapter: any[] = [];
+  totalChapter: any;
+  perPageChapter: any;
+  nowPageChapter: any;
+
+  getChapter() {
+    if (!this.novel?.novel_id) {
+      this.popupService.showPopup('ไม่มี Novel ID สำหรับการดึงตอน');
+      return;
+    }
+
+    this.authService.getAllDescChapter(this.novel?.novel_id).subscribe({
+      next: (data) => {
+        // this.popupService.showPopup('สร้างตัวละครสำเร็จ');
+        this.chapter = data.data
+        this.totalChapter = data.total
+        this.perPageChapter = data.perPage
+        this.nowPageChapter = data.nowPage
+        // console.log('Chapter Response:', this.chapter);
+      },
+      error: (error) => {
+        this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+      },
+    });
+  }
+
 
   updatecharacter() {
     const charId = this.currentCharactor?.id;
