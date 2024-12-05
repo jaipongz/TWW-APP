@@ -43,7 +43,7 @@ export class TextEditorComponent {
     minWidth: '160px',
     maxHeight: '15rem',
     textAreaBackgroundColor: 'white',
-    textAreaResize:'none',
+    // textAreaResize:'none',
     placeholder: 'Enter text here...',
     translate: 'yes',
     sanitize: true,
