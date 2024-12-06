@@ -221,7 +221,7 @@
             class="dropdown-menu"
             style="max-width: 104px"
           >
-            <li>ล่าสุด</li>
+            <li (click)="sortOrder = 'desc'">ล่าสุด</li>
             <div
               style="
                 display: flex;
@@ -229,7 +229,7 @@
                 width: 100%;
               "
             ></div>
-            <li>เก่าสุด</li>
+            <li (click)="sortOrder = 'asc'">เก่าสุด</li>
           </ul>
         </div>
 
@@ -282,12 +282,12 @@
         </div>
       </div>
 
-      <div class="story-card-container" *ngFor="let novel of noveldata">
+      <div class="story-card-container" *ngFor="let novel of noveldata | sort:'updated_at':sortOrder">
         <!-- รูปด้านซ้าย -->
         <div class="story-image">
           <img
-            src="{{ novel.novel_propic || '/image/test1.jpg' }}"
-            alt="ภาพเรื่องที่สร้าง"
+            [src]="novel.novel_propic"
+            alt="{{ novel.novel_name }}"
           />
         </div>
 

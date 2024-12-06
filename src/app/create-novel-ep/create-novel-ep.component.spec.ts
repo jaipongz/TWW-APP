@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CeateNovelEpComponent } from './create-novel-ep.component';
+import { CreateNovelEpComponent } from './create-novel-ep.component';
 
 describe('CeateNovelEpComponent', () => {
-  let component: CeateNovelEpComponent;
-  let fixture: ComponentFixture<CeateNovelEpComponent>;
+  let component: CreateNovelEpComponent;
+  let fixture: ComponentFixture<CreateNovelEpComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CeateNovelEpComponent]
+      declarations: [CreateNovelEpComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CeateNovelEpComponent);
+    fixture = TestBed.createComponent(CreateNovelEpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -39,6 +39,7 @@ import { CategoryNovelComponent } from './category-novel/category-novel.componen
 import { NgxEchartsModule } from 'ngx-echarts';
 import { AngularEditorModule } from '@wfpena/angular-wysiwyg';
 import { TextEditorComponent } from './text-editor/text-editor.component';
+import { SortPipe } from './sort.pipe';
 
 
 
@@ -85,6 +86,7 @@ const appRoutes: Routes = [
     SubjectComponent,
     CategoryNovelComponent,
     TextEditorComponent,
+    SortPipe,
   ],
   imports: [
     BrowserModule,

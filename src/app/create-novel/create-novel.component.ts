@@ -421,7 +421,6 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.authService.storeNovel(formData).subscribe({
       next: (data) => {
         this.popupService.showPopup(JSON.stringify(data));
-        console.log(this.novel);
         setTimeout(() => {
           this.popupService.closePopup();
           this.novelService.goTo('create-novel');

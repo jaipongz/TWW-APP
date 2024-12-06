@@ -275,6 +275,19 @@ export class NovelDetailComponent {
     });
   }
 
+sortOrder: 'asc' | 'desc' = 'desc';
+// เรียงลำดับจากใหม่สุด
+sortNow(): void {
+ 
+}
+
+// เรียงลำดับจากเก่าสุด
+sortOld(): void {
+ 
+}
+
+
+
   timeAgoThai(updatedAt: string): string {
     const now = new Date();
     const updatedTime = new Date(updatedAt); // Convert string to Date object
