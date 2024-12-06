@@ -4,26 +4,26 @@
 
     <div class="header">
         <h3>ชื่อตอน</h3>
-        <input type="text" [(ngModel)]="chaptername">
+        <input type="text" [(ngModel)]="data.chaptername" (ngModelChange)="saveToSessionStorage()">
         <!-- <a>{{ chaptername }}</a> -->
+         <button>ดูตัวอย่าง</button>
     </div>
 
     <div class="editorContent1">
         <h3>เนื้อหา</h3>
-        <angular-editor id="editor1" autofocus="true" [(ngModel)]="editorContent1"  [config]="config1" >>  
-           
+        <angular-editor id="editor1" autofocus="true" [(ngModel)]="data.editorContent1"  [config]="config1" (ngModelChange)="saveToSessionStorage()">   
         </angular-editor>
         <!-- <p>Output Editor 1: {{ editorContent1 }}</p> -->
     </div>
 
     <div class="editorContent2">
         <h3>ข้อความจากนักเขียน</h3>
-        <angular-editor id="editor2"  [(ngModel)]="editorContent2"  [config]="config2" >>  
+        <angular-editor id="editor2"  [(ngModel)]="data.editorContent2"  [config]="config2" (ngModelChange)="saveToSessionStorage()">  
            
         </angular-editor>
         <!-- <p>Output Editor 2: {{ editorContent2 }}</p> -->
     </div>
-
+    <hr>
     <div class="setting">
         <h3>ตั้งค่าตอน</h3>
         <div class="setting-ep">
@@ -33,7 +33,7 @@
     </div>
 
     <div class="buttons">
-        <button>ยกเลิก</button>
+        <button (click)="btnCancel()" id="cancel">ยกเลิก</button>
         <button (click)="addEpisode()">ตกลง</button>
     </div>
 

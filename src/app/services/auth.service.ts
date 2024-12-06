@@ -174,22 +174,7 @@ export class AuthService {
   // }
 
 
-  goTo(key: any) {
-    switch (key) {
-      case 'create':
-        this.router.navigate(['/create-novel']);
-        break;
 
-      case 'firstpage':
-        this.router.navigate(['/banner']);
-        break;
-
-
-      default:
-        console.warn('Invalid key provided:', key);
-        break;
-    }
-  }
 
 
   checkLoginStatus() {

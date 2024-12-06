@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CeateNovelEpComponent } from './ceate-novel-ep.component';
+import { CeateNovelEpComponent } from './create-novel-ep.component';
 
 describe('CeateNovelEpComponent', () => {
   let component: CeateNovelEpComponent;

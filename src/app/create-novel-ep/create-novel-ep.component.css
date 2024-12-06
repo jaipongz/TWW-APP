@@ -1,0 +1,73 @@
+/* .editorContent1 {
+    height: 300px;
+} */
+.contrainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 25px;
+    padding: 10px 20px;
+
+}
+h3 {
+    margin-bottom: 5px;
+}
+.header {
+    /* margin-bottom: 20px; */
+    position: relative;
+    max-width: 100%;
+}
+.header input {
+
+    border-radius: 10px;
+    background: none;
+    padding: 10px 20px;
+
+    width: 40%;
+
+}
+.header button {
+    position: absolute;
+    right: 0; 
+}
+
+.buttons {
+    display: flex;
+    margin: 0 auto;
+    gap: 3rem;
+}
+.buttons button , .header button {
+    background: #bf6a02;
+    color: #ffffff;
+    padding: 10px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.buttons #cancel {
+    background: #ffffff;
+    color: #000;
+    border: 1px solid #000;
+}
+.setting-ep {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .buttons button , .header button {
+        padding: 10px 20px;
+    }
+    .header input {
+
+        border-radius: 10px;
+        background: none;
+        padding: 10px 20px;
+    
+        width: 200px;
+    
+    }
+}

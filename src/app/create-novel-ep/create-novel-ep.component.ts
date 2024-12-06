@@ -4,18 +4,25 @@ import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EditorConfigService } from '../services/editor-config.service';
+import { customConfirm } from '../services/customConfirm.service';
+import { NovelService } from '../services/novel.service';
 
 @Component({
-  selector: 'app-ceate-novel-ep',
-  templateUrl: './ceate-novel-ep.component.html',
-  styleUrl: './ceate-novel-ep.component.css',
+  selector: 'app-create-novel-ep',
+  templateUrl: './create-novel-ep.component.html',
+  styleUrl: './create-novel-ep.component.css',
 })
-export class CeateNovelEpComponent {
+export class CreateNovelEpComponent {
 
-  chapterid='';
-  editorContent1: string = '';
-  editorContent2: string = '';
-  chaptername: string = ''
+
+  data = {
+    editorContent1:  '',
+    editorContent2:  '',
+    chaptername: '',
+  }
+
+
+  
 
   isLoading: boolean | undefined;
   novelId = '';
@@ -25,11 +32,12 @@ export class CeateNovelEpComponent {
   constructor(private authService: AuthService,
     private popupService:PopupService,
     private route:ActivatedRoute,
-    private configService: EditorConfigService,
+    private novelService: NovelService,
+    private cusComfirm:customConfirm
   ){
     this.authService.getToken();
     this.getNovel();
-    
+    this.getToSessionStorage();
   }
 
   config1: AngularEditorConfig = { 
@@ -41,7 +49,8 @@ export class CeateNovelEpComponent {
     minWidth: '160px',
     textAreaBackgroundColor: 'white',
     translate: 'yes',
-    sanitize: false,
+    sanitize: true,
+    outline:false,
     enableToolbar: true,
     defaultFontName: 'Comic Sans MS',
     defaultFontSize: '5',
@@ -54,8 +63,7 @@ export class CeateNovelEpComponent {
       { class: 'custom-font', name: 'Custom Font', label: 'ฟอนต์พิเศษ' } // ฟอนต์ใหม่
     ],
     showToolbar: true,
-    // defaultParagraphSeparator: 'p',
-    textPatternsEnabled: false,
+    textPatternsEnabled: true,
     customClasses: [
       {
         name: 'quote',
@@ -74,10 +82,9 @@ export class CeateNovelEpComponent {
     editHistoryLimit: 3,
     imageResizeSensitivity: 2,
     toolbarHiddenButtons: [
-      // ['bold', 'italic'],
-      // ['fontSize'],
+
       ['insertVideo'],
-      // ['insertHTML'],
+      ['toggleEditorMode'],
     ]
    };
 
@@ -90,7 +97,8 @@ export class CeateNovelEpComponent {
     minWidth: '160px',
     textAreaBackgroundColor: 'white',
     translate: 'yes',
-    sanitize: false,
+    sanitize: true,
+    outline:false,
     enableToolbar: true,
     defaultFontName: 'Comic Sans MS',
     defaultFontSize: '5',
@@ -104,7 +112,7 @@ export class CeateNovelEpComponent {
     ],
     showToolbar: true,
     // defaultParagraphSeparator: 'p',
-    textPatternsEnabled: false,
+    textPatternsEnabled: true,
     customClasses: [
       {
         name: 'quote',
@@ -123,14 +131,41 @@ export class CeateNovelEpComponent {
     editHistoryLimit: 3,
     imageResizeSensitivity: 2,
     toolbarHiddenButtons: [
-      // ['bold', 'italic'],
-      // ['fontSize'],
+      ['insertImage'],
       ['insertVideo'],
-      // ['insertHTML'],
+      ['toggleEditorMode'],
     ]
    };
 
-   isObject(val: any): boolean {
+   
+
+   saveToSessionStorage() {
+    try {
+      // แปลงข้อมูล novel เป็น JSON และเก็บใน localStorage
+      console.log('Saving to localStorage', this.data);
+      sessionStorage.setItem('getEpCreate', JSON.stringify(this.data));
+
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+
+    }
+  }
+
+  getToSessionStorage() {
+    const storedData = sessionStorage.getItem('getEpCreate');
+    if (storedData) {
+      try {
+        this.data = JSON.parse(storedData);
+        console.log('Loaded data from localStorage:', this.data);
+      } catch (error) {
+        console.error('Failed to parse JSON:', error);
+        sessionStorage.removeItem('getEpCreate');
+      }
+    }
+   }
+
+
+  isObject(val: any): boolean {
     return this.getTypeofVariable(val) === 'object';
   }
 
@@ -153,50 +188,50 @@ export class CeateNovelEpComponent {
     });
   }
 
-  addEpisode() {
-    const novelId = this.novelId; // ID ของนิยาย
-    const payload = {
-      chapterName: this.chaptername,
-      content: this.editorContent1,
-      writerMsg: this.editorContent2,
-      comment: this.comment,
-
+  async btnCancel() {
+    const confirmed = await this.cusComfirm.customConfirm(`ไม่ต้องการสร้างอีกต่อไป`);
+    if (confirmed) {
+      sessionStorage.removeItem('getEpCreate');
+      this.novelService.goTo('subject');
     }
-    console.log('editorContent1:', payload);
+  }
   
-    // append('chapterName', 'testttttt');
-    // append('content', 'sdfddfsdfsdfdsfdsf');
-    // append('writerMsg', ' ');
-    // append('comment', 'T');
+  async addEpisode() {
+    if (!this.data.chaptername) {
+      this.popupService.showPopup('กรุณากรอกชื่อตอน');
+      return;
+    } else if (!this.data.editorContent1) {
+      this.popupService.showPopup('กรุณากรอกเนื้อหา');
+      return;
+    }
 
-    this.authService.addEpsode(novelId, payload).subscribe(
-      (response) => {
-        console.log('Episode added successfully', response);
-      },
-      (error) => {
-        console.error('Error adding episode', error);
+    const confirmed = await this.cusComfirm.customConfirm(`ต้องการสร้างตอน: ${this.data.chaptername}`);
+    if (confirmed) {
+      const novelId = this.novelId; // ID ของนิยาย
+      const payload = {
+        chapterName: this.data.chaptername,
+        content: this.data.editorContent1,
+        writerMsg: this.data.editorContent2,
+        comment: this.comment,
       }
-    );
-  }
-
-  private handleError(error: any, defaultMessage: string) {
-    const errorMessage = error.status === 0
-      ? 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้ กรุณาลองใหม่'
-      : `${defaultMessage}: ${error.message}`;
-    this.popupService.showPopup(errorMessage);
-    console.error('API Error:', error);
+      this.authService.addEpsode(novelId, payload).subscribe({
+        next: () => {
+         this.popupService.showPopup('Episode added successfully');
+         setTimeout(() => {
+          this.popupService.closePopup();
+          this.novelService.goTo('subject');
+         }, 3000);
+        },
+        error: (error) => {
+          this.popupService.showPopup('Error adding episode');
+        }}
+      );
+      
+    } else {
+      this.popupService.showPopup('Cancel');
+    }
   }
 
   
-  // Optional: Methods to show success/error messages
-  showSuccessMessage(message: string) {
-    // Implement a toast notification or modal to show success message
-    alert(message); // Replace with better UI feedback
-  }
-  
-  showErrorMessage(message: string) {
-    // Implement a toast notification or modal to show error message
-    alert(message); // Replace with better UI feedback
-  }
 
 }

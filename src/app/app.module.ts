@@ -33,7 +33,7 @@ import { NovelFormComponent } from './novel-form/novel-form.component';
 import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { ProfileDetailComponent } from './profile-detail/profile-detail.component';
 import { LockpageComponent } from './lockpage/lockpage.component';
-import { CeateNovelEpComponent } from './ceate-novel-ep/ceate-novel-ep.component';
+import { CreateNovelEpComponent } from './create-novel-ep/create-novel-ep.component';
 import { SubjectComponent } from './subject/subject.component';
 import { CategoryNovelComponent } from './category-novel/category-novel.component';
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -43,7 +43,7 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
 
 
 const appRoutes: Routes = [
-  {path: '' , component: CeateNovelEpComponent },
+  {path: '' , component: BannerComponent },
   {path: 'login' , component: LoginComponent },
   {path: 'register' , component: RegisterComponent },
   {path: 'banner' , component: BannerComponent },
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
   {path: 'profile-detail', component: ProfileDetailComponent },
   {path: 'novel-detail', component: NovelDetailComponent },
   {path: 'subject', component: SubjectComponent },
-  {path: 'createEp', component: CeateNovelEpComponent },
+  {path: 'createEp', component: CreateNovelEpComponent },
   
 ]
 
@@ -81,7 +81,7 @@ const appRoutes: Routes = [
     UploadimageComponent,
     ProfileDetailComponent,
     LockpageComponent,
-    CeateNovelEpComponent,
+    CreateNovelEpComponent,
     SubjectComponent,
     CategoryNovelComponent,
     TextEditorComponent,

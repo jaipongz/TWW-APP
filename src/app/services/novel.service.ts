@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface Novel {
   novelName: string;
@@ -45,7 +46,7 @@ export class NovelService {
  
   private apiUrl = 'http://localhost:3090';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router:Router) {
 
   }
 
@@ -77,6 +78,38 @@ export class NovelService {
   // Get novel data
   getNovelData(): Novel {
     return this.novelData;
+  }
+
+  goTo(key: any) {
+    switch (key) {
+      case 'create-novel':
+        this.router.navigate(['/create-novel']);
+        break;
+
+      case 'firstpage':
+        this.router.navigate(['/banner']);
+        break;
+
+      case 'subject':
+        this.router.navigate(['/subject']);
+        break;
+
+      case 'edit-novel':
+        this.router.navigate(['/edit-novel']);
+        break;
+
+      case 'profile-detail':
+        this.router.navigate(['/profile-detail']);
+        break;
+      case 'createEp':
+        this.router.navigate(['/createEp']);
+        break;
+
+
+      default:
+        console.warn('Invalid key provided:', key);
+        break;
+    }
   }
 
   getToken(): string | null {

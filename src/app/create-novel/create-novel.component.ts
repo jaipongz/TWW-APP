@@ -125,7 +125,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       console.error('Failed to parse JSON:', error);
       localStorage.removeItem('getNovelCreate');
     }
-}
+  }
  }
 
   onSelectItem(event: Event): void {
@@ -424,7 +424,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
         console.log(this.novel);
         setTimeout(() => {
           this.popupService.closePopup();
-          this.authService.goTo('create');
+          this.novelService.goTo('create-novel');
         }, 2000);
       },
       error: (error) => this.popupService.showPopup(error.message),
