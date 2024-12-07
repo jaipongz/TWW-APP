@@ -40,6 +40,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import { AngularEditorModule } from '@wfpena/angular-wysiwyg';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import { SortPipe } from './sort.pipe';
+import { CreateTopicComponent } from './create-topic/create-topic.component';
 
 
 
@@ -87,6 +88,7 @@ const appRoutes: Routes = [
     CategoryNovelComponent,
     TextEditorComponent,
     SortPipe,
+    CreateTopicComponent,
   ],
   imports: [
     BrowserModule,
