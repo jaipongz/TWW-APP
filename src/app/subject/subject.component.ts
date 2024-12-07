@@ -33,17 +33,32 @@ export class SubjectComponent implements OnInit {
   ngOnInit(): void {
     this.getNovel();
     this.typeMapping();
-    this.getCharactor();
-    this.getChapter();
+    
   }
 
   @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;
 
-  getNovel = () => {
+  getNovel =  () => {
     const state = history.state;
-    this.novel = state.novel;
-    console.log(this.novel);
-    this.cdr.detectChanges();
+    // this.novel = state.novel;
+    // console.log('NOVELL ID');
+    
+    // console.log(state.novel.novel_id);
+    
+    // console.log(this.novel);
+    this.authService.getNovelDetal(state.novel.novel_id).subscribe({
+      next: (data) => {
+        this.novel = data.data;
+        this.getCharactor();
+        this.getChapter();
+        // console.log(data.data);
+        
+      },
+      error: (error) => {
+        this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+      },
+    });
+    // this.cdr.detectChanges();
   }
 
   typeMapping() {
@@ -56,20 +71,54 @@ export class SubjectComponent implements OnInit {
     const isChecked = (event.target as HTMLInputElement).checked;
     if (isChecked) {
       this.novel.published = 'T'; // ถ้าติ๊กถูกให้เก็บ T
+      this.authService.updateStatus(this.novel.novel_id,'published',this.novel.published).subscribe({
+        next: (data) => {
+          // console.log(data);
+        },
+        error: (error) => {
+          this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+        },
+      });
     } else {
       this.novel.published = 'F'; // ถ้าไม่ติ๊กให้เก็บ F
+      this.authService.updateStatus(this.novel.novel_id,'published',this.novel.published).subscribe({
+        next: (data) => {
+          // console.log(data);
+        },
+        error: (error) => {
+          this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+        },
+      });
     }
-    console.log(this.novel.published);
+    // console.log(this.novel.published);
   }
 
   toggleStatusEnd(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
     if (isChecked) {
-      this.novel.status = 'T'; // ถ้าติ๊กถูกให้เก็บ T
+      this.novel.end = 'T'; // ถ้าติ๊กถูกให้เก็บ T
+      this.authService.updateStatus(this.novel.novel_id,'end',this.novel.end).subscribe({
+        next: (data) => {
+          // console.log(data);
+        },
+        error: (error) => {
+          this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+        },
+      });
+
     } else {
-      this.novel.status = 'F'; // ถ้าไม่ติ๊กให้เก็บ F
+      this.novel.end = 'F'; // ถ้าไม่ติ๊กให้เก็บ F
+      this.authService.updateStatus(this.novel.novel_id,'end',this.novel.end).subscribe({
+        next: (data) => {
+          // console.log(data);
+        },
+        error: (error) => {
+          this.handleError(error, 'การสร้างตัวละครล้มเหลว');
+        },
+      });
+
     }
-    console.log(this.novel.status)
+    // console.log(this.novel.status)
   }
 
   onAdd() {
@@ -102,7 +151,7 @@ export class SubjectComponent implements OnInit {
   //   this.uploadService.closeModal();
   // }
   onAutoClick(): void {
-    console.log('Auto-click triggered!');
+    // console.log('Auto-click triggered!');
     // You can perform any action here that you want to run automatically after closing the modal
     // this.createcharacter();
   }
@@ -148,7 +197,7 @@ export class SubjectComponent implements OnInit {
     this.authService.addCharacter(formData).subscribe({
       next: (data) => {
         this.popupService.showPopup('สร้างตัวละครสำเร็จ');
-        console.log('Create Response:', data);
+        // console.log('Create Response:', data);
       },
       error: (error) => {
         this.handleError(error, 'การสร้างตัวละครล้มเหลว');
@@ -196,7 +245,7 @@ export class SubjectComponent implements OnInit {
     this.authService.updateCharacter(charId, formData).subscribe({
       next: (data) => {
         this.popupService.showPopup('อัปเดตตัวละครสำเร็จ');
-        console.log('Update Response:', data);
+        // console.log('Update Response:', data);
       },
       error: (error) => {
         this.handleError(error, 'การอัปเดตตัวละครล้มเหลว');
@@ -219,7 +268,7 @@ export class SubjectComponent implements OnInit {
   }
 
   async precreate() {
-    console.log('On precreate');
+    // console.log('On precreate');
     
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
     if (!this.uploadService.croppedImageBlob) {
@@ -262,7 +311,7 @@ export class SubjectComponent implements OnInit {
 
     this.authService.getCharacter(novelId).subscribe({
       next: (response) => {
-        console.log('API Response:', response);
+        // console.log('API Response:', response);
         if (response?.status === 'success') {
           this.charactors = response.data.data;
         } else {
@@ -283,7 +332,7 @@ export class SubjectComponent implements OnInit {
     this.currentCharactor = { ...this.charactors[index] };
 
     // ตัวอย่าง: ใช้งานค่าที่ดึงมา
-    console.log('Editing Character:', this.currentCharactor);
+    // console.log('Editing Character:', this.currentCharactor);
 
     // ทำการแก้ไข
     this.name = this.currentCharactor.name;
@@ -321,10 +370,10 @@ export class SubjectComponent implements OnInit {
     this.authService.getProfile().subscribe({
       next: (response: any) => {
         if (response?.status === 'success') {
-          console.log(response);
+          // console.log(response);
 
           this.profileData = response.data; // Store fetched data in `profileData`
-          console.log('Profile Data:', this.profileData);
+          // console.log('Profile Data:', this.profileData);
         } else {
           console.error('Failed to fetch novels:', response);
         }

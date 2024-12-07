@@ -81,9 +81,9 @@ export class NavbarComponent implements OnInit {
       this.authService.getProfile().subscribe({
         next: (response: any) => {
           if (response?.status === 'success') {
-            console.log(response);
+            // console.log(response);
             this.profileData = response.data; // Store fetched data in `profileData`
-            console.log('Profile Data:', this.profileData);
+            // console.log('Profile Data:', this.profileData);
           } else {
             console.error('Failed to fetch novels:', response);
           }

@@ -62,7 +62,7 @@ export class AuthService {
     );
   }
 
-  addCharacter(formData: FormData) : Observable<any> {
+  addCharacter(formData: FormData): Observable<any> {
     const token = this.getToken();
 
     if (!token) {
@@ -79,7 +79,7 @@ export class AuthService {
     );
   }
 
-  getCharacter(novelId:string) {
+  getCharacter(novelId: string) {
     const token = this.getToken();
 
     if (!token) {
@@ -93,7 +93,7 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrl}/api/novel/allCharactor/${novelId}`, { headers });
   }
 
-  updateCharacter(charId:string, formData: FormData){
+  updateCharacter(charId: string, formData: FormData) {
     const token = this.getToken();
 
     if (!token) {
@@ -107,7 +107,7 @@ export class AuthService {
     return this.http.put<any>(`${this.apiUrl}/api/novel/charactor/${charId}`, formData, { headers });
   }
 
-  deleteCharacter(charId:string){
+  deleteCharacter(charId: string) {
     const token = this.getToken();
 
     if (!token) {
@@ -118,10 +118,10 @@ export class AuthService {
       Authorization: `Bearer ${token}`,
     });
 
-    return this.http.delete<any>(`${this.apiUrl}/api/novel/charactor/${charId}`,{ headers });
+    return this.http.delete<any>(`${this.apiUrl}/api/novel/charactor/${charId}`, { headers });
   }
 
-  addEpsode(novel_id: string, payload:any){
+  addEpsode(novel_id: string, payload: any) {
     const token = this.getToken();
 
     if (!token) {
@@ -135,7 +135,7 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/api/novel/desc/${novel_id}`, payload, { headers });
   }
 
-  getAllDescChapter(novelId :string){
+  getAllDescChapter(novelId: string) {
     const token = this.getToken();
     if (!token) {
       throw new Error('Authentication token is missing');
@@ -145,6 +145,28 @@ export class AuthService {
     });
     return this.http.get<any>(`${this.apiUrl}/api/chapter/desc/getAll?novelId=${novelId}`, { headers });
   }
+  getNovelDetal(novelId: string) {
+    console.log('Novel Id:', novelId);
+
+    return this.http.get<any>(`${this.apiUrl}/api/novel/getNovelDetail/${novelId}`);
+  }
+  updateStatus(novelId: string, command: string, status: string) {
+    console.log('Novel Id:', novelId);
+    const token = this.getToken();
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+    console.log(token);
+    
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,  // Ensure Authorization header is correctly set
+    });
+  
+    // Correctly pass headers and empty body in the PUT request
+    return this.http.put<any>(`${this.apiUrl}/api/novel/updateStatus?novelId=${novelId}&command=${command}&status=${status}`, {}, { headers });
+  }
+  
   // storeNovel(payload: any): Observable<any> {
   //   const token = this.getToken();
 
