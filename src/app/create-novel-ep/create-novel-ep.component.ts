@@ -33,7 +33,8 @@ export class CreateNovelEpComponent {
     private popupService:PopupService,
     private route:ActivatedRoute,
     private novelService: NovelService,
-    private cusComfirm:customConfirm
+    private cusComfirm:customConfirm,
+    private router:Router
   ){
     this.authService.getToken();
     this.getNovel();
@@ -189,10 +190,13 @@ export class CreateNovelEpComponent {
   }
 
   async btnCancel() {
+    const novelId = this.novelId;
     const confirmed = await this.cusComfirm.customConfirm(`ไม่ต้องการสร้างอีกต่อไป`);
     if (confirmed) {
       sessionStorage.removeItem('getEpCreate');
-      this.novelService.goTo('subject');
+      this.router.navigate(['/subject'], {
+        state: { novelId }
+      });
     }
   }
   
@@ -204,23 +208,29 @@ export class CreateNovelEpComponent {
       this.popupService.showPopup('กรุณากรอกเนื้อหา');
       return;
     }
-
-    const confirmed = await this.cusComfirm.customConfirm(`ต้องการสร้างตอน: ${this.data.chaptername}`);
-    if (confirmed) {
-      const novelId = this.novelId; // ID ของนิยาย
+    const novelId = this.novelId; // ID ของนิยาย
       const payload = {
         chapterName: this.data.chaptername,
         content: this.data.editorContent1,
         writerMsg: this.data.editorContent2,
         comment: this.comment,
       }
+
+    const confirmed = await this.cusComfirm.customConfirm(`ต้องการสร้างตอน: ${this.data.chaptername}`);
+    if (confirmed) {
+      
       this.authService.addEpsode(novelId, payload).subscribe({
         next: () => {
-         this.popupService.showPopup('Episode added successfully');
-         setTimeout(() => {
-          this.popupService.closePopup();
-          this.novelService.goTo('subject');
-         }, 3000);
+         this.popupService.showPopup(`Episode added successfully `);
+         sessionStorage.removeItem('getEpCreate');
+         this.router.navigate(['/subject'], {
+          state: { novelId }
+        });
+        console.log('state:',novelId)
+        //  setTimeout(() => {
+        //   this.popupService.closePopup();
+         
+        //  }, 5000);
         },
         error: (error) => {
           this.popupService.showPopup('Error adding episode');

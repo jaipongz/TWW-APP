@@ -1,26 +1,24 @@
+
 .writer-container {
-  padding: 10px;
-}
-.lean-font {
+  max-width: 80%;
+  margin: 0 auto;
   font-size: 0.875rem;
   font-weight: 300;
   line-height: 1.2;
   color: #333;
-  font-family: "kanit", sans-serif;
+  font-family: "Arial", sans-serif;
 }
+
 .create-novel-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
   /*background-color: #f8f9fa; */
   border-radius: 10px;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .avatar-container {
@@ -98,6 +96,34 @@
   border: solid 1px #f1f1f1;
 }
 
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-top: 5px;
+}
+
+.chart-wrapper {
+  display: flex;
+  flex-direction: column; /* จัด Chart ให้อยู่ในแนวตั้ง */
+  gap: 20px; /* เพิ่มระยะห่างระหว่าง Chart */
+  width: 100%;
+}
+
+.chart-pie,
+.chart-bar {
+  width: 100%; /* ให้ Chart กว้างเต็มคอนเทนเนอร์ */
+  height: 400px; /* กำหนดความสูงของแต่ละ Chart */
+}
+
+
 .dashboard-button {
   padding: 10px 30px;
   background-color: #f1f1f1; /* สีเขียวสำหรับปุ่มแดชบอร์ด */
@@ -121,15 +147,6 @@
   color: #f1f1f1;
 }
 
-/* .novel-button.active {
-  background-color: #429BCD;
-  color: white;
-}
-
-.dashboard-button.active {
-  background-color: #DFCC80;
-  color: white;
-} */
 
 /* Responsive Design */
 @media (max-width: 600px) {
@@ -163,7 +180,6 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 10px;
@@ -222,6 +238,7 @@
 
 .bold-text {
   font-weight: bold;
+  text-wrap: nowrap;
 }
 
 .add-work-button {
@@ -286,11 +303,11 @@
   border-radius: 8px;
   text-align: center;
   width: 80%;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 .popup-title {
-  font-size: 2rem;
+  font-size: 1rem;
   margin-bottom: 20px;
   color: #7c4d3d;
 }
@@ -302,17 +319,17 @@
 }
 
 .popup-button {
-  width: 250px;
-  padding: 10px 20px;
+  width: 175px;
+  padding: 5px 8px;
   background-color: #fff;
   color: #7c4d3d;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
-  border-radius: 20px;
+  font-size: 14px;
+  border-radius: 10px;
   border: solid 1px #7c4d3d;
-  text-align: center;
+  text-align: start;
 }
 
 .popup-button:hover {
@@ -324,22 +341,22 @@
   color: #7c4d3d;
   text-align: start;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .popup-create-button {
   width: 35%;
-  padding: 15px 20px;
+  padding: 8px 20px;
   background-color: #7c4d3d;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   border-radius: 20px;
   border: solid 1px #f1f1f1;
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .popup-create-button:hover {
@@ -357,7 +374,7 @@
   color: #7c4d3d;
   border: solid 1px #7c4d3d;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 14px;
   text-align: start; /* จัดข้อความให้อยู่ตรงกลาง */
 }
 
@@ -375,7 +392,6 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 10px 10px 0 0;
@@ -412,16 +428,9 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 14px;
   border-radius: 10px;
   border: solid 1px #7c4d3d;
-  width: auto;
-}
-.card-header ul li {
-  font-size: 20px;
-}
-.card-right-buttons ul li {
-  font-size: 20px;
 }
 
 .dropdown-button:hover {
@@ -509,7 +518,6 @@
   align-items: center;
   padding: 15px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   background-color: #fff;
   border-radius: 0 0 10px 10px;
@@ -562,33 +570,6 @@
 }
 .story-icon {
   padding-right: 5px;
-}
-
-.dashboard-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin-top: 5px;
-}
-
-.chart-wrapper {
-  display: flex;
-  flex-direction: column; /* จัด Chart ให้อยู่ในแนวตั้ง */
-  gap: 20px; /* เพิ่มระยะห่างระหว่าง Chart */
-  width: 100%;
-}
-
-.chart-pie,
-.chart-bar {
-  width: 100%; /* ให้ Chart กว้างเต็มคอนเทนเนอร์ */
-  height: 400px; /* กำหนดความสูงของแต่ละ Chart */
 }
 
 /* Responsive styles for smaller screens */

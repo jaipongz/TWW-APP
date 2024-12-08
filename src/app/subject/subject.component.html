@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="containerfornav">
     <div class="container col-80">
-        <div class="card profile-card">
+        <div class="card-1 profile-card">
             <img *ngIf="novel?.novel_propic" [src]="novel?.novel_propic" alt="ภาพเรื่องที่สร้าง" />
             <div class="profile-info">
                 <a> {{ typeMapping()[novel.type] }}</a>
@@ -25,149 +25,152 @@
                 </div>
             </div>
         </div>
-        <div class="card settings">
-            <h3>
-                ตั้งค่าสถานะเรื่อง
-            </h3>
-            <div class="toggle">
-                <label>
-                    สถานะเรื่อง
-                </label>
-                <div class="toggle-button-cover">
-                    <a id="status">{{ novel.published === 'T' ? 'ส่วนตัว' : 'เผยแผร่' }}</a>
-                    <div class="button r" id="button-3">
-                        <input type="checkbox" class="checkbox" [checked]="novel.published === 'T'"
-                            (change)="toggleStatus($event)">
-                        <div class="knobs"></div>
-                        <div class="layer"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="toggle">
-                <label>
-                    สถานะจบ
-                </label>
-                <div class="toggle-button-cover">
-                    <a id="status">{{ novel.end === 'T' ? 'จบ' : 'ยังไม่จบ' }}</a>
-                    <div class="button r" id="button-3">
-                        <input type="checkbox" class="checkbox" [checked]="novel.end === 'T'"
-                            (change)="toggleStatusEnd($event)">
-                        <div class="knobs"></div>
-                        <div class="layer"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="buttons">
-                <button id="exambtn">
-                    ดูตัวอย่าง
-                </button>
-                <button id="editbtn">
-                    แก้ไข
-                </button>
-            </div>
-        </div>
-        <div class="card recommendations">
-            <h3>
-                แนะนำตัวละคร (ไม่บังคับสร้าง)
-            </h3>
-            <div class="charactor">
-                <div *ngFor="let charactor of charactors; let i = index">
-                    <div class="char-sub">
-                        <span (click)="charDelete(i)">x</span>
-                        <div class="image-wrapper" (click)="charEdit(i)">
-                            <img [src]="charactor.image_path || '/image/avartar.jpg'" alt="ภาพตัวละคร">
+        <div class="card">
+            <div class="settings">
+                <h3>
+                    ตั้งค่าสถานะเรื่อง
+                </h3>
+                <div class="toggle">
+                    <label>
+                        สถานะเรื่อง
+                    </label>
+                    <div class="toggle-button-cover">
+                        <a id="status">{{ novel.published === 'T' ? 'ส่วนตัว' : 'เผยแผร่' }}</a>
+                        <div class="button r" id="button-3">
+                            <input type="checkbox" class="checkbox" [checked]="novel.published === 'T'"
+                                (change)="toggleStatus($event)">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
                         </div>
-                        <a class="charname">{{ charactor.name }}</a>
-                        <a class="charrole">({{ charactor.role }})</a>
                     </div>
                 </div>
-            </div>
-            <div class="add-character" (click)="onAdd()">
-                <button>
-                    เพิ่มตัวละคร
-                </button>
-            </div>
-        </div>
-
-        <div class="create-character" *ngIf="createCharacter">
-            <div class="popup">
-                <div class="popup-content">
-                    <span (click)="closeAdd()">x</span>
-                    <div class="avatar-container avatar">
-                        <img [src]="uploadService.croppedImage   || '/image/avartar.jpg'" alt="ภาพตัวละคร"
-                            class="avatar" />
-                        <label for="upload-avatar" class="camera-icon" (click)="fileInput.click()">
-                            <i class="fa-solid fa-camera"></i>
-                        </label>
-                        <input #fileInput type="file" id="fileInput" accept="image/*" (change)="onFileChange($event)" />
+                <div class="toggle">
+                    <label>
+                        สถานะจบ
+                    </label>
+                    <div class="toggle-button-cover">
+                        <a id="status">{{ novel.end === 'T' ? 'จบ' : 'ยังไม่จบ' }}</a>
+                        <div class="button r" id="button-3">
+                            <input type="checkbox" class="checkbox" [checked]="novel.end === 'T'"
+                                (change)="toggleStatusEnd($event)">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                        </div>
                     </div>
-
-                    <div class="popup-input">
-                        <label>กรอกชิ่อตัวละคร</label>
-                        <input type="text" [(ngModel)]="name" required>
-                    </div>
-
-                    <div class="popup-input">
-                        <label>สถานะตัวละคร</label>
-                        <input type="text" [(ngModel)]="role" required>
-                    </div>
-                    <button (click)="precreate()" class="popup-create-button">ตกลง</button>
                 </div>
-            </div>
-        </div>
-        <div class="card tags">
-            <h3>
-                แท็ก
-            </h3>
-            <div class="tag-list">
-                <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" class="tag">
-                    {{ tag }}
-                </span>
-            </div>
-        </div>
-        <div class="card story">
-            <h3>แนะนำเรื่อง</h3>
-          
-            <!-- Show novel description if it exists, otherwise show the add button -->
-            <div *ngIf="novel.novel_desc; else addStory">
-              <p style="margin: 10px 20px 10px 10px;">{{ novel.novel_desc }}</p> <!-- Display the novel description -->
-              <div class="add-story">
-                <button>แก้ไขแนะนำเรื่อง</button> <!-- Show "Edit Novel Description" button -->
-              </div>
-            </div>
-            
-            <!-- Template for adding description if novel_desc is null -->
-            <ng-template #addStory>
-              <div class="add-story">
-                <button>เพิ่มแนะนำเรื่อง</button> <!-- Show "Add Novel Description" button -->
-              </div>
-            </ng-template>
-          </div>
-          
-        <div class="card responses">
-            <div class="response-header">
-                <span class="response-count">
-                    ตอนทั้งหมด ({{totalChapter}})
-                </span>
-                <div class="add-response">
-                    <button (click)="addNewChapter()">
-                        เพิ่มตอนใหม่
+                <div class="buttons">
+                    <button id="exambtn">
+                        ดูตัวอย่าง
+                    </button>
+                    <button id="editbtn">
+                        แก้ไข
                     </button>
                 </div>
             </div>
-            <div class="response-list">
-                <div class="response-item" *ngFor="let chapter of chapter">
-                    <div class="response-text">
-                        {{ chapter.chapter_name }}
+            <div class="recommendations">
+                <h3>
+                    แนะนำตัวละคร (ไม่บังคับสร้าง)
+                </h3>
+                <div class="charactor">
+                    <div *ngFor="let charactor of charactors; let i = index">
+                        <div class="char-sub">
+                            <span (click)="charDelete(i)">x</span>
+                            <div class="image-wrapper" (click)="charEdit(i)">
+                                <img [src]="charactor.image_path || '/image/avartar.jpg'" alt="ภาพตัวละคร">
+                            </div>
+                            <a class="charname">{{ charactor.name }}</a>
+                            <a class="charrole">({{ charactor.role }})</a>
+                        </div>
                     </div>
-                    <div class="response-actions">
-                        <i class="fas fa-comment" *ngIf="chapter.comment === 'T' && chapter.comment !== null"></i>
-                        <i class="fas fa-edit"></i>
-                        <i class="fas fa-trash"></i>
+                </div>
+                <div class="add-character" (click)="onAdd()">
+                    <button>
+                        เพิ่มตัวละคร
+                    </button>
+                </div>
+            </div>
+
+            <div class="create-character" *ngIf="createCharacter">
+                <div class="popups">
+                    <div class="popup-content">
+                        <span (click)="closeAdd()">x</span>
+                        <div class="avatar-container avatar">
+                            <img [src]="uploadService.croppedImage   || '/image/avartar.jpg'" alt="ภาพตัวละคร"
+                                class="avatar" />
+                            <label for="upload-avatar" class="camera-icon" (click)="fileInput.click()">
+                                <i class="fa-solid fa-camera"></i>
+                            </label>
+                            <input #fileInput type="file" id="fileInput" accept="image/*"
+                                (change)="onFileChange($event)" />
+                        </div>
+
+                        <div class="popup-input">
+                            <label>กรอกชิ่อตัวละคร</label>
+                            <input type="text" [(ngModel)]="name" required>
+                        </div>
+
+                        <div class="popup-input">
+                            <label>สถานะตัวละคร</label>
+                            <input type="text" [(ngModel)]="role" required>
+                        </div>
+                        <button (click)="precreate()" class="popup-create-button">ตกลง</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tags">
+                <h3>
+                    แท็ก
+                </h3>
+                <div class="tag-list">
+                    <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" class="tag">
+                        {{ tag }}
+                    </span>
+                </div>
+            </div>
+            <div class="story">
+                <h3>แนะนำเรื่อง</h3>
+
+                <!-- Show novel description if it exists, otherwise show the add button -->
+                <div *ngIf="novel.novel_desc; else addStory">
+                    <p style="margin: 10px 20px 10px 10px;">{{ novel.novel_desc }}</p>
+                    <!-- Display the novel description -->
+                    <div class="add-story">
+                        <button>แก้ไขแนะนำเรื่อง</button> <!-- Show "Edit Novel Description" button -->
                     </div>
                 </div>
 
-                <!-- <div class="response-item">
+                <!-- Template for adding description if novel_desc is null -->
+                <ng-template #addStory>
+                    <div class="add-story">
+                        <button>เพิ่มแนะนำเรื่อง</button> <!-- Show "Add Novel Description" button -->
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+            <div class="card-1 responses">
+                <div class="response-header">
+                    <span class="response-count">
+                        ตอนทั้งหมด ({{totalChapter}})
+                    </span>
+                    <div class="add-response">
+                        <button (click)="addNewChapter()">
+                            เพิ่มตอนใหม่
+                        </button>
+                    </div>
+                </div>
+                <div class="response-list">
+                    <div class="response-item" *ngFor="let chapter of chapter">
+                        <div class="response-text">
+                            {{ chapter.chapter_name }}
+                        </div>
+                        <div class="response-actions">
+                            <i class="fas fa-comment" *ngIf="chapter.comment === 'T' && chapter.comment !== null"></i>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-trash"></i>
+                        </div>
+                    </div>
+
+                    <!-- <div class="response-item">
                 <div class="response-text">
                     ตอนที่ 2
                 </div>
@@ -178,8 +181,9 @@
                     </i>
                 </div>
             </div> -->
+                </div>
             </div>
         </div>
-    </div>
+   <app-popup></app-popup>
     <app-uploadimage></app-uploadimage>
 </div>

@@ -67,6 +67,10 @@ export class RegisterComponent {
         (response: any) => {
           if (response.status === 'success') {
             this.popupService.showPopup('Registration successful');
+            setTimeout(() => {
+              this.dialogService.openLoginDialog();
+            }, 3000);
+
           } else {
             this.popupService.showPopup(response.data || 'Registration failed');
           }
@@ -90,10 +94,11 @@ export class RegisterComponent {
       (response: any) => {
         if (response.status === 'success') {
           this.showOtpInput = true; // แสดง input สำหรับ OTP
-          this.popupService.showPopup(response.message)
-          this.startCountdown(); // เริ่มนับถอยหลัง
+          setTimeout(() => {
+            this.popupService.showPopup(response.message)
+          }, 3000);
+          this.startCountdown();
           this.email = response.data;
-
         } else {
           this.popupService.showPopup(response.message || 'Verification failed');
         }
@@ -133,7 +138,7 @@ export class RegisterComponent {
           this.isInputReadonly = true;
           this.countdown = 0;
           this.otpVerified = true;
-          this.dialogService.openLoginDialog()
+
         } else {
           this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
         }

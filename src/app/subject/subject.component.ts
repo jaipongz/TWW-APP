@@ -17,6 +17,7 @@ export class SubjectComponent implements OnInit {
   createCharacter = false;
   name = '';
   role = '';
+  data:any;
 
 
   constructor(private cdr: ChangeDetectorRef,
@@ -40,13 +41,13 @@ export class SubjectComponent implements OnInit {
 
   getNovel =  () => {
     const state = history.state;
-    // this.novel = state.novel;
-    // console.log('NOVELL ID');
+    this.data = state.novel?.novel_id ?? state.novelId;
+    console.log('NOVELL ID', this.data);
     
     // console.log(state.novel.novel_id);
     
     // console.log(this.novel);
-    this.authService.getNovelDetal(state.novel.novel_id).subscribe({
+    this.authService.getNovelDetal(this.data).subscribe({
       next: (data) => {
         this.novel = data.data;
         this.getCharactor();
@@ -271,7 +272,7 @@ export class SubjectComponent implements OnInit {
     // console.log('On precreate');
     
     // ตรวจสอบว่าได้ครอบรูปภาพแล้วหรือยัง
-    if (!this.uploadService.croppedImageBlob) {
+    if (!this.uploadService.croppedImage) {
       this.popupService.showPopup("กรุณาเลือกรูปภาพและครอบรูปก่อน");
       return;
     }
@@ -290,9 +291,12 @@ export class SubjectComponent implements OnInit {
     if (confirmed) {
       if (this.currentCharactor?.id) {
         this.updatecharacter();
+        
       } else {
         this.createcharacter();
       }
+      this.getCharactor();
+      this.closeAdd();
     }
 
   }

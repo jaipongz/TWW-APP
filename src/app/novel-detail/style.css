@@ -1,0 +1,785 @@
+
+  .writer-container {
+    padding: 10px;
+  }
+  .lean-font {
+    font-size: 0.875rem;
+    font-weight: 300;
+    line-height: 1.2;
+    color: #333;
+    font-family: "Arial", sans-serif;
+  }
+  .create-novel-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    /*background-color: #f8f9fa; */
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    padding: 150px;
+    padding-bottom: 20px;
+  }
+  
+  .avatar-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .camera-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .upload-input {
+    display: none;
+  }
+  
+  .account-name {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 20px; /* เว้นระยะห่างระหว่างปุ่ม */
+  }
+
+  .button-group button {
+    padding: 10px 20px;
+    border: #7c4d3d;
+    cursor: pointer;
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button-group button {
+    background-color: #fff;
+    color: #000; /* สีปกติ */
+    border: solid 1px #7c4d3d; /* กำหนด border ที่มองไม่เห็น */
+  }
+  
+  .button-group button.active,
+  .button-group button:hover {
+    background-color: #7c4d3d;
+    color: #fff;
+    border: solid 1px #7c4d3d;
+  }
+  
+  .novel-button {
+    padding: 10px 20px;
+    background-color: #7c4d3d; /* สีน้ำเงินสำหรับปุ่มผลงานนิยาย */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 20px;
+    border: solid 1px #f1f1f1;
+  }
+
+  .dashboard-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
+  }
+  
+  .chart-wrapper {
+    display: flex;
+    flex-direction: column; /* จัด Chart ให้อยู่ในแนวตั้ง */
+    gap: 20px; /* เพิ่มระยะห่างระหว่าง Chart */
+    width: 100%;
+  }
+  
+  .chart-pie,
+  .chart-bar {
+    width: 100%; /* ให้ Chart กว้างเต็มคอนเทนเนอร์ */
+    height: 400px; /* กำหนดความสูงของแต่ละ Chart */
+  }
+  
+  
+  .dashboard-button {
+    padding: 10px 30px;
+    background-color: #f1f1f1; /* สีเขียวสำหรับปุ่มแดชบอร์ด */
+    color: #7c4d3d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 20px;
+    border: solid 1px #7c4d3d;
+  }
+  
+  .novel-button:hover {
+    background-color: #f1f1f1; /* สีเมื่อชี้ปุ่มผลงานนิยาย */
+    color: #7c4d3d;
+    border: solid 1px #7c4d3d;
+  }
+  
+  .dashboard-button:hover {
+    background-color: #7c4d3d; /* สีเมื่อชี้ปุ่มแดชบอร์ด */
+    color: #f1f1f1;
+  }
+
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .create-novel-container {
+      padding: 10px;
+    }
+  
+    .avatar {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .button-group {
+      flex-direction: row;
+      padding: 10px 15px;
+      gap: 10px;
+    }
+  
+    .novel-button,
+    .dashboard-button {
+      /*width: 100%;*/
+      font-size: 14px;
+    }
+  }
+  
+  /* novelinfo */
+  .create-novelifo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+  }
+  
+  .card-container {
+    display: flex; /* ให้ card-container ใช้ flexbox */
+    flex-direction: row; /* ใช้ row เพื่อให้ card อยู่ในแถวเดียวกัน */
+    flex: 1; /* ให้ card-container ใช้พื้นที่ว่าง */
+  }
+  
+  .card-left,
+  .card-right {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 200px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px;
+  }
+  
+  .card-left {
+    display: flex;
+    align-items: center;
+    padding-right: 80px;
+    padding-left: 80px;
+    text-align: center;
+  }
+  
+  .card-right {
+    display: flex;
+    padding-right: 80px;
+    padding-left: 80px;
+    text-align: center;
+  }
+  
+  .border-center {
+    border: solid 1px #dddddd;
+  }
+  
+  .work-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 0px;
+  }
+  
+  .work-details,
+  .episode-details {
+    text-align: center;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+  }
+  
+  .add-work-button {
+    padding: 8px 15px;
+    background-color: #7c4d3d;
+    color: white;
+    border: 1px solid transparent; /* ใช้ border โปร่งใส */
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .add-work-button:hover {
+    background-color: #fff;
+    color: #7c4d3d;
+    border: solid 1px #7c4d3d;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .card-container {
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    .card-left,
+    .card-right {
+      width: 100%;
+      padding: 0;
+      border: none;
+      text-align: center;
+    }
+  
+    .add-work-button {
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+  
+  /* สไตล์สำหรับ Popup */
+  .hidden {
+    display: none !important;
+  }
+  
+  .popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+  }
+  
+  .popup-title {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #7c4d3d;
+  }
+  
+  .popup-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+  }
+  
+  .popup-button {
+    width: 175px;
+    padding: 5px 8px;
+    background-color: #fff;
+    color: #7c4d3d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 10px;
+    border: solid 1px #7c4d3d;
+    text-align: start;
+  }
+  
+  .popup-button:hover {
+    background: #dcc1a0;
+  }
+  
+  .label-popup {
+    display: flex;
+    color: #7c4d3d;
+    text-align: start;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .popup-create-button {
+    width: 35%;
+    padding: 8px 20px;
+    background-color: #7c4d3d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 20px;
+    border: solid 1px #f1f1f1;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .popup-create-button:hover {
+    /*background-color: #683c2e;*/
+    background-color: #fff;
+    color: #7c4d3d;
+    cursor: pointer;
+    border: solid 1px #7c4d3d;
+  }
+  
+  .popup-advice {
+    margin: 0 auto; /* กำหนดให้อยู่ตรงกลาง */
+    padding: 5px 20px;
+    background-color: #fff;
+    color: #7c4d3d;
+    border: solid 1px #7c4d3d;
+    border-radius: 10px;
+    font-size: 14px;
+    text-align: start; /* จัดข้อความให้อยู่ตรงกลาง */
+  }
+  
+  .popup-button.active {
+    background-color: #dcc1a0;
+  }
+  .icon-pop {
+    padding-right: 4px;
+  }
+  
+  /* Update Novel Card */
+  .update-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    gap: 5px;
+  }
+  
+  .button-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .sort-label {
+    font-size: 12px;
+    font-weight: lighter;
+    color: #7c4d3d;
+    left: 0px;
+  }
+  
+  .dropdown-button {
+    padding: 5px 20px;
+    background-color: #fff;
+    color: #7c4d3d;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 10px;
+    border: solid 1px #7c4d3d;
+  }
+  
+  .dropdown-button:hover {
+    background-color: #7c4d3d;
+    color: #fff;
+  }
+  
+  .card-right-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .status-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 5px;
+  }
+  
+  .status-label {
+    font-size: 12px;
+    font-weight: lighter;
+    color: #7c4d3d;
+    margin-bottom: 5px;
+  }
+  .update-icon {
+    padding-left: 10px;
+  }
+  
+  .status-icon {
+    padding-left: 10px;
+  }
+  
+  .create-icon {
+    padding-right: 5px;
+  }
+  
+  /* Dropdown Menu Styles */
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: solid 1px #7c4d3d;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    padding: 0px 0px;
+    margin-top: 5px;
+    z-index: 50;
+    list-style: none;
+    /*display: none;*/ /* Hidden by default */
+  }
+  
+  .dropdown-button:focus + .dropdown-menu,
+  .dropdown-button:hover + .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu li {
+    padding: 8px 15px;
+    color: #7c4d3d;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu li:hover {
+    background-color: #7c4d3d;
+    color: #fff;
+    /* border-radius: 5px; */
+  }
+  
+  /* Adjust positioning for each group */
+  .status-group {
+    position: relative;
+  }
+  
+  /* Story Card */
+  
+  .story-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+  
+  .story-image img {
+    display: flex;
+    width: 120px;
+    height: 120px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  .story-info {
+    margin-left: 16px;
+    flex-grow: 1;
+  }
+  
+  .story-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .story-update,
+  .story-episodes {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .story-action .new-episode-button {
+    padding: 8px 15px;
+    background-color: #7c4d3d; /* สีน้ำเงินสำหรับปุ่ม */
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .story-action .new-episode-button:hover {
+    background-color: #f1f1f1;
+    color: #7c4d3d;
+    border: solid 1px #7c4d3d;
+  }
+  .new-episode-icon {
+    padding-right: 5px;
+  }
+  .story-icon {
+    padding-right: 5px;
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (max-width: 768px) {
+    .card-left,
+    .card-right {
+      padding: 0px;
+    }
+    .create-novelifo-container,
+    .story-card-container {
+      flex-direction: row;
+    }
+  
+    .card-left,
+    .card-right {
+      flex: 1 1 0;
+    }
+  
+    .story-image {
+      width: 40%;
+    }
+  
+    .story-info {
+      width: 60%;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .create-novel-container {
+      padding-top: 120px;
+    }
+    .button-group {
+      padding: 8px; /* ลด padding ให้เหลือ 8px หรือค่าที่คุณต้องการ */
+    }
+  
+    .create-novelifo-container {
+      flex-direction: column; /* เปลี่ยนให้เป็นแนวตั้งเมื่อขนาดหน้าจอลดลง */
+    }
+  
+    .card-container {
+      flex-direction: row; /* ให้ card ยังคงอยู่ในแถวเดียวกัน */
+      justify-content: space-between; /* จัด card ให้กระจายออก */
+      width: 100%; /* ทำให้ความกว้างเต็มที่ */
+      margin-top: 15px; /* เพิ่มระยะห่างด้านบน */
+      font-size: 14px;
+    }
+  
+    .card-left,
+    .card-right {
+      flex-direction: column; /* ให้ card แสดงในแนวตั้ง */
+      align-items: center; /* จัดให้ชิดกลาง */
+      margin: 8px; /* ให้มีระยะห่าง */
+      padding: 0; /* เอา padding ออก */
+    }
+  
+    .card-left {
+      border-right: none; /* เอา border ออกในขนาดหน้าจอเล็ก */
+    }
+  
+    .work-details,
+    .episode-details {
+      display: flex;
+      justify-content: center; /* จัดให้ชิดกลาง */
+      gap: 5px;
+    }
+  
+    .add-work-button {
+      width: 100%; /* ทำให้ปุ่มกว้างเต็มที่ */
+      margin-top: 15px; /* เพิ่มระยะห่างด้านบน */
+    }
+    .card-header {
+      margin-bottom: 20px;
+    }
+  
+    .story-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* จัดให้อยู่ตรงกลางทั้งหมด */
+    }
+  
+    .story-image {
+      display: flex;
+      justify-content: center; /* จัดให้ชิดกลาง */
+      margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่าง */
+    }
+  
+    .story-image img {
+      display: flex;
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  
+    .story-info {
+      text-align: center; /* จัดข้อความในส่วนนี้ให้อยู่ตรงกลาง */
+    }
+  
+    .story-action {
+      margin-top: 10px;
+    }
+    .popup-button {
+      width: 165px;
+    }
+    .add-work-button {
+      max-width: 120px;
+    }
+    .story-action .new-episode-button {
+      font-size: 14px;
+    }
+    .update-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .create-novel-container {
+      padding-top: 120px;
+    }
+    .button-group {
+      padding: 8px; /* ลด padding ให้เหลือ 8px หรือค่าที่คุณต้องการ */
+    }
+  
+    .create-novelifo-container {
+      flex-direction: column; /* เปลี่ยนให้เป็นแนวตั้งเมื่อขนาดหน้าจอลดลง */
+    }
+  
+    .card-container {
+      flex-direction: row; /* ให้ card ยังคงอยู่ในแถวเดียวกัน */
+      justify-content: space-between; /* จัด card ให้กระจายออก */
+      width: 100%; /* ทำให้ความกว้างเต็มที่ */
+      margin-top: 15px; /* เพิ่มระยะห่างด้านบน */
+      font-size: 14px;
+    }
+  
+    .card-left,
+    .card-right {
+      flex-direction: column; /* ให้ card แสดงในแนวตั้ง */
+      align-items: center; /* จัดให้ชิดกลาง */
+      margin: 8px; /* ให้มีระยะห่าง */
+      padding: 0; /* เอา padding ออก */
+    }
+  
+    .card-left {
+      border-right: none; /* เอา border ออกในขนาดหน้าจอเล็ก */
+    }
+  
+    .work-details,
+    .episode-details {
+      display: flex;
+      justify-content: center; /* จัดให้ชิดกลาง */
+      gap: 5px;
+    }
+  
+    .add-work-button {
+      width: 100%; /* ทำให้ปุ่มกว้างเต็มที่ */
+      margin-top: 15px; /* เพิ่มระยะห่างด้านบน */
+    }
+    .card-header {
+      margin-bottom: 20px;
+    }
+  
+    .story-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* จัดให้อยู่ตรงกลางทั้งหมด */
+    }
+  
+    .story-image {
+      display: flex;
+      justify-content: center; /* จัดให้ชิดกลาง */
+      margin-bottom: 15px; /* เพิ่มระยะห่างด้านล่าง */
+    }
+  
+    .story-image img {
+      display: flex;
+      width: 150px;
+      height: 150px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  
+    .story-info {
+      text-align: center; /* จัดข้อความในส่วนนี้ให้อยู่ตรงกลาง */
+    }
+  
+    .story-action {
+      margin-top: 10px;
+    }
+    .popup-button {
+      width: 165px;
+    }
+    .add-work-button {
+      max-width: 120px;
+    }
+    .story-action .new-episode-button {
+      font-size: 14px;
+    }
+    .update-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+  }

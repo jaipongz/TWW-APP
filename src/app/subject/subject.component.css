@@ -2,24 +2,30 @@
     display: flex;
     margin: 0 auto;
     flex-direction: column;
+    gap: 20px;
 }
-
-.card {
+.card-1 ,.card {
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
     padding: 20px;
+}
+
+.card {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
 }
 
 .profile-card {
     display: flex;
     padding: 0;
+    max-width: 100%;
 }
 
 .profile-card img {
     border-radius: 10px 0 0 10px;
-    width: 500px;
+    width: 40%;
     height: 400px;
     object-fit: cover;
 }
@@ -27,15 +33,20 @@
 .profile-info {
     display: flex;
     flex-direction: column;
-
     padding: 20px;
     background: linear-gradient(to right, #000000, #434343);
     color: white;
     border-radius: 0 10px 10px 0;
     flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis; /* เพิ่มการแสดงผล ... */
+    white-space: nowrap; /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
 }
 
 .profile-info h2 {
+    overflow: hidden;
+    text-overflow: ellipsis; /* เพิ่มการแสดงผล ... */
+    white-space: nowrap; /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
     font-size: 24px;
 }
 
@@ -68,18 +79,13 @@
     margin-right: 10px;
 }
 
-.settings,
-.recommendations,
-.tags,
-.story,
-.responses {
-    margin-top: 20px;
-}
+
 
 .settings {
     display: flex;
     flex-direction: column;
-
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
 }
 
 .settings .toggle {
@@ -145,6 +151,7 @@
     margin-right: 10px;
     margin-bottom: 10px;
 }
+
 
 .story .add-story {
     text-align: center;
@@ -321,7 +328,7 @@
 
 
 
-.popup {
+.popups {
     position: fixed;
     top: 0;
     left: 0;
@@ -331,7 +338,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 6;
 
 
 }
