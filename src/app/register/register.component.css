@@ -11,6 +11,9 @@
     background: #f44336;
     color: white;
 }
+input[type="password"]::-ms-reveal {
+    display: none;
+  }
 /* .verifyButton {
 
 } */
