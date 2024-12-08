@@ -129,5 +129,18 @@ export class NovelService {
 
     return this.http.get(`${this.apiUrl}/api/user/getCountNovel`, { headers });
   }
+  getRectag() {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/recTag`);
+  }
 
 }

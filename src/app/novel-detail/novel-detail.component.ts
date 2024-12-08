@@ -4,6 +4,7 @@ import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort, faPenToS
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { Router } from '@angular/router';
+import { customConfirm } from '../services/customConfirm.service';
 @Component({
   selector: 'app-novel-detail',
   templateUrl: './novel-detail.component.html',
@@ -26,7 +27,11 @@ export class NovelDetailComponent {
   showStatusCompleteDropdown = false;
 
 
-  constructor(private novelService: NovelService, private authService: AuthService, private popupService: PopupService, private router: Router) {
+  constructor(private novelService: NovelService, 
+    private authService: AuthService, 
+    private popupService: PopupService, 
+    private router: Router,
+    private customconfirm:customConfirm) {
     this.authService.checkLoginStatus();
     this.getNovel();
     this.getProfile();
@@ -264,7 +269,7 @@ export class NovelDetailComponent {
       next: (response) => {
         if (response?.status === 'success') {
           this.noveldata = response.data.data; // เก็บข้อมูล novel ใน array
-          // console.log('Novels:', this.noveldata);
+          console.log('Novels:', this.noveldata);
         } else {
           console.error('Failed to fetch novels:', response);
         }
@@ -274,17 +279,31 @@ export class NovelDetailComponent {
       },
     });
   }
+async deleteNovel(index: number){
+  const novelId = this.noveldata[index]?.novel_id;
+  const novelName = this.noveldata[index]?.novel_name;
+
+    if (!novelId) {
+      this.popupService.showPopup('ไม่พบ ID เรื่องที่ต้องการลบ');
+      return;
+    }
+    const confirmed = await this.customconfirm.customConfirm(`ต้องการลบเรื่อง ${novelName}`);
+    if (confirmed) {
+      this.authService.deleteNovel(novelId).subscribe({
+        next: () => {
+          this.popupService.showPopup(`ลบเรื่อง ${novelName} สำเร็จแล้ว`);
+          this.getNovel();
+        },
+        error: () => {
+          this.popupService.showPopup(`ลบเรื่อง ${novelName} ไม่สำเร็จ กรุณาลองใหม่`);
+        }
+      })
+    }
+  
+}
 
 sortOrder: 'asc' | 'desc' = 'desc';
-// เรียงลำดับจากใหม่สุด
-sortNow(): void {
- 
-}
 
-// เรียงลำดับจากเก่าสุด
-sortOld(): void {
- 
-}
 
 
 

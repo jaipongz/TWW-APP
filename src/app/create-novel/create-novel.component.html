@@ -37,7 +37,7 @@
               </a>
 
               <!-- แสดง input เมื่ออยู่ในโหมดแก้ไข -->
-              <input *ngIf="isEditingPenName" #penNameInput type="text" [(ngModel)]="novel.penName"
+              <input *ngIf="isEditingPenName" #penNameInput type="text" maxlength="20" [(ngModel)]="novel.penName"
                 (ngModelChange)="saveToLocalStorage()" (keydown.enter)="confirmPenName()">
             </div>
           </div>
@@ -48,12 +48,12 @@
 
 
           <div class="form-group-1">
-            <label for="title">ชื่อเรื่อง</label>
+            <label for="title">ชื่อเรื่อง ({{countName()}}/50)</label>
             <input id="title" name="title" [(ngModel)]="novel.novelName" (ngModelChange)="saveToLocalStorage()"
-              type="text">
-            <label for="subtitle">คำโปรย/เรื่องย่อ</label>
+              type="text" maxlength="50">
+            <label for="subtitle">คำโปรย/เรื่องย่อ ({{countDesc()}}/120)</label>
             <textarea id="subtitle" name="subtitle" [(ngModel)]="novel.desc" (ngModelChange)="saveToLocalStorage()"
-              type="text"></textarea>
+               maxlength="120"></textarea>
           </div>
         </div>
       </div>
@@ -110,9 +110,9 @@
           <option value="" disabled>เลือกระดับของเนื้อหา</option>
           <option *ngFor="let rate of rates">{{ rate.rate }}</option>
         </select>
-        <label class="tags-head">แท็ก (0/18)</label>
+        <label class="tags-head">แท็ก ({{ countTags() }}/20)</label>
         <div class="tags">
-          <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" (click)="deltag(tag)" class="tag">
+          <span *ngFor="let tag of tagsArray" (click)="deltag(tag)" class="tag">
             {{ tag }} <span class="remove-tag">×</span>
           </span>
         </div>
@@ -124,7 +124,7 @@
           </span>
         </div>
 
-        <input name="tags" type="text" placeholder="ใส่แท็กเพิ่ม (กด Enter เพื่อเพิ่มแท็กใหม่)" (keyup.enter)="addTag()"
+        <input name="tags" type="text" maxlength="20" placeholder="ใส่แท็กเพิ่ม (กด Enter เพื่อเพิ่มแท็กใหม่)" (keyup.enter)="addTag()"
           [(ngModel)]="newTag" />
       </div>
 

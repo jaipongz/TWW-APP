@@ -48,16 +48,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
   isEditingPenName = false;
   @ViewChild('penNameInput', { static: false }) penNameInput!: ElementRef;
   novelData!: { group: string; type: string };
-  tageRec = [
-    { tag: 'rec1' },
-    { tag: 'rec2' },
-    { tag: 'rec3' },
-    { tag: 'rec4' },
-    { tag: 'rec5' },
-    { tag: 'rec6' },
-    { tag: 'rec7' },
-    { tag: 'rec8' },
-  ];
+  tageRec:any[] = [];
 
   rates = [
     { rate: 'ทั่วไป' },
@@ -99,6 +90,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.novelData = this.novelService.getNovelCreate();
     this.updateNovel();
     this.getToLocalStorage();
+    this.getrectag();
     
   }
 
@@ -120,6 +112,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
   if (storedData) {
     try {
       this.novel = JSON.parse(storedData);
+      this.checkform = false;
       console.log('Loaded data from localStorage:', this.novel);
     } catch (error) {
       console.error('Failed to parse JSON:', error);
@@ -206,6 +199,36 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     console.log('Mouse left');
   }
 
+  // คำนวณและแยกแท็กออกมาเป็นอาร์เรย์
+  get tagsArray(): string[] {
+    return this.novel.tag ? this.novel.tag.split(', ').filter(tag => tag.trim() !== '') : [];
+  }
+  getrectag() {
+    this.novelService.getRectag().subscribe({
+      next: (response) => {
+        // แยกค่าของ `tag` ออกมาจาก `response.data`
+        this.tageRec = response.data;
+      },
+      error: (err) => {
+        this.popupService.showPopup('ไม่สามารถเรียกแท็กได้');
+      }
+    });
+  }
+      
+    
+  
+
+  // นับจำนวนแท็ก
+  countTags(): number {
+    return this.tagsArray.length;
+  }
+  countName(): number {
+    return this.novel.novelName.length;
+  }
+  countDesc(): number {
+    return this.novel.desc.length;
+  }
+
   // เพิ่มแท็กจาก recommended tags
   addTagRec(tagName: string): void {
     if (!tagName || this.tags.includes(tagName)) {
@@ -249,7 +272,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
   // Add a custom tag via input
   addTag() {
-    if (this.newTag && this.tags.length < 18) {
+    if (this.newTag && this.tags.length < 20) {
       this.tags.push(this.newTag);
       this.newTag = '';
       this.updateNovelTags();

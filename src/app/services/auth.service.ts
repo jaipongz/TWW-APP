@@ -62,6 +62,20 @@ export class AuthService {
     );
   }
 
+  deleteNovel(novelId:string) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.delete<any>(`${this.apiUrl}/api/novel/destroyNovel/${novelId}`, { headers });
+  }
+
   addCharacter(formData: FormData): Observable<any> {
     const token = this.getToken();
 
@@ -106,6 +120,7 @@ export class AuthService {
 
     return this.http.put<any>(`${this.apiUrl}/api/novel/charactor/${charId}`, formData, { headers });
   }
+
 
   deleteCharacter(charId: string) {
     const token = this.getToken();

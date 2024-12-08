@@ -282,7 +282,8 @@
         </div>
       </div>
 
-      <div class="story-card-container" *ngFor="let novel of noveldata | sort:'updated_at':sortOrder">
+      <div class="story-card-container" *ngFor="let novel of noveldata | sort:'updated_at':sortOrder; let i = index">
+        <span (click)="deleteNovel(i)">ลบ</span>
         <!-- รูปด้านซ้าย -->
         <div class="story-image">
           <img
