@@ -88,7 +88,7 @@ export class RegisterComponent {
       this.popupService.showPopup('Email ไม่ถูกต้อง');
       return;
     }
-
+    this.startCountdown();
     const payload = { email: this.email };
     this.http.post('http://localhost:3090/verifiedEmail', payload).subscribe(
       (response: any) => {
@@ -97,7 +97,6 @@ export class RegisterComponent {
           setTimeout(() => {
             this.popupService.showPopup(response.message)
           }, 3000);
-          this.startCountdown();
           this.email = response.data;
         } else {
           this.popupService.showPopup(response.message || 'Verification failed');
@@ -106,9 +105,11 @@ export class RegisterComponent {
       error => {
         if (error.status === 409) {
           this.popupService.showPopup('Email นี้ได้รับการยืนยันแล้วหรือมีปัญหา กรุณาตรวจสอบอีกครั้ง');
+          this.countdown = 0;
         } else {
           console.error('Error:', error);
           this.popupService.showPopup('An error occurred. Please try again later.');
+          this.countdown = 0;
         }
       }
     );
