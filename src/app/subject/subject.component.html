@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <div class="containerfornav">
-    <div class="container col-80">
+    <div class="container sreen-1280">
         <div class="card-1 profile-card">
             <img *ngIf="novel?.novel_propic" [src]="novel?.novel_propic" alt="ภาพเรื่องที่สร้าง" />
             <div class="profile-info">
@@ -69,7 +69,7 @@
             </div>
             <div class="recommendations">
                 <h3>
-                    แนะนำตัวละคร (ไม่บังคับสร้าง)
+                    แนะนำตัวละคร
                 </h3>
                 <div class="charactor">
                     <div *ngFor="let charactor of charactors; let i = index">
@@ -83,8 +83,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="add-character" (click)="onAdd()">
-                    <button>
+                <div class="add-character" >
+                    <button (click)="onAdd()">
                         เพิ่มตัวละคร
                     </button>
                 </div>
@@ -122,10 +122,18 @@
                     แท็ก
                 </h3>
                 <div class="tag-list">
-                    <span *ngFor="let tag of novel.tag ? novel.tag.split(', ') : []" class="tag">
-                        {{ tag }}
+                    <span *ngFor="let tag of tagsArray" (click)="deltag(tag)" class="tag">
+                      {{ tag }} <span class="remove-tag">×</span>
                     </span>
                 </div>
+                <div class="add-tag" *ngIf="!addtag">
+                    <button (click)="showAddTag()">เพิ่มแท็กใหม่</button> 
+                </div>
+                <div class="add-tag" *ngIf="addtag">
+                    <input type="text" maxlength="20" [(ngModel)]="newTag" (keyup.enter)="addTag()" placeholder="เพิ่มแท็ก">
+                    <button (click)="addTag()">เพิ่ม</button>
+                </div>
+
             </div>
             <div class="story">
                 <h3>แนะนำเรื่อง</h3>
@@ -135,7 +143,7 @@
                     <p style="margin: 10px 20px 10px 10px;">{{ novel.novel_desc }}</p>
                     <!-- Display the novel description -->
                     <div class="add-story">
-                        <button>แก้ไขแนะนำเรื่อง</button> <!-- Show "Edit Novel Description" button -->
+                        <button>แก้ไขแนะนำเรื่อง</button> 
                     </div>
                 </div>
 
@@ -159,7 +167,7 @@
                     </div>
                 </div>
                 <div class="response-list">
-                    <div class="response-item" *ngFor="let chapter of chapter">
+                    <div class="response-item" *ngFor="let chapter of chapters">
                         <div class="response-text">
                             {{ chapter.chapter_name }}
                         </div>

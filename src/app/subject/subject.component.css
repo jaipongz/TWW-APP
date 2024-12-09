@@ -2,6 +2,7 @@
     display: flex;
     margin: 0 auto;
     flex-direction: column;
+    padding: 0 10px;
     gap: 20px;
 }
 .card-1 ,.card {
@@ -142,15 +143,44 @@
     margin-top: 10px;
 }
 
-.tags .tag-list span {
+.tags .tag-list .tag {
     background-color: #f5e9d7;
     border: 1px solid #d4a373;
     border-radius: 5px;
     color: #d4a373;
     padding: 5px 10px;
     margin-right: 10px;
-    margin-bottom: 10px;
 }
+.add-tag {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+.add-tag input[type="text"] {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+}
+.add-tag button {
+    background-color: #bf6a02;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.remove-tag {
+    flex-direction: row;
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    margin-left: 5px;
+  }
 
 
 .story .add-story {

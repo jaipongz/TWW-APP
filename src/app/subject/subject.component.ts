@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { UploadService } from '../services/upload.service';
 import { customConfirm } from '../services/customConfirm.service';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@wfpena/angular-wysiwyg';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class SubjectComponent implements OnInit {
   name = '';
   role = '';
   data:any;
-
+  addtag = false;
 
   constructor(private cdr: ChangeDetectorRef,
     private novelService: NovelService,
@@ -26,6 +27,7 @@ export class SubjectComponent implements OnInit {
     private popupService: PopupService,
     public uploadService: UploadService,
     private customconfirm: customConfirm,
+    private eRef: ElementRef,
     private router: Router) { }
 
 
@@ -42,7 +44,7 @@ export class SubjectComponent implements OnInit {
   getNovel =  () => {
     const state = history.state;
     this.data = state.novel?.novel_id ?? state.novelId;
-    console.log('NOVELL ID', this.data);
+    // console.log('NOVELL ID', this.data);
     
     // console.log(state.novel.novel_id);
     
@@ -206,7 +208,7 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  chapter: any[] = [];
+  chapters: any[] = [];
   totalChapter: any;
   perPageChapter: any;
   nowPageChapter: any;
@@ -220,15 +222,39 @@ export class SubjectComponent implements OnInit {
     this.authService.getAllDescChapter(this.novel?.novel_id).subscribe({
       next: (data) => {
         // this.popupService.showPopup('สร้างตัวละครสำเร็จ');
-        this.chapter = data.data
+        this.chapters = data.data
         this.totalChapter = data.total
         this.perPageChapter = data.perPage
         this.nowPageChapter = data.nowPage
-        // console.log('Chapter Response:', this.chapter);
+        console.log('Chapter Response:', this.chapters);
       },
       error: (error) => {
         this.handleError(error, 'การสร้างตัวละครล้มเหลว');
       },
+    });
+  }
+
+  updateTag() {
+    if (!this.novel?.novel_id) {
+      this.popupService.showPopup('ไม่มี Novel ID');
+      return;
+    }
+    const novelId = this.novel?.novel_id;
+    // // เพิ่มโค้ดสำหรับบันทึกข้อมูล
+    const formData = new FormData();
+    // เพิ่มข้อมูล text fields ลงใน FormData
+    formData.append('tag', this.novel.tag);
+
+    // เรียกใช้ service เพื่อส่งข้อมูลไปยัง API
+    this.authService.updateNovel(novelId,formData).subscribe({
+      next: (data) => {
+        // this.popupService.showPopup('เพิ่ม');
+        
+        setTimeout(() => {
+          this.popupService.closePopup();
+        }, 2000);
+      },
+      error: (error) => this.popupService.showPopup(error.message),
     });
   }
 
@@ -344,6 +370,17 @@ export class SubjectComponent implements OnInit {
     this.uploadService.croppedImage = this.currentCharactor.image_path;
 
   }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.add-tag')) {
+      this.addtag = false; // ปิดเมื่อคลิกนอก .add-tag
+    }
+  }
+  
+  showAddTag(){
+    this.addtag = !this.addtag;
+  }
 
   async charDelete(index: number){
     const charId = this.charactors[index]?.id;
@@ -367,6 +404,33 @@ export class SubjectComponent implements OnInit {
       });
     }
   }
+  get tagsArray(): string[] {
+    return this.novel.tag ? this.novel.tag.split(', ').filter((tag: string) => tag.trim() !== '') : [];
+  }
+  async deltag(tag: string) {
+    const confirmed = await this.customconfirm.customConfirm(`ต้องการลบแท็ก ${tag}`);
+    if (confirmed){
+      const updatedTags = this.tagsArray.filter(t => t !== tag); // ลบแท็กที่เลือก
+      this.novel.tag = updatedTags.join(', '); // อัปเดตค่ากลับในรูปแบบสตริง
+      this.updateTag();
+    }
+  }
+
+
+newTag = '';
+addTag(): void {
+  if (this.newTag.trim() && !this.tagsArray.includes(this.newTag.trim())) {
+    const updatedTags = [...this.tagsArray, this.newTag.trim()];
+    this.novel.tag = updatedTags.join(', ');
+    this.updateTag();
+    this.newTag = ''; // ล้างค่าอินพุต
+    this.addtag = false;
+  }
+}
+
+saveDesc(){
+
+}
 
   profileData: any;
 
@@ -377,7 +441,7 @@ export class SubjectComponent implements OnInit {
           // console.log(response);
 
           this.profileData = response.data; // Store fetched data in `profileData`
-          // console.log('Profile Data:', this.profileData);
+          console.log('Profile Data:', this.profileData);
         } else {
           console.error('Failed to fetch novels:', response);
         }

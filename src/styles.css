@@ -40,15 +40,8 @@
   width: 33.33%;
 }
 
-.grow-1 {
-  flex-grow: 1;
-}
-.grow-2 {
-  flex-grow: 2;
-}
-
-.grow-8{
-  flex-grow: 8;
+.sreen-1280{
+  max-width: 1280px;
 }
 
 body {

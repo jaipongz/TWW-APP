@@ -61,6 +61,19 @@ export class AuthService {
       catchError((error) => throwError(() => new Error(`HTTP error! Status: ${error.status}`)))
     );
   }
+  updateNovel(novelId: string, formData: FormData) {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.put<any>(`${this.apiUrl}/api/novel/updateNovel/${novelId}`, formData, { headers });
+  }
 
   deleteNovel(novelId:string) {
     const token = this.getToken();
