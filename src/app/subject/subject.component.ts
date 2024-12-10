@@ -20,6 +20,7 @@ export class SubjectComponent implements OnInit {
   role = '';
   data:any;
   addtag = false;
+  addStory = false;
 
   constructor(private cdr: ChangeDetectorRef,
     private novelService: NovelService,
@@ -30,13 +31,121 @@ export class SubjectComponent implements OnInit {
     private eRef: ElementRef,
     private router: Router) { }
 
-
+    config: AngularEditorConfig = {
+      editable: true,
+      minHeight: '200px',
+      maxHeight: '300px',
+      placeholder: 'Enter text here...',
+      spellcheck: true,
+      minWidth: '160px',
+      textAreaBackgroundColor: 'white',
+      translate: 'yes',
+      sanitize: false,
+      enableToolbar: true,
+      defaultFontName: 'Comic Sans MS',
+      defaultFontSize: '5',
+      fonts: [
+        { class: 'arial', name: 'Arial' },
+        { class: 'times-new-roman', name: 'Times New Roman' },
+        { class: 'roboto-condensed-embedded', name: 'Roboto' },
+        { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+        { class: 'roboto-slab', name: 'RobotoSlab', label: 'Roboto Custom' },
+        { class: 'custom-font', name: 'Custom Font', label: 'ฟอนต์พิเศษ' } // ฟอนต์ใหม่
+      ],
+      showToolbar: true,
+      // defaultParagraphSeparator: 'p',
+      textPatternsEnabled: false,
+      customClasses: [
+        {
+          name: 'quote',
+          class: 'angular-editor-quote',
+        },
+        {
+          name: 'redText',
+          class: 'redText',
+        },
+        {
+          name: 'titleText',
+          class: 'titleText',
+          tag: 'h1',
+        },
+      ],
+      editHistoryLimit: 3,
+      imageResizeSensitivity: 2,
+      toolbarHiddenButtons: [
+        ['insertImage'],
+        ['insertVideo'],
+        ['toggleEditorMode'],
+      ],
+     };
 
 
   ngOnInit(): void {
     this.getNovel();
     this.typeMapping();
     
+  }
+
+  saveToSessionStorage() {
+    try {
+      // แปลงข้อมูล novel เป็น JSON และเก็บใน localStorage
+      console.log('Saving to localStorage', this.novel.novel_desc);
+      sessionStorage.setItem('getDesc', JSON.stringify(this.novel.novel_desc));
+
+    } catch (error) {
+      console.error('Error saving to localStorage:', error);
+
+    }
+  }
+
+  getToSessionStorage() {
+    const storedData = sessionStorage.getItem('getDesc');
+    if (storedData) {
+      try {
+        this.novel.novel_desc = JSON.parse(storedData);
+        console.log('Loaded data from localStorage:', this.novel.novel_desc);
+      } catch (error) {
+        console.error('Failed to parse JSON:', error);
+        sessionStorage.removeItem('getDesc');
+      }
+    }
+   }
+
+   editRecDesc(){
+    this.addStory = !this.addStory
+   }
+
+   async addRecDesc() {
+    const confirmed = await this.customconfirm.customConfirm('ต้องการแก้ไข')
+    if (confirmed) {
+      this.updateRecDesc();
+      sessionStorage.removeItem('getDesc');
+      this.addStory = false;
+    }
+   }
+
+   updateRecDesc() {
+    if (!this.novel?.novel_id) {
+      this.popupService.showPopup('ไม่มี Novel ID');
+      return;
+    }
+    const novelId = this.novel?.novel_id;
+    // // เพิ่มโค้ดสำหรับบันทึกข้อมูล
+    const formData = new FormData();
+    // เพิ่มข้อมูล text fields ลงใน FormData
+    formData.append('desc', this.novel.novel_desc);
+
+    // เรียกใช้ service เพื่อส่งข้อมูลไปยัง API
+    this.authService.updateNovel(novelId,formData).subscribe({
+      next: () => {
+        this.popupService.showPopup('แก้ไขแนะนำเรื่องสำเร็จ');
+        
+        setTimeout(() => {
+          this.popupService.closePopup();
+        }, 2000);
+      },
+      error: (error) => this.popupService.showPopup(error.message),
+    });
   }
 
   @ViewChild('createPopup', { static: false }) createPopup!: ElementRef;

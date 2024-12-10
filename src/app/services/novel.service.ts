@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
+
 
 interface Novel {
   novelName: string;
@@ -21,7 +24,8 @@ interface Novel {
   providedIn: 'root'
 })
 export class NovelService {
-  private readonly tokenKey = 'token';
+  private apiUrl = environment.API_URL;
+  
   private novelCreate = {
     group: '',
     type: '',
@@ -44,9 +48,9 @@ export class NovelService {
 
   
  
-  private apiUrl = 'http://localhost:3090';
 
-  constructor(private http: HttpClient,private router:Router) {
+
+  constructor(private http: HttpClient,private router:Router,private auth:AuthService) {
 
   }
 
@@ -112,35 +116,32 @@ export class NovelService {
     }
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
-  getCountNovel() {
-    const token = this.getToken();
-
-    if (!token) {
-      throw new Error('Authentication token is missing');
-    }
-
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get(`${this.apiUrl}/api/user/getCountNovel`, { headers });
-  }
+  
   getRectag() {
-    const token = this.getToken();
 
-    if (!token) {
-      throw new Error('Authentication token is missing');
-    }
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
+      'accept': 'application/json'
     });
 
     return this.http.get<any>(`${this.apiUrl}/recTag`);
+  }
+  getMaingroup() {
+
+    const headers = new HttpHeaders({
+      'accept': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/mainGroup`);
+  }
+  getSubgroup() {
+
+
+    const headers = new HttpHeaders({
+      'accept': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/subGroup`);
   }
 
 }

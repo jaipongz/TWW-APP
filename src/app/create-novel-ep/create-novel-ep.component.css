@@ -5,12 +5,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 80%;
     margin: 0 auto;
     background: #ffffff;
     border-radius: 25px;
     padding: 10px 20px;
-
+    margin: 0 10px;
 }
 h3 {
     margin-bottom: 5px;

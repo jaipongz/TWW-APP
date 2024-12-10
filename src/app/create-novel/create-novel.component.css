@@ -183,51 +183,6 @@
   }
 }
 
-/* .dropdown-container {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-btn {
-    padding: 10px;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-  }
-  
-  .dropdown-content {
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 200px;
-    z-index: 1;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  }
-  
-  .dropdown-item {
-    padding: 8px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #ddd;
-  }
-  
-  /* Hide child dropdown by default */
-  /* .child-dropdown {
-    display: none;
-    position: absolute;
-    left: 100%; /* Align to the right of the group item */
-    /* top: 0;
-    background-color: #f9f9f9;
-    min-width: 150px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Show child dropdown on hover of the group item */
-  /* .dropdown-item:hover .child-dropdown {
-    display: block;
-  } */ 
 
   .toggle-button-cover {
     position: relative;
@@ -301,24 +256,24 @@
   
   .button.r,
   .button.r .layer {
-    border-radius: 77px; /* เพิ่มขึ้น 10% จาก 70px */
+    border-radius: 50px; 
   }
   
   #button-3 .knobs:before {
     content: "PB";
     position: absolute;
-    top: 0; /* เพิ่มขึ้น 10% จาก 2.8px */
-    left: 0; /* เพิ่มขึ้น 10% จาก 2.8px */
-    width: 15px; /* เพิ่มขึ้น 10% จาก 14px */
-    height: 7px; /* เพิ่มขึ้น 10% จาก 7px */
+    top: 0; 
+    left: 0; 
+    width: 15px; 
+    height: 7px; 
     color: #fff;
-    font-size: 9px; /* เพิ่มขึ้น 10% จาก 8.4px */
+    font-size: 9px; 
     font-weight: bold;
     text-align: center;
     line-height: 1;
-    padding: 6.93px 3.08px; /* เพิ่มขึ้น 10% */
+    padding: 6.93px 3.08px; 
     background-color: #1c739b;
-    border-radius: 50%; /* เพิ่มขึ้น 10% จาก 35% */
+    border-radius: 50%; 
     transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
   }
   

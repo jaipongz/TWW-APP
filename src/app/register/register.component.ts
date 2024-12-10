@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PopupService } from '../services/popup.service';
 import { DialogService } from '../services/dialog.service';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class RegisterComponent {
   isInputReadonly: boolean = false;
   otpVerified: boolean = false;
 
-  constructor(private router: Router, private http: HttpClient,private dialogService: DialogService, private popupService: PopupService) {
+  constructor(private auth: AuthService, private http: HttpClient,private dialogService: DialogService, private popupService: PopupService) {
 
   }
 
@@ -58,12 +59,7 @@ export class RegisterComponent {
         email: this.email,
         password: this.password,
       };
-      this.http.post('http://localhost:3090/register', payload, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe(
+      this.auth.authRegist(payload).subscribe(
         (response: any) => {
           if (response.status === 'success') {
             this.popupService.showPopup('Registration successful');
@@ -90,12 +86,13 @@ export class RegisterComponent {
     }
     this.startCountdown();
     const payload = { email: this.email };
-    this.http.post('http://localhost:3090/verifiedEmail', payload).subscribe(
+    this.auth.authEmail(payload).subscribe(
       (response: any) => {
         if (response.status === 'success') {
           this.showOtpInput = true; // แสดง input สำหรับ OTP
+          this.popupService.showPopup(response.message);
           setTimeout(() => {
-            this.popupService.showPopup(response.message)
+            this.popupService.closePopup();
           }, 3000);
           this.email = response.data;
         } else {
@@ -127,12 +124,7 @@ export class RegisterComponent {
       otp: this.otpcheck.toString(),
     };
 
-    this.http.post('http://localhost:3090/verifyPassword', payload, {
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
+    this.auth.authPass(payload).subscribe(
       (response: any) => {
         if (response.status === 'success') {
           this.popupService.showPopup('OTP Verified Successfully');

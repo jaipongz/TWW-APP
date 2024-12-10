@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
   // showLoginPopup: boolean = false;
 
 
-  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService) { }
+  constructor(private auth: AuthService, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService) { }
 
   ngOnInit(): void {
 
@@ -37,31 +38,22 @@ export class LoginComponent implements OnInit {
       this.popupService.showPopup('กรุณาใส่ข้อมูลไม่ถึง8ตัว');
 
     } else {
-      // Register logic here
-      console.log('Form Submitted');
-
-      const payload = {
+       const payload = {
         username: this.username,
         password: this.password,
       };
 
-      this.http.post('http://localhost:3090/login', payload, {
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe(
+      this.auth.authLogin(payload).subscribe(
         (response: any) => {
           // if (response.status === 'success' && !response.data.error)
           if (!response.data.error) {
-            console.log('Login successful:', response);
+            this.popupService.showPopup('Login successful:');
             localStorage.setItem('token', response.data.token); // Store the token
             localStorage.setItem('userId', response.data.userId);
-            this.dialogService.closeDialog('login');
-            window.location.reload();
-            // const redirectUrl = localStorage.getItem('redirectUrl') || '/defaultRoute';
-            // this.router.navigate([redirectUrl]);
-            // localStorage.removeItem('redirectUrl');
+            setTimeout(() => {
+              this.dialogService.closeDialog('login');
+              window.location.reload();
+            }, 3000);
           } else {
             // Show error message if login failed
             this.popupService.showPopup = response.data.error || 'Login failed. Please check your username and password';

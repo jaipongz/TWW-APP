@@ -50,8 +50,7 @@ export class CreateNovelEpComponent {
     minWidth: '160px',
     textAreaBackgroundColor: 'white',
     translate: 'yes',
-    sanitize: true,
-    outline:false,
+    sanitize: false,
     enableToolbar: true,
     defaultFontName: 'Comic Sans MS',
     defaultFontSize: '5',
@@ -64,7 +63,8 @@ export class CreateNovelEpComponent {
       { class: 'custom-font', name: 'Custom Font', label: 'ฟอนต์พิเศษ' } // ฟอนต์ใหม่
     ],
     showToolbar: true,
-    textPatternsEnabled: true,
+    // defaultParagraphSeparator: 'p',
+    textPatternsEnabled: false,
     customClasses: [
       {
         name: 'quote',
@@ -83,13 +83,15 @@ export class CreateNovelEpComponent {
     editHistoryLimit: 3,
     imageResizeSensitivity: 2,
     toolbarHiddenButtons: [
-
+      // ['bold', 'italic'],
+      // ['fontSize'],
       ['insertVideo'],
-      ['toggleEditorMode'],
+      // ['insertHTML'],
     ]
    };
 
-  config2: AngularEditorConfig = {
+
+   config2: AngularEditorConfig = {
     editable: true,
     minHeight: '200px',
     maxHeight: '300px',
@@ -98,8 +100,7 @@ export class CreateNovelEpComponent {
     minWidth: '160px',
     textAreaBackgroundColor: 'white',
     translate: 'yes',
-    sanitize: true,
-    outline:false,
+    sanitize: false,
     enableToolbar: true,
     defaultFontName: 'Comic Sans MS',
     defaultFontSize: '5',
@@ -113,7 +114,7 @@ export class CreateNovelEpComponent {
     ],
     showToolbar: true,
     // defaultParagraphSeparator: 'p',
-    textPatternsEnabled: true,
+    textPatternsEnabled: false,
     customClasses: [
       {
         name: 'quote',
@@ -135,7 +136,7 @@ export class CreateNovelEpComponent {
       ['insertImage'],
       ['insertVideo'],
       ['toggleEditorMode'],
-    ]
+    ],
    };
 
    

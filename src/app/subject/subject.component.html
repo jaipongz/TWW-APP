@@ -136,23 +136,23 @@
 
             </div>
             <div class="story">
-                <h3>แนะนำเรื่อง</h3>
-
+                <h3>แนะนำเรื่อง ({{novel.novel_desc.length}}/1000)</h3>
                 <!-- Show novel description if it exists, otherwise show the add button -->
-                <div *ngIf="novel.novel_desc; else addStory">
+                <div *ngIf="!addStory;">
                     <p style="margin: 10px 20px 10px 10px;">{{ novel.novel_desc }}</p>
                     <!-- Display the novel description -->
                     <div class="add-story">
-                        <button>แก้ไขแนะนำเรื่อง</button> 
+                        <button (click)="editRecDesc()">แก้ไขแนะนำเรื่อง</button> 
                     </div>
                 </div>
 
                 <!-- Template for adding description if novel_desc is null -->
-                <ng-template #addStory>
+                <div class="addStory" *ngIf="addStory;">
+                    <textarea class="txtarea" maxlength="1000" [(ngModel)]="novel.novel_desc"></textarea>
                     <div class="add-story">
-                        <button>เพิ่มแนะนำเรื่อง</button> <!-- Show "Add Novel Description" button -->
+                        <button (click)="addRecDesc()">เพิ่มแนะนำเรื่อง</button> <!-- Show "Add Novel Description" button -->
                     </div>
-                </ng-template>
+                </div>
             </div>
         </div>
             <div class="card-1 responses">

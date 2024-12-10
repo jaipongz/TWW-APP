@@ -310,7 +310,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
   // Fetch main groups
   fetchData(): void {
-    this.http.get<{ status: string; data: DropdownItem[] }>('http://localhost:3090/mainGroup')
+    this.novelService.getMaingroup()
       .subscribe({
         next: (response) => {
           if (response.status === 'success') {
@@ -331,11 +331,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
 
   getSubGroups(): void {
-    this.http.get<any>('http://localhost:3090/subGroup', {
-      headers: {
-        'accept': 'application/json'
-      }
-    }).subscribe(
+    this.novelService.getSubgroup().subscribe(
       (response) => {
         this.subGroups = response.data;
         console.log('Fetched subGroups:', this.subGroups);

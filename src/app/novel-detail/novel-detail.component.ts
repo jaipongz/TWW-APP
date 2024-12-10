@@ -359,7 +359,7 @@ sortOrder: 'asc' | 'desc' = 'desc';
     });
   }
   getCountNovel() {
-    this.novelService.getCountNovel().subscribe({
+    this.authService.getCountNovel().subscribe({
       next: (response: any) => {
         if (response?.status === 'success') {
           console.log(response);

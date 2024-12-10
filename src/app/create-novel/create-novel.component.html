@@ -51,9 +51,9 @@
             <label for="title">ชื่อเรื่อง ({{countName()}}/50)</label>
             <input id="title" name="title" [(ngModel)]="novel.novelName" (ngModelChange)="saveToLocalStorage()"
               type="text" maxlength="50">
-            <label for="subtitle">คำโปรย/เรื่องย่อ ({{countDesc()}}/120)</label>
+            <label for="subtitle">คำโปรย/เรื่องย่อ ({{countDesc()}}/1000)</label>
             <textarea id="subtitle" name="subtitle" [(ngModel)]="novel.desc" (ngModelChange)="saveToLocalStorage()"
-               maxlength="120"></textarea>
+               maxlength="1000"></textarea>
           </div>
         </div>
       </div>

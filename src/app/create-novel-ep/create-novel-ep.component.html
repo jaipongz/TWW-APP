@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 <div class="containerfornav">
-<div class="contrainer">
-
+<div class="contrainer sreen-1280">
     <div class="header">
         <h3>ชื่อตอน</h3>
         <input type="text" [(ngModel)]="data.chaptername" (ngModelChange)="saveToSessionStorage()">
@@ -13,7 +12,7 @@
         <h3>เนื้อหา</h3>
         <angular-editor id="editor1" autofocus="true" [(ngModel)]="data.editorContent1"  [config]="config1" (ngModelChange)="saveToSessionStorage()">   
         </angular-editor>
-        <!-- <p>Output Editor 1: {{ editorContent1 }}</p> -->
+        <!-- <p>Output Editor 1: {{ data.editorContent1 }}</p> -->
     </div>
 
     <div class="editorContent2">
@@ -21,7 +20,7 @@
         <angular-editor id="editor2"  [(ngModel)]="data.editorContent2"  [config]="config2" (ngModelChange)="saveToSessionStorage()">  
            
         </angular-editor>
-        <!-- <p>Output Editor 2: {{ editorContent2 }}</p> -->
+        <!-- <p>Output Editor 2: {{ data.editorContent2 }}</p> -->
     </div>
     <hr>
     <div class="setting">

@@ -5,18 +5,51 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { DialogService } from './dialog.service';
 import { PopupService } from './popup.service';
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly tokenKey = 'token';
   // private readonly userIdKey = 'userId';
-  private apiUrl = 'http://localhost:3090';
+  private apiUrl = environment.API_URL;
 
   constructor(private router: Router, private dialogService: DialogService, private http: HttpClient, private popupService: PopupService) { }
 
+  authLogin(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
 
+    return this.http.post<any>(`${this.apiUrl}/login`, payload, { headers });
+  }
+  authRegist(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
 
+    return this.http.post<any>(`${this.apiUrl}/register`, payload, { headers });
+  }
+  authPass(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/verifyPassword`, payload, { headers });
+  }
+  authEmail(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/verifiedEmail`, payload, { headers });
+  }
+  
   getNovelDetail(keyword: string, start: number, limit: number): Observable<any> {
     const token = this.getToken();
 
@@ -193,6 +226,21 @@ export class AuthService {
   
     // Correctly pass headers and empty body in the PUT request
     return this.http.put<any>(`${this.apiUrl}/api/novel/updateStatus?novelId=${novelId}&command=${command}&status=${status}`, {}, { headers });
+  }
+
+
+  getCountNovel() {
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get(`${this.apiUrl}/api/user/getCountNovel`, { headers });
   }
   
   // storeNovel(payload: any): Observable<any> {

@@ -76,22 +76,22 @@ export class NavbarComponent implements OnInit {
   }
 
   getProfile() {
-    const token = this.authService.isLoggedIn;
-    if (token) {
+    if (this.authService.isLoggedIn) { 
       this.authService.getProfile().subscribe({
         next: (response: any) => {
           if (response?.status === 'success') {
-            // console.log(response);
-            this.profileData = response.data; // Store fetched data in `profileData`
-            // console.log('Profile Data:', this.profileData);
+            this.profileData = response.data; 
+            console.log('profile',this.profileData);
           } else {
-            console.error('Failed to fetch novels:', response);
+            console.error('Failed to fetch profile data:', response);
           }
         },
         error: (err) => {
-          console.error('Error fetching novels:', err);
+          console.error('Error fetching profile data:', err);
         },
       });
+    } else {
+      console.warn('User is not logged in.');
     }
-    }
+}
 }

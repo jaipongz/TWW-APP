@@ -242,6 +242,12 @@
 }
 
 
+.txtarea{
+    width: 100%;
+    height: 200px;
+}
+
+
 .toggle-button-cover {
     position: relative;
     box-sizing: border-box;
