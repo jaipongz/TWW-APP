@@ -5,6 +5,7 @@ import { NovelService } from '../services/novel.service';
 import { AuthService } from '../services/auth.service';
 import { customConfirm } from '../services/customConfirm.service';
 import { UploadService } from '../services/upload.service';
+import { Router } from '@angular/router';
 
 interface Novel {
   novelName: string;
@@ -79,6 +80,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private customconfirm:customConfirm,
+    private router:Router,
     public uploadService: UploadService) { 
     }
 
@@ -442,14 +444,12 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
         this.popupService.showPopup(JSON.stringify(data));
         setTimeout(() => {
           this.popupService.closePopup();
-          this.novelService.goTo('create-novel');
-        }, 2000);
+          this.router.navigateByUrl("/novel-detail");
+        }, 3000);
       },
       error: (error) => this.popupService.showPopup(error.message),
     });
   }
-
-
 
 
   // Adjust the textarea height as the user types

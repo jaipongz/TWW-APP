@@ -47,13 +47,9 @@ export class LoginComponent implements OnInit {
         (response: any) => {
           // if (response.status === 'success' && !response.data.error)
           if (!response.data.error) {
-            this.popupService.showPopup('Login successful:');
             localStorage.setItem('token', response.data.token); // Store the token
             localStorage.setItem('userId', response.data.userId);
-            setTimeout(() => {
-              this.dialogService.closeDialog('login');
-              window.location.reload();
-            }, 3000);
+            window.location.reload();
           } else {
             // Show error message if login failed
             this.popupService.showPopup = response.data.error || 'Login failed. Please check your username and password';

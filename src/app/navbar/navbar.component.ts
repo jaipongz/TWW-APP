@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
 import { AuthService } from '../services/auth.service';
+import { customConfirm } from '../services/customConfirm.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -16,7 +17,8 @@ export class NavbarComponent implements OnInit {
   isMenuOpen = false;
 
   constructor(private router: Router, public dialogService: DialogService, 
-    private popupService: PopupService,private elementRef: ElementRef,private authService:AuthService) {
+    private popupService: PopupService,private elementRef: ElementRef,
+    private authService:AuthService,private cusconfirm:customConfirm) {
       
     }
 
@@ -28,8 +30,8 @@ export class NavbarComponent implements OnInit {
     return this.authService.isLoggedIn;
   }
 
-  logout(): void {
-    const confirmed = confirm('ต้องการออกจากระบบหรือไม่');
+  async logout() {
+    const confirmed = await this.cusconfirm.customConfirm('ต้องการออกจากระบบหรือไม่');
   if (confirmed) {
     this.authService.logout();
   }

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,7 +13,7 @@ import { PopupService } from '../services/popup.service';
 export class ForgotPasswordComponent {
 
 
-  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService) {
+  constructor(private router: Router, private http: HttpClient, private dialogService: DialogService, private popupService: PopupService,private auth:AuthService) {
     this.startTimer();
   }
 
@@ -34,16 +35,10 @@ export class ForgotPasswordComponent {
       this.popupService.showPopup('Emailไม่ถูกต้องหรือEmailนี้ยังไม่ได้สมัคร');
     } else {
       this.isEmailSubmitted = true;
-
       const payload = {
         email: this.email
       };
-      this.http.post('http://localhost:3090/forgotPassword', payload, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe(
+      this.auth.authforgotPass(payload).subscribe(
         response => {
           this.isEmailSubmitted = true;
           console.log('Registration successful:', response);
@@ -75,12 +70,7 @@ export class ForgotPasswordComponent {
     const payload = {
       email: this.emailForOtp
     };
-    this.http.post('http://localhost:3090/forgotPassword', payload, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
+    this.auth.authforgotPass(payload).subscribe(
       response => {
         this.isEmailSubmitted = true;
         console.log('Registration successful:', response);
@@ -102,22 +92,14 @@ export class ForgotPasswordComponent {
       otp: userOtp
     };
 
-    this.http.post('http://localhost:3090/verifyPassword', payload, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
+    this.auth.authPass(payload).subscribe(
       (response: any) => {
         if (response.status === 'success') {
           console.log('OTP Verified Successfully');
           this.isOtpVerified = true;
-
-
         } else {
           this.popupService.showPopup = response.message;  // ข้อความที่ได้รับจาก API
           console.error('Invalid OTP:', response.message);
-
         }
       },
       error => {
@@ -140,12 +122,7 @@ export class ForgotPasswordComponent {
       newPassword: this.password
     };
 
-    this.http.post('http://localhost:3090/resetPassword', payload, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).subscribe(
+    this.auth.authresetPass(payload).subscribe(
       response => {
         this.dialogService.closeDialog('forgotPassword');
         console.log('Password reset successful');

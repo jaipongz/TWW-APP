@@ -49,7 +49,24 @@ export class AuthService {
 
     return this.http.post<any>(`${this.apiUrl}/verifiedEmail`, payload, { headers });
   }
+  authforgotPass(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/forgotPassword`, payload, { headers });
+  }
+  authresetPass(payload:any){
+    const headers = new HttpHeaders({
+      'accept': 'application/json',
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<any>(`${this.apiUrl}/resetPassword`, payload, { headers });
+  }
   
+
   getNovelDetail(keyword: string, start: number, limit: number): Observable<any> {
     const token = this.getToken();
 
@@ -243,19 +260,7 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/api/user/getCountNovel`, { headers });
   }
   
-  // storeNovel(payload: any): Observable<any> {
-  //   const token = this.getToken();
 
-  //   if (!token) {
-  //     throw new Error('Authentication token is missing');
-  //   }
-
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Authorization: `Bearer ${token}`,
-  //   });
-  //   return this.http.post(`${this.apiUrl}/storeNovel`, payload, { headers });
-  // }
 
 
 
@@ -301,10 +306,12 @@ export class AuthService {
   // Clear all auth-related localStorage items when logging out
   logout(): void {
     this.router.navigate(['/banner']).then(() => {
-      this.popupService.showPopup('ออกจากระบบเรียบร้อยแล้ว');
-      window.location.reload();
       localStorage.removeItem(this.tokenKey);
-      // localStorage.removeItem(this.userIdKey);
+      window.location.reload();
+      this.popupService.showPopup('ออกจากระบบเรียบร้อยแล้ว');
+      setTimeout(() => {
+      this.popupService.closePopup();
+      }, 2000);
     });
   }
 }

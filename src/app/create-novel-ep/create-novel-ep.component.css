@@ -9,7 +9,6 @@
     background: #ffffff;
     border-radius: 25px;
     padding: 10px 20px;
-    margin: 0 10px;
 }
 h3 {
     margin-bottom: 5px;
@@ -19,14 +18,8 @@ h3 {
     position: relative;
     max-width: 100%;
 }
-.header input {
-
-    border-radius: 10px;
-    background: none;
-    padding: 10px 20px;
-
+.header .txtinput {
     width: 40%;
-
 }
 .header button {
     position: absolute;
