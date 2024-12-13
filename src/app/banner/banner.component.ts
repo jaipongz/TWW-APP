@@ -78,21 +78,21 @@ export class BannerComponent implements OnInit, OnDestroy {
 
   goToSlide(index: number): void {
     this.currentIndex = index;
-    this.scrollToSlide();
+    // this.scrollToSlide();
     this.stopAutoSlide();
     this.startAutoSlide();  // Restart auto-slide after manual navigation
   }
-  scrollToSlide(): void {
-    const slideWidth = this.flexcard.nativeElement.clientWidth;
-    this.flexcard.nativeElement.scrollTo({
-      left: slideWidth * this.currentIndex,
-      behavior: 'smooth'
-    });
-  }
+  // scrollToSlide(): void {
+  //   const slideWidth = this.flexcard.nativeElement.clientWidth;
+  //   this.flexcard.nativeElement.scrollTo({
+  //     left: slideWidth * this.currentIndex,
+  //     behavior: 'smooth'
+  //   });
+  // }
   startAutoSlide(): void {
     this.autoSlideInterval = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.noveldata.length;
-      this.scrollToSlide();
+      // this.scrollToSlide();
     }, 3000);
   }
   stopAutoSlide(): void {

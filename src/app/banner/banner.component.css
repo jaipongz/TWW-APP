@@ -12,6 +12,8 @@
   position: relative;
   margin: auto;
   overflow: hidden;
+  padding-bottom: 10px;
+
 }
 
 .flexcard {
@@ -174,20 +176,22 @@
 .content {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  padding: 10px 20px;
+  overflow: auto;
+  border-top: 1px solid #ad9494;
   border-bottom: 1px solid #ad9494;
+  box-sizing: border-box;
 }
 .content h1 {
   font-size: 36px;
- color: #7F4400;
+  color: #7F4400;
 }
 
 .content-sub {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
+  width: 100%;
+  overflow-x: auto; /* Allow horizontal scrolling */
   gap: 10px;
 }
 
@@ -196,12 +200,11 @@
   justify-content: space-between;
   background: #D18D3F;
   color: #fff;
-  overflow: hidden;
-  white-space: nowrap;
   padding: 20px;
-  width: 100%;
   border-radius: 20px 20px 0 0;
+  white-space: normal; /* Allow text to wrap */
 }
+
 .topveiw {
   background: #EC8D20;
 }
@@ -209,32 +212,30 @@
   background: #7F4400;
 }
 
-.maincard {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: start;
-  width: 33.33%;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 20px;
-  /* flex-wrap: wrap;  */
-  margin-top: 10px;
 
+.maincard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: start;
+    flex: 1 1 calc(30% - 20px); /* ใช้ flex-grow, flex-shrink, และ flex-basis */
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    margin: 10px; /* ปรับระยะห่าง */
 }
+
 
 .concard {
   display: flex;
   gap: 10px;
   padding: 10px 20px;
-  
 }
 
 .concard img {
-  width: 50%;
-  max-width: 200px;
+  width: 150px; 
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: cover; 
   box-shadow: 0 0 5px #000;
 }
 
@@ -246,7 +247,8 @@
   overflow: hidden;
 }
 
-.cardname p, h3 {
+.cardname p, 
+.cardname h3 {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -268,29 +270,26 @@ header h1 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: end;
 }
-#loop{
+#loop {
   display: flex;
-  
+  justify-content: space-between;
+  overflow-x: auto;
 }
+
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   text-align: start;
-  background: #fff;
-  width: 20%;
+  gap: 10px;
+  padding: 10px 20px;
   border-radius: 0 0 20px 20px;
-  /* flex-wrap: wrap;  */
   margin-top: 10px;
-  padding: 0 5px;
-
 }
 
 .card img {
-  width: 100%;
-  max-width: 200px; /* จำกัดขนาดภาพสูงสุด */
+  width: 150px; 
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: cover; 
   box-shadow: 0 0 5px #000;
 }
 
@@ -305,7 +304,7 @@ header h1 {
     gap: 10px;
   }
 
-  .content-sub {
+  /* .content-sub {
     flex-wrap: wrap;
   }
   .maincard {
@@ -316,12 +315,12 @@ header h1 {
   }
   .headcard h3,.headcard a{
     font-size: 14px;
-  }
+  } */
 
 }
 @media (max-width: 480px) {
 
-  .content h1, header h1,.category-title h1 {
+  /* .content h1, header h1,.category-title h1 {
     font-size: 24px;
   }
   p ,.category-buttons button{
@@ -329,7 +328,7 @@ header h1 {
   }
   .gbcard {
     padding: 5px 10px;
-  }
+  } */
 }
 
 
