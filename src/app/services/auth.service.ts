@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private readonly tokenKey = 'token';
-  // private readonly userIdKey = 'userId';
+  private readonly userIdKey = 'userId';
   private apiUrl = environment.API_URL;
 
   constructor(private router: Router, private dialogService: DialogService, private http: HttpClient, private popupService: PopupService) { }
@@ -67,7 +67,7 @@ export class AuthService {
   }
   
 
-  getNovelDetail(keyword: string, start: number, limit: number): Observable<any> {
+  getNovelDetail(keyword: string, start: string, limit: string): Observable<any> {
     const token = this.getToken();
 
     if (!token) {
@@ -79,6 +79,19 @@ export class AuthService {
     });
 
     return this.http.get(`${this.apiUrl}/api/novel/myNovelList/?keyword=${keyword}&start=${start}&limit=${limit}`, { headers });
+  }
+
+  updateProfile(formData:FormData){
+    const token = this.getToken();
+
+    if (!token) {
+      throw new Error('Authentication token is missing');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(`${this.apiUrl}/api/user/updateProfilePic`, formData, { headers });
   }
 
   getProfile() {
@@ -272,9 +285,9 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  // getUserId(): string | null {
-  //   return localStorage.getItem(this.userIdKey);
-  // }
+  getUserId(): string | null {
+    return localStorage.getItem(this.userIdKey);
+  }
 
 
 

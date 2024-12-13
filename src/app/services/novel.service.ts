@@ -135,13 +135,20 @@ export class NovelService {
     return this.http.get<any>(`${this.apiUrl}/mainGroup`);
   }
   getSubgroup() {
-
-
     const headers = new HttpHeaders({
       'accept': 'application/json'
     });
 
     return this.http.get<any>(`${this.apiUrl}/subGroup`);
+  }
+
+  getAllnovel(keyword: string, start: string, limit: string) {
+
+    const headers = new HttpHeaders({
+      'accept': 'application/json'
+    });
+
+    return this.http.get<any>(`${this.apiUrl}/api/novel/getNovelList?keyword=${keyword}&start=${start}&limit=${limit}`, { headers });
   }
 
 }

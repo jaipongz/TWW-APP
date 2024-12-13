@@ -2,178 +2,96 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  justify-content: center;
-  /* background:rgb(255, 225, 225); */
   position: relative;
   padding-bottom: 10px;
   z-index: 1;
-  margin: 0 6% 0 6%;
-}
-
-.container-page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* background-image: url('/image/Background.png'); */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  opacity: 100%;
-  z-index: -1;
-}
-
-
-
-.container-page-sub {
-  padding: 0 1rem 0;
+  margin: 0 auto;
 }
 
 .banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 500px;
-  /* background-color: #000000; */
+  position: relative;
+  margin: auto;
   overflow: hidden;
-  
 }
 
 .flexcard {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 95%;
-  gap: 10px;
-  justify-content: center;
-  
-}
-
-.flexcard a {
-  flex: 0.7;
-  transition: flex 0.5s ease;
-}
-
-.flexcard a.active {
-  flex: 1.5;
-  /* Expands the active card */
-}
-
-.card-ban {
-  display: none;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
-  border-radius: 8px;
-  overflow: hidden;
-  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 1); */
-
-}
-
-.card-ban img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   transition: transform 0.5s ease;
+  position: relative;
 }
 
-.active {
-  display: block;
+.image {
+  width: 600px;
+  height: 300px;
+  min-width: 600px;
+  border-radius: 10px;
+  opacity: 0.7;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  object-fit: cover;
+
+}
+
+.image:nth-child(1) { /* รูปภาพด้านซ้าย */
+  transform: translateX(-50px); /* เคลื่อนที่ออกไปทางซ้าย */
+}
+
+.image:nth-child(3) { /* รูปภาพด้านขวา */
+  transform: translateX(50px); /* เคลื่อนที่ออกไปทางขวา */
+}
+
+.image.current {
+  opacity: 1;
+  min-width: none;
+  border-radius: 10px;
 }
 
 .dots-container {
+  position: absolute;
   display: flex;
   justify-content: center;
-  margin-top: -20px;
+  bottom: 0;
 }
 
 .dot {
-  height: 12px;
-  width: 12px;
+  height: 10px;
+  width: 10px;
   margin: 0 5px;
-  background-color: white;
+  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
-  transition: background-color 0.6s ease;
   cursor: pointer;
 }
 
 .dot.active {
-  background-color: #333;
+  background-color: #717171;
 }
-
-.flexcard a:not(.active) {
-  opacity: 0.8;
-  flex: 0.7;
-}
-
-/* Media Queries for responsiveness */
-
-/* For screens smaller than 768px (tablets and smaller devices) */
 @media (max-width: 768px) {
-  .banner {
-    height: 350px;
-    /* Reduce banner height */
-  }
 
-  .flexcard {
-    flex-direction: column;
-    /* Stack the cards vertically */
-  }
-
-  .flexcard a {
-    flex: 1;
-    /* Make all cards have the same size */
-  }
-
-  .flexcard a.active {
-    flex: 1.2;
-    /* Slightly larger active card for tablets */
-  }
 }
 
-/* For screens smaller than 480px (mobile phones) */
+
 @media (max-width: 480px) {
-  .banner {
-    height: 250px;
-    /* Reduce banner height further */
-  }
 
-  .flexcard {
-    flex-direction: column;
-    /* Stack cards vertically */
-    gap: 5px;
-    /* Reduce gap between cards */
-  }
 
-  .flexcard a {
-    flex: 1;
-    /* Equal size cards */
-  }
-
-  .flexcard a.active {
-    flex: 1.1;
-    /* Slightly expand the active card */
-  }
 }
 
 
 
 .category-section {
   position: relative;
-  /* max-width: 1100px; */
-  padding: 1% 5%;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 0.5fr 2fr;
+  padding: 10px 20px;
   border-radius: 10px;
+  margin: 10px 0;
   background-color: #ffffff;
-  box-shadow: 0px 5px 15px rgb(95, 95, 95);
+  box-shadow: 0 0 10px #000;
   z-index: 1;
-  min-width: 230px;
   
 }
-
 .category-section::before {
   content: "";
   position: absolute;
@@ -183,38 +101,27 @@
   height: 100%;
   background-image: url('/image/image.png');
   background-size: cover;
-  /* ทำให้ภาพเต็มพื้นที่ */
   opacity: 100%;
-  /* กำหนดความโปร่งใส 50% */
   z-index: -1;
-  /* วางไว้ข้างหลังเนื้อหา */
   border-radius: 10px;
-  /* ตรงกับคอนเทนเนอร์หลัก */
-}
-
-.category-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .category-title {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  margin: auto;
+  max-width: 200px;
 }
-
 .category-title img {
-  width: 100px;
-  /* Adjust the size of the image */
-  margin-right: 10px;
-}
+  width: 100%;
 
-.category-title h2 {
-  font-weight: bold;
-  color: #8b4513;
-  
 }
-
+.category-title h1 {
+  font-size: 32px;
+  text-wrap: nowrap;
+  color: #7F4400;
+}
 .category-tabs button {
   display: inline-flex;
   /* ให้ปุ่มมีขนาดตามข้อความ */
@@ -227,161 +134,202 @@
   color: #7c4d3d;
   cursor: pointer;
   white-space: nowrap;
-  /* ป้องกันข้อความยาวเกินทำให้ตัดบรรทัด */
 }
-
 .category-tabs button.active {
   background-color: #7c4d3d;
 }
-
 .category-buttons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px;
-  padding: 10px;
-}
+  justify-content: center;
+  align-items: center;
 
+  gap: 10px;
+  
+}
 .category-buttons button {
   display: inline-flex;
-  /* ให้ปุ่มมีขนาดตามข้อความ */
+  font-size: 18px;
   padding: 8px 12px;
-  /* ปรับ padding ให้เหมาะสม */
   border: none;
   border-radius: 25px;
   color: #7c4d3d;
   cursor: pointer;
   white-space: nowrap;
-  /* ป้องกันข้อความยาวเกินทำให้ตัดบรรทัด */
   border: none;
   color: white;
-  /* กำหนดสีตัวหนังสือเบื้องต้น */
   cursor: pointer;
   transition: background-color 0.3s ease;
-
- 
-
 }
-
 .category-buttons button:hover {
   opacity: 0.9;
 }
-
-
+.aside {
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ad9494;
+}
 
 
 .content {
   display: flex;
-  flex-direction: row-reverse;
-  gap: 16px;
-  margin: 0 auto;
- 
+  flex-direction: column;
+  overflow: hidden;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ad9494;
+}
+.content h1 {
+  font-size: 36px;
+ color: #7F4400;
 }
 
-.aside {
-  flex: 1;
-  position: sticky;
-  max-width: 20%;
-  top: 7rem;
-  height: fit-content;
+.content-sub {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  gap: 10px;
 }
 
-.section {
-  flex: 8;
+.headcard {
+  display: flex;
+  justify-content: space-between;
+  background: #D18D3F;
+  color: #fff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 20px;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+.topveiw {
+  background: #EC8D20;
+}
+.topbuy {
+  background: #7F4400;
+}
+
+.maincard {
   display: flex;
   flex-direction: column;
-  max-width: 80%;
-  gap: 16px;
+  justify-content: space-between;
+  text-align: start;
+  width: 33.33%;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  /* flex-wrap: wrap;  */
+  margin-top: 10px;
+
 }
-.card, .card img {
-  box-sizing: border-box; /* รวม padding และ border ในขนาด */
+
+.concard {
+  display: flex;
+  gap: 10px;
+  padding: 10px 20px;
+  
+}
+
+.concard img {
+  width: 50%;
+  max-width: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 0 5px #000;
+}
+
+.cardname {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cardname p, h3 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0; /* ลบระยะห่างขอบข้อความ */
+}
+
+header h1 {
+  font-size: 36px;
+  color: #7F4400;
+}
+
+.gbcard a{
+  font-size: 16px;
+  color: #7F4400;
+  cursor: pointer;
+}
+.gbcard {
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: end;
+}
+#loop{
+  display: flex;
+  
 }
 .card {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: start;
+  background: #fff;
+  width: 20%;
+  border-radius: 0 0 20px 20px;
+  /* flex-wrap: wrap;  */
+  margin-top: 10px;
+  padding: 0 5px;
 
 }
 
 .card img {
   width: 100%;
-  height: 100%;
-  object-fit: fill;
- 
-}
-
-
-
-.card-sub {
-  margin-top: 8px;
-}
-
-/* Horizontal Scrolling for Recommend Section */
-.novel-card {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 16px 0;
-  position: relative;
-  flex-shrink: 0;
-  scrollbar-width: none;
-}
-
-.novel-card .card {
-  width: 200px;
-  height: 250px;
-  border-radius: 8px;
+  max-width: 200px; /* จำกัดขนาดภาพสูงสุด */
+  border-radius: 10px;
   object-fit: cover;
-
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 24px;
-  color: #333;
-}
-
-.arrow-left {
-  left: -32px;
-}
-
-.arrow-right {
-  right: -32px;
-}
-
-/* Popular Section Header */
-.header-popular,
-.novel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-
-.novel-header a {
-  cursor: pointer;
+  box-shadow: 0 0 5px #000;
 }
 
 
 
-/* Responsive Design */
-@media (max-width: 980px) {
-  .content {
-    flex-direction: column-reverse;
+
+@media (max-width: 768px) {
+  .category-section {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: unset;
+    gap: 10px;
   }
-  .section {
-    max-width: 100%;
 
+  .content-sub {
+    flex-wrap: wrap;
   }
-  .aside {
-    
-    position: unset;
-    max-width: 100%;
+  .maincard {
+    width: 350px;
+  }
+  .headcard{
+    padding: 15px;
+  }
+  .headcard h3,.headcard a{
+    font-size: 14px;
+  }
+
+}
+@media (max-width: 480px) {
+
+  .content h1, header h1,.category-title h1 {
+    font-size: 24px;
+  }
+  p ,.category-buttons button{
+    font-size: 14px;
+  }
+  .gbcard {
+    padding: 5px 10px;
   }
 }
+
+

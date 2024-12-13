@@ -49,12 +49,18 @@ export class LoginComponent implements OnInit {
           if (!response.data.error) {
             localStorage.setItem('token', response.data.token); // Store the token
             localStorage.setItem('userId', response.data.userId);
-            window.location.reload();
+            console.log('userid',response.data.userId);
+            this.dialogService.closeDialog('login');
+            
           } else {
             // Show error message if login failed
             this.popupService.showPopup = response.data.error || 'Login failed. Please check your username and password';
-
           }
+          this.popupService.showPopup(`WELCOME BACK`);
+          setTimeout(() => {
+            this.popupService.closePopup();
+            // window.location.reload();
+          }, 2000);
         },
         (error) => {
           // Handle any errors from the HTTP request itself

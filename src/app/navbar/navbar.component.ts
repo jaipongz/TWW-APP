@@ -4,6 +4,7 @@ import { DialogService } from '../services/dialog.service';
 import { PopupService } from '../services/popup.service';
 import { AuthService } from '../services/auth.service';
 import { customConfirm } from '../services/customConfirm.service';
+import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -18,12 +19,14 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router, public dialogService: DialogService, 
     private popupService: PopupService,private elementRef: ElementRef,
-    private authService:AuthService,private cusconfirm:customConfirm) {
+    private authService:AuthService,private cusconfirm:customConfirm,
+    private uploadService:UploadService) {
       
     }
 
   ngOnInit(): void {
     this.getProfile();
+
   }
 
   get isLoggedIn(): boolean {

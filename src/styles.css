@@ -71,6 +71,12 @@ body::before {
 .sreen-1280{
   max-width: 1280px;
 }
+.bd-10 {
+  border-radius: 10px;
+}
+.bd-20 {
+  border-radius: 20px;
+}
 
 .txtarea {
     border-radius: 10px;
@@ -87,6 +93,12 @@ body::before {
 }
 .inputlog {
 
+}
+
+.gbcard {
+  position: relative;
+  background: #fff;
+  width: 100%;
 }
 
 .containerfornav {

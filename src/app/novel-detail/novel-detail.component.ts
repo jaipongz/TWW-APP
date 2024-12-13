@@ -1,10 +1,11 @@
-import { Component, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { Component, HostListener, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { NovelService } from '../services/novel.service';
 import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort, faPenToSquare, faComment, faPen } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { Router } from '@angular/router';
 import { customConfirm } from '../services/customConfirm.service';
+import { UploadService } from '../services/upload.service';
 @Component({
   selector: 'app-novel-detail',
   templateUrl: './novel-detail.component.html',
@@ -26,16 +27,19 @@ export class NovelDetailComponent {
   showStatusStoryDropdown = false;
   showStatusCompleteDropdown = false;
 
+  userId:any;
 
   constructor(private novelService: NovelService, 
     private authService: AuthService, 
     private popupService: PopupService, 
     private router: Router,
-    private customconfirm:customConfirm) {
+    private customconfirm:customConfirm,
+    private uploadService:UploadService) {
     this.authService.checkLoginStatus();
     this.getNovel();
     this.getProfile();
     this.getCountNovel();
+    this.userId = this.authService.getUserId();
   }
 
 
@@ -57,6 +61,14 @@ export class NovelDetailComponent {
 
   isOriginal = true;  // ค่าเริ่มต้นให้เป็นนิยายออรินอล
   isFanfiction = false;
+  
+  ngOnInit(): void {
+    // สมัครรับ EventEmitter เพื่อเรียก updateProfile เมื่อการครอปเสร็จ
+    this.uploadService.cropCompleted.subscribe(() => {
+      this.updateProfile();
+      window.location.reload();
+    });
+  }
 
   selectCategory(group: string) {
     this.isOriginal = group === 'original';
@@ -262,8 +274,8 @@ export class NovelDetailComponent {
   countNovel: any;
   getNovel() {
     const keyword = ''; // ใส่ keyword ที่ต้องการ
-    const start = 0;
-    const limit = 10;
+    const start = '';
+    const limit = '';
 
     this.authService.getNovelDetail(keyword, start, limit).subscribe({
       next: (response) => {
@@ -341,6 +353,31 @@ sortOrder: 'asc' | 'desc' = 'desc';
       return `${years} ปี ที่แล้ว`;
     }
   }
+  async updateProfile(): Promise<void> {
+    const formData = new FormData();
+    formData.append('userId', this.userId);
+
+    if (this.uploadService.croppedImageBlob) {
+      // หากมีรูปภาพที่ถูกครอบใหม่
+      formData.append('profile_pic', this.uploadService.croppedImageBlob, 'Avatar.png');
+    }
+
+    this.authService.updateProfile(formData).subscribe({
+      next(response: any) {
+        console.log('profile updated:', response.data);
+      },
+      error(err) {
+        console.error('Error updating profile:', err);
+      },
+    });
+  }
+
+   async onFileChange(event: Event): Promise<void> {
+    this.uploadService.handleFileSelect(event, (imageSrc: string) => {
+      this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
+    });
+  }
+
   getProfile() {
     this.authService.getProfile().subscribe({
       next: (response: any) => {

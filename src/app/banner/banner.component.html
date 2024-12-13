@@ -1,110 +1,171 @@
 <app-navbar></app-navbar>
-
-<div class="container-page">
-  <div class="containerfornav">
-    <div class="banner">
-      <div class="flexcard" #flexcard>
-        <a *ngFor="let card of slides; let i = index" [ngClass]="{ active: i === currentIndex }"
-          (mouseover)="stopAutoSlide()" (mouseleave)="startAutoSlide()" class="card-ban">
-          <img [src]="card.image" [alt]="card.title" />
-          <!-- <h5>{{ card.title }}</h5> -->
-        </a>
-      </div>
-      <!-- Dot Navigation -->
+<div class="containerfornav">
+  <div class="banner">
+    <!-- Slideshow Images -->
+    <div class="flexcard" (mouseover)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+      <img [src]="noveldata[previousIndex].novel_propic" [alt]="noveldata[previousIndex].novel_name" class="image previous">
+      <img [src]="noveldata[currentIndex].novel_propic" [alt]="noveldata[currentIndex].novel_name" class="image current">
+      <img [src]="noveldata[nextIndex].novel_propic" [alt]="noveldata[nextIndex].novel_name" class="image next">
+      
       <div class="dots-container">
-        <span *ngFor="let slide of slides; let i = index" class="dot" [ngClass]="{ active: i === currentIndex }"
+        <span *ngFor="let slide of noveldata; let i = index" class="dot" [ngClass]="{ active: i === currentIndex }"
           (click)="goToSlide(i)"></span>
       </div>
     </div>
+    </div>
+  <div class="container-page sreen-1280">
+   
+    
+      <!-- Dot Navigation -->
+
+
+
+    <!-- {
+      "novel_id": 78,
+      "user_id": 40,
+      "novel_name": "zxcasjgckzxca",
+      "pen_name": "xczcasc",
+      "novel_group": "fanfiction",
+      "type": "fic_describe",
+      "main_group": "สร้างเมืองในเกม",
+      "sub_group1": "ลึกลับ (mystery)",
+      "sub_group2": "coming of age",
+      "tag": "โอ้วเธอ, มาเฟีย, พี่แฉะ, พ่อไข่ย้อยทูโทน, แม่มาแล้ว, นาทอส",
+      "novel_desc": "zxczx,cngaks",
+      "rate": "18+",
+      "novel_propic": "http://localhost:3090/storage/novelPropic/1733909867789-novel_propic.png",
+      "published": "F",
+      "created_at": "2024-12-11T02:37:48.000Z",
+      "updated_at": "2024-12-11T02:37:48.000Z",
+      "end": "F"
+    } -->
 
     <div class="content">
-      <div class="aside ">
-        <!-- Category Section -->
-        <aside class="category-section">
-          <div class="category-header"(click)="showsBtn()">
-            <div class="category-title" >
-              <img src="image/g.png" alt="Character" />
-              <h2>หมวดหมู่</h2>
-            </div>
+      <h1>จัดอันดับนิยาย | Ranking Novel</h1>
+      <div class="content-sub">
+        <div class="maincard">
+          <div class="headcard">
+            <h3>อันดับยอดถูกใจ</h3>
+            <a>ดูทั้งหมด</a>
           </div>
-          <!-- Category Buttons -->
-          <div class="category-buttons" *ngIf="btnTag" >
-            <a *ngFor="let tag of category | slice:5; let i = index" class="tag-list">
-              <button (click)="goTotag()" [ngStyle]="buttonStyles[i]">{{ tag.tag }}</button>
-            </a>
-          </div>
-        </aside>
-      </div>
-
-      <div class="section">
-
-        <section class="section-sub">
-          <div class="novel-header">
-            <h2>นิยายอัพเดทล่าสุด</h2>
-            <a >ดูทั้งหมด <i class="fas fa-arrow-right">
-              </i></a>
-          </div>
-            <div class="novel-card" >
-              <div class="novel-card-sub" *ngFor="let nvupdate of novelupdate | slice:0:10;">
-                <div class="card" >
-                <img [src]="nvupdate.image" [alt]="nvupdate.name" >
+          <div *ngFor="let novel of noveldata | slice:0:4, let i = index">
+            <div class="concard">
+              <img [src]="novel?.novel_propic" [alt]="novel.novel_name">
+              <div class="cardname">
+                <div>
+                <p>{{ novel.novel_name }}</p>
+                <p>{{ novel.main_group }}</p>
+                <p>{{ novel.pen_name }}</p>
                 </div>
-                  <div class="card-sub">
-                   <h5>{{ nvupdate.name }}</h5>
-                    <h6>{{ nvupdate.penname }}</h6>
-                    <h6><i class="fas fa-book"> </i> {{ nvupdate.ep }} ตอน</h6>
+                <p id="chapter"><i class="fa-solid fa-list-ul"></i> {{ novel.chapter_count || 0 }} ตอน </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="maincard">
+          <div class="headcard topveiw">
+            <h3>อันดับยอดเข้าชม</h3>
+            <a>ดูทั้งหมด</a>
+          </div>
+          <div *ngFor="let novel of noveldata | slice:0:4, let i = index">
+            <div class="concard">
+              <img [src]="novel?.novel_propic" [alt]="novel.novel_name">
+              <div class="cardname">
+                <div>
+                <p>{{ novel.novel_name }}</p>
+                <p>{{ novel.main_group }}</p>
+                <p>{{ novel.pen_name }}</p>
+              </div>
+                <p><i class="fa-solid fa-list-ul"></i> {{ novel.chapter_count || 0 }} ตอน </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="maincard">
+          <div class="headcard topbuy">
+            <h3>อันดับยอดซื้อ</h3>
+            <a>ดูทั้งหมด</a>
+          </div>
+          <div *ngFor="let novel of noveldata | slice:0:4, let i = index">
+            <div class="concard">
+              <img [src]="novel?.novel_propic" [alt]="novel.novel_name">
+              <div class="cardname">
+                <div>
+                  <p>{{ novel.novel_name }}</p>
+                  <p>{{ novel.main_group }}</p>
+                  <p>{{ novel.pen_name }}</p>
                 </div>
+                <p id="chapter"><i class="fa-solid fa-list-ul"></i> {{ novel.chapter_count || 0 }} ตอน </p>
               </div>
             </div>
-        </section>
-
-        <section class="section-sub">
-          <div class="novel-header">
-            <h2>ยอดนิยม</h2>
           </div>
-            <div class="novel-card justi-aroun" >
-            <div *ngFor="let popcard of popular; let i = index" class="novel-card-sub">
-              <div class="card">
-                <img [src]="popcard.image" [alt]="popcard.name" />
-                <!-- <span class="number">{{ i + 1 }}</span> -->
-              </div>
-              <div class="card-sub">
-              <h5>{{ popcard.name }}</h5>
-              <h5>{{ popcard.tag }}</h5>
-              <h6>{{ popcard.penname }}</h6>
-              <h6><i class="fas fa-book"> </i> {{ popcard.ep }} ตอน</h6>
-            </div>
-            </div>
-          </div>
-
-        </section>
-
-        <section class="section-sub">
-          <h2>รายการแนะนำ</h2>
-          <div class="novel-card" #recommendContainer (scroll)="checkScroll()">
-            <div class="novel-card-sub" *ngFor="let rect of recmmend">
-            <div class="card">
-              <img [src]="rect.image" [alt]="rect.name" />
-            </div>
-              <div class="card-sub">
-                <h5>{{ rect.name }}</h5>
-                <h6>{{ rect.penname }}</h6>
-                <h6><i class="fas fa-book"> </i> {{ rect.ep }} ตอน</h6>
-              </div>
-            </div>
-            <span class="arrow arrow-left" (click)="scrollLeft()" *ngIf="showLeftArrow">
-              <i class="fas fa-arrow-left"></i>
-            </span>
-            <span class="arrow arrow-right" (click)="scrollRight()" *ngIf="showRightArrow">
-              <i class="fas fa-arrow-right">
-              </i>
-            </span>
-          </div>
-        </section>
-
-
+        </div>
       </div>
-     
     </div>
+
+    <div class="aside">
+      <aside class="category-section">
+        <div class="category-title">
+          <h1>หมวดหมู่</h1>
+          <img src="image/g.png" alt="Character" />
+        </div>
+        <div class="category-buttons">
+          <a *ngFor="let tag of category | slice:5; let i = index" class="tag-list">
+            <button (click)="goTotag()" [ngStyle]="buttonStyles[i]">{{ tag.tag }}</button>
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <br>
+
+    <section>
+      <header>
+        <h1>นิยายรัก | Love Novel</h1>
+      </header>
+      <article class="gbcard bd-20">
+        <a>ดูทั้งหมด >></a>
+        <div id="loop">
+          <div class="card" *ngFor="let novel of noveldata | slice:0:5; let i = index">
+            <img [src]="novel?.novel_propic" [alt]="novel.novel_name">
+            <div class="cardname">
+              <div>
+                <p>{{ novel.novel_name }}</p>
+                <p>{{ novel.main_group }}</p>
+                <p>{{ novel.pen_name }}</p>
+              </div>
+              <p id="chapter"><i class="fa-solid fa-list-ul"></i> {{ novel.chapter_count || 0 }} ตอน </p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+<br>
+    <section>
+      <header>
+        <h1>นิยายโรแมนซ์ | Romance Novel</h1>
+      </header>
+      <article class="gbcard bd-20">
+        <a>ดูทั้งหมด >></a>
+        <div id="loop">
+          <div class="card" *ngFor="let novel of noveldata | slice:0:5; let i = index">
+            <img [src]="novel?.novel_propic" [alt]="novel.novel_name">
+            <div class="cardname">
+              <div>
+                <p>{{ novel.novel_name }}</p>
+                <p>{{ novel.main_group }}</p>
+                <p>{{ novel.pen_name }}</p>
+              </div>
+              <p><i class="fa-solid fa-list-ul"></i> {{ novel.chapter_count || 0 }} ตอน </p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
   </div>
 </div>

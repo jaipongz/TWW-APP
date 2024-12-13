@@ -9,14 +9,15 @@
           alt="Account Avatar"
           class="avatar"
         />
-        <label for="upload-avatar" class="camera-icon">
+        <label for="upload-avatar" class="camera-icon" (click)="avatar.click()">
           <fa-icon [icon]="faCamera"></fa-icon>
         </label>
         <input
-          type="file"
-          id="upload-avatar"
+          #avatar type="file" 
+          id="avatar"
           class="upload-input"
           accept="image/*"
+          (change)="onFileChange($event)"
         />
       </div>
 
@@ -325,7 +326,7 @@
     </div>
   </div>
 </div>
-
+<app-uploadimage></app-uploadimage>
 <!-- <div *ngFor="let novel of noveldata">
   <h3>{{ novel.novel_name }}</h3>
   <p>By {{ novel.pen_name }}</p>

@@ -93,7 +93,7 @@
             <div class="create-character" *ngIf="createCharacter">
                 <div class="popups">
                     <div class="popup-content">
-                        <span (click)="closeAdd()">x</span>
+                        <span style="cursor: pointer;" (click)="closeAdd()">x</span>
                         <div class="avatar-container avatar">
                             <img [src]="uploadService.croppedImage   || '/image/avartar.jpg'" alt="ภาพตัวละคร"
                                 class="avatar" />

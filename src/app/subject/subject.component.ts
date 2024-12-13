@@ -257,6 +257,7 @@ export class SubjectComponent implements OnInit {
       this.uploadService.openCropTool(imageSrc, 'cropModal', 'imagePreview');
     });
     
+    
   }
   
   // closeModal(): void {

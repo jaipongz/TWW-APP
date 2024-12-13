@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import Cropper from 'cropperjs';
 import { PopupService } from './popup.service';
 import { BehaviorSubject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UploadService {
   public  imagePreview: HTMLImageElement | null = null;
   public  croppedImageBlob: Blob | null = null;
   public  croppedImage: string | null = null;
+  cropCompleted = new EventEmitter<void>();
   canClick = true;
 
   constructor(private popupService: PopupService) {}
@@ -77,6 +79,7 @@ export class UploadService {
         croppedImageContainer.style.display = 'block';
       }
       this.croppedImageBlob = blob;
+      this.cropCompleted.emit();
       this.closeModal();
     }
   }
