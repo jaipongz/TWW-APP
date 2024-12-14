@@ -1,1 +1,63 @@
-<p>create-topic works!</p>
+<app-navbar></app-navbar>
+
+<div class="container">
+    <!-- <h1>เขียนหัวข้อกระทู้</h1> -->
+    <input type="text" class="input-topic" placeholder="เขียนหัวข้อกระทู้">
+    <div class="form-group">
+      <!-- <textarea class="textarea" placeholder="เขียนข้อความ หรือแนบรูป"></textarea> -->
+      <angular-editor id="editor1" autofocus="true" [(ngModel)]="data.editorContent1"  [config]="config1" (ngModelChange)="saveToSessionStorage()"></angular-editor>
+
+    </div>
+
+    <div class="form-content">
+        <div class="form-group">
+            <!-- <label>ชื่อผู้แต่ง</label> -->
+          <h3 class="name-wirter" style="color: #7c4d3d;">ชื่อผู้แต่ง</h3>
+            <input type="text" class="input-name-writer" placeholder="ชื่อผู้แต่ง">
+          </div>
+      
+          <div class="form-group">
+            <!-- <label>Tag 0/8</label> -->
+             <h3 style="color: #7c4d3d;">Tag 0/8</h3>
+            <div class="tags-container">
+              <div class="tag">
+                รัก <button>&times;</button>
+              </div>
+              <div class="tag">
+                โรแมนซ์ <button>&times;</button>
+              </div>
+              <div class="tag">
+                แฟนตาซี <button>&times;</button>
+              </div>
+              <div class="tag">
+                รักวัยรุ่น <button>&times;</button>
+              </div>
+              <div class="tag">
+                ดราม่า <button>&times;</button>
+              </div>
+            </div>
+          </div>
+      
+          <div class="tag-novel">
+              <h3 style="color: #7c4d3d;">เพิ่ม Tag</h3>
+              <div class="tag-input-group">
+                <select class="tag-dropdown" [(ngModel)]="selectedTag" aria-placeholder="เลือกจาก Tag ที่มีอยู่">
+                  <option value="" disabled selected>เลือกจาก Tag ที่มีอยู่</option>
+                  <option *ngFor="let tag of tags" [value]="tag.value">{{ tag.label }}</option>
+                </select>
+              </div>
+                
+          
+              <div class="tag-input-group">
+                  <h3 style="color: #7c4d3d;">สร้าง Tag</h3>
+                <input type="text" class="tag-input" placeholder="พิมพ์ Tag ที่ต้องการ">
+                <i class="fa-solid fa-plus add-tag-novel"></i>   
+              </div>
+          </div>
+      
+          <div class="btn-actions">
+            <button>Create Blog</button>
+          </div>
+    </div>
+    
+  </div>

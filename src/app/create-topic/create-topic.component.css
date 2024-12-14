@@ -1,0 +1,214 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    }
+
+    .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+    }
+
+    /* Input Fields */
+    h1 {
+        font-size: 24px;
+        color: #7c4d3d;
+        margin-bottom: 10px;
+    }
+
+    .input-topic {
+        border: 2px solid #d4b895;
+        border-radius: 20px;
+        margin: 10px 0px;
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+        color: #7c4d3d;
+        font: bold;
+        width: 30%;
+    }
+
+    .name-wirter {
+        margin-bottom: 5px;
+    }
+
+    .input-name-writer {
+        border: 2px solid #d4b895;
+        border-radius: 20px;
+        margin: 5px 0px;
+        font-size: 14px;
+        padding: 5px 10px;
+        text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .input, .textarea, .tag-input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 2px solid #d4b895;
+      border-radius: 5px;
+      background-color: #fff;
+      outline: none;
+    }
+
+    .tag-input {
+        padding: 5px 10px;
+        text-align: center;
+    }
+
+    .textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 2px solid #d4b895;
+        border-radius: 5px;
+        background-color: #fff;
+        outline: none;
+        resize: none;
+        height: 100px;
+        box-sizing: border-box; /* เพิ่มบรรทัดนี้ */
+    }
+
+    .form-content {
+        padding: 0px 15px;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background-color: #7c4d3d;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tag button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .tag button:hover {
+      color: #ffc1a6;
+    }
+
+    .btn-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .btn-actions button {
+      background-color: #7c4d3d;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-actions button:hover {
+      background-color: #ffffff;
+      color: #7c4d3d;
+      /* border: 1px solid #7c4d3d; */
+      outline: 1px solid #7c4d3d
+    }
+
+    .tag-input-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .tag-input-group input {
+      flex: 1;
+      border-radius: 20px;
+    }
+
+    .tag-input-group button {
+      padding: 10px;
+      background-color: #d4b895;
+      border: 1px solid #a85e32;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .tag-input-group button:hover {
+      background-color: #ffffff;
+      color: #7c4d3d;
+      border: 1px solid #7c4d3d;
+    }
+
+    .tag-dropdown {
+        width: 100%;
+        padding: 5px 10px;
+        font-size: 14px;
+        border: 2px solid #d4b895;
+        border-radius: 20px;
+        background-color: #fff;
+        color: grey;
+        /* color: #5a3e2b; */
+        /* outline: none; */
+        cursor: pointer;
+        /* appearance: none; */
+        }
+
+        .dropdown:focus {
+        border-color: #a85e32;
+        box-shadow: 0 0 5px rgba(168, 94, 50, 0.5);
+        }
+
+        .dropdown::placeholder {
+        color: #d4b895;
+        }
+
+        /* .tag-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        } */
+
+    .tag-novel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .add-tag-novel {
+        font-size: 20px;
+        color: #7c4d3d;
+        font: bold;
+    }
