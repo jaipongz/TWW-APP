@@ -8,12 +8,13 @@
   margin: 0 auto;
 }
 
+/* ปรับขนาดแบนเนอร์ให้ responsive */
 .banner {
   position: relative;
   margin: auto;
   overflow: hidden;
   padding-bottom: 10px;
-
+  max-width: 100%;
 }
 
 .flexcard {
@@ -25,27 +26,25 @@
 }
 
 .image {
-  width: 600px;
-  height: 300px;
+  width: 600px; 
+  height: 300px; 
   min-width: 600px;
-  border-radius: 10px;
+  border-radius: 10px; 
   opacity: 0.7;
   transition: transform 0.5s ease, opacity 0.5s ease;
   object-fit: cover;
-
 }
 
-.image:nth-child(1) { /* รูปภาพด้านซ้าย */
-  transform: translateX(-50px); /* เคลื่อนที่ออกไปทางซ้าย */
+.image.previous {
+  transform: translateX(-50px);
 }
 
-.image:nth-child(3) { /* รูปภาพด้านขวา */
-  transform: translateX(50px); /* เคลื่อนที่ออกไปทางขวา */
+.image.next {
+  transform: translateX(50px);
 }
 
 .image.current {
   opacity: 1;
-  min-width: none;
   border-radius: 10px;
 }
 
@@ -53,7 +52,8 @@
   position: absolute;
   display: flex;
   justify-content: center;
-  bottom: 0;
+  bottom: 10px; /* เพิ่มระยะห่างจากล่าง */
+  width: 100%;
 }
 
 .dot {
@@ -69,14 +69,28 @@
 .dot.active {
   background-color: #717171;
 }
+
+/* Media Queries สำหรับหน้าจอขนาดเล็ก */
 @media (max-width: 768px) {
+  .image {
 
+    height: 200px; 
+    min-width: 400px;
+
+  }
+  .dots-container {
+    bottom: 5px; /* ลดระยะห่างด้านล่าง */
+  }
 }
-
 
 @media (max-width: 480px) {
 
 
+  .dot {
+    height: 8px;
+    width: 8px;
+    margin: 0 3px; /* ลดช่องว่างระหว่างจุด */
+  }
 }
 
 
