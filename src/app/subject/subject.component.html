@@ -35,7 +35,7 @@
                         สถานะเรื่อง
                     </label>
                     <div class="toggle-button-cover">
-                        <a id="status">{{ novel.published === 'T' ? 'ส่วนตัว' : 'เผยแผร่' }}</a>
+                        <a id="status">{{ novel.published === 'T' ? 'เผยแผร่' : 'ส่วนตัว'}}</a>
                         <div class="button r" id="button-3">
                             <input type="checkbox" class="checkbox" [checked]="novel.published === 'T'"
                                 (change)="toggleStatus($event)">

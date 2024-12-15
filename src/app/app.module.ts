@@ -57,6 +57,7 @@ const appRoutes: Routes = [
   {path: 'novel-detail', component: NovelDetailComponent },
   {path: 'subject', component: SubjectComponent },
   {path: 'createEp', component: CreateNovelEpComponent },
+  {path: 'createTopic', component: CreateTopicComponent },
   
 ]
 

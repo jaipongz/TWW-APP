@@ -1,6 +1,6 @@
 import { Component, HostListener, ViewChild, ElementRef,OnInit } from '@angular/core';
 import { NovelService } from '../services/novel.service';
-import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort, faPenToSquare, faComment, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faCaretDown, faPlus, faBookOpen, faArrowUpWideShort,faArrowDownWideShort, faPenToSquare, faComment, faPen } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from '../services/auth.service';
 import { PopupService } from '../services/popup.service';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ export class NovelDetailComponent {
   faPlus = faPlus;
   faBookOpen = faBookOpen;
   faArrowUpWideShort = faArrowUpWideShort;
+  faArrowDownWideShort = faArrowDownWideShort;
+  isArrowUp = true;
   faPenToSquare = faPenToSquare;
   faComment = faComment;
   faPen = faPen;
@@ -59,15 +61,24 @@ export class NovelDetailComponent {
   };
 
 
+
   isOriginal = true;  // ค่าเริ่มต้นให้เป็นนิยายออรินอล
   isFanfiction = false;
   
   ngOnInit(): void {
+    
     // สมัครรับ EventEmitter เพื่อเรียก updateProfile เมื่อการครอปเสร็จ
     this.uploadService.cropCompleted.subscribe(() => {
       this.updateProfile();
       window.location.reload();
     });
+
+    
+  }
+
+  toggleIcon(): void {
+    this.isArrowUp = !this.isArrowUp; 
+    this.sortOrder = this.isArrowUp ? 'desc' : 'asc'; 
   }
 
   selectCategory(group: string) {
@@ -102,6 +113,9 @@ export class NovelDetailComponent {
   precreate() {
     if (!this.getNovelCreate.group || !this.getNovelCreate.type) {
       this.popupService.showPopup('ตัวเลือกไม่ครบ');
+    } else if (this.getNovelCreate.type === 'gist') {
+      this.novelService.setNovelCreate(this.getNovelCreate);
+      this.router.navigate(['createTopic']);
     } else {
       this.novelService.setNovelCreate(this.getNovelCreate);
       this.router.navigate(['create-novel']);
@@ -282,6 +296,7 @@ export class NovelDetailComponent {
         if (response?.status === 'success') {
           this.noveldata = response.data.data; // เก็บข้อมูล novel ใน array
           console.log('Novels:', this.noveldata);
+          this.filterNovelData();
         } else {
           console.error('Failed to fetch novels:', response);
         }
@@ -313,9 +328,55 @@ async deleteNovel(index: number){
     }
   
 }
-
+filteredNovelData = [...this.noveldata];
+selectedStatus: string = 'ทั้งหมด';
 sortOrder: 'asc' | 'desc' = 'desc';
+selectedComplete: string = 'ทั้งหมด';
 
+selectStatus(status: string) {
+  this.selectedStatus = status;
+  this.filterNovelData();
+  this.showStatusStoryDropdown = false;
+}
+selectComplete(status: string) {
+  this.selectedComplete = status;
+  this.filterNovelData();
+  this.showStatusCompleteDropdown = false;
+}
+
+filterNovelData() {
+  this.filteredNovelData = this.noveldata.filter(data => {
+    let statusMatch = true;
+    let completeMatch = true;
+
+    // กรองตามสถานะ (เผยแพร่แล้ว/ร่าง)
+    switch (this.selectedStatus) {
+      case 'เผยแพร่แล้ว':
+        statusMatch = data.published === 'T';
+        break;
+      case 'ร่าง':
+        statusMatch = data.published === 'F';
+        break;
+      default:
+        statusMatch = true; // แสดงทั้งหมดถ้าไม่ได้เลือกสถานะ
+    }
+
+    // กรองตามสถานะจบ/ไม่จบ
+    switch (this.selectedComplete) {
+      case 'จบแล้ว':
+        completeMatch = data.end === 'T';
+        break;
+      case 'ยังไม่จบ':
+        completeMatch = data.end === 'F';
+        break;
+      default:
+        completeMatch = true; // แสดงทั้งหมดถ้าไม่ได้เลือกสถานะ
+    }
+
+    // รวมเงื่อนไขทั้งสอง
+    return statusMatch && completeMatch;
+  });
+}
 
 
 

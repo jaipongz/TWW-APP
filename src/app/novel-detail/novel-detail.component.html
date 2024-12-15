@@ -206,32 +206,16 @@
           <label class="sort-label">เรียงตาม</label>
           <div class="button-container">
             <button class="dropdown-button" (click)="toggleSortDropdown()">
-              อัพเดต
-              <fa-icon [icon]="faCaretDown" class="update-icon"></fa-icon>
+              {{ sortOrder === 'desc' ? 'ล่าสุด' : 'เก่าสุด' }}
             </button>
             <!-- ปุ่มใหม่ที่มีไอคอน faArrowUpWideShort -->
-            <button class="dropdown-button">
+            <button class="dropdown-button" (click)="toggleIcon()">
               <fa-icon
-                [icon]="faArrowUpWideShort"
+                [icon]="isArrowUp ? faArrowUpWideShort : faArrowDownWideShort"
                 class="listup-icon"
               ></fa-icon>
             </button>
           </div>
-          <ul
-            *ngIf="showSortDropdown"
-            class="dropdown-menu"
-            style="max-width: 104px"
-          >
-            <li (click)="sortOrder = 'desc'">ล่าสุด</li>
-            <div
-              style="
-                display: flex;
-                border: 1px solid rgba(124, 77, 61, 0.5);
-                width: 100%;
-              "
-            ></div>
-            <li (click)="sortOrder = 'asc'">เก่าสุด</li>
-          </ul>
         </div>
 
         <div class="card-right-buttons">
@@ -242,11 +226,11 @@
               class="dropdown-button"
               (click)="toggleStatusStoryDropdown()"
             >
-              ทั้งหมด
+              {{ selectedStatus }}
               <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
             </button>
             <ul *ngIf="showStatusStoryDropdown" class="dropdown-menu">
-              <li>เผยแพร่แล้ว</li>
+              <li (click)="selectStatus('ทั้งหมด')">ทั้งหมด</li>
               <div
                 style="
                   display: flex;
@@ -254,7 +238,8 @@
                   width: 100%;
                 "
               ></div>
-              <li>ร่าง</li>
+              <li (click)="selectStatus('เผยแพร่แล้ว')">เผยแพร่แล้ว</li>
+              <li (click)="selectStatus('ร่าง')">ร่าง</li>
             </ul>
           </div>
 
@@ -265,11 +250,11 @@
               class="dropdown-button"
               (click)="toggleStatusCompleteDropdown()"
             >
-              ทั้งหมด
+            {{ selectedComplete }}
               <fa-icon [icon]="faCaretDown" class="status-icon"></fa-icon>
             </button>
             <ul *ngIf="showStatusCompleteDropdown" class="dropdown-menu">
-              <li>จบแล้ว</li>
+              <li (click)="selectComplete('ทั้งหมด')">ทั้งหมด</li>
               <div
                 style="
                   display: flex;
@@ -277,13 +262,14 @@
                   width: 100%;
                 "
               ></div>
-              <li>ยังไม่จบ</li>
+              <li (click)="selectComplete('จบแล้ว')">จบแล้ว</li>
+              <li (click)="selectComplete('ยังไม่จบ')">ยังไม่จบ</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="story-card-container" *ngFor="let novel of noveldata | sort:'updated_at':sortOrder; let i = index">
+      <div class="story-card-container" *ngFor="let novel of filteredNovelData | sort:'updated_at':sortOrder; let i = index">
         <span (click)="deleteNovel(i)">ลบ</span>
         <!-- รูปด้านซ้าย -->
         <div class="story-image">

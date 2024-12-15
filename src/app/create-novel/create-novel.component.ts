@@ -369,6 +369,11 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
 
   cropImage(): void {
     this.uploadService.cropImage();
+    this.cdr.detectChanges();
+  }
+  
+  closeModal(): void {
+    this.uploadService.closeModal();
   }
 
   async presubmit(): Promise<void> {
