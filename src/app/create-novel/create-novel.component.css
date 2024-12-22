@@ -1,370 +1,336 @@
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5ebdc;
+  }
 
-.container-page {
+  .novel-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+    background-color: #ffffff;
+    margin-top: 60px;
+    border-radius: 10px;
+  }
+
+  .novel-main {
+    display: flex;
+    gap: 20px;
+  }
+
+  .novel-left-section,
+  .novel-right-section {
+    /* background-color: white; */
+    padding: 20px;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+  }
+
+  .novel-left-section {
+    flex: 1;
+    border-right: 2px solid #ddd;
+    padding-right: 40px;
+    /* margin-right: 5px; */
+  }
+
+  .novel-cover-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .novel-change-cover-btn {
+    margin-top: 10px;
+    background-color: #8b5e34;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .novel-cover-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .novel-cover-image {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .novel-cover-wrapper {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    height: 400px;
+    margin: 10px auto;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .novel-cover-background {
+    width: 100%;
+    height: 100%;
+    /* background-image: url("https://placehold.co/300x400"); */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .file-label {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-   
-}
-/* .containerfornav{
-    margin: 0px;
-} */
-.container {
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     text-align: center;
-    height: 100%;
-    margin-bottom: 2rem;
-}
+  }
 
-.header {
-    text-align: center;
+  .file-label i {
     font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 40px;
-}
-
-.form-group {
-    background-color: #fff;
-    text-align: start;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
     margin-bottom: 5px;
-    font-weight: bold;
-}
+  }
 
-.form-group input[type="text"],
-.form-group select,
-.form-group textarea {
+  .file-label p {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .novel-cover-wrapper:hover .file-label {
+    opacity: 1;
+  }
+
+  .upload-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .novel-between-section {
+    width: 2px;
+    height: 50%;
+    background-color: #555;
+    z-index: 50px;
+  }
+
+  .novel-right-section {
+    flex: 2;
+  }
+
+  .novel-details-header {
+    /* font-size: 20px; */
+    margin-bottom: 10px;
+    color: #7c4d3d;
+  }
+
+  .novel-label {
+    display: block;
+    /* margin-bottom: 5px; */
+    /* margin-top: 5px; */
+    margin: 5px 0px;
+    /* font-size: 14px; */
+    color: #7c4d3d;
+  }
+
+  .head-image {
+    color: #7c4d3d;
+    margin: 2px;
+  }
+
+  .novel-input {
+    border: 2px solid #d4b895;
+    border-radius: 20px;
+    /* margin: 10px 0px; */
+    font-size: 14px;
+    padding: 7px;
+    text-align: center;
+    color: #7c4d3d;
+    font: bold;
+    width: 40%;
+    margin-bottom: 5px;
+  }
+
+  .novel-textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    outline: none;
+    font-size: 14px;
+    /* margin-bottom: 10px; */
+  }
 
+  .novel-select {
+    border: 2px solid #d4b895;
+    border-radius: 20px;
+    /* margin: 5px 0px; */
+    font-size: 14px;
+    padding: 7px;
+    text-align: center;
+    color: #7c4d3d;
+    font: bold;
+    width: 30%;
+  }
 
-}
-.form-group-1 {
-    
-    width: 600px;
-    
-    textarea {
-        padding: 10px;
-        resize: none;
-        font-size: 18px;
-        height: 200px;
+  .novel-textarea {
+    resize: none;
+  }
 
-    }
-
-}
-
-.file-upload-head {
+  .novel-tags {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
-
-
-.main-category-sub {
-    display: flex;
-    justify-content: space-between;
-
-    .category-sub {
-        width: 48%;
-    }
-}
-
-
-  
-
-  #rating {
+    gap: 10px;
+    flex-wrap: wrap;
     margin-bottom: 10px;
   }
-.tags-head {
-    margin-top: 10px;
-}
-.tags {
+
+  .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
     cursor: pointer;
-}
-
-.remove-tag {
-    font-weight: bold;
-    color: red;
-    cursor: pointer;
-    margin-left: 5px;
   }
-  
-.tags .tag {
+  .tags .tag {
     background-color: #f5e9d7;
     border: 1px solid #d4a373;
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 14px;
-}
+  }
 
-.buttons {
-    display: flex;
-    position: fixed ;
-    justify-content: space-between;
-    padding: 5px 10px;
-    background: #000;
-    border-radius: 10px;
-    top: 4rem;
-    right: 50%;
-    transform: translatex(50%);
-    width: 50%;
-    align-items: center;
-    text-wrap: nowrap;
-    overflow: hidden;
-    a {
-        color: #fff;
-        font-size: 1em;
-    }
-}
-
-.buttons-sub {
-    display: flex;
-    gap: 5px;
-}
-
-.buttons button {
-    padding: 5px 10px;
+  .tag button {
+    background: none;
     border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-}
-
-.buttons .back-button {
-    background-color: #333;
-    color: #fff;
-}
-
-.buttons .submit-button {
-    background-color: #ff9900;
-    color: #fff;
-}
-
-@media (max-width: 1200px) {
-  .buttons {
-      width: 70%;
-      padding: 5px;
-      font-size: 0.9em;
-  }
-  .buttons-sub {
-    gap: 5px;
-}
-
-  .buttons button {
-      font-size: 0.9em;
-  }
-}
-
-@media (max-width: 768px) {
-  .buttons {
-      width: 90%;
-  }
-
-
-
-  .buttons button {
-      width: 100%; /* ปุ่มเต็มความกว้าง */
-  }
-}
-
-
-  .toggle-button-cover {
-    position: relative;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .button-cover {
-    background-color: #fff;
-    box-shadow: 0 7.7px 15px -6.6px #c5d6d6; /* ปรับเพิ่ม */
-    border-radius: 10px; /* เพิ่มขึ้น 10% จาก 2.8px */
-  }
-  
-  .button-cover:before {
-    counter-increment: button-counter;
-    content: counter(button-counter);
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    color: #d7e3e3;
-    font-size: 9.24px; /* เพิ่มขึ้น 10% จาก 8.4px */
-    line-height: 1;
-    padding: 3.85px; /* เพิ่มขึ้น 10% จาก 3.5px */
-  }
-  
-  .button-cover,
-  .knobs,
-  .layer {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  
-  .button {
-    position: relative;
-    width: 40px; /* เพิ่มขึ้น 10% จาก 51.8px */
-    height: 20px; /* เพิ่มขึ้น 10% จาก 25.2px */
-    overflow: hidden;
-  }
-  #status{
-    color: #ffff;
-    font-size: 1em;
-    
-
-    }
-  .checkbox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 3;
-  }
-  
-  .knobs {
-    z-index: 2;
-  }
-  
-  .layer {
-    max-width: 100%;
-    background-color: #ebf7fc;
-    transition: 0.3s ease all;
-    z-index: 1;
-  }
-  
-  .button.r,
-  .button.r .layer {
-    border-radius: 50px; 
-  }
-  
-  #button-3 .knobs:before {
-    content: "PB";
-    position: absolute;
-    top: 0; 
-    left: 0; 
-    width: 15px; 
-    height: 7px; 
-    color: #fff;
-    font-size: 9px; 
-    font-weight: bold;
-    text-align: center;
-    line-height: 1;
-    padding: 6.93px 3.08px; 
-    background-color: #1c739b;
-    border-radius: 50%; 
-    transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-  }
-  
-  #button-3 .checkbox:checked + .knobs:before {
-    content: "PV";
-    left: 20px; /* เพิ่มขึ้น 10% จาก 29.4px */
-    background-color: #b6413b;
-  }
-
-
-  .file-upload {
-    display: flex;
-    position: relative;
-    max-width: 300px;
-    min-width: 200px;
-    height: 300px;
-    border: 1px solid #000;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-  }
-  .file-upload:hover {
-    background-color: #e2e6ea;
-  }
-  .cropped-image-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-  }
-  
-  .file-input {
-    display: none;  
-  }
-  
-  .file-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-  }
-  
-  .upload-icon {
-    font-size: 50px;
-    color: #007bff;
-    margin-bottom: 10px;
-  }
-  
-  .file-upload p {
-    margin: 0;
-    font-size: 16px;
-    color: #6c757d;
-  }
-  
-  .file-upload .dragover {
-    background-color: #007bff;
     color: white;
+    font-size: 12px;
+    cursor: pointer;
   }
-  
-  .image-container {
-    max-width: 100%;
-    overflow: hidden;
+
+  .tag button:hover {
+    color: #ffc1a6;
   }
-  #imagePreview {
-    max-width: 100%;
-    height: auto;
+  .remove-tag {
+    font-weight: bold;
+    color: red;
+    cursor: pointer;
+    margin-left: 5px;
   }
-  button {
-    margin: 10px;
-    padding: 10px 20px;
+
+  .novel-tag {
+    background-color: #8b5e34;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
     font-size: 16px;
+    margin-bottom: 5px;
   }
-  
-  
-  #croppedImageContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none;
+
+  .tags-head {
+    margin: 10px 0px;
+    color: #7c4d3d;
+  }
+
+  .tag-section {
+    display: flex;
     justify-content: center;
     align-items: center;
-  
-    img  {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+    margin: 20px 0;
+    margin-bottom: 5px;
+    gap: 15px;
   }
-  
+
+  .tag-title {
+    font-size: 18px;
+    color: #7c4d3d;
+    margin-bottom: 15px;
+  }
+
+  .tag-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .tag-input {
+    flex: 1;
+    width: 100%;
+    padding: 7px 10px;
+    font-size: 14px;
+    border: 2px solid #d4b895;
+    border-radius: 20px;
+    background-color: #fff;
+    color: grey;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .tag-input:focus {
+    border-color: #a85e32;
+    box-shadow: 0 0 5px rgba(168, 94, 50, 0.5);
+  }
+
+  .add-tag-button {
+    padding: 10px 15px;
+    background-color: #d4b895;
+    border: 1px solid #a85e32;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .add-tag-button:hover {
+    background-color: #ffffff;
+    color: #7c4d3d;
+    border: 1px solid #7c4d3d;
+  }
+
+  .tag-dropdown {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 2px solid #d4b895;
+    border-radius: 20px;
+    background-color: #fff;
+    color: grey;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .tag-dropdown:focus {
+    border-color: #a85e32;
+    box-shadow: 0 0 5px rgba(168, 94, 50, 0.5);
+  }
+
+  .novel-create-btn {
+    background-color: #8b5e34;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
