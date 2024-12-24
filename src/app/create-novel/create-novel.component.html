@@ -5,7 +5,9 @@
   <div class="novel-main">
     <!-- Left Section -->
     <div class="novel-left-section">
-      <h2 class="novel-header" style="color: #7c4d3d">หน้าสร้างนิยาย</h2>
+      <h2 class="novel-header" style="color: #7c4d3d">
+        หน้าสร้างนิยาย<a>({{ typeMapping()[novel.type] || "ไม่ระบุ" }})</a>
+      </h2>
       <h5 class="head-image">*รูปปก</h5>
       <div class="novel-cover-wrapper">
         <div class="novel-cover-background">
@@ -13,72 +15,211 @@
             <i class="upload-icon">📁</i>
             <p>Drag & Drop your files here or click to upload</p>
           </label>
+          <div id="croppedImageContainer">
+            <img
+              [src]="uploadService.croppedImage"
+              alt="Cropped Image Preview"
+            />
+          </div>
+          <input
+            #fileInput
+            type="file"
+            id="fileInput"
+            accept="image/*"
+            (change)="onFileChange($event)"
+            style="display: none"
+          />
+        </div>
+        <div id="cropModal">
+          <div class="modal-content">
+            <div class="image-container">
+              <img id="imagePreview" alt="Image preview for cropping" />
+            </div>
+            <button (click)="cropImage()">Crop</button>
+            <button (click)="closeModal()">Close</button>
+          </div>
         </div>
       </div>
-      <button class="novel-change-cover-btn">เปลี่ยนรูปปก</button>
+      <button class="novel-change-cover-btn" (click)="fileInput.click()">
+        เปลี่ยนรูปปก
+      </button>
     </div>
-
-    <!-- <div class="novel-between-section"></div> -->
 
     <!-- Right Section -->
     <div class="novel-right-section">
       <h2 class="novel-details-header">รายละเอียด</h2>
-      <label for="title" class="novel-label">*ชื่อเรื่อง</label>
+      <label for="title" class="novel-label"
+        >*ชื่อเรื่อง {{ countName() }}</label
+      >
       <input
-        type="text"
         id="title"
+        name="title"
+        [(ngModel)]="novel.novelName"
+        (ngModelChange)="saveToLocalStorage()"
+        type="text"
+        maxlength="50"
         placeholder="กรุณาใส่ชื่อเรื่อง"
         class="novel-input"
       />
 
-      <label for="summary" class="novel-label">*เนื้อเรื่องโดยย่อ</label>
+      <label for="summary" class="novel-label"
+        >*เนื้อเรื่องโดยย่อ ({{ countDesc() }}/1000)</label
+      >
       <textarea
-        id="summary"
-        rows="4"
+        id="subtitle"
+        name="subtitle"
+        [(ngModel)]="novel.desc"
+        (ngModelChange)="saveToLocalStorage()"
+        maxlength="1000"
         placeholder="กรุณาใส่เนื้อเรื่องโดยย่อ"
         class="novel-textarea"
       ></textarea>
 
-      <h2 for="category" class="novel-label">หมวดหมู่</h2>
-      <select id="category" class="novel-select">
-        <option>เลือก หมวดหมู่</option>
-      </select>
+      <div class="main-category">
+        <h2 for="category" class="novel-label">หมวดหมู่</h2>
+        <select
+          id="subItemSelect"
+          [(ngModel)]="selectedItem"
+          (change)="onSelectItem($event)"
+          (ngModelChange)="saveToLocalStorage()"
+          class="novel-select-main"
+        >
+          <option value="" disabled>เลือกหมวดหมู่หลัก</option>
+          <optgroup
+            *ngFor="let group of groupedData | keyvalue"
+            [label]="group.key"
+          >
+            <option
+              *ngFor="let subItem of group.value"
+              [value]="subItem.label"
+              [title]="subItem.desc"
+            >
+              {{ subItem.label }}
+            </option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="main-category-sub">
+        <div class="category-sub">
+          <h3 for="sub-category1" class="novel-label">หมวดหมู่รอง 1</h3>
+          <select
+            [(ngModel)]="novel.selectedSubCategory1"
+            (ngModelChange)="saveToLocalStorage()"
+            class="novel-select-sub"
+          >
+            <option value="" disabled>เลือกหมวดหมู่รอง</option>
+            <option
+              *ngFor="let subGroup of filteredSubGroups('sub-category1')"
+              [value]="subGroup.label"
+            >
+              {{ subGroup.label }}
+            </option>
+          </select>
+        </div>
+        <div class="sub-category2">
+          <h3 class="novel-label">หมวดหมู่รอง 2</h3>
+          <select
+            name="sub-category2"
+            [(ngModel)]="novel.selectedSubCategory2"
+            (ngModelChange)="saveToLocalStorage()"
+            class="novel-select-sub"
+          >
+            <option value="" disabled>เลือกหมวดหมู่รอง</option>
+            <option
+              *ngFor="let subGroup of filteredSubGroups('sub-sub-category2')"
+              [value]="subGroup.label"
+            >
+              {{ subGroup.label }}
+            </option>
+          </select>
+        </div>
+      </div>
 
       <div class="form-group">
-        <h2 class="tags-head">แท็ก(0/20)</h2>
+        <h2 for="rating" class="novel-label">ระดับของเนื้อหา (Rating)</h2>
+        <select
+          id="rating"
+          name="rating"
+          [(ngModel)]="novel.rate"
+          (ngModelChange)="saveToLocalStorage()"
+          class="rating-select"
+        >
+          <option value="" disabled>เลือกระดับของเนื้อหา</option>
+          <option *ngFor="let rate of rates">{{ rate.rate }}</option>
+        </select>
+        
+        <h2 class="tags-head">แท็ก ({{ countTags() }}/20)</h2>
         <div class="tags">
-          <span class="tag"
-            >love
-            <span class="remove-tag">×</span>
+          <span *ngFor="let tag of tagsArray" (click)="deltag(tag)" class="tag">
+            {{ tag }} <span class="remove-tag">×</span>
           </span>
         </div>
 
         <div class="tag-section">
           <h3 class="tag-title">เพิ่ม Tag ที่แนะนำ</h3>
           <div class="tag-input-group">
-            <select class="tag-dropdown">
+            <select
+              class="tag-dropdown"
+              [(ngModel)]="selectedTag"
+              (change)="addTagRec(selectedTag)"
+            >
               <option value="" disabled selected>เลือกจาก Tag ที่มีอยู่</option>
-              <option value="tag1">Tag 1</option>
-              <option value="tag2">Tag 2</option>
-              <option value="tag3">Tag 3</option>
+              <option
+                *ngFor="let tag of tageRec; trackBy: trackByTag"
+                [value]="tag.tag"
+              >
+                {{ tag.tag }}
+              </option>
             </select>
           </div>
 
           <h3 class="tag-title">สร้าง Tag</h3>
           <div class="tag-input-group">
             <input
+              name="tags"
               type="text"
+              maxlength="20"
+              placeholder="ใส่แท็กเพิ่ม (กด Enter เพื่อเพิ่มแท็กใหม่)"
+              (keyup.enter)="addTag()"
+              [(ngModel)]="newTag"
               class="tag-input"
               placeholder="พิมพ์ Tag ที่ต้องการ"
             />
             <i
               class="fa-solid fa-plus add-tag-novel"
               style="color: #7c4d3d"
+              (click)="addTag()"
             ></i>
           </div>
         </div>
 
-        <button class="novel-create-btn">Create Novel</button>
+        <button class="novel-create-btn" onclick="preSubmit()">
+          Create Novel
+        </button>
+
+        <!-- popup checkform -->
+        <div class="buttons" *ngIf="checkform">
+          <a>คุณต้องการบันทึกหรือไม่</a>
+          <div class="toggle-button-cover">
+            <a id="status">{{
+              novel.status === "T" ? "ส่วนตัว" : "สาธารณะ"
+            }}</a>
+            <div class="button r" id="button-3">
+              <input
+                type="checkbox"
+                class="checkbox"
+                (change)="toggleStatus($event)"
+              />
+              <div class="knobs"></div>
+              <div class="layer"></div>
+            </div>
+          </div>
+          <div class="buttons-sub">
+            <button class="back-button" (click)="goBack()">ย้อนกลับ</button>
+            <button class="submit-button" (click)="presubmit()">บันทึก</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

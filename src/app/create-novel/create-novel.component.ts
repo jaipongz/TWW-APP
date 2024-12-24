@@ -51,6 +51,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
   novelData!: { group: string; type: string };
   tageRec:any[] = [];
 
+  selectedTag: string = '';
+
   rates = [
     { rate: 'ทั่วไป' },
     { rate: '18+' },
@@ -93,7 +95,7 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
     this.updateNovel();
     this.getToLocalStorage();
     this.getrectag();
-    
+    this.getProfile();
   }
 
   saveToLocalStorage() {
@@ -107,6 +109,10 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       console.error('Error saving to localStorage:', error);
       this.checkform = false; // กรณีเกิดข้อผิดพลาดระหว่างการบันทึก
     }
+  }
+
+  preSubmit() {
+    this.checkform = true;
   }
 
  getToLocalStorage() {
@@ -418,6 +424,8 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
   
     return true;
   }
+
+  
  
 
   saveNovel() {
@@ -475,4 +483,27 @@ export class CreateNovelComponent implements OnInit, AfterViewChecked {
       localStorage.removeItem('getNovelCreate')
     }
   }
+
+  profileData: any;
+
+  getProfile() {
+    if (this.authService.isLoggedIn) { 
+      this.authService.getProfile().subscribe({
+        next: (response: any) => {
+          if (response?.status === 'success') {
+            this.profileData = response.data; 
+            this.novel.penName = this.profileData.user_name;
+            console.log('profile',this.profileData);
+          } else {
+            console.error('Failed to fetch profile data:', response);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching profile data:', err);
+        },
+      });
+    } else {
+      console.warn('User is not logged in.');
+    }
+}
 }
